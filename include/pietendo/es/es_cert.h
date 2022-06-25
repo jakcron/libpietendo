@@ -10,7 +10,7 @@ enum class ESCertPubKeyType : uint32_t
 {
     RSA4096 = 0, /* RSA 4096 bit key */
     RSA2048 = 1, /* RSA 2048 bit key */
-    ECC = 2, /* ECC pub key 512 bits */
+    ECC = 2, /* ECC pub key 233 bits */
 };
 
 static const size_t ES_CERT_NAME_SIZE = 64;

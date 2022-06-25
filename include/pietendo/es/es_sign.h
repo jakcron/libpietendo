@@ -13,7 +13,7 @@ enum class ESSigType : uint32_t
     ECC_SHA1 = 0x00010002, /* ECC signature 512 bits */
     RSA4096_SHA256 = 0x00010003, /* RSA 4096 bit sig using SHA-256 */
     RSA2048_SHA256 = 0x00010004, /* RSA 2048 bit sig using SHA-256 */ // note that Switch Ticket has this word swapped
-    ECC_SHA256 = 0x00010005, /* ECC sig 512 bits using SHA-256 */
+    ECC_SHA256 = 0x00010005, /* ECC sig 233 bits using SHA-256 */
     HMAC_SHA1 = 0x00010006, /* HMAC-SHA1 160 bit signature */
 };
 
