@@ -8,7 +8,10 @@
 #pragma once
 #include <tc/types.h>
 
-
+	/**
+	 * @namespace   pie::es::detail
+	 * @brief       Namespace of the BroadON ES library common structs and data types
+	 */
 namespace pie { namespace es { namespace detail {
 
 	/**
