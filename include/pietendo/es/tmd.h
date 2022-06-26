@@ -1,6 +1,6 @@
 	/**
 	 * @file tmd.h
-	 * @brief Declaration of ES TitleMetaData structs and data types for the ES library
+	 * @brief Declaration of TitleMeta structs and enums for the ES library.
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/25
@@ -12,8 +12,7 @@ namespace pie { namespace es {
 
 	/**
 	 * @brief ES title type
-	 * @details
-	 * The
+	 * 
 	 */
 enum ESTitleType : uint32_t
 {
@@ -43,7 +42,6 @@ enum ESContentType : uint16_t
 	ESContentType_OPTIONAL  = 0x4000, /**< bit14 (from broadOn & b4) */
 	ESContentType_SHARED    = 0x8000, /**< bit15 (from broadOn & b4) */
 };
-
 
 	/**
 	 * @brief Maximum possible content index
@@ -105,6 +103,10 @@ struct ESV1ContentMeta
 };
 static_assert(sizeof(ESV1ContentMeta) == 48, "ESV1ContentMeta size");
 
+	/**
+	 * @brief TitleMetaData v0 Header
+	 * 
+	 */
 struct ESTitleMetaHeader
 {
 	using ESTmdCustomData = std::array<uint8_t, 32>;
@@ -116,7 +118,7 @@ struct ESTitleMetaHeader
 	tc::bn::be64<uint64_t>    sysVersion;         /**< System software version number */
 	tc::bn::be64<uint64_t>    titleId;            /**< 64-bit title id */
 	tc::bn::be32<ESTitleType> type;               /**< 32-bit title type */
-	tc::bn::be16<uint16_t>    groupId;
+	tc::bn::be16<uint16_t>    groupId;            /**< 16-bit group id */
 	ESTmdCustomData           customData;         /**< 32-byte custom data */
 	ESTmdReserved             reserved;           /**< 30-byte reserved info */
 	tc::bn::be32<uint32_t>    accessRights;       /**< Rights to system resources */
@@ -135,15 +137,26 @@ struct ESV1ContentMetaGroup
 };
 static_assert(sizeof(ESV1ContentMetaGroup) == 36, "ESV1ContentMetaGroup size");
 
+	/**
+	 * @brief TitleMetaData v1 Header Extension
+	 * 
+	 */
 struct ESV1TitleMetaHeader
 {
 	using ESV1ContentMetaGroupArray = std::array<ESV1ContentMetaGroup, ES_MAX_CMD_GROUPS>;
 
 	Sha256Hash                hash;          /**< Hash for the CMD groups */
-	ESV1ContentMetaGroupArray cmdGroups;
+	ESV1ContentMetaGroupArray cmdGroups;     /**< CMD Groups */
 };
 static_assert(sizeof(ESV1TitleMetaHeader) == 2336, "ESV1TitleMetaHeader size");
 
+	/**
+	 * @brief TitleMetaData (format v0)
+	 * 
+	 * Platforms that use this version:
+	 * * Nintendo Wii (RVL)
+	 * * Nintendo DSi (TWL)
+	 */
 struct ESTitleMeta
 {
 	ESSigRsa2048      sig;            /**< RSA 2048-bit sign of the TMD header */
@@ -152,6 +165,13 @@ struct ESTitleMeta
 };
 static_assert(sizeof(ESTitleMeta) == 484, "ESTitleMeta size");
 
+	/**
+	 * @brief TitleMetaData (format v1)
+	 * 
+	 * Platforms that use this version:
+	 * * Nintendo WiiU (CAFE)
+	 * * Nintendo 3DS (CTR)
+	 */
 struct ESV1TitleMeta
 {
 	ESSigRsa2048        sig;            /**< RSA 2048-bit sign of the TMD header */

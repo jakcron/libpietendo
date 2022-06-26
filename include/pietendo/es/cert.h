@@ -1,6 +1,6 @@
 	/**
 	 * @file cert.h
-	 * @brief Declaration of ES Certificate structs and data types for the ES library
+	 * @brief Declaration of Certificate structs and enums for the ES library.
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/25
@@ -11,8 +11,7 @@
 namespace pie { namespace es {
 
 	/**
-	 * @enum ESCertPubKeyType
-	 * @brief ES Certificate public key type definition
+	 * @brief ES Certificate public key type
 	 */
 enum ESCertPubKeyType : uint32_t
 {
@@ -80,6 +79,10 @@ struct ESCertEcc233PublicKey
 };
 static_assert(sizeof(ESCertEcc233PublicKey) == 120, "ESCertEcc233PublicKey size");
 
+	/**
+	 * @brief Root Certificate
+	 * 
+	 */
 struct ESRootCert
 {
 	ESSigRsa4096             sig;
@@ -88,6 +91,11 @@ struct ESRootCert
 };
 static_assert(sizeof(ESRootCert) == 1280, "ESRootCert size");
 
+	/**
+	 * @brief Certificate Authority (CA) Certificate
+	 * @details 
+	 * These are always signed by __Root__
+	 */
 struct ESCACert
 {
 	ESSigRsa4096             sig;
@@ -96,6 +104,10 @@ struct ESCACert
 };
 static_assert(sizeof(ESCACert) == 1024, "ESCACert size");
 
+	/**
+	 * @brief CA Signed Certificate
+	 * 
+	 */
 struct ESCASignedCert
 {
 	ESSigRsa2048             sig;
@@ -104,6 +116,11 @@ struct ESCASignedCert
 };
 static_assert(sizeof(ESCASignedCert) == 768, "ESCASignedCert size");
 
+	/**
+	 * @brief Device Certificate
+	 * @details 
+	 * These are unique to a given device, used to identify genuine devices.
+	 */
 struct ESDeviceCert
 {
 	ESSigRsa2048             sig;
@@ -112,6 +129,11 @@ struct ESDeviceCert
 };
 static_assert(sizeof(ESDeviceCert) == 576, "ESDeviceCert size");
 
+	/**
+	 * @brief Device Signed Certificate
+	 * @details 
+	 * These are used to sign content exported to untrusted/external storage by a device (e.g. save data)
+	 */
 struct ESDeviceSignedCert
 {
 	ESSigEcc233              sig;

@@ -1,6 +1,6 @@
 	/**
 	 * @file ticket.h
-	 * @brief Declaration of ES Ticket structs and data types for the ES library
+	 * @brief Declaration of Ticket structs and enums for the ES library.
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/25
@@ -25,7 +25,7 @@ enum ESLicenseType : uint8_t
 };
 
 	/**
-	 * @brief Maximum 
+	 * @brief Valid license type mask.
 	 * 
 	 */
 static const uint8_t ES_LICENSE_MASK = 0xf;
@@ -42,6 +42,11 @@ enum ESLimitCode : uint32_t
 	ESLimitCode_NUM_LAUNCH = 4, /**< Number of launches */
 	ESLimitCode_ELAPSED_TIME = 5, /**< Elapsed time */
 };
+
+	/**
+	 * @brief Maximum possible value for an ESLimitCode value.
+	 * 
+	 */
 static const uint32_t ES_MAX_LIMIT_TYPE = 8;
 
 	/**
@@ -155,6 +160,10 @@ struct ESTicket
 };
 static_assert(sizeof(ESTicket) == 676, "ESTicket size");
 
+	/**
+	 * @brief Ticket v1 Header Extension
+	 * 
+	 */
 struct ESV1TicketHeader
 {
 	tc::bn::be16<uint16_t>  hdrVersion;         /**< Version of the ticket header */
