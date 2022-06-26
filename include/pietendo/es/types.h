@@ -1,3 +1,10 @@
+	/**
+	 * @file types.h
+	 * @brief Declaration of common structs and data types for the ES library
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/25
+	 **/
 #pragma once
 #include <tc/types.h>
 
@@ -29,13 +36,13 @@ static const size_t kRsa2048Size = 0x100;
 using Rsa2048Integer = std::array<uint8_t, kRsa2048Size>;
 struct Rsa2048PublicKey
 {
-	Rsa2048Integer m; // modulus
-	RsaPublicExponent e; // public_exponent
+	Rsa2048Integer m; /**< modulus */
+	RsaPublicExponent e; /**< public_exponent */
 };
 struct Rsa2048PrivateKey
 {
-	Rsa2048Integer m; // modulus
-	Rsa2048Integer d; // private_exponent
+	Rsa2048Integer m; /**< modulus */
+	Rsa2048Integer d; /**< private_exponent */
 };
 using Rsa2048Sig = Rsa2048Integer;
 
@@ -43,13 +50,13 @@ static const size_t kRsa4096Size = 0x200;
 using Rsa4096Integer = std::array<uint8_t, kRsa4096Size>;
 struct Rsa4096PublicKey
 {
-	Rsa4096Integer m; // modulus
-	RsaPublicExponent e; // public_exponent
+	Rsa4096Integer m; /**< modulus */
+	RsaPublicExponent e; /**< public_exponent */
 };
 struct Rsa4096PrivateKey
 {
-	Rsa4096Integer m; // modulus
-	Rsa4096Integer d; // private_exponent
+	Rsa4096Integer m; /**< modulus */
+	Rsa4096Integer d; /**< private_exponent */
 };
 using Rsa4096Sig = Rsa4096Integer;
 

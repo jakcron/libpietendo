@@ -1,9 +1,9 @@
 	/**
-	 * @file es_sign.h
-	 * @brief Declaration of structures and enums related to ES Signature
+	 * @file sign.h
+	 * @brief Declaration of ES Signature structs and data types for the ES library
 	 * @author Jack (jakcron)
 	 * @version 0.1
-	 * @date 2020/07/04
+	 * @date 2022/06/25
 	 **/
 #pragma once
 #include <pietendo/es/types.h>
