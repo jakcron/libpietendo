@@ -8,7 +8,16 @@
 #pragma once
 #include <tc/types.h>
 
-namespace pie { namespace es {
+
+namespace pie { namespace es { namespace detail {
+
+	/**
+	 * @brief Template for defining padding in ES structures.
+	 * 
+	 * @tparam _size Padding size in bytes.
+	 */
+template <size_t _size>
+using Padding = std::array<byte_t, _size>; 
 
 #pragma pack(push,4)
 
@@ -77,4 +86,4 @@ struct Ecc233Sig
 
 #pragma pack(pop)
 
-}} // namespace pie::es
+}}} // namespace pie::es::detail
