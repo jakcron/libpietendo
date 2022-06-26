@@ -16,13 +16,13 @@ namespace pie { namespace es {
 	 */
 enum ESTitleType : uint32_t
 {
-	ESTitleType_NC_TITLE   = 0x1, /**< bit0 NetCard - End-of-life */
-	ESTitleType_NG_TITLE   = 0x2, /**< bit1 Wii/NDEV */
-	ESTitleType_DS_TITLE   = 0x4, /**< bit2 TWL/DSi */
-	ESTitleType_DATA       = 0x8, /**< bit3 boring data title */
-	ESTitleType_CT_TITLE   = 0x40, /**< bit6 CTR/3DS */
-	ESTitleType_GVM_TITLE  = 0x80, /**< bit7 GVM = ? (from BroadOn libraries) */
-	ESTitleType_CAFE_TITLE = 0x100, /**< bit8 WiiU (from WiiU sdk) */
+	ESTitleType_NC_TITLE   = 0x1, /**< NetCard Title - End-of-life (bit0) */
+	ESTitleType_NG_TITLE   = 0x2, /**< NextGen Title - Wii/NDEV (bit1) */
+	ESTitleType_DS_TITLE   = 0x4, /**< DS Title - TWL/DSi (bit2) */
+	ESTitleType_DATA       = 0x8, /**< Data Title (bit3) */
+	ESTitleType_CT_TITLE   = 0x40, /**< CTR Title - CTR/3DS (bit6) */
+	ESTitleType_GVM_TITLE  = 0x80, /**< GVM = ? (bit7, from BroadOn libraries) */
+	ESTitleType_CAFE_TITLE = 0x100, /**< Cafe Title - WiiU (bit8, from WiiU sdk) */
 };
 
 	/**
@@ -34,13 +34,13 @@ enum ESTitleType : uint32_t
 	 */
 enum ESContentType : uint16_t
 {
-	ESContentType_ENCRYPTED = 0x1, /**< bit0 (from broadOn & b4) */
-	ESContentType_DISC      = 0x2, /**< bit1 (from broadOn & b4) */
-	ESContentType_HASHED    = 0x2, /**< bit1 (from b4) */
-	ESContentType_CFM       = 0x4, /**< bit3 (from broadOn & b4) */
-	ESContentType_SHA1_HASH = 0x2000, /**< bit13 from b4 (wiiu sdk) */
-	ESContentType_OPTIONAL  = 0x4000, /**< bit14 (from broadOn & b4) */
-	ESContentType_SHARED    = 0x8000, /**< bit15 (from broadOn & b4) */
+	ESContentType_ENCRYPTED = 0x1, /**< Encrypted - (bit0, from broadOn & b4) */
+	ESContentType_DISC      = 0x2, /**< Disc - (bit1, from broadOn & b4)) */
+	ESContentType_HASHED    = 0x2, /**< Hashed - (bit1, from b4) */
+	ESContentType_CFM       = 0x4, /**< CFM - (bit2, from broadOn & b4) */
+	ESContentType_SHA1_HASH = 0x2000, /**< SHA1 Hash - (bit13, from b4 (wiiu sdk) */
+	ESContentType_OPTIONAL  = 0x4000, /**< Optional - (bit14, from broadOn & b4) */
+	ESContentType_SHARED    = 0x8000, /**< Shared - (bit15,from broadOn & b4) */
 };
 
 	/**
@@ -83,7 +83,7 @@ struct ESContentMeta
 	tc::bn::be16<uint16_t> index;  /**< Content index, unique per title */
 	tc::bn::be16<uint16_t> type;   /**< Content type */
 	tc::bn::be64<uint64_t> size;   /**< Unencrypted content size in bytes */
-	Sha1Hash               hash;   /**< Hash of the content */
+	detail::Sha1Hash       hash;   /**< Hash of the content */
 };
 static_assert(sizeof(ESContentMeta) == 36, "ESContentMeta size");
 
@@ -99,7 +99,7 @@ struct ESV1ContentMeta
 	tc::bn::be16<uint16_t> index;  /**< Content index, unique per title */
 	tc::bn::be16<uint16_t> type;   /**< Content type */
 	tc::bn::be64<uint64_t> size;   /**< Unencrypted content size in bytes */
-	Sha256Hash             hash;   /**< Hash of the content */
+	detail::Sha256Hash     hash;   /**< Hash of the content */
 };
 static_assert(sizeof(ESV1ContentMeta) == 48, "ESV1ContentMeta size");
 
@@ -133,7 +133,7 @@ struct ESV1ContentMetaGroup
 {
 	tc::bn::be16<uint16_t> offset;             /**< Offset content index */
 	tc::bn::be16<uint16_t> nCmds;              /**< Number of CMDs in this group */
-	Sha256Hash             groupHash;          /**< Hash for this group of CMDs */
+	detail::Sha256Hash     groupHash;          /**< Hash for this group of CMDs */
 };
 static_assert(sizeof(ESV1ContentMetaGroup) == 36, "ESV1ContentMetaGroup size");
 
@@ -145,7 +145,7 @@ struct ESV1TitleMetaHeader
 {
 	using ESV1ContentMetaGroupArray = std::array<ESV1ContentMetaGroup, ES_MAX_CMD_GROUPS>;
 
-	Sha256Hash                hash;          /**< Hash for the CMD groups */
+	detail::Sha256Hash        hash;          /**< Hash for the CMD groups */
 	ESV1ContentMetaGroupArray cmdGroups;     /**< CMD Groups */
 };
 static_assert(sizeof(ESV1TitleMetaHeader) == 2336, "ESV1TitleMetaHeader size");

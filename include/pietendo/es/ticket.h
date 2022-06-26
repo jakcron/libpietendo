@@ -87,7 +87,7 @@ enum ESV1SectionHeaderFlag : uint16_t
 };
 
 	/**
-	 * @brief Describes the method of TitleKey encryption.
+	 * @brief ES TitleKey encryption type.
 	 * 
 	 * * __COMMON__ - TitleKey is encrypted using AES128-CBC with the CommonKey (as indicated in the ticket header).
 	 * * __PERSONALIZED__ - Same as __COMMON__ but the encrypted payload is further encrypted using RSA2048-OAEP, with the device specific RSA key.
@@ -135,11 +135,11 @@ struct ESTicket
 	using ESLimitedPlayArray = std::array<ESLimitedPlayEntry, 8>;
 
 	ESSigRsa2048              sig;               /**< RSA 2048-bit sign of the ticket */
-	Ecc233PublicKey           serverPubKey;      /**< Ticketing server public key */
+	detail::Ecc233PublicKey   serverPubKey;      /**< Ticketing server public key */
 	uint8_t                   version;           /**< Ticket data structure version number */
 	uint8_t                   caCrlVersion;      /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;  /**< Signer CRL version number */
-	Aes128Key                 titleKey;          /**< Published title key */
+	detail::Aes128Key         titleKey;          /**< Published title key */
 	/* 1 byte alignment padding */
 	tc::bn::be64<uint64_t>    ticketId;          /**< Unique 64bit ticket ID */
 	tc::bn::be32<uint32_t>    deviceId;          /**< Unique 32bit device ID */
@@ -263,7 +263,7 @@ static_assert(sizeof(ESV1LimitedResourceRecord) == 24, "ESV1LimitedResourceRecor
 	 */
 struct ESV2Ticket
 {
-	using ESV2TitleKey = Rsa2048Integer;
+	using ESV2TitleKey = detail::Rsa2048Integer;
 	using ESRightsId = std::array<byte_t, 16>;
 	using ESV2TicketReserved = std::array<byte_t, 8>;
 

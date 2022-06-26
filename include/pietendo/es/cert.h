@@ -38,14 +38,6 @@ using ESCertName = tc::bn::string<64>;
 using ESServerId = ESCertName;
 using ESDeviceId = ESCertName;
 
-	/**
-	 * @brief Template for defining padding in ES public key structures.
-	 * 
-	 * @tparam _size Padding size in bytes.
-	 */
-template <size_t _size>
-using ESPubKeyPad = std::array<byte_t, _size>; 
-
 /* pack to 4 byte boundaries */
 #pragma pack(push,4)
 
@@ -70,8 +62,8 @@ static_assert(sizeof(ESCertHeader) == 72, "ESCertHeader size");
 	 */
 struct ESCertRsa2048PublicKey
 {
-	Rsa2048PublicKey      pubKey; /**< RSA2048 Public Key */
-	ESPubKeyPad<52>       pad;    /**< Padding */
+	detail::Rsa2048PublicKey pubKey; /**< RSA2048 Public Key */
+	detail::Padding<52>      pad;    /**< Padding */
 };
 static_assert(sizeof(ESCertRsa2048PublicKey) == 312, "ESCertRsa2048PublicKey size");
 
@@ -81,8 +73,8 @@ static_assert(sizeof(ESCertRsa2048PublicKey) == 312, "ESCertRsa2048PublicKey siz
 	 */
 struct ESCertRsa4096PublicKey
 {
-	Rsa4096PublicKey      pubKey; /**< RSA4096 Public Key */
-	ESPubKeyPad<52>       pad;    /**< Padding */
+	detail::Rsa4096PublicKey pubKey; /**< RSA4096 Public Key */
+	detail::Padding<52>      pad;    /**< Padding */
 };
 static_assert(sizeof(ESCertRsa4096PublicKey) == 568, "ESCertRsa4096PublicKey size");
 
@@ -92,8 +84,8 @@ static_assert(sizeof(ESCertRsa4096PublicKey) == 568, "ESCertRsa4096PublicKey siz
 	 */
 struct ESCertEcc233PublicKey
 {
-	Ecc233PublicKey       pubKey; /**< ECC233 Public Key */
-	ESPubKeyPad<60>       pad;    /**< Padding */
+	detail::Ecc233PublicKey pubKey; /**< ECC233 Public Key */
+	detail::Padding<60>     pad;    /**< Padding */
 };
 static_assert(sizeof(ESCertEcc233PublicKey) == 120, "ESCertEcc233PublicKey size");
 

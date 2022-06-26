@@ -40,52 +40,44 @@ enum ESSigType : uint32_t
 	 */
 using ESIssuer = tc::bn::string<64>;  
 
-	/**
-	 * @brief Template for defining padding in ES signature structures.
-	 * 
-	 * @tparam _size Padding size in bytes.
-	 */
-template <size_t _size>
-using ESSigPad = tc::bn::pad<_size>; 
-
 /* pack to 4 byte boundaries */
 #pragma pack(push,4)
 
 	/**
-	 * @brief RSA2048 ES Signature
+	 * @brief ES Signature (RSA2048)
 	 * 
 	 */
 struct ESSigRsa2048
 {
 	tc::bn::be32<ESSigType>    sigType; /**< Signature type */
-	Rsa2048Sig                 sig;     /**< Signature data */
-	ESSigPad<60>               pad;     /**< Padding */
+	detail::Rsa2048Sig         sig;     /**< Signature data */
+	detail::Padding<60>        pad;     /**< Padding */
 	ESIssuer                   issuer;  /**< Signature issuer */
 };
 static_assert(sizeof(ESSigRsa2048) == 384, "ESSigRsa2048 size");
 
 	/**
-	 * @brief RSA4096 ES Signature
+	 * @brief ES Signature (RSA4096)
 	 * 
 	 */
 struct ESSigRsa4096
 {
 	tc::bn::be32<ESSigType>    sigType; /**< Signature type */
-	Rsa4096Sig                 sig;     /**< Signature data */
-	ESSigPad<60>               pad;     /**< Padding */
+	detail::Rsa4096Sig         sig;     /**< Signature data */
+	detail::Padding<60>        pad;     /**< Padding */
 	ESIssuer                   issuer;  /**< Signature issuer */
 };
 static_assert(sizeof(ESSigRsa4096) == 640, "ESSigRsa4096 size");
 
 	/**
-	 * @brief ECC233 ES Signature
+	 * @brief ES Signature (ECC233)
 	 * 
 	 */
 struct ESSigEcc233
 {
 	tc::bn::be32<ESSigType>    sigType; /**< Signature type */
-	Ecc233Sig                  sig;     /**< Signature data */
-	ESSigPad<64>               pad;     /**< Padding */
+	detail::Ecc233Sig          sig;     /**< Signature data */
+	detail::Padding<64>        pad;     /**< Padding */
 	ESIssuer                   issuer;  /**< Signature issuer */
 };
 static_assert(sizeof(ESSigEcc233) == 192, "ESSigEcc233 size");
