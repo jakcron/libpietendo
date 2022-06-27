@@ -1,3 +1,10 @@
+	/**
+	 * @file CciFsShapshotGenerator.h
+	 * @brief Declaration of pie::ctr::CciFsShapshotGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/io/VirtualFileSystem.h>
 

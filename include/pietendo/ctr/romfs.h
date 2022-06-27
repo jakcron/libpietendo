@@ -1,3 +1,10 @@
+	/**
+	 * @file romfs.h
+	 * @brief Declaration of RomFs structs and enums for the CTR library.
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
 

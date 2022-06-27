@@ -1,7 +1,12 @@
+	/**
+	 * @file ncch.h
+	 * @brief Declaration of NCCH structs and enums for the CTR library.
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
-
-
 
 namespace pie { namespace ctr {
 
@@ -11,53 +16,74 @@ struct NcchCommonHeader
 {
 	static const uint32_t kStructMagic = tc::bn::make_struct_magic_uint32("NCCH");
 
+		/**
+		 * @brief NCCH Format Version
+		 * @details 
+		 * The current version is 2. However due to a bug in the SDK, CFAs do not have this field set, making this field unreliable.
+		 */
 	enum FormatVersion
 	{
-		FormatVersion_CFA = 0,
-		FormatVersion_CXI_PROTOTYPE = 1,
-		FormatVersion_CXI = 2,
+		FormatVersion_PROTOTYPE_0 = 0,
+		FormatVersion_PROTOTYPE_1 = 1,
+		FormatVersion_PRODUCTION = 2,
 	};
 
+		/**
+		 * @brief NCCH Flag Index
+		 * 
+		 */
 	enum FlagIndex
 	{
-		FlagIndex_SecurityVersion = 3, // this flag determines the security version for secure crypto
-		FlagIndex_ContentPlatform = 4,
-		FlagIndex_ContentTypeFlag = 5,
-		FlagIndex_BlockSizeLog = 6, // this flag determines the block_size = 1 << (block_size_log + 9), alternatively this is always 0, and the blocksize is always 0x200
-		FlagIndex_OtherFlag = 7,
+		FlagIndex_SecurityVersion = 3, /**< Security version for secure crypto */
+		FlagIndex_ContentPlatform = 4, /**< Supported platforms */
+		FlagIndex_ContentTypeFlag = 5, /**< NCCH Type */
+		FlagIndex_BlockSizeLog = 6, /**< NCCH BlockSize (`block_size = 1 << (block_size_log + 9)`, alternatively this is always 0, and the blocksize is always 0x200) */
+		FlagIndex_OtherFlag = 7, /**< Misc Other Flags */
 	};
 
+		/**
+		 * @brief ContentPlatform BitFlags
+		 * 
+		 */
 	enum ContentPlatform
 	{
-		ContentPlatform_CTR = 0,
-		ContentPlatform_SNAKE = 1,
+		ContentPlatform_CTR = 0, /**< CTR (3DS) */
+		ContentPlatform_SNAKE = 1, /**< SNAKE (New3DS) */
 	};
 
+		/**
+		 * @brief NCCH Form Type
+		 * @details This describes the 
+		 */
 	enum FormType
 	{
-		FormType_Unassigned = 0, // invalid
-		FormType_SimpleContent = 1, // CFA (Non-executable data archive)
-		FormType_ExecutableWithoutRomFS = 2, // CXI (ExeFS Only)
-		FormType_Executable = 3, // CXI (ExeFS & RomFS)
+		FormType_Unassigned = 0, /**< Invalid */
+		FormType_SimpleContent = 1, /**< CFA (Non-executable data archive) */
+		FormType_ExecutableWithoutRomFS = 2, /**< CXI (ExeFS Only) */
+		FormType_Executable = 3, /**< CXI (ExeFS & RomFS) */
 	};
 
+		/**
+		 * @brief NCCH Content Type
+		 * 
+		 */
 	enum ContentType
 	{
-		ContentType_Application = 0,
-		ContentType_SystemUpdate = 1, // CTR update
-		ContentType_Manual = 2,
-		ContentType_Child = 3,
-		ContentType_Trial = 4,
-		ContentType_ExtendedSystemUpdate = 5, // SNAKE update
+		ContentType_Application = 0, /**< Applicaton */
+		ContentType_SystemUpdate = 1, /**< Update Archive (CTR) */
+		ContentType_Manual = 2, /**< eManual Archive */
+		ContentType_Child = 3, /**< DLP Child Archive */
+		ContentType_Trial = 4, /**< Trial Application */
+		ContentType_ExtendedSystemUpdate = 5, /**< Update Archive (SNAKE) */
 	};
 
 	enum OtherFlag
 	{
-		OtherFlag_FixedAesKey = 0,
-		OtherFlag_NoMountRomFS = 1,
-		OtherFlag_NoEncryption = 2,
-		OtherFlag_SeededAesKeyY = 5,
-		OtherFlag_ManualDisclosure = 6,
+		OtherFlag_FixedAesKey = 0, /**< Fixed AES key is used */
+		OtherFlag_NoMountRomFS = 1, /**< RomFs not present */
+		OtherFlag_NoEncryption = 2, /**< NCCH not encrypted */
+		OtherFlag_SeededAesKeyY = 5, /**< Secure KeyY requires seed */
+		OtherFlag_ManualDisclosure = 6, /**< Manual does not require KeyY seed (only required if application does required seed) */
 	};
 
 	struct NcchFlags

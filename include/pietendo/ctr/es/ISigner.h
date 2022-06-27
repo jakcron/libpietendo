@@ -1,3 +1,10 @@
+	/**
+	 * @file ISigner.h
+	 * @brief Declaration of pie::ctr::es::ISigner
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <bitset>
 #include <tc/types.h>

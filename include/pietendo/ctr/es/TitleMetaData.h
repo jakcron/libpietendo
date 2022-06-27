@@ -1,3 +1,10 @@
+	/**
+	 * @file TitleMetaData.h
+	 * @brief Declaration of CTR ES TitleMetaData Classes / Utilities
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
 #include <tc/io/IStream.h>

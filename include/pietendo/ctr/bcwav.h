@@ -1,8 +1,19 @@
+	/**
+	 * @file bcwav.h
+	 * @brief Declaration of BCWAV structs and enums for the CTR library.
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
 
 namespace pie { namespace ctr {
 
+	/**
+	 * @namespace   pie::ctr::bcwave
+	 * @brief       Namespace of the CTR BCWAV library
+	 */
 namespace bcwav {
 
 static const uint32_t kCwavMagic = tc::bn::make_struct_magic_uint32("CWAV");

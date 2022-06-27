@@ -1,3 +1,10 @@
+	/**
+	 * @file RomFsSnapshotGenerator.h
+	 * @brief Declaration of pie::ctr::RomFsSnapshotGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/ByteData.h>
 #include <tc/io/VirtualFileSystem.h>

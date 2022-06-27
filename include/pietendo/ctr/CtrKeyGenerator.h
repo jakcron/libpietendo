@@ -1,3 +1,10 @@
+	/**
+	 * @file CtrKeyGenerator.h
+	 * @brief Declaration of pie::ctr::CtrKeyGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
 

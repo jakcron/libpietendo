@@ -1,3 +1,10 @@
+	/**
+	 * @file cci.h
+	 * @brief Declaration of CCI structs and enums for the CTR library.
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/types.h>
 #include <array>
@@ -36,7 +43,6 @@ struct NcsdCommonHeader
 	enum MediaPlatform : byte_t
 	{
 		MediaPlatform_CTR = 0,
-		MediaPlatform_SNAKE = 1,
 	};
 
 	enum MediaType : byte_t

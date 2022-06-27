@@ -1,3 +1,10 @@
+	/**
+	 * @file ExeFsSnapshotGenerator.h
+	 * @brief Declaration of pie::ctr::ExeFsSnapshotGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <tc/io/VirtualFileSystem.h>
 

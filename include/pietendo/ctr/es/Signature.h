@@ -1,3 +1,10 @@
+	/**
+	 * @file Signature.h
+	 * @brief Declaration of CTR ES Signature Classes / Utilities
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/27
+	 **/
 #pragma once
 #include <bitset>
 #include <tc/types.h>
