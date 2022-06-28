@@ -1,125 +1,125 @@
-#include <nn/hac/FileSystemAccessUtil.h>
+#include <pietendo/hac/FileSystemAccessUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::FileSystemAccessUtil::getFsAccessFlagAsString(nn::hac::fac::FsAccessFlag flag)
+std::string pie::hac::FileSystemAccessUtil::getFsAccessFlagAsString(pie::hac::fac::FsAccessFlag flag)
 {
 	std::stringstream ss;
 
 	switch(flag)
 	{
-	case (nn::hac::fac::FsAccessFlag::ApplicationInfo):
+	case (pie::hac::fac::FsAccessFlag::ApplicationInfo):
 		ss << "ApplicationInfo";
 		break;
-	case (nn::hac::fac::FsAccessFlag::BootModeControl):
+	case (pie::hac::fac::FsAccessFlag::BootModeControl):
 		ss << "BootModeControl";
 		break;
-	case (nn::hac::fac::FsAccessFlag::Calibration):
+	case (pie::hac::fac::FsAccessFlag::Calibration):
 		ss << "Calibration";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SystemSaveData):
+	case (pie::hac::fac::FsAccessFlag::SystemSaveData):
 		ss << "SystemSaveData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::GameCard):
+	case (pie::hac::fac::FsAccessFlag::GameCard):
 		ss << "GameCard";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataBackUp):
+	case (pie::hac::fac::FsAccessFlag::SaveDataBackUp):
 		ss << "SaveDataBackUp";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataManagement):
+	case (pie::hac::fac::FsAccessFlag::SaveDataManagement):
 		ss << "SaveDataManagement";
 		break;
-	case (nn::hac::fac::FsAccessFlag::BisAllRaw):
+	case (pie::hac::fac::FsAccessFlag::BisAllRaw):
 		ss << "BisAllRaw";
 		break;
-	case (nn::hac::fac::FsAccessFlag::GameCardRaw):
+	case (pie::hac::fac::FsAccessFlag::GameCardRaw):
 		ss << "GameCardRaw";
 		break;
-	case (nn::hac::fac::FsAccessFlag::GameCardPrivate):
+	case (pie::hac::fac::FsAccessFlag::GameCardPrivate):
 		ss << "GameCardPrivate";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SetTime):
+	case (pie::hac::fac::FsAccessFlag::SetTime):
 		ss << "SetTime";
 		break;
-	case (nn::hac::fac::FsAccessFlag::ContentManager):
+	case (pie::hac::fac::FsAccessFlag::ContentManager):
 		ss << "ContentManager";
 		break;
-	case (nn::hac::fac::FsAccessFlag::ImageManager):
+	case (pie::hac::fac::FsAccessFlag::ImageManager):
 		ss << "ImageManager";
 		break;
-	case (nn::hac::fac::FsAccessFlag::CreateSaveData):
+	case (pie::hac::fac::FsAccessFlag::CreateSaveData):
 		ss << "CreateSaveData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SystemSaveDataManagement):
+	case (pie::hac::fac::FsAccessFlag::SystemSaveDataManagement):
 		ss << "SystemSaveDataManagement";
 		break;
-	case (nn::hac::fac::FsAccessFlag::BisFileSystem):
+	case (pie::hac::fac::FsAccessFlag::BisFileSystem):
 		ss << "BisFileSystem";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SystemUpdate):
+	case (pie::hac::fac::FsAccessFlag::SystemUpdate):
 		ss << "SystemUpdate";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataMeta):
+	case (pie::hac::fac::FsAccessFlag::SaveDataMeta):
 		ss << "SaveDataMeta";
 		break;
-	case (nn::hac::fac::FsAccessFlag::DeviceSaveData):
+	case (pie::hac::fac::FsAccessFlag::DeviceSaveData):
 		ss << "DeviceSaveData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SettingsControl):
+	case (pie::hac::fac::FsAccessFlag::SettingsControl):
 		ss << "SettingsControl";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SystemData):
+	case (pie::hac::fac::FsAccessFlag::SystemData):
 		ss << "SystemData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SdCard):
+	case (pie::hac::fac::FsAccessFlag::SdCard):
 		ss << "SdCard";
 		break;
-	case (nn::hac::fac::FsAccessFlag::Host):
+	case (pie::hac::fac::FsAccessFlag::Host):
 		ss << "Host";
 		break;
-	case (nn::hac::fac::FsAccessFlag::FillBis):
+	case (pie::hac::fac::FsAccessFlag::FillBis):
 		ss << "FillBis";
 		break;
-	case (nn::hac::fac::FsAccessFlag::CorruptSaveData):
+	case (pie::hac::fac::FsAccessFlag::CorruptSaveData):
 		ss << "CorruptSaveData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataForDebug):
+	case (pie::hac::fac::FsAccessFlag::SaveDataForDebug):
 		ss << "SaveDataForDebug";
 		break;
-	case (nn::hac::fac::FsAccessFlag::FormatSdCard):
+	case (pie::hac::fac::FsAccessFlag::FormatSdCard):
 		ss << "FormatSdCard";
 		break;
-	case (nn::hac::fac::FsAccessFlag::GetRightsId):
+	case (pie::hac::fac::FsAccessFlag::GetRightsId):
 		ss << "GetRightsId";
 		break;
-	case (nn::hac::fac::FsAccessFlag::RegisterExternalKey):
+	case (pie::hac::fac::FsAccessFlag::RegisterExternalKey):
 		ss << "RegisterExternalKey";
 		break;
-	case (nn::hac::fac::FsAccessFlag::RegisterUpdatePartition):
+	case (pie::hac::fac::FsAccessFlag::RegisterUpdatePartition):
 		ss << "RegisterUpdatePartition";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataTransfer):
+	case (pie::hac::fac::FsAccessFlag::SaveDataTransfer):
 		ss << "SaveDataTransfer";
 		break;
-	case (nn::hac::fac::FsAccessFlag::DeviceDetection):
+	case (pie::hac::fac::FsAccessFlag::DeviceDetection):
 		ss << "DeviceDetection";
 		break;
-	case (nn::hac::fac::FsAccessFlag::AccessFailureResolution):
+	case (pie::hac::fac::FsAccessFlag::AccessFailureResolution):
 		ss << "AccessFailureResolution";
 		break;
-	case (nn::hac::fac::FsAccessFlag::SaveDataTransferVersion2):
+	case (pie::hac::fac::FsAccessFlag::SaveDataTransferVersion2):
 		ss << "SaveDataTransferVersion2";
 		break;
-	case (nn::hac::fac::FsAccessFlag::RegisterProgramIndexMapInfo):
+	case (pie::hac::fac::FsAccessFlag::RegisterProgramIndexMapInfo):
 		ss << "RegisterProgramIndexMapInfo";
 		break;
-	case (nn::hac::fac::FsAccessFlag::CreateOwnSaveData):
+	case (pie::hac::fac::FsAccessFlag::CreateOwnSaveData):
 		ss << "CreateOwnSaveData";
 		break;
-	case (nn::hac::fac::FsAccessFlag::Debug):
+	case (pie::hac::fac::FsAccessFlag::Debug):
 		ss << "Debug";
 		break;
-	case (nn::hac::fac::FsAccessFlag::FullPermission):
+	case (pie::hac::fac::FsAccessFlag::FullPermission):
 		ss << "FullPermission";
 		break;
 	default:
@@ -130,19 +130,19 @@ std::string nn::hac::FileSystemAccessUtil::getFsAccessFlagAsString(nn::hac::fac:
 	return ss.str();
 }
 
-std::string nn::hac::FileSystemAccessUtil::getSaveDataOwnerAccessModeAsString(nn::hac::fac::SaveDataOwnerIdAccessType type)
+std::string pie::hac::FileSystemAccessUtil::getSaveDataOwnerAccessModeAsString(pie::hac::fac::SaveDataOwnerIdAccessType type)
 {
 	std::stringstream ss;
 
 	switch(type)
 	{
-	case (nn::hac::fac::SaveDataOwnerIdAccessType::Read):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType::Read):
 		ss << "Read";
 		break;
-	case (nn::hac::fac::SaveDataOwnerIdAccessType::Write):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType::Write):
 		ss << "Write";
 		break;
-	case (nn::hac::fac::SaveDataOwnerIdAccessType::ReadWrite):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType::ReadWrite):
 		ss << "ReadWrite";
 		break;
 	default:

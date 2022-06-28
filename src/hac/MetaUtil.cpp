@@ -1,23 +1,23 @@
-#include <nn/hac/MetaUtil.h>
+#include <pietendo/hac/MetaUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::MetaUtil::getProcessAddressSpaceAsString(nn::hac::meta::ProcessAddressSpace type)
+std::string pie::hac::MetaUtil::getProcessAddressSpaceAsString(pie::hac::meta::ProcessAddressSpace type)
 {
 	std::stringstream ss;
 
 	switch(type)
 	{
-	case (nn::hac::meta::ProcessAddressSpace::AddressSpace32Bit):
+	case (pie::hac::meta::ProcessAddressSpace::AddressSpace32Bit):
 		ss << "AddressSpace32Bit";
 		break;
-	case (nn::hac::meta::ProcessAddressSpace::AddressSpace64BitOld):
+	case (pie::hac::meta::ProcessAddressSpace::AddressSpace64BitOld):
 		ss << "AddressSpace64BitOld";
 		break;
-	case (nn::hac::meta::ProcessAddressSpace::AddressSpace32BitNoReserved):
+	case (pie::hac::meta::ProcessAddressSpace::AddressSpace32BitNoReserved):
 		ss << "AddressSpace32BitNoReserved";
 		break;
-	case (nn::hac::meta::ProcessAddressSpace::AddressSpace64Bit):
+	case (pie::hac::meta::ProcessAddressSpace::AddressSpace64Bit):
 		ss << "AddressSpace64Bit";
 		break;
 	default:

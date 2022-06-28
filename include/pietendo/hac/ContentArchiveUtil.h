@@ -1,31 +1,36 @@
+	/**
+	 * @file ContentArchiveUtil.h
+	 * @brief Declaration of pie::hac::ContentArchiveUtil
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/nca.h>
+#include <pietendo/hac/define/nca.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class ContentArchiveUtil
 {
-namespace hac
-{
-	class ContentArchiveUtil
-	{
-	public:
-		static inline size_t sectorToOffset(size_t sector_index) { return sector_index * nn::hac::nca::kSectorSize; }
-		static void decryptContentArchiveHeader(const byte_t* src, byte_t* dst, const detail::aes128_xtskey_t& key);
-		static void getNcaPartitionAesCtr(const nn::hac::sContentArchiveFsHeader* hdr, byte_t* aes_ctr);
-		static void getNcaPartitionAesCtr(uint32_t generation, uint32_t secure_value, byte_t* aes_ctr);
+public:
+	static inline size_t sectorToOffset(size_t sector_index) { return sector_index * pie::hac::nca::kSectorSize; }
+	static void decryptContentArchiveHeader(const byte_t* src, byte_t* dst, const detail::aes128_xtskey_t& key);
+	static void getNcaPartitionAesCtr(const pie::hac::sContentArchiveFsHeader* hdr, byte_t* aes_ctr);
+	static void getNcaPartitionAesCtr(uint32_t generation, uint32_t secure_value, byte_t* aes_ctr);
 
-		static std::string getFormatHeaderVersionAsString(nn::hac::nca::HeaderFormatVersion val);
-		static std::string getProgramContentParititionIndexAsString(nn::hac::nca::ProgramContentPartitionIndex val);
-		static std::string getDistributionTypeAsString(nn::hac::nca::DistributionType val);
-		static std::string getContentTypeAsString(nn::hac::nca::ContentType val);
-		static std::string getFormatTypeAsString(nn::hac::nca::FormatType val);
-		static std::string getHashTypeAsString(nn::hac::nca::HashType val);
-		static std::string getEncryptionTypeAsString(nn::hac::nca::EncryptionType val);
-		static std::string getMetaDataHashTypeAsString(nn::hac::nca::MetaDataHashType val);
-		static std::string getKeyAreaEncryptionKeyIndexAsString(nn::hac::nca::KeyAreaEncryptionKeyIndex val);
-		static std::string getSdkAddonVersionAsString(uint32_t version);
+	static std::string getFormatHeaderVersionAsString(pie::hac::nca::HeaderFormatVersion val);
+	static std::string getProgramContentParititionIndexAsString(pie::hac::nca::ProgramContentPartitionIndex val);
+	static std::string getDistributionTypeAsString(pie::hac::nca::DistributionType val);
+	static std::string getContentTypeAsString(pie::hac::nca::ContentType val);
+	static std::string getFormatTypeAsString(pie::hac::nca::FormatType val);
+	static std::string getHashTypeAsString(pie::hac::nca::HashType val);
+	static std::string getEncryptionTypeAsString(pie::hac::nca::EncryptionType val);
+	static std::string getMetaDataHashTypeAsString(pie::hac::nca::MetaDataHashType val);
+	static std::string getKeyAreaEncryptionKeyIndexAsString(pie::hac::nca::KeyAreaEncryptionKeyIndex val);
+	static std::string getSdkAddonVersionAsString(uint32_t version);
 
-	private:
-		const std::string kModuleName = "CONTENT_ARCHIVE_UTIL";
-	};
-}
-}
+private:
+	const std::string kModuleName = "CONTENT_ARCHIVE_UTIL";
+};
+
+}} // namespace pie::hac

@@ -1,6 +1,6 @@
-#include <nn/hac/ThreadInfoEntry.h>
+#include <pietendo/hac/ThreadInfoEntry.h>
 
-nn::hac::ThreadInfoEntry::ThreadInfoEntry() :
+pie::hac::ThreadInfoEntry::ThreadInfoEntry() :
 	mCap(kCapId),
 	mMinPriority(kDefaultPriority),
 	mMaxPriority(kDefaultPriority),
@@ -8,7 +8,7 @@ nn::hac::ThreadInfoEntry::ThreadInfoEntry() :
 	mMaxCpuId(kDefaultCpuId)
 {}
 
-nn::hac::ThreadInfoEntry::ThreadInfoEntry(const KernelCapabilityEntry & kernel_cap) :
+pie::hac::ThreadInfoEntry::ThreadInfoEntry(const KernelCapabilityEntry & kernel_cap) :
 	mCap(kCapId),
 	mMinPriority(kDefaultPriority),
 	mMaxPriority(kDefaultPriority),
@@ -18,7 +18,7 @@ nn::hac::ThreadInfoEntry::ThreadInfoEntry(const KernelCapabilityEntry & kernel_c
 	setKernelCapability(kernel_cap);
 }
 
-nn::hac::ThreadInfoEntry::ThreadInfoEntry(uint8_t min_priority, uint8_t max_priority, uint8_t min_core_number, uint8_t max_core_number) :
+pie::hac::ThreadInfoEntry::ThreadInfoEntry(uint8_t min_priority, uint8_t max_priority, uint8_t min_core_number, uint8_t max_core_number) :
 	mCap(kCapId),
 	mMinPriority(kDefaultPriority),
 	mMaxPriority(kDefaultPriority),
@@ -31,7 +31,7 @@ nn::hac::ThreadInfoEntry::ThreadInfoEntry(uint8_t min_priority, uint8_t max_prio
 	setMaxCpuId(max_core_number);
 }
 
-void nn::hac::ThreadInfoEntry::operator=(const ThreadInfoEntry& other)
+void pie::hac::ThreadInfoEntry::operator=(const ThreadInfoEntry& other)
 {
 	mMinPriority = other.mMinPriority;
 	mMaxPriority = other.mMaxPriority;
@@ -40,7 +40,7 @@ void nn::hac::ThreadInfoEntry::operator=(const ThreadInfoEntry& other)
 	updateCapField();
 }
 
-bool nn::hac::ThreadInfoEntry::operator==(const ThreadInfoEntry& other) const
+bool pie::hac::ThreadInfoEntry::operator==(const ThreadInfoEntry& other) const
 {
 	return (mMinPriority == other.mMinPriority) \
 		&& (mMaxPriority == other.mMaxPriority) \
@@ -48,17 +48,17 @@ bool nn::hac::ThreadInfoEntry::operator==(const ThreadInfoEntry& other) const
 		&& (mMaxCpuId == other.mMaxCpuId);
 }
 
-bool nn::hac::ThreadInfoEntry::operator!=(const ThreadInfoEntry& other) const
+bool pie::hac::ThreadInfoEntry::operator!=(const ThreadInfoEntry& other) const
 {
 	return !(*this == other);
 }
 
-const nn::hac::KernelCapabilityEntry & nn::hac::ThreadInfoEntry::getKernelCapability() const
+const pie::hac::KernelCapabilityEntry & pie::hac::ThreadInfoEntry::getKernelCapability() const
 {
 	return mCap;
 }
 
-void nn::hac::ThreadInfoEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
+void pie::hac::ThreadInfoEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
 	if (kernel_cap.getType() != kCapId)
 	{
@@ -69,12 +69,12 @@ void nn::hac::ThreadInfoEntry::setKernelCapability(const KernelCapabilityEntry &
 	processCapField();
 }
 
-uint8_t nn::hac::ThreadInfoEntry::getMinPriority() const
+uint8_t pie::hac::ThreadInfoEntry::getMinPriority() const
 {
 	return mMinPriority;
 }
 
-void nn::hac::ThreadInfoEntry::setMinPriority(uint8_t priority)
+void pie::hac::ThreadInfoEntry::setMinPriority(uint8_t priority)
 {
 	if (priority > kMaxVal)
 	{
@@ -85,12 +85,12 @@ void nn::hac::ThreadInfoEntry::setMinPriority(uint8_t priority)
 	updateCapField();
 }
 
-uint8_t nn::hac::ThreadInfoEntry::getMaxPriority() const
+uint8_t pie::hac::ThreadInfoEntry::getMaxPriority() const
 {
 	return mMaxPriority;
 }
 
-void nn::hac::ThreadInfoEntry::setMaxPriority(uint8_t priority)
+void pie::hac::ThreadInfoEntry::setMaxPriority(uint8_t priority)
 {
 	if (priority > kMaxVal)
 	{
@@ -101,12 +101,12 @@ void nn::hac::ThreadInfoEntry::setMaxPriority(uint8_t priority)
 	updateCapField();
 }
 
-uint8_t nn::hac::ThreadInfoEntry::getMinCpuId() const
+uint8_t pie::hac::ThreadInfoEntry::getMinCpuId() const
 {
 	return mMinCpuId;
 }
 
-void nn::hac::ThreadInfoEntry::setMinCpuId(uint8_t core_num)
+void pie::hac::ThreadInfoEntry::setMinCpuId(uint8_t core_num)
 {
 	if (core_num > kMaxVal)
 	{
@@ -117,12 +117,12 @@ void nn::hac::ThreadInfoEntry::setMinCpuId(uint8_t core_num)
 	updateCapField();
 }
 
-uint8_t nn::hac::ThreadInfoEntry::getMaxCpuId() const
+uint8_t pie::hac::ThreadInfoEntry::getMaxCpuId() const
 {
 	return mMaxCpuId;
 }
 
-void nn::hac::ThreadInfoEntry::setMaxCpuId(uint8_t core_num)
+void pie::hac::ThreadInfoEntry::setMaxCpuId(uint8_t core_num)
 {
 	if (core_num > kMaxVal)
 	{

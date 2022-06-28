@@ -1,16 +1,16 @@
-#include <nn/hac/NsoHeader.h>
+#include <pietendo/hac/NsoHeader.h>
 
-nn::hac::NsoHeader::NsoHeader()
+pie::hac::NsoHeader::NsoHeader()
 {
 	clear();
 }
 
-nn::hac::NsoHeader::NsoHeader(const NsoHeader& other)
+pie::hac::NsoHeader::NsoHeader(const NsoHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::NsoHeader::operator=(const NsoHeader& other)
+void pie::hac::NsoHeader::operator=(const NsoHeader& other)
 {
 	clear();
 	mModuleId = other.mModuleId;
@@ -25,7 +25,7 @@ void nn::hac::NsoHeader::operator=(const NsoHeader& other)
 }
 
 
-bool nn::hac::NsoHeader::operator==(const NsoHeader& other) const
+bool pie::hac::NsoHeader::operator==(const NsoHeader& other) const
 {
 	return (mModuleId == other.mModuleId) \
 		&& (mBssSize == other.mBssSize) \
@@ -38,15 +38,15 @@ bool nn::hac::NsoHeader::operator==(const NsoHeader& other) const
 		&& (mRoDynSymInfo == other.mRoDynSymInfo);
 }
 
-bool nn::hac::NsoHeader::operator!=(const NsoHeader& other) const
+bool pie::hac::NsoHeader::operator!=(const NsoHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::NsoHeader::toBytes()
+void pie::hac::NsoHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sNsoHeader));
-	nn::hac::sNsoHeader* hdr = (nn::hac::sNsoHeader*)mRawBinary.data();
+	pie::hac::sNsoHeader* hdr = (pie::hac::sNsoHeader*)mRawBinary.data();
 
 	// set header identifers
 	hdr->st_magic.wrap(nso::kNsoStructMagic);
@@ -120,7 +120,7 @@ void nn::hac::NsoHeader::toBytes()
 	hdr->dyn_sym.size.wrap(mRoDynSymInfo.size);
 }
 
-void nn::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sNsoHeader))
@@ -136,7 +136,7 @@ void nn::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// get sNsoHeader ptr
-	const nn::hac::sNsoHeader* hdr = (const nn::hac::sNsoHeader*)mRawBinary.data();
+	const pie::hac::sNsoHeader* hdr = (const pie::hac::sNsoHeader*)mRawBinary.data();
 	
 	// check NSO signature
 	if (hdr->st_magic.unwrap() != nso::kNsoStructMagic)
@@ -191,12 +191,12 @@ void nn::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
 	mRoDynSymInfo.size = hdr->dyn_sym.size.unwrap();
 }
 
-const tc::ByteData& nn::hac::NsoHeader::getBytes() const
+const tc::ByteData& pie::hac::NsoHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::NsoHeader::clear()
+void pie::hac::NsoHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	memset(mModuleId.data(), 0, mModuleId.size());
@@ -210,92 +210,92 @@ void nn::hac::NsoHeader::clear()
 	mRoDynSymInfo = sLayout();
 }
 
-const nn::hac::detail::module_id_t& nn::hac::NsoHeader::getModuleId() const
+const pie::hac::detail::module_id_t& pie::hac::NsoHeader::getModuleId() const
 {
 	return mModuleId;
 }
 
-void nn::hac::NsoHeader::setModuleId(const nn::hac::detail::module_id_t& id)
+void pie::hac::NsoHeader::setModuleId(const pie::hac::detail::module_id_t& id)
 {
 	mModuleId = id;
 }
 
-uint32_t nn::hac::NsoHeader::getBssSize() const
+uint32_t pie::hac::NsoHeader::getBssSize() const
 {
 	return mBssSize;
 }
 
-void nn::hac::NsoHeader::setBssSize(uint32_t size)
+void pie::hac::NsoHeader::setBssSize(uint32_t size)
 {
 	mBssSize = size;
 }
 
-const nn::hac::NsoHeader::sCodeSegment& nn::hac::NsoHeader::getTextSegmentInfo() const
+const pie::hac::NsoHeader::sCodeSegment& pie::hac::NsoHeader::getTextSegmentInfo() const
 {
 	return mTextSegmentInfo;
 }
 
-void nn::hac::NsoHeader::setTextSegmentInfo(const sCodeSegment& info)
+void pie::hac::NsoHeader::setTextSegmentInfo(const sCodeSegment& info)
 {
 	mTextSegmentInfo = info;
 }
 
-const nn::hac::NsoHeader::sCodeSegment& nn::hac::NsoHeader::getRoSegmentInfo() const
+const pie::hac::NsoHeader::sCodeSegment& pie::hac::NsoHeader::getRoSegmentInfo() const
 {
 	return mRoSegmentInfo;
 }
 
-void nn::hac::NsoHeader::setRoSegmentInfo(const sCodeSegment& info)
+void pie::hac::NsoHeader::setRoSegmentInfo(const sCodeSegment& info)
 {
 	mRoSegmentInfo = info;
 }
 
-const nn::hac::NsoHeader::sCodeSegment& nn::hac::NsoHeader::getDataSegmentInfo() const
+const pie::hac::NsoHeader::sCodeSegment& pie::hac::NsoHeader::getDataSegmentInfo() const
 {
 	return mDataSegmentInfo;
 }
 
-void nn::hac::NsoHeader::setDataSegmentInfo(const sCodeSegment& info)
+void pie::hac::NsoHeader::setDataSegmentInfo(const sCodeSegment& info)
 {
 	mDataSegmentInfo = info;
 }
 
-const nn::hac::NsoHeader::sLayout& nn::hac::NsoHeader::getModuleNameInfo() const
+const pie::hac::NsoHeader::sLayout& pie::hac::NsoHeader::getModuleNameInfo() const
 {
 	return mModuleNameInfo;
 }
 
-void nn::hac::NsoHeader::setModuleNameInfo(const sLayout& info)
+void pie::hac::NsoHeader::setModuleNameInfo(const sLayout& info)
 {
 	mModuleNameInfo = info;
 }
 
-const nn::hac::NsoHeader::sLayout& nn::hac::NsoHeader::getRoEmbeddedInfo() const
+const pie::hac::NsoHeader::sLayout& pie::hac::NsoHeader::getRoEmbeddedInfo() const
 {
 	return mRoEmbeddedInfo;
 }
 
-void nn::hac::NsoHeader::setRoEmbeddedInfo(const sLayout& info)
+void pie::hac::NsoHeader::setRoEmbeddedInfo(const sLayout& info)
 {
 	mRoEmbeddedInfo = info;
 }
 
-const nn::hac::NsoHeader::sLayout& nn::hac::NsoHeader::getRoDynStrInfo() const
+const pie::hac::NsoHeader::sLayout& pie::hac::NsoHeader::getRoDynStrInfo() const
 {
 	return mRoDynStrInfo;
 }
 
-void nn::hac::NsoHeader::setRoDynStrInfo(const sLayout& info)
+void pie::hac::NsoHeader::setRoDynStrInfo(const sLayout& info)
 {
 	mRoDynStrInfo = info;
 }
 
-const nn::hac::NsoHeader::sLayout& nn::hac::NsoHeader::getRoDynSymInfo() const
+const pie::hac::NsoHeader::sLayout& pie::hac::NsoHeader::getRoDynSymInfo() const
 {
 	return mRoDynSymInfo;
 }
 
-void nn::hac::NsoHeader::setRoDynSymInfo(const sLayout& info)
+void pie::hac::NsoHeader::setRoDynSymInfo(const sLayout& info)
 {
 	mRoDynSymInfo = info;
 }

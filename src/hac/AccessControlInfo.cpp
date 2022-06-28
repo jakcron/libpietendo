@@ -1,16 +1,16 @@
-#include <nn/hac/AccessControlInfo.h>
+#include <pietendo/hac/AccessControlInfo.h>
 
-nn::hac::AccessControlInfo::AccessControlInfo()
+pie::hac::AccessControlInfo::AccessControlInfo()
 {
 	clear();
 }
 
-nn::hac::AccessControlInfo::AccessControlInfo(const AccessControlInfo & other)
+pie::hac::AccessControlInfo::AccessControlInfo(const AccessControlInfo & other)
 {
 	*this = other;
 }
 
-void nn::hac::AccessControlInfo::operator=(const AccessControlInfo & other)
+void pie::hac::AccessControlInfo::operator=(const AccessControlInfo & other)
 {
 	mRawBinary = other.mRawBinary;
 	mProgramId = other.mProgramId;
@@ -19,7 +19,7 @@ void nn::hac::AccessControlInfo::operator=(const AccessControlInfo & other)
 	mKernelCapabilities = other.mKernelCapabilities;
 }
 
-bool nn::hac::AccessControlInfo::operator==(const AccessControlInfo & other) const
+bool pie::hac::AccessControlInfo::operator==(const AccessControlInfo & other) const
 {
 	return (mProgramId == other.mProgramId) \
 		&& (mFileSystemAccessControl == other.mFileSystemAccessControl) \
@@ -27,12 +27,12 @@ bool nn::hac::AccessControlInfo::operator==(const AccessControlInfo & other) con
 		&& (mKernelCapabilities == other.mKernelCapabilities);
 }
 
-bool nn::hac::AccessControlInfo::operator!=(const AccessControlInfo & other) const
+bool pie::hac::AccessControlInfo::operator!=(const AccessControlInfo & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::AccessControlInfo::toBytes()
+void pie::hac::AccessControlInfo::toBytes()
 {
 	// serialise the sections
 	mFileSystemAccessControl.toBytes();
@@ -77,7 +77,7 @@ void nn::hac::AccessControlInfo::toBytes()
 	memcpy(mRawBinary.data() + kc.offset, mKernelCapabilities.getBytes().data(), kc.size);
 }
 
-void nn::hac::AccessControlInfo::fromBytes(const byte_t* data, size_t len)
+void pie::hac::AccessControlInfo::fromBytes(const byte_t* data, size_t len)
 {
 	// check size
 	if (len < sizeof(sAciHeader))
@@ -118,12 +118,12 @@ void nn::hac::AccessControlInfo::fromBytes(const byte_t* data, size_t len)
 	mKernelCapabilities.fromBytes(mRawBinary.data() + hdr.kc.offset.unwrap(), hdr.kc.size.unwrap());
 }
 
-const tc::ByteData& nn::hac::AccessControlInfo::getBytes() const
+const tc::ByteData& pie::hac::AccessControlInfo::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::AccessControlInfo::clear()
+void pie::hac::AccessControlInfo::clear()
 {
 	mRawBinary =tc::ByteData();
 	mProgramId = 0;
@@ -132,42 +132,42 @@ void nn::hac::AccessControlInfo::clear()
 	mKernelCapabilities.clear();
 }
 
-uint64_t nn::hac::AccessControlInfo::getProgramId() const
+uint64_t pie::hac::AccessControlInfo::getProgramId() const
 {
 	return mProgramId;
 }
 
-void nn::hac::AccessControlInfo::setProgramId(uint64_t program_id)
+void pie::hac::AccessControlInfo::setProgramId(uint64_t program_id)
 {
 	mProgramId = program_id;
 }
 
-const nn::hac::FileSystemAccessControl& nn::hac::AccessControlInfo::getFileSystemAccessControl() const
+const pie::hac::FileSystemAccessControl& pie::hac::AccessControlInfo::getFileSystemAccessControl() const
 {
 	return mFileSystemAccessControl;
 }
 
-void nn::hac::AccessControlInfo::setFileSystemAccessControl(const nn::hac::FileSystemAccessControl& fac)
+void pie::hac::AccessControlInfo::setFileSystemAccessControl(const pie::hac::FileSystemAccessControl& fac)
 {
 	mFileSystemAccessControl = fac;
 }
 
-const nn::hac::ServiceAccessControl& nn::hac::AccessControlInfo::getServiceAccessControl() const
+const pie::hac::ServiceAccessControl& pie::hac::AccessControlInfo::getServiceAccessControl() const
 {
 	return mServiceAccessControl;
 }
 
-void nn::hac::AccessControlInfo::setServiceAccessControl(const nn::hac::ServiceAccessControl& sac)
+void pie::hac::AccessControlInfo::setServiceAccessControl(const pie::hac::ServiceAccessControl& sac)
 {
 	mServiceAccessControl = sac;
 }
 
-const nn::hac::KernelCapabilityControl& nn::hac::AccessControlInfo::getKernelCapabilities() const
+const pie::hac::KernelCapabilityControl& pie::hac::AccessControlInfo::getKernelCapabilities() const
 {
 	return mKernelCapabilities;
 }
 
-void nn::hac::AccessControlInfo::setKernelCapabilities(const nn::hac::KernelCapabilityControl& kc)
+void pie::hac::AccessControlInfo::setKernelCapabilities(const pie::hac::KernelCapabilityControl& kc)
 {
 	mKernelCapabilities = kc;
 }

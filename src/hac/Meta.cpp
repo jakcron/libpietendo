@@ -1,17 +1,17 @@
-#include <nn/hac/Meta.h>
+#include <pietendo/hac/Meta.h>
 
-nn::hac::Meta::Meta()
+pie::hac::Meta::Meta()
 {
 	clear();
 }
 
-nn::hac::Meta::Meta(const Meta & other) :
+pie::hac::Meta::Meta(const Meta & other) :
 	Meta()
 {
 	*this = other;
 }
 
-void nn::hac::Meta::operator=(const Meta & other)
+void pie::hac::Meta::operator=(const Meta & other)
 {
 	mRawBinary = other.mRawBinary;
 	mAccessControlInfoDescKeyGeneration = other.mAccessControlInfoDescKeyGeneration;
@@ -29,7 +29,7 @@ void nn::hac::Meta::operator=(const Meta & other)
 	mAccessControlInfoDesc = other.mAccessControlInfoDesc;
 }
 
-bool nn::hac::Meta::operator==(const Meta & other) const
+bool pie::hac::Meta::operator==(const Meta & other) const
 {
 	return (mAccessControlInfoDescKeyGeneration == other.mAccessControlInfoDescKeyGeneration) \
 		&& (mIs64BitInstructionFlag == other.mIs64BitInstructionFlag) \
@@ -46,12 +46,12 @@ bool nn::hac::Meta::operator==(const Meta & other) const
 		&& (mAccessControlInfoDesc == other.mAccessControlInfoDesc);
 }
 
-bool nn::hac::Meta::operator!=(const Meta & other) const
+bool pie::hac::Meta::operator!=(const Meta & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::Meta::toBytes()
+void pie::hac::Meta::toBytes()
 {
 	if (mAccessControlInfoDesc.getBytes().size() == 0)
 		mAccessControlInfoDesc.toBytes();
@@ -110,7 +110,7 @@ void nn::hac::Meta::toBytes()
 	}
 }
 
-void nn::hac::Meta::fromBytes(const byte_t* data, size_t len)
+void pie::hac::Meta::fromBytes(const byte_t* data, size_t len)
 {
 	// check size
 	if (len < sizeof(sMetaHeader))
@@ -168,12 +168,12 @@ void nn::hac::Meta::fromBytes(const byte_t* data, size_t len)
 	}	
 }
 
-const tc::ByteData& nn::hac::Meta::getBytes() const
+const tc::ByteData& pie::hac::Meta::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::Meta::clear()
+void pie::hac::Meta::clear()
 {
 	mRawBinary = tc::ByteData();
 	mAccessControlInfoDescKeyGeneration = 0;
@@ -191,52 +191,52 @@ void nn::hac::Meta::clear()
 	mAccessControlInfoDesc.clear();
 }
 
-byte_t nn::hac::Meta::getAccessControlInfoDescKeyGeneration() const
+byte_t pie::hac::Meta::getAccessControlInfoDescKeyGeneration() const
 {
 	return mAccessControlInfoDescKeyGeneration;
 }
 
-void nn::hac::Meta::setAccessControlInfoDescKeyGeneration(byte_t key_generation)
+void pie::hac::Meta::setAccessControlInfoDescKeyGeneration(byte_t key_generation)
 {
 	mAccessControlInfoDescKeyGeneration = key_generation;
 }
 
-bool nn::hac::Meta::getIs64BitInstructionFlag() const
+bool pie::hac::Meta::getIs64BitInstructionFlag() const
 {
 	return mIs64BitInstructionFlag;
 }
 
-void nn::hac::Meta::setIs64BitInstructionFlag(bool flag)
+void pie::hac::Meta::setIs64BitInstructionFlag(bool flag)
 {
 	mIs64BitInstructionFlag = flag;
 }
 
-nn::hac::meta::ProcessAddressSpace nn::hac::Meta::getProcessAddressSpace() const
+pie::hac::meta::ProcessAddressSpace pie::hac::Meta::getProcessAddressSpace() const
 {
 	return mProcessAddressSpace;
 }
 
-void nn::hac::Meta::setProcessAddressSpace(meta::ProcessAddressSpace type)
+void pie::hac::Meta::setProcessAddressSpace(meta::ProcessAddressSpace type)
 {
 	mProcessAddressSpace = type;
 }
 
-bool nn::hac::Meta::getOptimizeMemoryAllocationFlag() const
+bool pie::hac::Meta::getOptimizeMemoryAllocationFlag() const
 {
 	return mOptimizeMemoryAllocationFlag;
 }
 
-void nn::hac::Meta::setOptimizeMemoryAllocationFlag(bool flag)
+void pie::hac::Meta::setOptimizeMemoryAllocationFlag(bool flag)
 {
 	mOptimizeMemoryAllocationFlag = flag;
 }
 
-byte_t nn::hac::Meta::getMainThreadPriority() const
+byte_t pie::hac::Meta::getMainThreadPriority() const
 {
 	return mMainThreadPriority;
 }
 
-void nn::hac::Meta::setMainThreadPriority(byte_t priority)
+void pie::hac::Meta::setMainThreadPriority(byte_t priority)
 {
 	if (priority > meta::kMaxPriority)
 	{
@@ -246,52 +246,52 @@ void nn::hac::Meta::setMainThreadPriority(byte_t priority)
 	mMainThreadPriority = priority;
 }
 
-byte_t nn::hac::Meta::getMainThreadCpuId() const
+byte_t pie::hac::Meta::getMainThreadCpuId() const
 {
 	return mMainThreadCpuId;
 }
 
-void nn::hac::Meta::setMainThreadCpuId(byte_t core_num)
+void pie::hac::Meta::setMainThreadCpuId(byte_t core_num)
 {
 	mMainThreadCpuId = core_num;
 }
 
-uint32_t nn::hac::Meta::getSystemResourceSize() const
+uint32_t pie::hac::Meta::getSystemResourceSize() const
 {
 	return mSystemResourceSize;
 }
 
-void nn::hac::Meta::setSystemResourceSize(uint32_t size)
+void pie::hac::Meta::setSystemResourceSize(uint32_t size)
 {
 	mSystemResourceSize = size;
 }
 
-uint32_t nn::hac::Meta::getVersion() const
+uint32_t pie::hac::Meta::getVersion() const
 {
 	return mVersion;
 }
 
-void nn::hac::Meta::setVersion(uint32_t version)
+void pie::hac::Meta::setVersion(uint32_t version)
 {
 	mVersion = version;
 }
 
-uint32_t nn::hac::Meta::getMainThreadStackSize() const
+uint32_t pie::hac::Meta::getMainThreadStackSize() const
 {
 	return mMainThreadStackSize;
 }
 
-void nn::hac::Meta::setMainThreadStackSize(uint32_t size)
+void pie::hac::Meta::setMainThreadStackSize(uint32_t size)
 {
 	mMainThreadStackSize = size;
 }
 
-const std::string & nn::hac::Meta::getName() const
+const std::string & pie::hac::Meta::getName() const
 {
 	return mName;
 }
 
-void nn::hac::Meta::setName(const std::string & name)
+void pie::hac::Meta::setName(const std::string & name)
 {
 	if (name.length() > meta::kNameMaxLen)
 	{
@@ -301,12 +301,12 @@ void nn::hac::Meta::setName(const std::string & name)
 	mName = name;
 }
 
-const std::string & nn::hac::Meta::getProductCode() const
+const std::string & pie::hac::Meta::getProductCode() const
 {
 	return mProductCode;
 }
 
-void nn::hac::Meta::setProductCode(const std::string & product_code)
+void pie::hac::Meta::setProductCode(const std::string & product_code)
 {
 	if (product_code.length() > meta::kProductCodeMaxLen)
 	{
@@ -316,22 +316,22 @@ void nn::hac::Meta::setProductCode(const std::string & product_code)
 	mProductCode = product_code;
 }
 
-const nn::hac::AccessControlInfo & nn::hac::Meta::getAccessControlInfo() const
+const pie::hac::AccessControlInfo & pie::hac::Meta::getAccessControlInfo() const
 {
 	return mAccessControlInfo;
 }
 
-void nn::hac::Meta::setAccessControlInfo(const AccessControlInfo & aci)
+void pie::hac::Meta::setAccessControlInfo(const AccessControlInfo & aci)
 {
 	mAccessControlInfo = aci;
 }
 
-const nn::hac::AccessControlInfoDesc & nn::hac::Meta::getAccessControlInfoDesc() const
+const pie::hac::AccessControlInfoDesc & pie::hac::Meta::getAccessControlInfoDesc() const
 {
 	return mAccessControlInfoDesc;
 }
 
-void nn::hac::Meta::setAccessControlInfoDesc(const AccessControlInfoDesc & aci_desc)
+void pie::hac::Meta::setAccessControlInfoDesc(const AccessControlInfoDesc & aci_desc)
 {
 	mAccessControlInfoDesc = aci_desc;
 }

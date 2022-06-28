@@ -1,30 +1,30 @@
-#include <nn/hac/MemoryMappingHandler.h>
-#include <nn/hac/MemoryPageEntry.h>
+#include <pietendo/hac/MemoryMappingHandler.h>
+#include <pietendo/hac/MemoryPageEntry.h>
 
-nn::hac::MemoryMappingHandler::MemoryMappingHandler() :
+pie::hac::MemoryMappingHandler::MemoryMappingHandler() :
 	mIsSet(false)
 {}
 
-void nn::hac::MemoryMappingHandler::operator=(const MemoryMappingHandler & other)
+void pie::hac::MemoryMappingHandler::operator=(const MemoryMappingHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mMemRange = other.mMemRange;
 	mMemPage = other.mMemPage;
 }
 
-bool nn::hac::MemoryMappingHandler::operator==(const MemoryMappingHandler & other) const
+bool pie::hac::MemoryMappingHandler::operator==(const MemoryMappingHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mMemRange == other.mMemRange) \
 		&& (mMemPage == other.mMemPage);
 }
 
-bool nn::hac::MemoryMappingHandler::operator!=(const MemoryMappingHandler & other) const
+bool pie::hac::MemoryMappingHandler::operator!=(const MemoryMappingHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::MemoryMappingHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::MemoryMappingHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() == 0)
 		return;
@@ -87,7 +87,7 @@ void nn::hac::MemoryMappingHandler::importKernelCapabilityList(const std::vector
 	mIsSet = true;
 }
 
-void nn::hac::MemoryMappingHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::MemoryMappingHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -116,24 +116,24 @@ void nn::hac::MemoryMappingHandler::exportKernelCapabilityList(std::vector<Kerne
 	}
 }
 
-void nn::hac::MemoryMappingHandler::clear()
+void pie::hac::MemoryMappingHandler::clear()
 {
 	mIsSet = false;
 	mMemRange.clear();
 	mMemPage.clear();
 }
 
-bool nn::hac::MemoryMappingHandler::isSet() const
+bool pie::hac::MemoryMappingHandler::isSet() const
 {
 	return mIsSet;
 }
 
-const std::vector<nn::hac::MemoryMappingHandler::sMemoryMapping>& nn::hac::MemoryMappingHandler::getMemoryMaps() const
+const std::vector<pie::hac::MemoryMappingHandler::sMemoryMapping>& pie::hac::MemoryMappingHandler::getMemoryMaps() const
 {
 	return mMemRange;
 }
 
-const std::vector<nn::hac::MemoryMappingHandler::sMemoryMapping>& nn::hac::MemoryMappingHandler::getIoMemoryMaps() const
+const std::vector<pie::hac::MemoryMappingHandler::sMemoryMapping>& pie::hac::MemoryMappingHandler::getIoMemoryMaps() const
 {
 	return mMemPage;
 }

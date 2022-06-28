@@ -1,36 +1,41 @@
+	/**
+	 * @file InteruptHandler.h
+	 * @brief Declaration of pie::hac::InteruptHandler
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/IKernelCapabilityHandler.h>
-#include <nn/hac/InteruptEntry.h>
+#include <pietendo/hac/IKernelCapabilityHandler.h>
+#include <pietendo/hac/InteruptEntry.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class InteruptHandler :
+	public IKernelCapabilityHandler
 {
-namespace hac
-{
-	class InteruptHandler :
-		public IKernelCapabilityHandler
-	{
-	public:
-		InteruptHandler();
+public:
+	InteruptHandler();
 
-		void operator=(const InteruptHandler& other);
-		bool operator==(const InteruptHandler& other) const;
-		bool operator!=(const InteruptHandler& other) const;
+	void operator=(const InteruptHandler& other);
+	bool operator==(const InteruptHandler& other) const;
+	bool operator!=(const InteruptHandler& other) const;
 
-		// kernel capabilty list in/out
-		void importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps);
-		void exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const;
-		void clear();
-		bool isSet() const;
+	// kernel capabilty list in/out
+	void importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps);
+	void exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const;
+	void clear();
+	bool isSet() const;
 
-		// variables
-		const std::vector<uint16_t>& getInteruptList() const;
-		void setInteruptList(const std::vector<uint16_t>& interupts);
+	// variables
+	const std::vector<uint16_t>& getInteruptList() const;
+	void setInteruptList(const std::vector<uint16_t>& interupts);
 
-	private:
-		const std::string kModuleName = "INTERUPT_HANDLER";
+private:
+	const std::string kModuleName = "INTERUPT_HANDLER";
 
-		bool mIsSet;
-		std::vector<uint16_t> mInterupts;
-	};
-}
-}
+	bool mIsSet;
+	std::vector<uint16_t> mInterupts;
+};
+
+}} // namespace pie::hac

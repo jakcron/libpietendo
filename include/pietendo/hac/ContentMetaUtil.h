@@ -1,23 +1,28 @@
+	/**
+	 * @file ContentMetaUtil.h
+	 * @brief Declaration of pie::hac::ContentMetaUtil
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/cnmt.h>
+#include <pietendo/hac/define/cnmt.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class ContentMetaUtil
 {
-namespace hac
-{
-	class ContentMetaUtil
-	{
-	public:
-		static std::string getContentTypeAsString(nn::hac::cnmt::ContentType val);
-		static std::string getContentMetaTypeAsString(nn::hac::cnmt::ContentMetaType val);
-		static std::string getUpdateTypeAsString(nn::hac::cnmt::UpdateType val);
-		static std::string getContentInstallTypeAsString(nn::hac::cnmt::ContentInstallType val);
-		static std::string getStorageIdAsString(nn::hac::cnmt::StorageId val);
-		static std::string getContentMetaAttributeFlagAsString(nn::hac::cnmt::ContentMetaAttributeFlag val);
-		static std::string getVersionAsString(uint32_t version);
+public:
+	static std::string getContentTypeAsString(pie::hac::cnmt::ContentType val);
+	static std::string getContentMetaTypeAsString(pie::hac::cnmt::ContentMetaType val);
+	static std::string getUpdateTypeAsString(pie::hac::cnmt::UpdateType val);
+	static std::string getContentInstallTypeAsString(pie::hac::cnmt::ContentInstallType val);
+	static std::string getStorageIdAsString(pie::hac::cnmt::StorageId val);
+	static std::string getContentMetaAttributeFlagAsString(pie::hac::cnmt::ContentMetaAttributeFlag val);
+	static std::string getVersionAsString(uint32_t version);
 
-	private:
-		const std::string kModuleName = "CONTENT_META_UTIL";
-	};
-}
-}
+private:
+	const std::string kModuleName = "CONTENT_META_UTIL";
+};
+
+}} // namespace pie::hac

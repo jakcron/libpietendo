@@ -1,47 +1,47 @@
-#include <nn/hac/GameCardFsSnapshotGenerator.h>
+#include <pietendo/hac/GameCardFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/crypto/Sha256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
-#include <nn/hac/PartitionFsHeader.h>
+#include <pietendo/hac/PartitionFsHeader.h>
 
 #include <fmt/core.h>
 #include <tc/cli/FormatUtil.h>
 
-nn::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream, size_t root_header_size, ValidationMode validate_mode) :
+pie::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream, size_t root_header_size, ValidationMode validate_mode) :
 	FileSystemSnapshot()
 {
 	// validate stream properties
 	if (stream == nullptr)
 	{
-		throw tc::ObjectDisposedException("nn::hac::GameCardFsSnapshotGenerator", "Failed to open input stream.");
+		throw tc::ObjectDisposedException("pie::hac::GameCardFsSnapshotGenerator", "Failed to open input stream.");
 	}
 	if (stream->canRead() == false || stream->canSeek() == false)
 	{
-		throw tc::NotSupportedException("nn::hac::GameCardFsSnapshotGenerator", "Input stream requires read/seek permissions.");
+		throw tc::NotSupportedException("pie::hac::GameCardFsSnapshotGenerator", "Input stream requires read/seek permissions.");
 	}
 
 	// read/validate root HFS0 header
 	if (stream->length() < tc::io::IOUtil::castSizeToInt64(root_header_size))
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::GameCardFsSnapshotGenerator", "Input stream is too small.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::GameCardFsSnapshotGenerator", "Input stream is too small.");
 	}
 
 	tc::ByteData root_header_raw = tc::ByteData(root_header_size);
 	stream->seek(0, tc::io::SeekOrigin::Begin);
 	stream->read(root_header_raw.data(), root_header_raw.size());
 
-	nn::hac::PartitionFsHeader root_header;
+	pie::hac::PartitionFsHeader root_header;
 	try {
 		root_header.fromBytes(root_header_raw.data(), root_header_raw.size());
 	} catch (tc::Exception&) {
-		throw tc::Exception("nn::hac::GameCardFsSnapshotGenerator", "Failed to process root HFS0 header.");
+		throw tc::Exception("pie::hac::GameCardFsSnapshotGenerator", "Failed to process root HFS0 header.");
 	}
 	
-	if (root_header.getFsType() != nn::hac::PartitionFsHeader::TYPE_HFS0)
+	if (root_header.getFsType() != pie::hac::PartitionFsHeader::TYPE_HFS0)
 	{
-		throw tc::Exception("nn::hac::GameCardFsSnapshotGenerator", "Root header was not HFS0.");
+		throw tc::Exception("pie::hac::GameCardFsSnapshotGenerator", "Root header was not HFS0.");
 	}
 
 	// parse header sections
@@ -63,7 +63,7 @@ nn::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sha
 	std::vector<PartitionInformation> dir_list;
 
 	
-	nn::hac::detail::sha256_hash_t calc_hash; // for hash checking
+	pie::hac::detail::sha256_hash_t calc_hash; // for hash checking
 
 	// get partition metadata
 	for (auto dirItr = root_header.getFileList().begin(); dirItr != root_header.getFileList().end(); dirItr++)
@@ -88,7 +88,7 @@ nn::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sha
 				std::string error_msg = fmt::format("Partition \"{:s}\" failed hash check.", dirItr->name);
 				if (validate_mode == ValidationMode_Throw)
 				{
-					throw tc::crypto::CryptoException("nn::hac::GameCardFsSnapshotGenerator", error_msg);
+					throw tc::crypto::CryptoException("pie::hac::GameCardFsSnapshotGenerator", error_msg);
 				}
 				else if (validate_mode == ValidationMode_Warn)
 				{
@@ -98,17 +98,17 @@ nn::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sha
 		}
 
 		// parse partition header
-		nn::hac::PartitionFsHeader part_header;
+		pie::hac::PartitionFsHeader part_header;
 		try {
 			part_header.fromBytes(part_header_raw.data(), part_header_raw.size());
 		} catch (tc::Exception&) {
-			throw tc::Exception("nn::hac::GameCardFsSnapshotGenerator", "Failed to process partition HFS0 header.");
+			throw tc::Exception("pie::hac::GameCardFsSnapshotGenerator", "Failed to process partition HFS0 header.");
 		}
 		
 		// check the FsType is HFS0
-		if (part_header.getFsType() != nn::hac::PartitionFsHeader::TYPE_HFS0)
+		if (part_header.getFsType() != pie::hac::PartitionFsHeader::TYPE_HFS0)
 		{
-			throw tc::Exception("nn::hac::GameCardFsSnapshotGenerator", "Partition header was not HFS0.");
+			throw tc::Exception("pie::hac::GameCardFsSnapshotGenerator", "Partition header was not HFS0.");
 		}
 
 		// iterate over files
@@ -175,7 +175,7 @@ nn::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sha
 					std::string error_msg = fmt::format("\"{:s}\" failed hash check.", fileItr->name);
 					if (validate_mode == ValidationMode_Throw)
 					{
-						throw tc::crypto::CryptoException("nn::hac::GameCardFsSnapshotGenerator", error_msg);
+						throw tc::crypto::CryptoException("pie::hac::GameCardFsSnapshotGenerator", error_msg);
 					}
 					else if (validate_mode == ValidationMode_Warn)
 					{

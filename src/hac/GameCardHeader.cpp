@@ -1,16 +1,16 @@
-#include <nn/hac/GameCardHeader.h>
+#include <pietendo/hac/GameCardHeader.h>
 
-nn::hac::GameCardHeader::GameCardHeader()
+pie::hac::GameCardHeader::GameCardHeader()
 {
 	clear();
 }
 
-nn::hac::GameCardHeader::GameCardHeader(const GameCardHeader& other)
+pie::hac::GameCardHeader::GameCardHeader(const GameCardHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::GameCardHeader::operator=(const GameCardHeader& other)
+void pie::hac::GameCardHeader::operator=(const GameCardHeader& other)
 {
 	mRomAreaStartPage = other.mRomAreaStartPage;
 	mBackupAreaStartPage = other.mBackupAreaStartPage;
@@ -43,7 +43,7 @@ void nn::hac::GameCardHeader::operator=(const GameCardHeader& other)
 	mUppId = other.mUppId;
 }
 
-bool nn::hac::GameCardHeader::operator==(const GameCardHeader& other) const
+bool pie::hac::GameCardHeader::operator==(const GameCardHeader& other) const
 {
 	return	(mRomAreaStartPage == other.mRomAreaStartPage)
 		&&	(mBackupAreaStartPage == other.mBackupAreaStartPage)
@@ -76,17 +76,17 @@ bool nn::hac::GameCardHeader::operator==(const GameCardHeader& other) const
 		&&	(mUppId == other.mUppId);
 }
 
-bool nn::hac::GameCardHeader::operator!=(const GameCardHeader& other) const
+bool pie::hac::GameCardHeader::operator!=(const GameCardHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::GameCardHeader::toBytes()
+void pie::hac::GameCardHeader::toBytes()
 {
 	tc::NotImplementedException(kModuleName, "toBytes() not implemented");
 }
 
-void nn::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sGcHeader))
@@ -102,7 +102,7 @@ void nn::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// get sGcHeader ptr
-	const nn::hac::sGcHeader* hdr = (const nn::hac::sGcHeader*)mRawBinary.data();
+	const pie::hac::sGcHeader* hdr = (const pie::hac::sGcHeader*)mRawBinary.data();
 	
 	// check GameCardImage signature
 	if (hdr->st_magic.unwrap() != gc::kGcHeaderStructMagic)
@@ -120,7 +120,7 @@ void nn::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
 	{
 		if (hdr->flags.test(i))
 		{
-			mFlags.push_back(nn::hac::gc::HeaderFlags(i));
+			mFlags.push_back(pie::hac::gc::HeaderFlags(i));
 		}
 	}
 	mPackageId = hdr->package_id.unwrap();
@@ -149,13 +149,13 @@ void nn::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
 	mUppId = hdr->extended_header.upp_id.unwrap();
 }
 
-const tc::ByteData& nn::hac::GameCardHeader::getBytes() const
+const tc::ByteData& pie::hac::GameCardHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
 // variables
-void nn::hac::GameCardHeader::clear()
+void pie::hac::GameCardHeader::clear()
 {
 	mRomAreaStartPage = 0;
 	mBackupAreaStartPage = 0;
@@ -188,293 +188,293 @@ void nn::hac::GameCardHeader::clear()
 	mUppId = 0;
 }
 
-uint32_t nn::hac::GameCardHeader::getRomAreaStartPage() const
+uint32_t pie::hac::GameCardHeader::getRomAreaStartPage() const
 {
 	return mRomAreaStartPage;
 }
 
-void nn::hac::GameCardHeader::setRomAreaStartPage(uint32_t startPage)
+void pie::hac::GameCardHeader::setRomAreaStartPage(uint32_t startPage)
 {
 	mRomAreaStartPage = startPage;
 }
 
-uint32_t nn::hac::GameCardHeader::getBackupAreaStartPage() const
+uint32_t pie::hac::GameCardHeader::getBackupAreaStartPage() const
 {
 	return mBackupAreaStartPage;
 }
 
-void nn::hac::GameCardHeader::setBackupAreaStartPage(uint32_t startPage)
+void pie::hac::GameCardHeader::setBackupAreaStartPage(uint32_t startPage)
 {
 	mBackupAreaStartPage = startPage;
 }
 
-byte_t nn::hac::GameCardHeader::getKekIndex() const
+byte_t pie::hac::GameCardHeader::getKekIndex() const
 {
 	return mKekIndex;
 }
 
-void nn::hac::GameCardHeader::setKekIndex(byte_t kekIndex)
+void pie::hac::GameCardHeader::setKekIndex(byte_t kekIndex)
 {
 	mKekIndex = kekIndex;
 }
 
-byte_t nn::hac::GameCardHeader::getTitleKeyDecIndex() const
+byte_t pie::hac::GameCardHeader::getTitleKeyDecIndex() const
 {
 	return mTitleKeyDecIndex;
 }
 
-void nn::hac::GameCardHeader::setTitleKeyDecIndex(byte_t index)
+void pie::hac::GameCardHeader::setTitleKeyDecIndex(byte_t index)
 {
 	mTitleKeyDecIndex = index;
 }
 
-byte_t nn::hac::GameCardHeader::getRomSizeType() const
+byte_t pie::hac::GameCardHeader::getRomSizeType() const
 {
 	return mRomSize;
 }
 
-void nn::hac::GameCardHeader::setRomSizeType(byte_t romSizeType)
+void pie::hac::GameCardHeader::setRomSizeType(byte_t romSizeType)
 {
 	mRomSize = romSizeType;
 }
 
-byte_t nn::hac::GameCardHeader::getCardHeaderVersion() const
+byte_t pie::hac::GameCardHeader::getCardHeaderVersion() const
 {
 	return mCardHeaderVersion;
 }
 
-void nn::hac::GameCardHeader::setCardHeaderVersion(byte_t version)
+void pie::hac::GameCardHeader::setCardHeaderVersion(byte_t version)
 {
 	mCardHeaderVersion = version;
 }
 
-byte_t nn::hac::GameCardHeader::getCompatibilityType() const
+byte_t pie::hac::GameCardHeader::getCompatibilityType() const
 {
 	return mCompatibilityType;
 }
 
-void nn::hac::GameCardHeader::setCompatibilityType(byte_t compat_type)
+void pie::hac::GameCardHeader::setCompatibilityType(byte_t compat_type)
 {
 	mCompatibilityType = compat_type;
 }
 
-uint64_t nn::hac::GameCardHeader::getPackageId() const
+uint64_t pie::hac::GameCardHeader::getPackageId() const
 {
 	return mPackageId;
 }
 
-void nn::hac::GameCardHeader::setPackageId(uint64_t id)
+void pie::hac::GameCardHeader::setPackageId(uint64_t id)
 {
 	mPackageId = id;
 }
 
-uint32_t nn::hac::GameCardHeader::getValidDataEndPage() const
+uint32_t pie::hac::GameCardHeader::getValidDataEndPage() const
 {
 	return mValidDataEndPage;
 }
 
-void nn::hac::GameCardHeader::setValidDataEndPage(uint32_t page)
+void pie::hac::GameCardHeader::setValidDataEndPage(uint32_t page)
 {
 	mValidDataEndPage = page;
 }
 
-const nn::hac::detail::aes_iv_t& nn::hac::GameCardHeader::getAesCbcIv() const
+const pie::hac::detail::aes_iv_t& pie::hac::GameCardHeader::getAesCbcIv() const
 {
 	return mAesCbcIv;
 }
 
-void nn::hac::GameCardHeader::setAesCbcIv(const nn::hac::detail::aes_iv_t& iv)
+void pie::hac::GameCardHeader::setAesCbcIv(const pie::hac::detail::aes_iv_t& iv)
 {
 	mAesCbcIv = iv;
 }
 
-uint64_t nn::hac::GameCardHeader::getPartitionFsAddress() const
+uint64_t pie::hac::GameCardHeader::getPartitionFsAddress() const
 {
 	return mPartitionFsHeaderAddress;
 }
 
-void nn::hac::GameCardHeader::setPartitionFsAddress(uint64_t address)
+void pie::hac::GameCardHeader::setPartitionFsAddress(uint64_t address)
 {
 	mPartitionFsHeaderAddress = address;
 }
 
-uint64_t nn::hac::GameCardHeader::getPartitionFsSize() const
+uint64_t pie::hac::GameCardHeader::getPartitionFsSize() const
 {
 	return mPartitionFsHeaderSize;
 }
 
-void nn::hac::GameCardHeader::setPartitionFsSize(uint64_t size)
+void pie::hac::GameCardHeader::setPartitionFsSize(uint64_t size)
 {
 	mPartitionFsHeaderSize = size;
 }
 
-const nn::hac::detail::sha256_hash_t& nn::hac::GameCardHeader::getPartitionFsHash() const
+const pie::hac::detail::sha256_hash_t& pie::hac::GameCardHeader::getPartitionFsHash() const
 {
 	return mPartitionFsHeaderHash;
 }
 
-void nn::hac::GameCardHeader::setPartitionFsHash(const nn::hac::detail::sha256_hash_t& hash)
+void pie::hac::GameCardHeader::setPartitionFsHash(const pie::hac::detail::sha256_hash_t& hash)
 {
 	mPartitionFsHeaderHash = hash;
 }
 
-const nn::hac::detail::sha256_hash_t& nn::hac::GameCardHeader::getInitialDataHash() const
+const pie::hac::detail::sha256_hash_t& pie::hac::GameCardHeader::getInitialDataHash() const
 {
 	return mInitialDataHash;
 }
 
-void nn::hac::GameCardHeader::setInitialDataHash(const nn::hac::detail::sha256_hash_t& hash)
+void pie::hac::GameCardHeader::setInitialDataHash(const pie::hac::detail::sha256_hash_t& hash)
 {
 	mInitialDataHash = hash;
 }
 
-uint32_t nn::hac::GameCardHeader::getSelSec() const
+uint32_t pie::hac::GameCardHeader::getSelSec() const
 {
 	return mSelSec;
 }
 
-void nn::hac::GameCardHeader::setSelSec(uint32_t sel_sec)
+void pie::hac::GameCardHeader::setSelSec(uint32_t sel_sec)
 {
 	mSelSec = sel_sec;
 }
 
-uint32_t nn::hac::GameCardHeader::getSelT1Key() const
+uint32_t pie::hac::GameCardHeader::getSelT1Key() const
 {
 	return mSelT1Key;
 }
 
-void nn::hac::GameCardHeader::setSelT1Key(uint32_t sel_t1_key)
+void pie::hac::GameCardHeader::setSelT1Key(uint32_t sel_t1_key)
 {
 	mSelT1Key = sel_t1_key;
 }
 
-uint32_t nn::hac::GameCardHeader::getSelKey() const
+uint32_t pie::hac::GameCardHeader::getSelKey() const
 {
 	return mSelKey;
 }
 
-void nn::hac::GameCardHeader::setSelKey(uint32_t sel_key)
+void pie::hac::GameCardHeader::setSelKey(uint32_t sel_key)
 {
 	mSelKey = sel_key;
 }
 
-uint32_t nn::hac::GameCardHeader::getLimAreaPage() const
+uint32_t pie::hac::GameCardHeader::getLimAreaPage() const
 {
 	return mLimAreaPage;
 }
 
-void nn::hac::GameCardHeader::setLimAreaPage(uint32_t page)
+void pie::hac::GameCardHeader::setLimAreaPage(uint32_t page)
 {
 	mLimAreaPage = page;
 }
 
 
-uint64_t nn::hac::GameCardHeader::getFwVersion() const
+uint64_t pie::hac::GameCardHeader::getFwVersion() const
 {
 	return mFwVersion;
 }
 
-void nn::hac::GameCardHeader::setFwVersion(uint64_t version)
+void pie::hac::GameCardHeader::setFwVersion(uint64_t version)
 {
 	mFwVersion = version;
 }
 
-uint32_t nn::hac::GameCardHeader::getAccCtrl1() const
+uint32_t pie::hac::GameCardHeader::getAccCtrl1() const
 {
 	return mAccCtrl1;
 }
 
-void nn::hac::GameCardHeader::setAccCtrl1(uint32_t acc_ctrl_1)
+void pie::hac::GameCardHeader::setAccCtrl1(uint32_t acc_ctrl_1)
 {
 	mAccCtrl1 = acc_ctrl_1;
 }
 
-uint32_t nn::hac::GameCardHeader::getWait1TimeRead() const
+uint32_t pie::hac::GameCardHeader::getWait1TimeRead() const
 {
 	return mWait1TimeRead;
 }
 
-void nn::hac::GameCardHeader::setWait1TimeRead(uint32_t seconds)
+void pie::hac::GameCardHeader::setWait1TimeRead(uint32_t seconds)
 {
 	mWait1TimeRead = seconds;
 }
 
-uint32_t nn::hac::GameCardHeader::getWait2TimeRead() const
+uint32_t pie::hac::GameCardHeader::getWait2TimeRead() const
 {
 	return mWait2TimeRead;
 }
 
-void nn::hac::GameCardHeader::setWait2TimeRead(uint32_t seconds)
+void pie::hac::GameCardHeader::setWait2TimeRead(uint32_t seconds)
 {
 	mWait2TimeRead = seconds;
 }
 
-uint32_t nn::hac::GameCardHeader::getWait1TimeWrite() const
+uint32_t pie::hac::GameCardHeader::getWait1TimeWrite() const
 {
 	return mWait1TimeWrite;
 }
 
-void nn::hac::GameCardHeader::setWait1TimeWrite(uint32_t seconds)
+void pie::hac::GameCardHeader::setWait1TimeWrite(uint32_t seconds)
 {
 	mWait1TimeWrite = seconds;
 }
 
-uint32_t nn::hac::GameCardHeader::getWait2TimeWrite() const
+uint32_t pie::hac::GameCardHeader::getWait2TimeWrite() const
 {
 	return mWait2TimeWrite;
 }
 
-void nn::hac::GameCardHeader::setWait2TimeWrite(uint32_t seconds)
+void pie::hac::GameCardHeader::setWait2TimeWrite(uint32_t seconds)
 {
 	mWait2TimeWrite = seconds;
 }
 
-uint32_t nn::hac::GameCardHeader::getFwMode() const
+uint32_t pie::hac::GameCardHeader::getFwMode() const
 {
 	return mFwMode;
 }
 
-void nn::hac::GameCardHeader::setFwMode(uint32_t fw_mode)
+void pie::hac::GameCardHeader::setFwMode(uint32_t fw_mode)
 {
 	mFwMode = fw_mode;
 }
 
-uint32_t nn::hac::GameCardHeader::getUppVersion() const
+uint32_t pie::hac::GameCardHeader::getUppVersion() const
 {
 	return mUppVersion;
 }
 
-void nn::hac::GameCardHeader::setUppVersion(uint32_t version)
+void pie::hac::GameCardHeader::setUppVersion(uint32_t version)
 {
 	mUppVersion = version;
 }
 
-const std::vector<nn::hac::gc::HeaderFlags>& nn::hac::GameCardHeader::getFlags() const
+const std::vector<pie::hac::gc::HeaderFlags>& pie::hac::GameCardHeader::getFlags() const
 {
 	return mFlags;
 }
 
-void nn::hac::GameCardHeader::setFlags(const std::vector<nn::hac::gc::HeaderFlags>& flags)
+void pie::hac::GameCardHeader::setFlags(const std::vector<pie::hac::gc::HeaderFlags>& flags)
 {
 	mFlags = flags;
 }
 
-const nn::hac::gc::upp_hash_t& nn::hac::GameCardHeader::getUppHash() const
+const pie::hac::gc::upp_hash_t& pie::hac::GameCardHeader::getUppHash() const
 {
 	return mUppHash;
 }
 
-void nn::hac::GameCardHeader::setUppHash(const nn::hac::gc::upp_hash_t& hash)
+void pie::hac::GameCardHeader::setUppHash(const pie::hac::gc::upp_hash_t& hash)
 {
 	mUppHash = hash;
 }
 
-uint64_t nn::hac::GameCardHeader::getUppId() const
+uint64_t pie::hac::GameCardHeader::getUppId() const
 {
 	return mUppId;
 }
 
-void nn::hac::GameCardHeader::setUppId(uint64_t id)
+void pie::hac::GameCardHeader::setUppId(uint64_t id)
 {
 	mUppId = id;
 }

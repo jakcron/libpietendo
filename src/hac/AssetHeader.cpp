@@ -1,16 +1,16 @@
-#include <nn/hac/AssetHeader.h>
+#include <pietendo/hac/AssetHeader.h>
 
-nn::hac::AssetHeader::AssetHeader()
+pie::hac::AssetHeader::AssetHeader()
 {
 	clear();
 }
 
-nn::hac::AssetHeader::AssetHeader(const AssetHeader& other)
+pie::hac::AssetHeader::AssetHeader(const AssetHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::AssetHeader::operator=(const AssetHeader& other)
+void pie::hac::AssetHeader::operator=(const AssetHeader& other)
 {
 	mRawBinary = other.mRawBinary;
 	mIconInfo = other.mIconInfo;
@@ -18,22 +18,22 @@ void nn::hac::AssetHeader::operator=(const AssetHeader& other)
 	mRomfsInfo = other.mRomfsInfo;
 }
 
-bool nn::hac::AssetHeader::operator==(const AssetHeader& other) const
+bool pie::hac::AssetHeader::operator==(const AssetHeader& other) const
 {
 	return (mIconInfo == other.mIconInfo) \
 		&& (mNacpInfo == other.mNacpInfo) \
 		&& (mRomfsInfo == other.mRomfsInfo);
 }
 
-bool nn::hac::AssetHeader::operator!=(const AssetHeader& other) const
+bool pie::hac::AssetHeader::operator!=(const AssetHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::AssetHeader::toBytes()
+void pie::hac::AssetHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sAssetHeader));
-	nn::hac::sAssetHeader* hdr = (nn::hac::sAssetHeader*)mRawBinary.data();
+	pie::hac::sAssetHeader* hdr = (pie::hac::sAssetHeader*)mRawBinary.data();
 
 	// set header identifers
 	hdr->st_magic.wrap(aset::kAssetStructMagic);
@@ -52,7 +52,7 @@ void nn::hac::AssetHeader::toBytes()
 	hdr->romfs.size.wrap(mRomfsInfo.size);
 }
 
-void nn::hac::AssetHeader::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::AssetHeader::fromBytes(const byte_t* bytes, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sAssetHeader))
@@ -68,7 +68,7 @@ void nn::hac::AssetHeader::fromBytes(const byte_t* bytes, size_t len)
 	memcpy(mRawBinary.data(), bytes, mRawBinary.size());
 
 	// get sAssetHeader ptr
-	const nn::hac::sAssetHeader* hdr = (const nn::hac::sAssetHeader*)mRawBinary.data();
+	const pie::hac::sAssetHeader* hdr = (const pie::hac::sAssetHeader*)mRawBinary.data();
 	
 	// check NRO signature
 	if (hdr->st_magic.unwrap() != aset::kAssetStructMagic)
@@ -90,12 +90,12 @@ void nn::hac::AssetHeader::fromBytes(const byte_t* bytes, size_t len)
 	mRomfsInfo.size = hdr->romfs.size.unwrap();
 }
 
-const tc::ByteData& nn::hac::AssetHeader::getBytes() const
+const tc::ByteData& pie::hac::AssetHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::AssetHeader::clear()
+void pie::hac::AssetHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mIconInfo = sSection();
@@ -103,32 +103,32 @@ void nn::hac::AssetHeader::clear()
 	mRomfsInfo = sSection();
 }
 
-const nn::hac::AssetHeader::sSection& nn::hac::AssetHeader::getIconInfo() const
+const pie::hac::AssetHeader::sSection& pie::hac::AssetHeader::getIconInfo() const
 {
 	return mIconInfo;
 }
 
-void nn::hac::AssetHeader::setIconInfo(const nn::hac::AssetHeader::sSection& info)
+void pie::hac::AssetHeader::setIconInfo(const pie::hac::AssetHeader::sSection& info)
 {
 	mIconInfo = info;
 }
 
-const nn::hac::AssetHeader::sSection& nn::hac::AssetHeader::getNacpInfo() const
+const pie::hac::AssetHeader::sSection& pie::hac::AssetHeader::getNacpInfo() const
 {
 	return mNacpInfo;
 }
 
-void nn::hac::AssetHeader::setNacpInfo(const sSection& info)
+void pie::hac::AssetHeader::setNacpInfo(const sSection& info)
 {
 	mNacpInfo = info;
 }
 
-const nn::hac::AssetHeader::sSection& nn::hac::AssetHeader::getRomfsInfo() const
+const pie::hac::AssetHeader::sSection& pie::hac::AssetHeader::getRomfsInfo() const
 {
 	return mRomfsInfo;
 }
 
-void nn::hac::AssetHeader::setRomfsInfo(const sSection& info)
+void pie::hac::AssetHeader::setRomfsInfo(const sSection& info)
 {
 	mRomfsInfo = info;
 }

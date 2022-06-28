@@ -1,13 +1,13 @@
 	/**
 	 * @file    IndirectStorageStream.h
-	 * @brief   Declaration of nn::hac::IndirectStorageStream
+	 * @brief   Declaration of pie::hac::IndirectStorageStream
 	 * @author  Jack (jakcron)
 	 * @version 0.1
 	 * @date    2021/11/14
 	 **/
 #pragma once
-#include <nn/hac/BucketTree.h>
-#include <nn/hac/define/indirectstorage.h>
+#include <pietendo/hac/BucketTree.h>
+#include <pietendo/hac/define/indirectstorage.h>
 
 #include <tc/io/IStream.h>
 
@@ -17,7 +17,7 @@
 #include <tc/NotSupportedException.h>
 #include <tc/io/IOException.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 	/**
 	 * @class IndirectStorageStream
@@ -27,7 +27,7 @@ class IndirectStorageStream : public tc::io::IStream
 {
 public:
 	IndirectStorageStream();
-	IndirectStorageStream(const std::shared_ptr<tc::io::IStream>& stream0, const std::shared_ptr<tc::io::IStream>& stream1, int64_t stream_length, const nn::hac::BucketTree& bucket_tree);
+	IndirectStorageStream(const std::shared_ptr<tc::io::IStream>& stream0, const std::shared_ptr<tc::io::IStream>& stream1, int64_t stream_length, const pie::hac::BucketTree& bucket_tree);
 
 		/**
 		 * @brief Indicates whether the current stream supports reading.
@@ -137,7 +137,7 @@ private:
 	int64_t mStreamPositition;
 	
 	// BucketTree
-	nn::hac::BucketTree mBucketTree;
+	pie::hac::BucketTree mBucketTree;
 
 	bool isStreamInit() const { return mBaseStream[0] != nullptr && mBaseStream[1] != nullptr; }
 };

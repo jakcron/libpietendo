@@ -1,13 +1,13 @@
-#include <nn/hac/MemoryPageEntry.h>
+#include <pietendo/hac/MemoryPageEntry.h>
 
-nn::hac::MemoryPageEntry::MemoryPageEntry() :
+pie::hac::MemoryPageEntry::MemoryPageEntry() :
 	mCap(kc::KernelCapId::Invalid),
 	mPage(0),
 	mFlag(false),
 	mMapMultiplePages(false)
 {}
 
-nn::hac::MemoryPageEntry::MemoryPageEntry(const KernelCapabilityEntry & kernel_cap) :
+pie::hac::MemoryPageEntry::MemoryPageEntry(const KernelCapabilityEntry & kernel_cap) :
 	mCap(kc::KernelCapId::Invalid),
 	mPage(0),
 	mFlag(false),
@@ -16,7 +16,7 @@ nn::hac::MemoryPageEntry::MemoryPageEntry(const KernelCapabilityEntry & kernel_c
 	setKernelCapability(kernel_cap);
 }
 
-nn::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page) :
+pie::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page) :
 	mCap(kc::KernelCapId::Invalid),
 	mPage(0),
 	mFlag(false),
@@ -25,7 +25,7 @@ nn::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page) :
 	setPage(page);
 }
 
-nn::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page, bool flag) :
+pie::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page, bool flag) :
 	mCap(kc::KernelCapId::Invalid),
 	mPage(0),
 	mFlag(false),
@@ -35,7 +35,7 @@ nn::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page, bool flag) :
 	setFlag(flag);
 }
 
-void nn::hac::MemoryPageEntry::operator=(const MemoryPageEntry& other)
+void pie::hac::MemoryPageEntry::operator=(const MemoryPageEntry& other)
 {
 	mPage = other.mPage;
 	mFlag = other.mFlag;
@@ -43,24 +43,24 @@ void nn::hac::MemoryPageEntry::operator=(const MemoryPageEntry& other)
 	updateCapField();
 }
 
-bool nn::hac::MemoryPageEntry::operator==(const MemoryPageEntry& other) const
+bool pie::hac::MemoryPageEntry::operator==(const MemoryPageEntry& other) const
 {
 	return (mPage == other.mPage) \
 		&& (mFlag == other.mFlag) \
 		&& (mMapMultiplePages == other.mMapMultiplePages);
 }
 
-bool nn::hac::MemoryPageEntry::operator!=(const MemoryPageEntry& other) const
+bool pie::hac::MemoryPageEntry::operator!=(const MemoryPageEntry& other) const
 {
 	return !(*this == other);
 }
 
-const nn::hac::KernelCapabilityEntry & nn::hac::MemoryPageEntry::getKernelCapability() const
+const pie::hac::KernelCapabilityEntry & pie::hac::MemoryPageEntry::getKernelCapability() const
 {
 	return mCap;
 }
 
-void nn::hac::MemoryPageEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
+void pie::hac::MemoryPageEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
 	if (kernel_cap.getType() != kc::KernelCapId::MemoryMap && kernel_cap.getType() != kc::KernelCapId::IoMemoryMap)
 	{
@@ -71,12 +71,12 @@ void nn::hac::MemoryPageEntry::setKernelCapability(const KernelCapabilityEntry &
 	processCapField();
 }
 
-uint32_t nn::hac::MemoryPageEntry::getPage() const
+uint32_t pie::hac::MemoryPageEntry::getPage() const
 {
 	return mPage;
 }
 
-void nn::hac::MemoryPageEntry::setPage(uint32_t page)
+void pie::hac::MemoryPageEntry::setPage(uint32_t page)
 {
 	if (page > kMaxPage)
 	{
@@ -87,23 +87,23 @@ void nn::hac::MemoryPageEntry::setPage(uint32_t page)
 	updateCapField();
 }
 
-bool nn::hac::MemoryPageEntry::getFlag() const
+bool pie::hac::MemoryPageEntry::getFlag() const
 {
 	return mFlag;
 }
 
-void nn::hac::MemoryPageEntry::setFlag(bool flag)
+void pie::hac::MemoryPageEntry::setFlag(bool flag)
 {
 	mFlag = flag;
 	updateCapField();
 }
 
-bool nn::hac::MemoryPageEntry::isMultiplePages() const
+bool pie::hac::MemoryPageEntry::isMultiplePages() const
 {
 	return mMapMultiplePages;
 }
 
-void nn::hac::MemoryPageEntry::setMapMultiplePages(bool useFlag)
+void pie::hac::MemoryPageEntry::setMapMultiplePages(bool useFlag)
 {
 	mMapMultiplePages = useFlag;
 }

@@ -1,32 +1,32 @@
-#include <nn/hac/ContentMetaUtil.h>
+#include <pietendo/hac/ContentMetaUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::ContentMetaUtil::getContentTypeAsString(nn::hac::cnmt::ContentType val)
+std::string pie::hac::ContentMetaUtil::getContentTypeAsString(pie::hac::cnmt::ContentType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::ContentType::Meta):
+	case (pie::hac::cnmt::ContentType::Meta):
 		ss << "Meta";
 		break;
-	case (nn::hac::cnmt::ContentType::Program):
+	case (pie::hac::cnmt::ContentType::Program):
 		ss << "Program";
 		break;
-	case (nn::hac::cnmt::ContentType::Data):
+	case (pie::hac::cnmt::ContentType::Data):
 		ss << "Data";
 		break;
-	case (nn::hac::cnmt::ContentType::Control):
+	case (pie::hac::cnmt::ContentType::Control):
 		ss << "Control";
 		break;
-	case (nn::hac::cnmt::ContentType::HtmlDocument):
+	case (pie::hac::cnmt::ContentType::HtmlDocument):
 		ss << "HtmlDocument";
 		break;
-	case (nn::hac::cnmt::ContentType::LegalInformation):
+	case (pie::hac::cnmt::ContentType::LegalInformation):
 		ss << "LegalInformation";
 		break;
-	case (nn::hac::cnmt::ContentType::DeltaFragment):
+	case (pie::hac::cnmt::ContentType::DeltaFragment):
 		ss << "DeltaFragment";
 		break;
 	default:
@@ -37,37 +37,37 @@ std::string nn::hac::ContentMetaUtil::getContentTypeAsString(nn::hac::cnmt::Cont
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getContentMetaTypeAsString(nn::hac::cnmt::ContentMetaType val)
+std::string pie::hac::ContentMetaUtil::getContentMetaTypeAsString(pie::hac::cnmt::ContentMetaType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::ContentMetaType::SystemProgram):
+	case (pie::hac::cnmt::ContentMetaType::SystemProgram):
 		ss << "SystemProgram";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::SystemData):
+	case (pie::hac::cnmt::ContentMetaType::SystemData):
 		ss << "SystemData";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::SystemUpdate):
+	case (pie::hac::cnmt::ContentMetaType::SystemUpdate):
 		ss << "SystemUpdate";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::BootImagePackage):
+	case (pie::hac::cnmt::ContentMetaType::BootImagePackage):
 		ss << "BootImagePackage";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::BootImagePackageSafe):
+	case (pie::hac::cnmt::ContentMetaType::BootImagePackageSafe):
 		ss << "BootImagePackageSafe";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::Application):
+	case (pie::hac::cnmt::ContentMetaType::Application):
 		ss << "Application";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::Patch):
+	case (pie::hac::cnmt::ContentMetaType::Patch):
 		ss << "Patch";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::AddOnContent):
+	case (pie::hac::cnmt::ContentMetaType::AddOnContent):
 		ss << "AddOnContent";
 		break;
-	case (nn::hac::cnmt::ContentMetaType::Delta):
+	case (pie::hac::cnmt::ContentMetaType::Delta):
 		ss << "Delta";
 		break;
 	default:
@@ -78,19 +78,19 @@ std::string nn::hac::ContentMetaUtil::getContentMetaTypeAsString(nn::hac::cnmt::
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getUpdateTypeAsString(nn::hac::cnmt::UpdateType val)
+std::string pie::hac::ContentMetaUtil::getUpdateTypeAsString(pie::hac::cnmt::UpdateType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::UpdateType::ApplyAsDelta):
+	case (pie::hac::cnmt::UpdateType::ApplyAsDelta):
 		ss << "ApplyAsDelta";
 		break;
-	case (nn::hac::cnmt::UpdateType::Overwrite):
+	case (pie::hac::cnmt::UpdateType::Overwrite):
 		ss << "Overwrite";
 		break;
-	case (nn::hac::cnmt::UpdateType::Create):
+	case (pie::hac::cnmt::UpdateType::Create):
 		ss << "Create";
 		break;
 	default:
@@ -101,16 +101,16 @@ std::string nn::hac::ContentMetaUtil::getUpdateTypeAsString(nn::hac::cnmt::Updat
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getContentInstallTypeAsString(nn::hac::cnmt::ContentInstallType val)
+std::string pie::hac::ContentMetaUtil::getContentInstallTypeAsString(pie::hac::cnmt::ContentInstallType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::ContentInstallType::Full):
+	case (pie::hac::cnmt::ContentInstallType::Full):
 		ss << "Full";
 		break;
-	case (nn::hac::cnmt::ContentInstallType::FragmentOnly):
+	case (pie::hac::cnmt::ContentInstallType::FragmentOnly):
 		ss << "FragmentOnly";
 		break;
 	default:
@@ -121,31 +121,31 @@ std::string nn::hac::ContentMetaUtil::getContentInstallTypeAsString(nn::hac::cnm
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getStorageIdAsString(nn::hac::cnmt::StorageId val)
+std::string pie::hac::ContentMetaUtil::getStorageIdAsString(pie::hac::cnmt::StorageId val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::StorageId::None):
+	case (pie::hac::cnmt::StorageId::None):
 		ss << "None";
 		break;
-	case (nn::hac::cnmt::StorageId::Host):
+	case (pie::hac::cnmt::StorageId::Host):
 		ss << "Host";
 		break;
-	case (nn::hac::cnmt::StorageId::GameCard):
+	case (pie::hac::cnmt::StorageId::GameCard):
 		ss << "GameCard";
 		break;
-	case (nn::hac::cnmt::StorageId::BuiltInSystem):
+	case (pie::hac::cnmt::StorageId::BuiltInSystem):
 		ss << "BuiltInSystem";
 		break;
-	case (nn::hac::cnmt::StorageId::BuiltInUser):
+	case (pie::hac::cnmt::StorageId::BuiltInUser):
 		ss << "BuiltInUser";
 		break;
-	case (nn::hac::cnmt::StorageId::SdCard):
+	case (pie::hac::cnmt::StorageId::SdCard):
 		ss << "SdCard";
 		break;
-	case (nn::hac::cnmt::StorageId::Any):
+	case (pie::hac::cnmt::StorageId::Any):
 		ss << "Any";
 		break;
 	default:
@@ -156,19 +156,19 @@ std::string nn::hac::ContentMetaUtil::getStorageIdAsString(nn::hac::cnmt::Storag
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getContentMetaAttributeFlagAsString(nn::hac::cnmt::ContentMetaAttributeFlag val)
+std::string pie::hac::ContentMetaUtil::getContentMetaAttributeFlagAsString(pie::hac::cnmt::ContentMetaAttributeFlag val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::cnmt::ContentMetaAttributeFlag::IncludesExFatDriver):
+	case (pie::hac::cnmt::ContentMetaAttributeFlag::IncludesExFatDriver):
 		ss << "IncludesExFatDriver";
 		break;
-	case (nn::hac::cnmt::ContentMetaAttributeFlag::Rebootless):
+	case (pie::hac::cnmt::ContentMetaAttributeFlag::Rebootless):
 		ss << "Rebootless";
 		break;
-	case (nn::hac::cnmt::ContentMetaAttributeFlag::Compacted):
+	case (pie::hac::cnmt::ContentMetaAttributeFlag::Compacted):
 		ss << "Compacted";
 		break;
 	default:
@@ -179,7 +179,7 @@ std::string nn::hac::ContentMetaUtil::getContentMetaAttributeFlagAsString(nn::ha
 	return ss.str();
 }
 
-std::string nn::hac::ContentMetaUtil::getVersionAsString(uint32_t version)
+std::string pie::hac::ContentMetaUtil::getVersionAsString(uint32_t version)
 {
 	std::stringstream ss;
 

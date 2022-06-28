@@ -1,19 +1,24 @@
+	/**
+	 * @file PartitionFsUtil.h
+	 * @brief Declaration of pie::hac::PartitionFsUtil
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/pfs.h>
-#include <nn/hac/PartitionFsHeader.h>
+#include <pietendo/hac/define/pfs.h>
+#include <pietendo/hac/PartitionFsHeader.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class PartitionFsUtil
 {
-namespace hac
-{
-	class PartitionFsUtil
-	{
-	public:
-		static std::string getFsTypeAsString(nn::hac::PartitionFsHeader::FsType val);
-		static std::string getFsTypeAsStringDescription(nn::hac::PartitionFsHeader::FsType val);
+public:
+	static std::string getFsTypeAsString(pie::hac::PartitionFsHeader::FsType val);
+	static std::string getFsTypeAsStringDescription(pie::hac::PartitionFsHeader::FsType val);
 
-	private:
-		const std::string kModuleName = "PARTITION_FS_UTIL";
-	};
-}
-}
+private:
+	const std::string kModuleName = "PARTITION_FS_UTIL";
+};
+
+}} // namespace pie::hac

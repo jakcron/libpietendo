@@ -1,28 +1,28 @@
-#include <nn/hac/ThreadInfoHandler.h>
+#include <pietendo/hac/ThreadInfoHandler.h>
 
-nn::hac::ThreadInfoHandler::ThreadInfoHandler() :
+pie::hac::ThreadInfoHandler::ThreadInfoHandler() :
 	mIsSet(false),
 	mEntry(0,0,0,0)
 {}
 
-void nn::hac::ThreadInfoHandler::operator=(const ThreadInfoHandler & other)
+void pie::hac::ThreadInfoHandler::operator=(const ThreadInfoHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mEntry.setKernelCapability(other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::ThreadInfoHandler::operator==(const ThreadInfoHandler & other) const
+bool pie::hac::ThreadInfoHandler::operator==(const ThreadInfoHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mEntry.getKernelCapability() == other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::ThreadInfoHandler::operator!=(const ThreadInfoHandler & other) const
+bool pie::hac::ThreadInfoHandler::operator!=(const ThreadInfoHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ThreadInfoHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::ThreadInfoHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() > kMaxKernelCapNum)
 	{
@@ -36,7 +36,7 @@ void nn::hac::ThreadInfoHandler::importKernelCapabilityList(const std::vector<Ke
 	mIsSet = true;
 }
 
-void nn::hac::ThreadInfoHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::ThreadInfoHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -44,7 +44,7 @@ void nn::hac::ThreadInfoHandler::exportKernelCapabilityList(std::vector<KernelCa
 	caps.push_back(mEntry.getKernelCapability());
 }
 
-void nn::hac::ThreadInfoHandler::clear()
+void pie::hac::ThreadInfoHandler::clear()
 {
 	mIsSet = false;
 	mEntry.setMaxPriority(0);
@@ -53,50 +53,50 @@ void nn::hac::ThreadInfoHandler::clear()
 	mEntry.setMinCpuId(0);
 }
 
-bool nn::hac::ThreadInfoHandler::isSet() const
+bool pie::hac::ThreadInfoHandler::isSet() const
 {
 	return mIsSet;
 }
 
-uint8_t nn::hac::ThreadInfoHandler::getMinPriority() const
+uint8_t pie::hac::ThreadInfoHandler::getMinPriority() const
 {
 	return mEntry.getMinPriority();
 }
 
-void nn::hac::ThreadInfoHandler::setMinPriority(uint8_t priority)
+void pie::hac::ThreadInfoHandler::setMinPriority(uint8_t priority)
 {
 	mEntry.setMinPriority(priority);
 	mIsSet = true;
 }
 
-uint8_t nn::hac::ThreadInfoHandler::getMaxPriority() const
+uint8_t pie::hac::ThreadInfoHandler::getMaxPriority() const
 {
 	return mEntry.getMaxPriority();
 }
 
-void nn::hac::ThreadInfoHandler::setMaxPriority(uint8_t priority)
+void pie::hac::ThreadInfoHandler::setMaxPriority(uint8_t priority)
 {
 	mEntry.setMaxPriority(priority);
 	mIsSet = true;
 }
 
-uint8_t nn::hac::ThreadInfoHandler::getMinCpuId() const
+uint8_t pie::hac::ThreadInfoHandler::getMinCpuId() const
 {
 	return mEntry.getMinCpuId();
 }
 
-void nn::hac::ThreadInfoHandler::setMinCpuId(uint8_t core_num)
+void pie::hac::ThreadInfoHandler::setMinCpuId(uint8_t core_num)
 {
 	mEntry.setMinCpuId(core_num);
 	mIsSet = true;
 }
 
-uint8_t nn::hac::ThreadInfoHandler::getMaxCpuId() const
+uint8_t pie::hac::ThreadInfoHandler::getMaxCpuId() const
 {
 	return mEntry.getMaxCpuId();
 }
 
-void nn::hac::ThreadInfoHandler::setMaxCpuId(uint8_t core_num)
+void pie::hac::ThreadInfoHandler::setMaxCpuId(uint8_t core_num)
 {
 	mEntry.setMaxCpuId(core_num);
 	mIsSet = true;

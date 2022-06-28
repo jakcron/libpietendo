@@ -1,24 +1,24 @@
 #include <cstring>
-#include <nn/hac/ServiceAccessControlEntry.h>
+#include <pietendo/hac/ServiceAccessControlEntry.h>
 
-nn::hac::ServiceAccessControlEntry::ServiceAccessControlEntry()
+pie::hac::ServiceAccessControlEntry::ServiceAccessControlEntry()
 {
 	clear();
 }
 
-nn::hac::ServiceAccessControlEntry::ServiceAccessControlEntry(const std::string & name, bool isServer) :
+pie::hac::ServiceAccessControlEntry::ServiceAccessControlEntry(const std::string & name, bool isServer) :
 	mIsServer(isServer),
 	mName(name)
 {
 	toBytes();
 }
 
-nn::hac::ServiceAccessControlEntry::ServiceAccessControlEntry(const ServiceAccessControlEntry & other)
+pie::hac::ServiceAccessControlEntry::ServiceAccessControlEntry(const ServiceAccessControlEntry & other)
 {
 	*this = other;
 }
 
-void nn::hac::ServiceAccessControlEntry::operator=(const ServiceAccessControlEntry & other)
+void pie::hac::ServiceAccessControlEntry::operator=(const ServiceAccessControlEntry & other)
 {
 	if (other.getBytes().size())
 	{
@@ -32,19 +32,19 @@ void nn::hac::ServiceAccessControlEntry::operator=(const ServiceAccessControlEnt
 	}
 }
 
-bool nn::hac::ServiceAccessControlEntry::operator==(const ServiceAccessControlEntry & other) const
+bool pie::hac::ServiceAccessControlEntry::operator==(const ServiceAccessControlEntry & other) const
 {
 	return (mIsServer == other.mIsServer) \
 		&& (mName == other.mName);
 }
 
-bool nn::hac::ServiceAccessControlEntry::operator!=(const ServiceAccessControlEntry & other) const
+bool pie::hac::ServiceAccessControlEntry::operator!=(const ServiceAccessControlEntry & other) const
 {
 	return !(*this == other);
 }
 
 
-void nn::hac::ServiceAccessControlEntry::toBytes()
+void pie::hac::ServiceAccessControlEntry::toBytes()
 {
 	try {
 		mRawBinary = tc::ByteData(mName.size() + 1);
@@ -69,7 +69,7 @@ void nn::hac::ServiceAccessControlEntry::toBytes()
 	memcpy(mRawBinary.data() + 1, mName.c_str(), mName.length());
 }
 
-void nn::hac::ServiceAccessControlEntry::fromBytes(const byte_t* data, size_t len)
+void pie::hac::ServiceAccessControlEntry::fromBytes(const byte_t* data, size_t len)
 {
 	bool isServer = (data[0] & SAC_IS_SERVER) == SAC_IS_SERVER;
 	size_t nameLen = (data[0] & SAC_NAME_LEN_MASK) + 1; // bug?
@@ -95,33 +95,33 @@ void nn::hac::ServiceAccessControlEntry::fromBytes(const byte_t* data, size_t le
 	mName = std::string((const char*)(mRawBinary.data() + 1), nameLen);
 }
 
-const tc::ByteData& nn::hac::ServiceAccessControlEntry::getBytes() const
+const tc::ByteData& pie::hac::ServiceAccessControlEntry::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ServiceAccessControlEntry::clear()
+void pie::hac::ServiceAccessControlEntry::clear()
 {
 	mIsServer = false;
 	mName.clear();
 }
 
-bool nn::hac::ServiceAccessControlEntry::isServer() const
+bool pie::hac::ServiceAccessControlEntry::isServer() const
 {
 	return mIsServer;
 }
 
-void nn::hac::ServiceAccessControlEntry::setIsServer(bool isServer)
+void pie::hac::ServiceAccessControlEntry::setIsServer(bool isServer)
 {
 	mIsServer = isServer;
 }
 
-const std::string & nn::hac::ServiceAccessControlEntry::getName() const
+const std::string & pie::hac::ServiceAccessControlEntry::getName() const
 {
 	return mName;
 }
 
-void nn::hac::ServiceAccessControlEntry::setName(const std::string & name)
+void pie::hac::ServiceAccessControlEntry::setName(const std::string & name)
 {
 	if (name.length() > kMaxServiceNameLen)
 	{

@@ -1,16 +1,16 @@
-#include <nn/hac/NroHeader.h>
+#include <pietendo/hac/NroHeader.h>
 
-nn::hac::NroHeader::NroHeader()
+pie::hac::NroHeader::NroHeader()
 {
 	clear();
 }
 
-nn::hac::NroHeader::NroHeader(const NroHeader& other)
+pie::hac::NroHeader::NroHeader(const NroHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::NroHeader::operator=(const NroHeader& other)
+void pie::hac::NroHeader::operator=(const NroHeader& other)
 {
 	clear();
 	mRoCrtEntryPoint = other.mRoCrtEntryPoint;
@@ -27,7 +27,7 @@ void nn::hac::NroHeader::operator=(const NroHeader& other)
 	mRoDynSymInfo = other.mRoDynSymInfo;
 }
 
-bool nn::hac::NroHeader::operator==(const NroHeader& other) const
+bool pie::hac::NroHeader::operator==(const NroHeader& other) const
 {
 	return (mRoCrtEntryPoint == other.mRoCrtEntryPoint) \
 		&& (mRoCrtModOffset == other.mRoCrtModOffset) \
@@ -43,15 +43,15 @@ bool nn::hac::NroHeader::operator==(const NroHeader& other) const
 		&& (mRoDynSymInfo == other.mRoDynSymInfo);
 }
 
-bool nn::hac::NroHeader::operator!=(const NroHeader& other) const
+bool pie::hac::NroHeader::operator!=(const NroHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::NroHeader::toBytes()
+void pie::hac::NroHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sNroHeader));
-	nn::hac::sNroHeader* hdr = (nn::hac::sNroHeader*)mRawBinary.data();
+	pie::hac::sNroHeader* hdr = (pie::hac::sNroHeader*)mRawBinary.data();
 
 	// set header identifers
 	hdr->st_magic.wrap(nro::kNroStructMagic);
@@ -96,7 +96,7 @@ void nn::hac::NroHeader::toBytes()
 	hdr->dyn_sym.size.wrap(mRoDynSymInfo.size);
 }
 
-void nn::hac::NroHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::NroHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sNroHeader))
@@ -112,7 +112,7 @@ void nn::hac::NroHeader::fromBytes(const byte_t* data, size_t len)
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// get sNroHeader ptr
-	const nn::hac::sNroHeader* hdr = (const nn::hac::sNroHeader*)mRawBinary.data();
+	const pie::hac::sNroHeader* hdr = (const pie::hac::sNroHeader*)mRawBinary.data();
 	
 	// check NRO signature
 	if (hdr->st_magic.unwrap() != nro::kNroStructMagic)
@@ -154,12 +154,12 @@ void nn::hac::NroHeader::fromBytes(const byte_t* data, size_t len)
 	mRoDynSymInfo.size = hdr->dyn_sym.size.unwrap();
 }
 
-const tc::ByteData& nn::hac::NroHeader::getBytes() const
+const tc::ByteData& pie::hac::NroHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::NroHeader::clear()
+void pie::hac::NroHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mRoCrtEntryPoint = 0;
@@ -174,112 +174,112 @@ void nn::hac::NroHeader::clear()
 	mRoDynSymInfo = sSection();
 }
 
-uint32_t nn::hac::NroHeader::getRoCrtEntryPoint() const
+uint32_t pie::hac::NroHeader::getRoCrtEntryPoint() const
 {
 	return mRoCrtEntryPoint;
 }
 
-void nn::hac::NroHeader::setRoCrtEntryPoint(uint32_t addr)
+void pie::hac::NroHeader::setRoCrtEntryPoint(uint32_t addr)
 {
 	mRoCrtEntryPoint = addr;
 }
 
-uint32_t nn::hac::NroHeader::getRoCrtModOffset() const
+uint32_t pie::hac::NroHeader::getRoCrtModOffset() const
 {
 	return mRoCrtModOffset;
 }
 
-void nn::hac::NroHeader::setRoCrtModOffset(uint32_t offset)
+void pie::hac::NroHeader::setRoCrtModOffset(uint32_t offset)
 {
 	mRoCrtModOffset = offset;
 }
 
-uint32_t nn::hac::NroHeader::getNroSize() const
+uint32_t pie::hac::NroHeader::getNroSize() const
 {
 	return mNroSize;
 }
 
-void nn::hac::NroHeader::setNroSize(uint32_t size)
+void pie::hac::NroHeader::setNroSize(uint32_t size)
 {
 	mNroSize = size;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getTextInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getTextInfo() const
 {
 	return mTextInfo;
 }
 
-void nn::hac::NroHeader::setTextInfo(const sSection& info)
+void pie::hac::NroHeader::setTextInfo(const sSection& info)
 {
 	mTextInfo = info;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getRoInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getRoInfo() const
 {
 	return mRoInfo;
 }
 
-void nn::hac::NroHeader::setRoInfo(const sSection& info)
+void pie::hac::NroHeader::setRoInfo(const sSection& info)
 {
 	mRoInfo = info;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getDataInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getDataInfo() const
 {
 	return mDataInfo;
 }
 
-void nn::hac::NroHeader::setDataInfo(const sSection& info)
+void pie::hac::NroHeader::setDataInfo(const sSection& info)
 {
 	mDataInfo = info;
 }
 
-uint32_t nn::hac::NroHeader::getBssSize() const
+uint32_t pie::hac::NroHeader::getBssSize() const
 {
 	return mBssSize;
 }
 
-void nn::hac::NroHeader::setBssSize(uint32_t size)
+void pie::hac::NroHeader::setBssSize(uint32_t size)
 {
 	mBssSize = size;
 }
 
-const nn::hac::detail::module_id_t& nn::hac::NroHeader::getModuleId() const
+const pie::hac::detail::module_id_t& pie::hac::NroHeader::getModuleId() const
 {
 	return mModuleId;
 }
 
-void nn::hac::NroHeader::setModuleId(const nn::hac::detail::module_id_t& id)
+void pie::hac::NroHeader::setModuleId(const pie::hac::detail::module_id_t& id)
 {
 	mModuleId = id;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getRoEmbeddedInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getRoEmbeddedInfo() const
 {
 	return mRoEmbeddedInfo;
 }
 
-void nn::hac::NroHeader::setRoEmbeddedInfo(const sSection& info)
+void pie::hac::NroHeader::setRoEmbeddedInfo(const sSection& info)
 {
 	mRoEmbeddedInfo = info;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getRoDynStrInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getRoDynStrInfo() const
 {
 	return mRoDynStrInfo;
 }
 
-void nn::hac::NroHeader::setRoDynStrInfo(const sSection& info)
+void pie::hac::NroHeader::setRoDynStrInfo(const sSection& info)
 {
 	mRoDynStrInfo = info;
 }
 
-const nn::hac::NroHeader::sSection& nn::hac::NroHeader::getRoDynSymInfo() const
+const pie::hac::NroHeader::sSection& pie::hac::NroHeader::getRoDynSymInfo() const
 {
 	return mRoDynSymInfo;
 }
 
-void nn::hac::NroHeader::setRoDynSymInfo(const sSection& info)
+void pie::hac::NroHeader::setRoDynSymInfo(const sSection& info)
 {
 	mRoDynSymInfo = info;
 }

@@ -1,7 +1,14 @@
+	/**
+	 * @file PartitionFsSnapshotGenerator.h
+	 * @brief Declaration of pie::hac::PartitionFsSnapshotGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
 #include <tc/io/VirtualFileSystem.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 struct PartitionFsSnapshotGenerator : public tc::io::VirtualFileSystem::FileSystemSnapshot
 {
@@ -18,4 +25,4 @@ private:
 	PartitionFsSnapshotGenerator();
 };
 
-}} // namespace nn::hac
+}} // namespace pie::hac

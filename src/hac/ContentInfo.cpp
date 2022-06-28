@@ -1,16 +1,16 @@
-#include <nn/hac/ContentInfo.h>
+#include <pietendo/hac/ContentInfo.h>
 
-nn::hac::ContentInfo::ContentInfo()
+pie::hac::ContentInfo::ContentInfo()
 {
 	clear();
 }
 
-nn::hac::ContentInfo::ContentInfo(const ContentInfo& other)
+pie::hac::ContentInfo::ContentInfo(const ContentInfo& other)
 {
 	*this = other;
 }
 
-void nn::hac::ContentInfo::operator=(const ContentInfo& other)
+void pie::hac::ContentInfo::operator=(const ContentInfo& other)
 {
 	clear();
 	mRawBinary = other.mRawBinary;
@@ -20,7 +20,7 @@ void nn::hac::ContentInfo::operator=(const ContentInfo& other)
 	mType = other.mType;
 }
 
-bool nn::hac::ContentInfo::operator==(const ContentInfo& other) const
+bool pie::hac::ContentInfo::operator==(const ContentInfo& other) const
 {
 	return (mHash == other.mHash) \
 		&& (mContentId == other.mContentId) \
@@ -28,12 +28,12 @@ bool nn::hac::ContentInfo::operator==(const ContentInfo& other) const
 		&& (mType == other.mType);
 }
 
-bool nn::hac::ContentInfo::operator!=(const ContentInfo& other) const
+bool pie::hac::ContentInfo::operator!=(const ContentInfo& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ContentInfo::toBytes()
+void pie::hac::ContentInfo::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sContentInfo));
 	sContentInfo* info = (sContentInfo*)mRawBinary.data();
@@ -46,7 +46,7 @@ void nn::hac::ContentInfo::toBytes()
 	info->id_offset = mIdOffset;
 }
 
-void nn::hac::ContentInfo::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::ContentInfo::fromBytes(const byte_t* bytes, size_t len)
 {
 	if (len < sizeof(sContentInfo))
 	{
@@ -62,62 +62,62 @@ void nn::hac::ContentInfo::fromBytes(const byte_t* bytes, size_t len)
 	mIdOffset = info->id_offset;
 }
 
-const tc::ByteData& nn::hac::ContentInfo::getBytes() const
+const tc::ByteData& pie::hac::ContentInfo::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ContentInfo::clear()
+void pie::hac::ContentInfo::clear()
 {
 	mRawBinary = tc::ByteData();
 }
 
-const nn::hac::detail::sha256_hash_t& nn::hac::ContentInfo::getContentHash() const
+const pie::hac::detail::sha256_hash_t& pie::hac::ContentInfo::getContentHash() const
 {
 	return mHash;
 }
 
-void nn::hac::ContentInfo::setContentHash(const nn::hac::detail::sha256_hash_t& hash)
+void pie::hac::ContentInfo::setContentHash(const pie::hac::detail::sha256_hash_t& hash)
 {
 	mHash = hash;
 }
 
-const nn::hac::cnmt::content_id_t& nn::hac::ContentInfo::getContentId() const
+const pie::hac::cnmt::content_id_t& pie::hac::ContentInfo::getContentId() const
 {
 	return mContentId;
 }
 
-void nn::hac::ContentInfo::setContentId(const nn::hac::cnmt::content_id_t& content_id)
+void pie::hac::ContentInfo::setContentId(const pie::hac::cnmt::content_id_t& content_id)
 {
 	mContentId = content_id;
 }
 
-size_t nn::hac::ContentInfo::getContentSize() const
+size_t pie::hac::ContentInfo::getContentSize() const
 {
 	return mSize;
 }
 
-void nn::hac::ContentInfo::setContentSize(size_t size)
+void pie::hac::ContentInfo::setContentSize(size_t size)
 {
 	mSize = size;
 }
 
-nn::hac::cnmt::ContentType nn::hac::ContentInfo::getContentType() const
+pie::hac::cnmt::ContentType pie::hac::ContentInfo::getContentType() const
 {
 	return mType;
 }
 
-void nn::hac::ContentInfo::setContentType(cnmt::ContentType type)
+void pie::hac::ContentInfo::setContentType(cnmt::ContentType type)
 {
 	mType = type;
 }
 
-byte_t nn::hac::ContentInfo::getIdOffset() const
+byte_t pie::hac::ContentInfo::getIdOffset() const
 {
 	return mIdOffset;
 }
 
-void nn::hac::ContentInfo::setIdOffset(byte_t id_offset)
+void pie::hac::ContentInfo::setIdOffset(byte_t id_offset)
 {
 	mIdOffset = id_offset;
 }

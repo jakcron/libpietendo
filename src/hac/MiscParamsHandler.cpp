@@ -1,28 +1,28 @@
-#include <nn/hac/MiscParamsHandler.h>
+#include <pietendo/hac/MiscParamsHandler.h>
 
-nn::hac::MiscParamsHandler::MiscParamsHandler() :
+pie::hac::MiscParamsHandler::MiscParamsHandler() :
 	mIsSet(false),
 	mEntry()
 {}
 
-void nn::hac::MiscParamsHandler::operator=(const MiscParamsHandler & other)
+void pie::hac::MiscParamsHandler::operator=(const MiscParamsHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mEntry.setKernelCapability(other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::MiscParamsHandler::operator==(const MiscParamsHandler & other) const
+bool pie::hac::MiscParamsHandler::operator==(const MiscParamsHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mEntry.getKernelCapability() == other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::MiscParamsHandler::operator!=(const MiscParamsHandler & other) const
+bool pie::hac::MiscParamsHandler::operator!=(const MiscParamsHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::MiscParamsHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::MiscParamsHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() > kMaxKernelCapNum)
 	{
@@ -37,7 +37,7 @@ void nn::hac::MiscParamsHandler::importKernelCapabilityList(const std::vector<Ke
 	mIsSet = true;
 }
 
-void nn::hac::MiscParamsHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::MiscParamsHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -45,23 +45,23 @@ void nn::hac::MiscParamsHandler::exportKernelCapabilityList(std::vector<KernelCa
 	caps.push_back(mEntry.getKernelCapability());
 }
 
-void nn::hac::MiscParamsHandler::clear()
+void pie::hac::MiscParamsHandler::clear()
 {
 	mIsSet = false;
 	mEntry = MiscParamsEntry();
 }
 
-bool nn::hac::MiscParamsHandler::isSet() const
+bool pie::hac::MiscParamsHandler::isSet() const
 {
 	return mIsSet;
 }
 
-nn::hac::kc::ProgramType nn::hac::MiscParamsHandler::getProgramType() const
+pie::hac::kc::ProgramType pie::hac::MiscParamsHandler::getProgramType() const
 {
 	return mEntry.getProgramType();
 }
 
-void nn::hac::MiscParamsHandler::setProgramType(nn::hac::kc::ProgramType type)
+void pie::hac::MiscParamsHandler::setProgramType(pie::hac::kc::ProgramType type)
 {
 	mEntry.setProgramType(type);
 	mIsSet = true;

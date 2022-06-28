@@ -1,16 +1,16 @@
-#include <nn/hac/RomFsSnapshotGenerator.h>
+#include <pietendo/hac/RomFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/MemoryStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/crypto/Sha256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
-#include <nn/hac/define/romfs.h>
+#include <pietendo/hac/define/romfs.h>
 
 #include <fmt/core.h>
 #include <tc/cli/FormatUtil.h>
 
-nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream) :
+pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream) :
 	FileSystemSnapshot(),
 	mBaseStream(stream),
 	mDataOffset(0),
@@ -23,38 +23,38 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 	// validate stream properties
 	if (mBaseStream == nullptr)
 	{
-		throw tc::ObjectDisposedException("nn::hac::RomFsSnapshotGenerator", "Failed to open input stream.");
+		throw tc::ObjectDisposedException("pie::hac::RomFsSnapshotGenerator", "Failed to open input stream.");
 	}
 	if (mBaseStream->canRead() == false || mBaseStream->canSeek() == false)
 	{
-		throw tc::NotSupportedException("nn::hac::RomFsSnapshotGenerator", "Input stream requires read/seek permissions.");
+		throw tc::NotSupportedException("pie::hac::RomFsSnapshotGenerator", "Input stream requires read/seek permissions.");
 	}
 
 	//std::cout << "pos() -> " << mBaseStream->position() << std::endl;
 
 	// validate and read ROMFS header
-	nn::hac::sRomfsHeader hdr;
-	if (mBaseStream->length() < tc::io::IOUtil::castSizeToInt64(sizeof(nn::hac::sRomfsHeader)))
+	pie::hac::sRomfsHeader hdr;
+	if (mBaseStream->length() < tc::io::IOUtil::castSizeToInt64(sizeof(pie::hac::sRomfsHeader)))
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::RomFsSnapshotGenerator", "Input stream is too small.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::RomFsSnapshotGenerator", "Input stream is too small.");
 	}
 	mBaseStream->seek(0, tc::io::SeekOrigin::Begin);
-	mBaseStream->read((byte_t*)(&hdr), sizeof(nn::hac::sRomfsHeader));
+	mBaseStream->read((byte_t*)(&hdr), sizeof(pie::hac::sRomfsHeader));
 
 	/*
 	std::cout << "hdr.header_size             : " << hdr.header_size.unwrap() << std::endl;
-	std::cout << "sizeof(nn::hac::sRomfsHeader)  : " << sizeof(nn::hac::sRomfsHeader) << std::endl;
+	std::cout << "sizeof(pie::hac::sRomfsHeader)  : " << sizeof(pie::hac::sRomfsHeader) << std::endl;
 	std::cout << "hdr.dir_hash_bucket.offset : " << hdr.dir_hash_bucket.offset.unwrap() << std::endl;
 	std::cout << "hdr.data_offset             : " << hdr.data_offset.unwrap() << std::endl;
-	std::cout << "expected data offset        : " << align<int64_t>(hdr.header_size.unwrap(), nn::hac::romfs::kRomfsHeaderAlign) << std::endl;
+	std::cout << "expected data offset        : " << align<int64_t>(hdr.header_size.unwrap(), pie::hac::romfs::kRomfsHeaderAlign) << std::endl;
 	*/
 
 
-	if (hdr.header_size.unwrap() != sizeof(nn::hac::sRomfsHeader) ||
+	if (hdr.header_size.unwrap() != sizeof(pie::hac::sRomfsHeader) ||
 	    hdr.dir_entry.offset.unwrap() != (hdr.dir_hash_bucket.offset.unwrap() + hdr.dir_hash_bucket.size.unwrap()) ||
-	    hdr.data_offset.unwrap() != align<int64_t>(hdr.header_size.unwrap(), nn::hac::romfs::kRomfsHeaderAlign))
+	    hdr.data_offset.unwrap() != align<int64_t>(hdr.header_size.unwrap(), pie::hac::romfs::kRomfsHeaderAlign))
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::RomFsSnapshotGenerator", "RomFsHeader is corrupted.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::RomFsSnapshotGenerator", "RomFsHeader is corrupted.");
 	}
 
 	// save data offset
@@ -85,7 +85,7 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 		std::cout << " > hash_sibling: 0x" << std::hex << getDirEntry(v_addr)->hash_sibling_offset.unwrap() << std::endl;
 		std::cout << " > name_size:    0x" << std::hex << getDirEntry(v_addr)->name_size.unwrap() << std::endl;
 
-		uint32_t total_size = sizeof(nn::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t total_size = sizeof(pie::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
 		std::cout << " > entry_size:   0x" << std::hex << total_size << std::endl;
 
 		if (getDirEntry(v_addr)->sibling_offset.unwrap() < v_addr)
@@ -111,7 +111,7 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 		std::cout << " > hash_sibling: 0x" << std::hex << getFileEntry(v_addr)->hash_sibling_offset.unwrap() << std::endl;
 		std::cout << " > name_size:    0x" << std::hex << getFileEntry(v_addr)->name_size.unwrap() << std::endl;
 
-		uint32_t total_size = sizeof(nn::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t total_size = sizeof(pie::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
 		std::cout << " > entry_size:   0x" << std::hex << total_size << std::endl;
 
 		if (getFileEntry(v_addr)->sibling_offset.unwrap() < v_addr)
@@ -128,7 +128,7 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 	    getDirEntry(0)->sibling_offset.unwrap() != 0xffffffff ||
 	    getDirEntry(0)->name_size.unwrap() != 0)
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::RomFsSnapshotGenerator", "Root sRomfsDirEntry corrupted.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::RomFsSnapshotGenerator", "Root sRomfsDirEntry corrupted.");
 	}
 
 	// add/index directories
@@ -154,7 +154,7 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 		{
 			// check parent is in map
 			if (mDirParentVaddrMap.find(getDirEntry(v_addr)->parent_offset.unwrap()) == mDirParentVaddrMap.end())
-				throw tc::InvalidOperationException("nn::hac::RomFsSnapshotGenerator", "Directory had invalid parent");
+				throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "Directory had invalid parent");
 
 			// save file name
 			std::string file_name_str = std::string(getDirEntry(v_addr)->name, getDirEntry(v_addr)->name_size.unwrap());
@@ -176,11 +176,11 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 		}
 		
 
-		uint32_t total_size = sizeof(nn::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t total_size = sizeof(pie::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
 
 		if (getDirEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
-			throw tc::InvalidOperationException("nn::hac::RomFsSnapshotGenerator", "Possibly corrupted directory entry");
+			throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "Possibly corrupted directory entry");
 		}
 
 		v_addr += total_size;
@@ -192,7 +192,7 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 	{
 		// check parent is in map
 		if (mDirParentVaddrMap.find(getFileEntry(v_addr)->parent_offset.unwrap()) == mDirParentVaddrMap.end())
-			throw tc::InvalidOperationException("nn::hac::RomFsSnapshotGenerator", "File had invalid parent");
+			throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "File had invalid parent");
 
 		if (getFileEntry(v_addr)->data_size.unwrap() != 0)
 		{
@@ -226,11 +226,11 @@ nn::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<tc
 		// add name to parent directory listing
 		dir_entries[parent_index].dir_listing.file_list.push_back(file_name_str);
 
-		uint32_t total_size = sizeof(nn::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t total_size = sizeof(pie::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
 
 		if (getFileEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
-			throw tc::InvalidOperationException("nn::hac::RomFsSnapshotGenerator", "Possibly corrupted file entry");
+			throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "Possibly corrupted file entry");
 		}
 
 		v_addr += total_size;

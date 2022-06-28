@@ -1,16 +1,16 @@
-#include <nn/pki/SignatureBlock.h>
+#include <pietendo/hac/pki/SignatureBlock.h>
 
-nn::pki::SignatureBlock::SignatureBlock()
+pie::hac::pki::SignatureBlock::SignatureBlock()
 {
 	clear();
 }
 
-nn::pki::SignatureBlock::SignatureBlock(const SignatureBlock& other)
+pie::hac::pki::SignatureBlock::SignatureBlock(const SignatureBlock& other)
 {
 	*this = other;
 }
 
-void nn::pki::SignatureBlock::operator=(const SignatureBlock& other)
+void pie::hac::pki::SignatureBlock::operator=(const SignatureBlock& other)
 {
 	if (other.mRawBinary.data() != nullptr)
 	{
@@ -25,19 +25,19 @@ void nn::pki::SignatureBlock::operator=(const SignatureBlock& other)
 	}	
 }
 
-bool nn::pki::SignatureBlock::operator==(const SignatureBlock& other) const
+bool pie::hac::pki::SignatureBlock::operator==(const SignatureBlock& other) const
 {
 	return (mSignType == other.mSignType) \
 		&& (mIsLittleEndian == other.mIsLittleEndian) \
 		&& (memcmp(mSignature.data(), other.mSignature.data(), mSignature.size()) == 0);
 }
 
-bool nn::pki::SignatureBlock::operator!=(const SignatureBlock& other) const
+bool pie::hac::pki::SignatureBlock::operator!=(const SignatureBlock& other) const
 {
 	return !(*this == other);
 }
 
-void nn::pki::SignatureBlock::toBytes()
+void pie::hac::pki::SignatureBlock::toBytes()
 {
 	size_t totalSize = 0;
 	size_t sigSize = 0;
@@ -74,7 +74,7 @@ void nn::pki::SignatureBlock::toBytes()
 	memcpy(mRawBinary.data() + 4, mSignature.data(), sigSize);
 }
 
-void nn::pki::SignatureBlock::fromBytes(const byte_t* src, size_t size)
+void pie::hac::pki::SignatureBlock::fromBytes(const byte_t* src, size_t size)
 {
 	if (src == nullptr) { throw tc::ArgumentNullException(kModuleName, "src was null."); }
 	if (size < sizeof(sEcdsa240SignBlock)) { throw tc::ArgumentOutOfRangeException(kModuleName, "src was too small."); }
@@ -145,12 +145,12 @@ void nn::pki::SignatureBlock::fromBytes(const byte_t* src, size_t size)
 	memcpy(mSignature.data(), mRawBinary.data() + 4, sigSize);
 }
 
-const tc::ByteData& nn::pki::SignatureBlock::getBytes() const
+const tc::ByteData& pie::hac::pki::SignatureBlock::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::pki::SignatureBlock::clear()
+void pie::hac::pki::SignatureBlock::clear()
 {
 	memset(mRawBinary.data(), 0, mRawBinary.size());
 	mSignType = sign::SIGN_ID_RSA4096_SHA1;
@@ -158,32 +158,32 @@ void nn::pki::SignatureBlock::clear()
 	memset(mSignature.data(), 0, mSignature.size());
 }
 
-nn::pki::sign::SignatureId nn::pki::SignatureBlock::getSignType() const
+pie::hac::pki::sign::SignatureId pie::hac::pki::SignatureBlock::getSignType() const
 {
 	return mSignType;
 }
 
-void nn::pki::SignatureBlock::setSignType(nn::pki::sign::SignatureId type)
+void pie::hac::pki::SignatureBlock::setSignType(pie::hac::pki::sign::SignatureId type)
 {
 	mSignType = type;
 }
 
-bool nn::pki::SignatureBlock::isLittleEndian() const
+bool pie::hac::pki::SignatureBlock::isLittleEndian() const
 {
 	return mIsLittleEndian;
 }
 
-void nn::pki::SignatureBlock::setLittleEndian(bool isLE)
+void pie::hac::pki::SignatureBlock::setLittleEndian(bool isLE)
 {
 	mIsLittleEndian = isLE;
 }
 
-const tc::ByteData& nn::pki::SignatureBlock::getSignature() const
+const tc::ByteData& pie::hac::pki::SignatureBlock::getSignature() const
 {
 	return mSignature;
 }
 
-void nn::pki::SignatureBlock::setSignature(const tc::ByteData& signature)
+void pie::hac::pki::SignatureBlock::setSignature(const tc::ByteData& signature)
 {
 	mSignature = signature;
 }

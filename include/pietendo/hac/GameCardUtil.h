@@ -1,23 +1,28 @@
+	/**
+	 * @file GameCardUtil.h
+	 * @brief Declaration of pie::hac::GameCardUtil
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/gc.h>
+#include <pietendo/hac/define/gc.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class GameCardUtil
 {
-namespace hac
-{
-	class GameCardUtil
-	{
-	public:
-		static inline uint64_t blockToAddr(uint32_t block) { return ((uint64_t)block) << 9; }
-		static void getXciHeaderAesIv(const nn::hac::sGcHeader* hdr, nn::hac::detail::aes_iv_t& iv);
-		static void decryptXciHeader(nn::hac::sGcHeader* hdr, const byte_t* key);
+public:
+	static inline uint64_t blockToAddr(uint32_t block) { return ((uint64_t)block) << 9; }
+	static void getXciHeaderAesIv(const pie::hac::sGcHeader* hdr, pie::hac::detail::aes_iv_t& iv);
+	static void decryptXciHeader(pie::hac::sGcHeader* hdr, const byte_t* key);
 
-		static std::string getKekIndexAsString(nn::hac::gc::KekIndex val);
-		static std::string getRomSizeAsString(nn::hac::gc::RomSize val);
-		static std::string getHeaderFlagsAsString(nn::hac::gc::HeaderFlags val);
-		static std::string getCardFwVersionDescriptionAsString(nn::hac::gc::FwVersion val);
-		static std::string getCardClockRateAsString(nn::hac::gc::CardClockRate val);
-		static std::string getCompatibilityTypeAsString(nn::hac::gc::CompatibilityType val);
-	};
-}
-}
+	static std::string getKekIndexAsString(pie::hac::gc::KekIndex val);
+	static std::string getRomSizeAsString(pie::hac::gc::RomSize val);
+	static std::string getHeaderFlagsAsString(pie::hac::gc::HeaderFlags val);
+	static std::string getCardFwVersionDescriptionAsString(pie::hac::gc::FwVersion val);
+	static std::string getCardClockRateAsString(pie::hac::gc::CardClockRate val);
+	static std::string getCompatibilityTypeAsString(pie::hac::gc::CompatibilityType val);
+};
+
+}} // namespace pie::hac

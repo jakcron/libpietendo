@@ -1,37 +1,37 @@
-#include <nn/hac/IniHeader.h>
+#include <pietendo/hac/IniHeader.h>
 
-nn::hac::IniHeader::IniHeader()
+pie::hac::IniHeader::IniHeader()
 {
 	clear();
 }
 
-nn::hac::IniHeader::IniHeader(const IniHeader& other)
+pie::hac::IniHeader::IniHeader(const IniHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::IniHeader::operator=(const IniHeader& other)
+void pie::hac::IniHeader::operator=(const IniHeader& other)
 {
 	clear();
 	this->mSize = other.mSize;
 	this->mKipNum = other.mKipNum;
 }
 
-bool nn::hac::IniHeader::operator==(const IniHeader& other) const
+bool pie::hac::IniHeader::operator==(const IniHeader& other) const
 {
 	return (this->mSize == other.mSize) \
 		&& (this->mKipNum == other.mKipNum);
 }
 
-bool nn::hac::IniHeader::operator!=(const IniHeader& other) const
+bool pie::hac::IniHeader::operator!=(const IniHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::IniHeader::toBytes()
+void pie::hac::IniHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sIniHeader));
-	nn::hac::sIniHeader* hdr = (nn::hac::sIniHeader*)mRawBinary.data();
+	pie::hac::sIniHeader* hdr = (pie::hac::sIniHeader*)mRawBinary.data();
 
 	// set header identifers
 	hdr->st_magic.wrap(ini::kIniStructMagic);
@@ -46,7 +46,7 @@ void nn::hac::IniHeader::toBytes()
 	hdr->kip_num.wrap(mKipNum);
 }
 
-void nn::hac::IniHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::IniHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sIniHeader))
@@ -62,7 +62,7 @@ void nn::hac::IniHeader::fromBytes(const byte_t* data, size_t len)
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// get sIniHeader ptr
-	const nn::hac::sIniHeader* hdr = (const nn::hac::sIniHeader*)mRawBinary.data();
+	const pie::hac::sIniHeader* hdr = (const pie::hac::sIniHeader*)mRawBinary.data();
 	
 	// check INI signature
 	if (hdr->st_magic.unwrap() != ini::kIniStructMagic)
@@ -81,34 +81,34 @@ void nn::hac::IniHeader::fromBytes(const byte_t* data, size_t len)
 	mKipNum = hdr->kip_num.unwrap();
 }
 
-const tc::ByteData& nn::hac::IniHeader::getBytes() const
+const tc::ByteData& pie::hac::IniHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::IniHeader::clear()
+void pie::hac::IniHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mSize = 0;
 	mKipNum = 0;
 }
 
-uint32_t nn::hac::IniHeader::getSize() const
+uint32_t pie::hac::IniHeader::getSize() const
 {
 	return mSize;
 }
 
-void nn::hac::IniHeader::setSize(uint32_t size)
+void pie::hac::IniHeader::setSize(uint32_t size)
 {
 	mSize = size;
 }
 
-uint32_t nn::hac::IniHeader::getKipNum() const
+uint32_t pie::hac::IniHeader::getKipNum() const
 {
 	return mKipNum;
 }
 
-void nn::hac::IniHeader::setKipNum(uint32_t num)
+void pie::hac::IniHeader::setKipNum(uint32_t num)
 {
 	mKipNum = num;
 }

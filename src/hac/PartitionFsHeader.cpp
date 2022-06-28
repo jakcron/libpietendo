@@ -1,19 +1,19 @@
 #include <limits>
-#include <nn/hac/PartitionFsHeader.h>
+#include <pietendo/hac/PartitionFsHeader.h>
 
 #include <tc/io/IOUtil.h>
 
-nn::hac::PartitionFsHeader::PartitionFsHeader()
+pie::hac::PartitionFsHeader::PartitionFsHeader()
 {
 	clear();
 }
 
-nn::hac::PartitionFsHeader::PartitionFsHeader(const PartitionFsHeader & other)
+pie::hac::PartitionFsHeader::PartitionFsHeader(const PartitionFsHeader & other)
 {
 	*this = other;
 }
 
-void nn::hac::PartitionFsHeader::operator=(const PartitionFsHeader & other)
+void pie::hac::PartitionFsHeader::operator=(const PartitionFsHeader & other)
 {
 	if (other.getBytes().size())
 	{
@@ -27,24 +27,24 @@ void nn::hac::PartitionFsHeader::operator=(const PartitionFsHeader & other)
 	}
 }
 
-bool nn::hac::PartitionFsHeader::operator==(const PartitionFsHeader & other) const
+bool pie::hac::PartitionFsHeader::operator==(const PartitionFsHeader & other) const
 {
 	return (mFsType == other.mFsType) \
 		&& (mFileList == other.mFileList);
 }
 
-bool nn::hac::PartitionFsHeader::operator!=(const PartitionFsHeader & other) const
+bool pie::hac::PartitionFsHeader::operator!=(const PartitionFsHeader & other) const
 {
 	return !(*this == other);
 }
 
-const tc::ByteData& nn::hac::PartitionFsHeader::getBytes() const
+const tc::ByteData& pie::hac::PartitionFsHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
 
-void nn::hac::PartitionFsHeader::toBytes()
+void pie::hac::PartitionFsHeader::toBytes()
 {
 	// calculate name table size
 	int64_t name_table_size = 0;
@@ -136,7 +136,7 @@ void nn::hac::PartitionFsHeader::toBytes()
 	
 }
 
-void nn::hac::PartitionFsHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::PartitionFsHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input length meets minimum size
 	if (len < sizeof(sPfsHeader))
@@ -218,34 +218,34 @@ void nn::hac::PartitionFsHeader::fromBytes(const byte_t* data, size_t len)
 	
 }
 
-void nn::hac::PartitionFsHeader::clear()
+void pie::hac::PartitionFsHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mFsType = TYPE_PFS0;
 	mFileList.clear();
 }
 
-nn::hac::PartitionFsHeader::FsType nn::hac::PartitionFsHeader::getFsType() const
+pie::hac::PartitionFsHeader::FsType pie::hac::PartitionFsHeader::getFsType() const
 {
 	return mFsType;
 }
 
-void nn::hac::PartitionFsHeader::setFsType(FsType type)
+void pie::hac::PartitionFsHeader::setFsType(FsType type)
 {
 	mFsType = type;
 }
 
-const std::vector<nn::hac::PartitionFsHeader::sFile>& nn::hac::PartitionFsHeader::getFileList() const
+const std::vector<pie::hac::PartitionFsHeader::sFile>& pie::hac::PartitionFsHeader::getFileList() const
 {
 	return mFileList;
 }
 
-void nn::hac::PartitionFsHeader::addFile(const std::string & name, int64_t size)
+void pie::hac::PartitionFsHeader::addFile(const std::string & name, int64_t size)
 {
 	mFileList.push_back({ name, 0, size, 0 });
 }
 
-void nn::hac::PartitionFsHeader::addFile(const std::string & name, int64_t size, int64_t hash_protected_size, const nn::hac::detail::sha256_hash_t& hash)
+void pie::hac::PartitionFsHeader::addFile(const std::string & name, int64_t size, int64_t hash_protected_size, const pie::hac::detail::sha256_hash_t& hash)
 {
 	if (hash_protected_size >= int64_t(std::numeric_limits<uint32_t>::max()))
 	{
@@ -255,7 +255,7 @@ void nn::hac::PartitionFsHeader::addFile(const std::string & name, int64_t size,
 	mFileList.push_back({ name, 0, size, hash_protected_size, hash });
 }
 
-size_t nn::hac::PartitionFsHeader::getFileEntrySize(FsType fs_type)
+size_t pie::hac::PartitionFsHeader::getFileEntrySize(FsType fs_type)
 {
 	size_t size = 0;
 	switch(fs_type)
@@ -272,7 +272,7 @@ size_t nn::hac::PartitionFsHeader::getFileEntrySize(FsType fs_type)
 	return size;
 }
 
-void nn::hac::PartitionFsHeader::calculateOffsets(int64_t data_offset)
+void pie::hac::PartitionFsHeader::calculateOffsets(int64_t data_offset)
 {
 	for (size_t i = 0; i < mFileList.size(); i++)
 	{

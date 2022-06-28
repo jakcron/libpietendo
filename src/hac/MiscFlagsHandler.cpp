@@ -1,27 +1,27 @@
-#include <nn/hac/MiscFlagsHandler.h>
+#include <pietendo/hac/MiscFlagsHandler.h>
 
-nn::hac::MiscFlagsHandler::MiscFlagsHandler() :
+pie::hac::MiscFlagsHandler::MiscFlagsHandler() :
 	mIsSet(false)
 {}
 
-void nn::hac::MiscFlagsHandler::operator=(const MiscFlagsHandler & other)
+void pie::hac::MiscFlagsHandler::operator=(const MiscFlagsHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mFlags = other.mFlags;
 }
 
-bool nn::hac::MiscFlagsHandler::operator==(const MiscFlagsHandler & other) const
+bool pie::hac::MiscFlagsHandler::operator==(const MiscFlagsHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mFlags == other.mFlags);
 }
 
-bool nn::hac::MiscFlagsHandler::operator!=(const MiscFlagsHandler & other) const
+bool pie::hac::MiscFlagsHandler::operator!=(const MiscFlagsHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::MiscFlagsHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::MiscFlagsHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() > kMaxKernelCapNum)
 	{
@@ -40,7 +40,7 @@ void nn::hac::MiscFlagsHandler::importKernelCapabilityList(const std::vector<Ker
 	mIsSet = true;
 }
 
-void nn::hac::MiscFlagsHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::MiscFlagsHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -53,23 +53,23 @@ void nn::hac::MiscFlagsHandler::exportKernelCapabilityList(std::vector<KernelCap
 	caps.push_back(entry.getKernelCapability());
 }
 
-void nn::hac::MiscFlagsHandler::clear()
+void pie::hac::MiscFlagsHandler::clear()
 {
 	mIsSet = false;
 	mFlags.reset();
 }
 
-bool nn::hac::MiscFlagsHandler::isSet() const
+bool pie::hac::MiscFlagsHandler::isSet() const
 {
 	return mIsSet;
 }
 
-const nn::hac::kc::MiscFlags& nn::hac::MiscFlagsHandler::getMiscFlags() const
+const pie::hac::kc::MiscFlags& pie::hac::MiscFlagsHandler::getMiscFlags() const
 {
 	return mFlags;
 }
 
-void nn::hac::MiscFlagsHandler::setMiscFlags(const nn::hac::kc::MiscFlags& flags)
+void pie::hac::MiscFlagsHandler::setMiscFlags(const pie::hac::kc::MiscFlags& flags)
 {
 	mFlags = flags;
 	mIsSet = true;

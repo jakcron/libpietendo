@@ -1,30 +1,30 @@
-#include <nn/hac/ContentArchiveUtil.h>
+#include <pietendo/hac/ContentArchiveUtil.h>
 #include <fmt/core.h>
 
-void nn::hac::ContentArchiveUtil::decryptContentArchiveHeader(const byte_t* src, byte_t* dst, const detail::aes128_xtskey_t& key)
+void pie::hac::ContentArchiveUtil::decryptContentArchiveHeader(const byte_t* src, byte_t* dst, const detail::aes128_xtskey_t& key)
 {
 	// init aes-xts
 	tc::crypto::Aes128XtsEncryptor enc;
-	enc.initialize(key[0].data(), key[0].size(), key[1].data(), key[1].size(), nn::hac::nca::kSectorSize, false);
+	enc.initialize(key[0].data(), key[0].size(), key[1].data(), key[1].size(), pie::hac::nca::kSectorSize, false);
 
 	// decrypt main header
-	byte_t raw_hdr[nn::hac::nca::kSectorSize];
-	enc.decrypt(raw_hdr, src + sectorToOffset(1), nn::hac::nca::kSectorSize, 1);
-	bool useNca2SectorIndex = ((nn::hac::sContentArchiveHeader*)(raw_hdr))->st_magic.unwrap() == nn::hac::nca::kNca2StructMagic;
+	byte_t raw_hdr[pie::hac::nca::kSectorSize];
+	enc.decrypt(raw_hdr, src + sectorToOffset(1), pie::hac::nca::kSectorSize, 1);
+	bool useNca2SectorIndex = ((pie::hac::sContentArchiveHeader*)(raw_hdr))->st_magic.unwrap() == pie::hac::nca::kNca2StructMagic;
 
 	// decrypt whole header
-	for (size_t i = 0; i < nn::hac::nca::kHeaderSectorNum; i++)
+	for (size_t i = 0; i < pie::hac::nca::kHeaderSectorNum; i++)
 	{
-		enc.decrypt(dst + sectorToOffset(i), src + sectorToOffset(i), nn::hac::nca::kSectorSize, (i >= 2 && useNca2SectorIndex)? 0 : i);
+		enc.decrypt(dst + sectorToOffset(i), src + sectorToOffset(i), pie::hac::nca::kSectorSize, (i >= 2 && useNca2SectorIndex)? 0 : i);
 	}
 }
 
-void nn::hac::ContentArchiveUtil::getNcaPartitionAesCtr(const nn::hac::sContentArchiveFsHeader* hdr, byte_t* aes_ctr)
+void pie::hac::ContentArchiveUtil::getNcaPartitionAesCtr(const pie::hac::sContentArchiveFsHeader* hdr, byte_t* aes_ctr)
 {
 	getNcaPartitionAesCtr(hdr->generation.unwrap(), hdr->secure_value.unwrap(), aes_ctr);
 }
 
-void nn::hac::ContentArchiveUtil::getNcaPartitionAesCtr(uint32_t generation, uint32_t secure_value, byte_t* aes_ctr)
+void pie::hac::ContentArchiveUtil::getNcaPartitionAesCtr(uint32_t generation, uint32_t secure_value, byte_t* aes_ctr)
 {
 	/*
 	for (size_t i = 0; i < 8; i++)
@@ -44,16 +44,16 @@ void nn::hac::ContentArchiveUtil::getNcaPartitionAesCtr(uint32_t generation, uin
 }
 
 
-std::string nn::hac::ContentArchiveUtil::getFormatHeaderVersionAsString(nn::hac::nca::HeaderFormatVersion val)
+std::string pie::hac::ContentArchiveUtil::getFormatHeaderVersionAsString(pie::hac::nca::HeaderFormatVersion val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::FORMAT_NCA2):
+	case (pie::hac::nca::FORMAT_NCA2):
 		str = "NCA2";
 		break;
-	case (nn::hac::nca::FORMAT_NCA3):
+	case (pie::hac::nca::FORMAT_NCA3):
 		str = "NCA3";
 		break;
 	default:
@@ -64,19 +64,19 @@ std::string nn::hac::ContentArchiveUtil::getFormatHeaderVersionAsString(nn::hac:
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getProgramContentParititionIndexAsString(nn::hac::nca::ProgramContentPartitionIndex val)
+std::string pie::hac::ContentArchiveUtil::getProgramContentParititionIndexAsString(pie::hac::nca::ProgramContentPartitionIndex val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::PARTITION_CODE):
+	case (pie::hac::nca::PARTITION_CODE):
 		str = "code";
 		break;
-	case (nn::hac::nca::PARTITION_DATA):
+	case (pie::hac::nca::PARTITION_DATA):
 		str = "data";
 		break;
-	case (nn::hac::nca::PARTITION_LOGO):
+	case (pie::hac::nca::PARTITION_LOGO):
 		str = "logo";
 		break;
 	default:
@@ -87,16 +87,16 @@ std::string nn::hac::ContentArchiveUtil::getProgramContentParititionIndexAsStrin
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getDistributionTypeAsString(nn::hac::nca::DistributionType val)
+std::string pie::hac::ContentArchiveUtil::getDistributionTypeAsString(pie::hac::nca::DistributionType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::DistributionType::Download):
+	case (pie::hac::nca::DistributionType::Download):
 		str = "Download";
 		break;
-	case (nn::hac::nca::DistributionType::GameCard):
+	case (pie::hac::nca::DistributionType::GameCard):
 		str = "Game Card";
 		break;
 	default:
@@ -107,28 +107,28 @@ std::string nn::hac::ContentArchiveUtil::getDistributionTypeAsString(nn::hac::nc
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getContentTypeAsString(nn::hac::nca::ContentType val)
+std::string pie::hac::ContentArchiveUtil::getContentTypeAsString(pie::hac::nca::ContentType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::ContentType::Program):
+	case (pie::hac::nca::ContentType::Program):
 		str = "Program";
 		break;
-	case (nn::hac::nca::ContentType::Meta):
+	case (pie::hac::nca::ContentType::Meta):
 		str = "Meta";
 		break;
-	case (nn::hac::nca::ContentType::Control):
+	case (pie::hac::nca::ContentType::Control):
 		str = "Control";
 		break;
-	case (nn::hac::nca::ContentType::Manual):
+	case (pie::hac::nca::ContentType::Manual):
 		str = "Manual";
 		break;
-	case (nn::hac::nca::ContentType::Data):
+	case (pie::hac::nca::ContentType::Data):
 		str = "Data";
 		break;
-	case (nn::hac::nca::ContentType::PublicData):
+	case (pie::hac::nca::ContentType::PublicData):
 		str = "PublicData";
 		break;
 	default:
@@ -139,16 +139,16 @@ std::string nn::hac::ContentArchiveUtil::getContentTypeAsString(nn::hac::nca::Co
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getFormatTypeAsString(nn::hac::nca::FormatType val)
+std::string pie::hac::ContentArchiveUtil::getFormatTypeAsString(pie::hac::nca::FormatType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::FormatType::RomFs):
+	case (pie::hac::nca::FormatType::RomFs):
 		str = "RomFs";
 		break;
-	case (nn::hac::nca::FormatType::PartitionFs):
+	case (pie::hac::nca::FormatType::PartitionFs):
 		str = "PartitionFs";
 		break;
 	default:
@@ -159,31 +159,31 @@ std::string nn::hac::ContentArchiveUtil::getFormatTypeAsString(nn::hac::nca::For
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getHashTypeAsString(nn::hac::nca::HashType val)
+std::string pie::hac::ContentArchiveUtil::getHashTypeAsString(pie::hac::nca::HashType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::HashType::Auto):
+	case (pie::hac::nca::HashType::Auto):
 		str = "Auto";
 		break;
-	case (nn::hac::nca::HashType::None):
+	case (pie::hac::nca::HashType::None):
 		str = "None";
 		break;
-	case (nn::hac::nca::HashType::HierarchicalSha256):
+	case (pie::hac::nca::HashType::HierarchicalSha256):
 		str = "HierarchicalSha256";
 		break;
-	case (nn::hac::nca::HashType::HierarchicalIntegrity):
+	case (pie::hac::nca::HashType::HierarchicalIntegrity):
 		str = "HierarchicalIntegrity";
 		break;
-	case (nn::hac::nca::HashType::AutoSha3):
+	case (pie::hac::nca::HashType::AutoSha3):
 		str = "AutoSha3";
 		break;
-	case (nn::hac::nca::HashType::HierarchicalSha3256):
+	case (pie::hac::nca::HashType::HierarchicalSha3256):
 		str = "HierarchicalSha3256";
 		break;
-	case (nn::hac::nca::HashType::HierarchicalIntegritySha3):
+	case (pie::hac::nca::HashType::HierarchicalIntegritySha3):
 		str = "HierarchicalIntegritySha3";
 		break;
 	default:
@@ -194,31 +194,31 @@ std::string nn::hac::ContentArchiveUtil::getHashTypeAsString(nn::hac::nca::HashT
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getEncryptionTypeAsString(nn::hac::nca::EncryptionType val)
+std::string pie::hac::ContentArchiveUtil::getEncryptionTypeAsString(pie::hac::nca::EncryptionType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::EncryptionType::Auto):
+	case (pie::hac::nca::EncryptionType::Auto):
 		str = "Auto";
 		break;
-	case (nn::hac::nca::EncryptionType::None):
+	case (pie::hac::nca::EncryptionType::None):
 		str = "None";
 		break;
-	case (nn::hac::nca::EncryptionType::AesXts):
+	case (pie::hac::nca::EncryptionType::AesXts):
 		str = "AesXts";
 		break;
-	case (nn::hac::nca::EncryptionType::AesCtr):
+	case (pie::hac::nca::EncryptionType::AesCtr):
 		str = "AesCtr";
 		break;
-	case (nn::hac::nca::EncryptionType::AesCtrEx):
+	case (pie::hac::nca::EncryptionType::AesCtrEx):
 		str = "AesCtrEx";
 		break;
-	case (nn::hac::nca::EncryptionType::AesCtrSkipLayerHash):
+	case (pie::hac::nca::EncryptionType::AesCtrSkipLayerHash):
 		str = "AesCtrSkipLayerHash";
 		break;
-	case (nn::hac::nca::EncryptionType::AesCtrExSkipLayerHash):
+	case (pie::hac::nca::EncryptionType::AesCtrExSkipLayerHash):
 		str = "AesCtrExSkipLayerHash";
 		break;
 	default:
@@ -230,19 +230,19 @@ std::string nn::hac::ContentArchiveUtil::getEncryptionTypeAsString(nn::hac::nca:
 }
 
 
-std::string nn::hac::ContentArchiveUtil::getMetaDataHashTypeAsString(nn::hac::nca::MetaDataHashType val)
+std::string pie::hac::ContentArchiveUtil::getMetaDataHashTypeAsString(pie::hac::nca::MetaDataHashType val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::MetaDataHashType::None):
+	case (pie::hac::nca::MetaDataHashType::None):
 		str = "None";
 		break;
-	case (nn::hac::nca::MetaDataHashType::HierarchicalIntegrity):
+	case (pie::hac::nca::MetaDataHashType::HierarchicalIntegrity):
 		str = "HierarchicalIntegrity";
 		break;
-	case (nn::hac::nca::MetaDataHashType::HierarchicalIntegritySha3):
+	case (pie::hac::nca::MetaDataHashType::HierarchicalIntegritySha3):
 		str = "HierarchicalIntegritySha3";
 		break;
 	default:
@@ -253,19 +253,19 @@ std::string nn::hac::ContentArchiveUtil::getMetaDataHashTypeAsString(nn::hac::nc
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getKeyAreaEncryptionKeyIndexAsString(nn::hac::nca::KeyAreaEncryptionKeyIndex val)
+std::string pie::hac::ContentArchiveUtil::getKeyAreaEncryptionKeyIndexAsString(pie::hac::nca::KeyAreaEncryptionKeyIndex val)
 {
 	std::string str;
 
 	switch (val)
 	{
-	case (nn::hac::nca::KAEK_IDX_APPLICATION):
+	case (pie::hac::nca::KAEK_IDX_APPLICATION):
 		str = "Application";
 		break;
-	case (nn::hac::nca::KAEK_IDX_OCEAN):
+	case (pie::hac::nca::KAEK_IDX_OCEAN):
 		str = "Ocean";
 		break;
-	case (nn::hac::nca::KAEK_IDX_SYSTEM):
+	case (pie::hac::nca::KAEK_IDX_SYSTEM):
 		str = "System";
 		break;
 	default:
@@ -276,7 +276,7 @@ std::string nn::hac::ContentArchiveUtil::getKeyAreaEncryptionKeyIndexAsString(nn
 	return str;
 }
 
-std::string nn::hac::ContentArchiveUtil::getSdkAddonVersionAsString(uint32_t version)
+std::string pie::hac::ContentArchiveUtil::getSdkAddonVersionAsString(uint32_t version)
 {
 	std::string str;
 

@@ -1,4 +1,4 @@
-#include <nn/hac/HierarchicalSha256Stream.h>
+#include <pietendo/hac/HierarchicalSha256Stream.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/io/StreamUtil.h>
@@ -6,8 +6,8 @@
 #include <tc/cli/FormatUtil.h>
 #include <fmt/format.h>
 
-nn::hac::HierarchicalSha256Stream::HierarchicalSha256Stream() :
-	mModuleLabel("nn::hac::HierarchicalSha256Stream"),
+pie::hac::HierarchicalSha256Stream::HierarchicalSha256Stream() :
+	mModuleLabel("pie::hac::HierarchicalSha256Stream"),
 	mBaseStream(),
 	mDataStreamBlockSize(0),
 	mDataStreamLogicalLength(0),
@@ -17,7 +17,7 @@ nn::hac::HierarchicalSha256Stream::HierarchicalSha256Stream() :
 {
 }
 
-nn::hac::HierarchicalSha256Stream::HierarchicalSha256Stream(const std::shared_ptr<tc::io::IStream>& stream, const nn::hac::HierarchicalSha256Header& hash_header) :
+pie::hac::HierarchicalSha256Stream::HierarchicalSha256Stream(const std::shared_ptr<tc::io::IStream>& stream, const pie::hac::HierarchicalSha256Header& hash_header) :
 	HierarchicalSha256Stream()
 {
 	mBaseStream = stream;
@@ -25,15 +25,15 @@ nn::hac::HierarchicalSha256Stream::HierarchicalSha256Stream(const std::shared_pt
 	// validate stream properties
 	if (mBaseStream == nullptr)
 	{
-		throw tc::ObjectDisposedException("nn::hac::HierarchicalSha256Stream", "stream is null.");
+		throw tc::ObjectDisposedException("pie::hac::HierarchicalSha256Stream", "stream is null.");
 	}
 	if (mBaseStream->canRead() == false)
 	{
-		throw tc::InvalidOperationException("nn::hac::HierarchicalSha256Stream", "stream does not support reading.");
+		throw tc::InvalidOperationException("pie::hac::HierarchicalSha256Stream", "stream does not support reading.");
 	}
 	if (mBaseStream->canSeek() == false)
 	{
-		throw tc::InvalidOperationException("nn::hac::HierarchicalSha256Stream", "stream does not support seeking.");
+		throw tc::InvalidOperationException("pie::hac::HierarchicalSha256Stream", "stream does not support seeking.");
 	}
 
 	// save block size
@@ -98,31 +98,31 @@ nn::hac::HierarchicalSha256Stream::HierarchicalSha256Stream(const std::shared_pt
 	mDataStream = std::shared_ptr<tc::io::SubStream>(new tc::io::SubStream(mBaseStream, data_layer.offset, data_layer_physical_size));
 }
 
-bool nn::hac::HierarchicalSha256Stream::canRead() const
+bool pie::hac::HierarchicalSha256Stream::canRead() const
 {
 	return mDataStream == nullptr ? false : mDataStream->canRead();
 }
 
-bool nn::hac::HierarchicalSha256Stream::canWrite() const
+bool pie::hac::HierarchicalSha256Stream::canWrite() const
 {
 	return false; // always false this is a read-only stream
 }
-bool nn::hac::HierarchicalSha256Stream::canSeek() const
+bool pie::hac::HierarchicalSha256Stream::canSeek() const
 {
 	return mDataStream == nullptr ? false : mDataStream->canSeek();
 }
 
-int64_t nn::hac::HierarchicalSha256Stream::length()
+int64_t pie::hac::HierarchicalSha256Stream::length()
 {
 	return mDataStream == nullptr ? 0 : mDataStreamLogicalLength;
 }
 
-int64_t nn::hac::HierarchicalSha256Stream::position()
+int64_t pie::hac::HierarchicalSha256Stream::position()
 {
 	return mDataStream == nullptr ? 0 : mDataStream->position();
 }
 
-size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
+size_t pie::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 {
 	if (mBaseStream == nullptr)
 	{
@@ -207,12 +207,12 @@ size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 
 	if (block_num == 0)
 	{
-		tc::InvalidOperationException("nn::hac::HierarchicalSha256Stream", "Invalid block number (0 blocks, would have returned before now if count==0)");
+		tc::InvalidOperationException("pie::hac::HierarchicalSha256Stream", "Invalid block number (0 blocks, would have returned before now if count==0)");
 	}
 
 	if (block_num < continuous_block_num)
 	{
-		tc::InvalidOperationException("nn::hac::HierarchicalSha256Stream", "Invalid block number (underflow error)");
+		tc::InvalidOperationException("pie::hac::HierarchicalSha256Stream", "Invalid block number (underflow error)");
 	}
 
 	// allocate memory for partial block
@@ -228,7 +228,7 @@ size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 		// verify block
 		if (validateLayerBlocksWithHashLayer(partial_block.data(), getSizeOfBlock(partial_begin_block), mDataStreamBlockSize, 1, getBlockHash(partial_begin_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
 		}
 
 		// copy out block carving
@@ -248,7 +248,7 @@ size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 		// verify blocks
 		if (validateLayerBlocksWithHashLayer(ptr + data_read_count, continuous_block_num * mDataStreamBlockSize, mDataStreamBlockSize, continuous_block_num, getBlockHash(continuous_begin_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
 		}
 
 		// increment data read count
@@ -265,7 +265,7 @@ size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 		// verify block
 		if (validateLayerBlocksWithHashLayer(partial_block.data(), getSizeOfBlock(partial_end_block), mDataStreamBlockSize, 1, getBlockHash(partial_end_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalSha256Stream", "Data layer block(s) failed hash validation.");
 		}
 
 		// copy out block carving
@@ -282,12 +282,12 @@ size_t nn::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 	return data_read_count;
 }
 
-size_t nn::hac::HierarchicalSha256Stream::write(const byte_t* ptr, size_t count)
+size_t pie::hac::HierarchicalSha256Stream::write(const byte_t* ptr, size_t count)
 {
 	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for HierarchicalSha256Stream");
 }
 
-int64_t nn::hac::HierarchicalSha256Stream::seek(int64_t offset, tc::io::SeekOrigin origin)
+int64_t pie::hac::HierarchicalSha256Stream::seek(int64_t offset, tc::io::SeekOrigin origin)
 {
 	if (mDataStream == nullptr)
 	{
@@ -297,7 +297,7 @@ int64_t nn::hac::HierarchicalSha256Stream::seek(int64_t offset, tc::io::SeekOrig
 	return mDataStream->seek(offset, origin);
 }
 
-void nn::hac::HierarchicalSha256Stream::setLength(int64_t length)
+void pie::hac::HierarchicalSha256Stream::setLength(int64_t length)
 {
 	if (mDataStream == nullptr)
 	{
@@ -307,7 +307,7 @@ void nn::hac::HierarchicalSha256Stream::setLength(int64_t length)
 	throw tc::NotSupportedException(mModuleLabel+"::setLength()", "setLength is not supported for HierarchicalSha256Stream");
 }
 
-void nn::hac::HierarchicalSha256Stream::flush()
+void pie::hac::HierarchicalSha256Stream::flush()
 {
 	if (mDataStream == nullptr)
 	{
@@ -318,7 +318,7 @@ void nn::hac::HierarchicalSha256Stream::flush()
 	mBaseStream->flush();
 }
 
-void nn::hac::HierarchicalSha256Stream::dispose()
+void pie::hac::HierarchicalSha256Stream::dispose()
 {
 	if (mDataStream.get() != nullptr)
 	{
@@ -342,7 +342,7 @@ void nn::hac::HierarchicalSha256Stream::dispose()
 	mHashCache = tc::ByteData();
 }
 
-bool nn::hac::HierarchicalSha256Stream::validateLayerBlocksWithHashLayer(const byte_t* layer, size_t layer_size, size_t block_size, size_t block_num, const byte_t* hash_layer)
+bool pie::hac::HierarchicalSha256Stream::validateLayerBlocksWithHashLayer(const byte_t* layer, size_t layer_size, size_t block_size, size_t block_num, const byte_t* hash_layer)
 {
 	size_t bad_block = block_num;
 

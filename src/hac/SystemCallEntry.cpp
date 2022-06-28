@@ -1,6 +1,6 @@
-#include <nn/hac/SystemCallEntry.h>
+#include <pietendo/hac/SystemCallEntry.h>
 
-nn::hac::SystemCallEntry::SystemCallEntry() :
+pie::hac::SystemCallEntry::SystemCallEntry() :
 	mCap(kCapId),
 	mSystemCallUpper(0),
 	mSystemCallLower(0)
@@ -8,7 +8,7 @@ nn::hac::SystemCallEntry::SystemCallEntry() :
 
 }
 
-nn::hac::SystemCallEntry::SystemCallEntry(const KernelCapabilityEntry & kernel_cap) :
+pie::hac::SystemCallEntry::SystemCallEntry(const KernelCapabilityEntry & kernel_cap) :
 	mCap(kCapId),
 	mSystemCallUpper(0),
 	mSystemCallLower(0)
@@ -16,7 +16,7 @@ nn::hac::SystemCallEntry::SystemCallEntry(const KernelCapabilityEntry & kernel_c
 	setKernelCapability(kernel_cap);
 }
 
-nn::hac::SystemCallEntry::SystemCallEntry(uint32_t upper_bits, uint32_t lower_bits) :
+pie::hac::SystemCallEntry::SystemCallEntry(uint32_t upper_bits, uint32_t lower_bits) :
 	mCap(kCapId),
 	mSystemCallUpper(0),
 	mSystemCallLower(0)
@@ -25,30 +25,30 @@ nn::hac::SystemCallEntry::SystemCallEntry(uint32_t upper_bits, uint32_t lower_bi
 	setSystemCallLowerBits(lower_bits);
 }
 
-void nn::hac::SystemCallEntry::operator=(const SystemCallEntry& other)
+void pie::hac::SystemCallEntry::operator=(const SystemCallEntry& other)
 {
 	mSystemCallUpper = other.mSystemCallUpper;
 	mSystemCallLower = other.mSystemCallLower;
 	updateCapField();
 }
 
-bool nn::hac::SystemCallEntry::operator==(const SystemCallEntry& other) const
+bool pie::hac::SystemCallEntry::operator==(const SystemCallEntry& other) const
 {
 	return (mSystemCallUpper == other.mSystemCallUpper) \
 		&& (mSystemCallLower == other.mSystemCallLower);
 }
 
-bool nn::hac::SystemCallEntry::operator!=(const SystemCallEntry& other) const
+bool pie::hac::SystemCallEntry::operator!=(const SystemCallEntry& other) const
 {
 	return !(*this == other);
 }
 
-const nn::hac::KernelCapabilityEntry & nn::hac::SystemCallEntry::getKernelCapability() const
+const pie::hac::KernelCapabilityEntry & pie::hac::SystemCallEntry::getKernelCapability() const
 {
 	return mCap;
 }
 
-void nn::hac::SystemCallEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
+void pie::hac::SystemCallEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
 	if (kernel_cap.getType() != kCapId)
 	{
@@ -59,12 +59,12 @@ void nn::hac::SystemCallEntry::setKernelCapability(const KernelCapabilityEntry &
 	processCapField();
 }
 
-uint32_t nn::hac::SystemCallEntry::getSystemCallUpperBits() const
+uint32_t pie::hac::SystemCallEntry::getSystemCallUpperBits() const
 {
 	return mSystemCallUpper;
 }
 
-void nn::hac::SystemCallEntry::setSystemCallUpperBits(uint32_t upper_bits)
+void pie::hac::SystemCallEntry::setSystemCallUpperBits(uint32_t upper_bits)
 {
 	if (upper_bits > kSysCallUpperMax)
 	{
@@ -75,12 +75,12 @@ void nn::hac::SystemCallEntry::setSystemCallUpperBits(uint32_t upper_bits)
 	updateCapField();
 }
 
-uint32_t nn::hac::SystemCallEntry::getSystemCallLowerBits() const
+uint32_t pie::hac::SystemCallEntry::getSystemCallLowerBits() const
 {
 	return mSystemCallLower;
 }
 
-void nn::hac::SystemCallEntry::setSystemCallLowerBits(uint32_t lower_bits)
+void pie::hac::SystemCallEntry::setSystemCallLowerBits(uint32_t lower_bits)
 {
 	if (lower_bits > kSysCallLowerMax)
 	{

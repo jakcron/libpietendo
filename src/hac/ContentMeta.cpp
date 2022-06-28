@@ -1,16 +1,16 @@
-#include <nn/hac/ContentMeta.h>
+#include <pietendo/hac/ContentMeta.h>
 
-nn::hac::ContentMeta::ContentMeta()
+pie::hac::ContentMeta::ContentMeta()
 {
 	clear();
 }
 
-nn::hac::ContentMeta::ContentMeta(const ContentMeta & other)
+pie::hac::ContentMeta::ContentMeta(const ContentMeta & other)
 {
 	*this = other;
 }
 
-void nn::hac::ContentMeta::operator=(const ContentMeta& other)
+void pie::hac::ContentMeta::operator=(const ContentMeta& other)
 {
 	if (other.getBytes().size() > 0)
 	{
@@ -40,7 +40,7 @@ void nn::hac::ContentMeta::operator=(const ContentMeta& other)
 	}
 }
 
-bool nn::hac::ContentMeta::operator==(const ContentMeta& other) const
+bool pie::hac::ContentMeta::operator==(const ContentMeta& other) const
 {
 	return (mTitleId == other.mTitleId) \
 		&& (mTitleVersion == other.mTitleVersion) \
@@ -62,17 +62,17 @@ bool nn::hac::ContentMeta::operator==(const ContentMeta& other) const
 		&& (memcmp(mDigest.data(), other.mDigest.data(), mDigest.size()) == 0);
 }
 
-bool nn::hac::ContentMeta::operator!=(const ContentMeta& other) const
+bool pie::hac::ContentMeta::operator!=(const ContentMeta& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ContentMeta::toBytes()
+void pie::hac::ContentMeta::toBytes()
 {
 	throw tc::NotImplementedException(kModuleName, "toBytes() not implemented");
 }
 
-void nn::hac::ContentMeta::fromBytes(const byte_t* data, size_t len)
+void pie::hac::ContentMeta::fromBytes(const byte_t* data, size_t len)
 {
 	// clear member variables
 	clear();
@@ -193,12 +193,12 @@ void nn::hac::ContentMeta::fromBytes(const byte_t* data, size_t len)
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 }
 
-const tc::ByteData& nn::hac::ContentMeta::getBytes() const
+const tc::ByteData& pie::hac::ContentMeta::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ContentMeta::clear()
+void pie::hac::ContentMeta::clear()
 {
 	mRawBinary = tc::ByteData();
 	mTitleId = 0;
@@ -222,197 +222,197 @@ void nn::hac::ContentMeta::clear()
 	memset(mDigest.data(), 0, mDigest.size());
 }
 
-uint64_t nn::hac::ContentMeta::getTitleId() const
+uint64_t pie::hac::ContentMeta::getTitleId() const
 {
 	return mTitleId;
 }
 
-void nn::hac::ContentMeta::setTitleId(uint64_t title_id)
+void pie::hac::ContentMeta::setTitleId(uint64_t title_id)
 {
 	mTitleId = title_id;
 }
 
-uint32_t nn::hac::ContentMeta::getTitleVersion() const
+uint32_t pie::hac::ContentMeta::getTitleVersion() const
 {
 	return mTitleVersion;
 }
 
-void nn::hac::ContentMeta::setTitleVersion(uint32_t version)
+void pie::hac::ContentMeta::setTitleVersion(uint32_t version)
 {
 	mTitleVersion = version;
 }
 
-nn::hac::cnmt::ContentMetaType nn::hac::ContentMeta::getContentMetaType() const
+pie::hac::cnmt::ContentMetaType pie::hac::ContentMeta::getContentMetaType() const
 {
 	return mType;
 }
 
-void nn::hac::ContentMeta::setContentMetaType(nn::hac::cnmt::ContentMetaType type)
+void pie::hac::ContentMeta::setContentMetaType(pie::hac::cnmt::ContentMetaType type)
 {
 	mType = type;
 }
 
-const std::vector<nn::hac::cnmt::ContentMetaAttributeFlag>& nn::hac::ContentMeta::getAttribute() const
+const std::vector<pie::hac::cnmt::ContentMetaAttributeFlag>& pie::hac::ContentMeta::getAttribute() const
 {
 	return mAttribute;
 }
 
-void nn::hac::ContentMeta::setAttribute(const std::vector<nn::hac::cnmt::ContentMetaAttributeFlag>& attr)
+void pie::hac::ContentMeta::setAttribute(const std::vector<pie::hac::cnmt::ContentMetaAttributeFlag>& attr)
 {
 	mAttribute = attr;
 }
 
-nn::hac::cnmt::StorageId nn::hac::ContentMeta::getStorageId() const
+pie::hac::cnmt::StorageId pie::hac::ContentMeta::getStorageId() const
 {
 	return mStorageId;
 }
 
-void nn::hac::ContentMeta::setStorageId(nn::hac::cnmt::StorageId storage_id)
+void pie::hac::ContentMeta::setStorageId(pie::hac::cnmt::StorageId storage_id)
 {
 	mStorageId = storage_id;
 }
 
-nn::hac::cnmt::ContentInstallType nn::hac::ContentMeta::getContentInstallType() const
+pie::hac::cnmt::ContentInstallType pie::hac::ContentMeta::getContentInstallType() const
 {
 	return mContentInstallType;
 }
 
-void nn::hac::ContentMeta::setContentInstallType(nn::hac::cnmt::ContentInstallType install_type)
+void pie::hac::ContentMeta::setContentInstallType(pie::hac::cnmt::ContentInstallType install_type)
 {
 	mContentInstallType = install_type;
 }
 
-const std::vector<nn::hac::cnmt::InstallStateFlag>& nn::hac::ContentMeta::getInstallState() const
+const std::vector<pie::hac::cnmt::InstallStateFlag>& pie::hac::ContentMeta::getInstallState() const
 {
 	return mInstallState;
 }
 
-void nn::hac::ContentMeta::setInstallState(const std::vector<nn::hac::cnmt::InstallStateFlag>& install_state)
+void pie::hac::ContentMeta::setInstallState(const std::vector<pie::hac::cnmt::InstallStateFlag>& install_state)
 {
 	mInstallState = install_state;
 }
 
-uint32_t nn::hac::ContentMeta::getRequiredDownloadSystemVersion() const
+uint32_t pie::hac::ContentMeta::getRequiredDownloadSystemVersion() const
 {
 	return mRequiredDownloadSystemVersion;
 }
 
-void nn::hac::ContentMeta::setRequiredDownloadSystemVersion(uint32_t version)
+void pie::hac::ContentMeta::setRequiredDownloadSystemVersion(uint32_t version)
 {
 	mRequiredDownloadSystemVersion = version;
 }
 
-const nn::hac::ApplicationMetaExtendedHeader& nn::hac::ContentMeta::getApplicationMetaExtendedHeader() const
+const pie::hac::ApplicationMetaExtendedHeader& pie::hac::ContentMeta::getApplicationMetaExtendedHeader() const
 {
 	return mApplicationMetaExtendedHeader;
 }
 
-void nn::hac::ContentMeta::setApplicationMetaExtendedHeader(const nn::hac::ApplicationMetaExtendedHeader& exhdr)
+void pie::hac::ContentMeta::setApplicationMetaExtendedHeader(const pie::hac::ApplicationMetaExtendedHeader& exhdr)
 {
 	mApplicationMetaExtendedHeader = exhdr;
 }
 
-const nn::hac::PatchMetaExtendedHeader& nn::hac::ContentMeta::getPatchMetaExtendedHeader() const
+const pie::hac::PatchMetaExtendedHeader& pie::hac::ContentMeta::getPatchMetaExtendedHeader() const
 {
 	return mPatchMetaExtendedHeader;
 }
 
-void nn::hac::ContentMeta::setPatchMetaExtendedHeader(const nn::hac::PatchMetaExtendedHeader& exhdr)
+void pie::hac::ContentMeta::setPatchMetaExtendedHeader(const pie::hac::PatchMetaExtendedHeader& exhdr)
 {
 	mPatchMetaExtendedHeader = exhdr;
 }
 
-const nn::hac::AddOnContentMetaExtendedHeader& nn::hac::ContentMeta::getAddOnContentMetaExtendedHeader() const
+const pie::hac::AddOnContentMetaExtendedHeader& pie::hac::ContentMeta::getAddOnContentMetaExtendedHeader() const
 {
 	return mAddOnContentMetaExtendedHeader;
 }
 
-void nn::hac::ContentMeta::setAddOnContentMetaExtendedHeader(const nn::hac::AddOnContentMetaExtendedHeader& exhdr)
+void pie::hac::ContentMeta::setAddOnContentMetaExtendedHeader(const pie::hac::AddOnContentMetaExtendedHeader& exhdr)
 {
 	mAddOnContentMetaExtendedHeader = exhdr;
 }
 
-const nn::hac::DeltaMetaExtendedHeader& nn::hac::ContentMeta::getDeltaMetaExtendedHeader() const
+const pie::hac::DeltaMetaExtendedHeader& pie::hac::ContentMeta::getDeltaMetaExtendedHeader() const
 {
 	return mDeltaMetaExtendedHeader;
 }
 
-void nn::hac::ContentMeta::setDeltaMetaExtendedHeader(const nn::hac::DeltaMetaExtendedHeader& exhdr)
+void pie::hac::ContentMeta::setDeltaMetaExtendedHeader(const pie::hac::DeltaMetaExtendedHeader& exhdr)
 {
 	mDeltaMetaExtendedHeader = exhdr;
 }
 
-const nn::hac::SystemUpdateMetaExtendedHeader& nn::hac::ContentMeta::getSystemUpdateMetaExtendedHeader() const
+const pie::hac::SystemUpdateMetaExtendedHeader& pie::hac::ContentMeta::getSystemUpdateMetaExtendedHeader() const
 {
 	return mSystemUpdateMetaExtendedHeader;
 }
 
-void nn::hac::ContentMeta::setSystemUpdateMetaExtendedHeader(const nn::hac::SystemUpdateMetaExtendedHeader& exhdr)
+void pie::hac::ContentMeta::setSystemUpdateMetaExtendedHeader(const pie::hac::SystemUpdateMetaExtendedHeader& exhdr)
 {
 	mSystemUpdateMetaExtendedHeader = exhdr;
 }
 
-const std::vector<nn::hac::ContentInfo>& nn::hac::ContentMeta::getContentInfo() const
+const std::vector<pie::hac::ContentInfo>& pie::hac::ContentMeta::getContentInfo() const
 {
 	return mContentInfo;
 }
 
-void nn::hac::ContentMeta::setContentInfo(const std::vector<nn::hac::ContentInfo>& info)
+void pie::hac::ContentMeta::setContentInfo(const std::vector<pie::hac::ContentInfo>& info)
 {
 	mContentInfo = info;
 }
 
-const std::vector<nn::hac::ContentMetaInfo>& nn::hac::ContentMeta::getContentMetaInfo() const
+const std::vector<pie::hac::ContentMetaInfo>& pie::hac::ContentMeta::getContentMetaInfo() const
 {
 	return mContentMetaInfo;
 }
 
-void nn::hac::ContentMeta::setContentMetaInfo(const std::vector<nn::hac::ContentMetaInfo>& info)
+void pie::hac::ContentMeta::setContentMetaInfo(const std::vector<pie::hac::ContentMetaInfo>& info)
 {
 	mContentMetaInfo = info;
 }
 
-const tc::ByteData & nn::hac::ContentMeta::getPatchMetaExtendedData() const
+const tc::ByteData & pie::hac::ContentMeta::getPatchMetaExtendedData() const
 {
 	return mPatchMetaExtendedData;
 }
 
-void nn::hac::ContentMeta::setPatchMetaExtendedData(const tc::ByteData& exdata)
+void pie::hac::ContentMeta::setPatchMetaExtendedData(const tc::ByteData& exdata)
 {
 	mPatchMetaExtendedData = exdata;
 }
 
-const tc::ByteData & nn::hac::ContentMeta::getDeltaMetaExtendedData() const
+const tc::ByteData & pie::hac::ContentMeta::getDeltaMetaExtendedData() const
 {
 	return mDeltaMetaExtendedData;
 }
 
-void nn::hac::ContentMeta::setDeltaMetaExtendedData(const tc::ByteData& exdata)
+void pie::hac::ContentMeta::setDeltaMetaExtendedData(const tc::ByteData& exdata)
 {
 	mDeltaMetaExtendedData = exdata;
 }
 
-const nn::hac::SystemUpdateMetaExtendedData& nn::hac::ContentMeta::getSystemUpdateMetaExtendedData() const
+const pie::hac::SystemUpdateMetaExtendedData& pie::hac::ContentMeta::getSystemUpdateMetaExtendedData() const
 {
 	return mSystemUpdateMetaExtendedData;
 }
 
-void nn::hac::ContentMeta::setSystemUpdateMetaExtendedData(const nn::hac::SystemUpdateMetaExtendedData& exdata)
+void pie::hac::ContentMeta::setSystemUpdateMetaExtendedData(const pie::hac::SystemUpdateMetaExtendedData& exdata)
 {
 	mSystemUpdateMetaExtendedData = exdata;
 }
 
-const nn::hac::cnmt::digest_t & nn::hac::ContentMeta::getDigest() const
+const pie::hac::cnmt::digest_t & pie::hac::ContentMeta::getDigest() const
 {
 	return mDigest;
 }
 
-void nn::hac::ContentMeta::setDigest(const nn::hac::cnmt::digest_t& digest)
+void pie::hac::ContentMeta::setDigest(const pie::hac::cnmt::digest_t& digest)
 {
 	mDigest = digest;
 }
 
-bool nn::hac::ContentMeta::validateExtendedHeaderSize(cnmt::ContentMetaType type, size_t exhdrSize) const
+bool pie::hac::ContentMeta::validateExtendedHeaderSize(cnmt::ContentMetaType type, size_t exhdrSize) const
 {
 	bool validSize = false;
 
@@ -440,7 +440,7 @@ bool nn::hac::ContentMeta::validateExtendedHeaderSize(cnmt::ContentMetaType type
 	return validSize;
 }
 
-size_t nn::hac::ContentMeta::getExtendedDataSize(cnmt::ContentMetaType type, const byte_t * data) const
+size_t pie::hac::ContentMeta::getExtendedDataSize(cnmt::ContentMetaType type, const byte_t * data) const
 {
 	size_t exdata_len = 0;
 	if (type == cnmt::ContentMetaType::Patch)
@@ -461,7 +461,7 @@ size_t nn::hac::ContentMeta::getExtendedDataSize(cnmt::ContentMetaType type, con
 	return exdata_len;
 }
 
-void nn::hac::ContentMeta::validateBinary(const byte_t * data, size_t len) const
+void pie::hac::ContentMeta::validateBinary(const byte_t * data, size_t len) const
 {
 	// check if it is large enough to read the header
 	if (len < sizeof(sContentMetaHeader))

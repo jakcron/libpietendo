@@ -1,16 +1,16 @@
-#include <nn/hac/AccessControlInfoDesc.h>
+#include <pietendo/hac/AccessControlInfoDesc.h>
 
-nn::hac::AccessControlInfoDesc::AccessControlInfoDesc()
+pie::hac::AccessControlInfoDesc::AccessControlInfoDesc()
 {
 	clear();
 }
 
-nn::hac::AccessControlInfoDesc::AccessControlInfoDesc(const AccessControlInfoDesc & other)
+pie::hac::AccessControlInfoDesc::AccessControlInfoDesc(const AccessControlInfoDesc & other)
 {
 	*this = other;
 }
 
-void nn::hac::AccessControlInfoDesc::operator=(const AccessControlInfoDesc & other)
+void pie::hac::AccessControlInfoDesc::operator=(const AccessControlInfoDesc & other)
 {
 	mRawBinary = other.mRawBinary;
 	mContentArchiveHeaderSignature2Key = other.mContentArchiveHeaderSignature2Key;
@@ -23,7 +23,7 @@ void nn::hac::AccessControlInfoDesc::operator=(const AccessControlInfoDesc & oth
 	mKernelCapabilities = other.mKernelCapabilities;
 }
 
-bool nn::hac::AccessControlInfoDesc::operator==(const AccessControlInfoDesc & other) const
+bool pie::hac::AccessControlInfoDesc::operator==(const AccessControlInfoDesc & other) const
 {
 	return (mContentArchiveHeaderSignature2Key.n == other.mContentArchiveHeaderSignature2Key.n) \
 		&& (mContentArchiveHeaderSignature2Key.e == other.mContentArchiveHeaderSignature2Key.e) \
@@ -37,12 +37,12 @@ bool nn::hac::AccessControlInfoDesc::operator==(const AccessControlInfoDesc & ot
 		&& (mKernelCapabilities == other.mKernelCapabilities);
 }
 
-bool nn::hac::AccessControlInfoDesc::operator!=(const AccessControlInfoDesc & other) const
+bool pie::hac::AccessControlInfoDesc::operator!=(const AccessControlInfoDesc & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::AccessControlInfoDesc::toBytes()
+void pie::hac::AccessControlInfoDesc::toBytes()
 {
 	// serialise the sections
 	mFileSystemAccessControl.toBytes();
@@ -109,7 +109,7 @@ void nn::hac::AccessControlInfoDesc::toBytes()
 	memcpy(mRawBinary.data() + kc.offset, mKernelCapabilities.getBytes().data(), kc.size);
 }
 
-void nn::hac::AccessControlInfoDesc::fromBytes(const byte_t* data, size_t len)
+void pie::hac::AccessControlInfoDesc::fromBytes(const byte_t* data, size_t len)
 {
 	// check size
 	if (len < sizeof(sAciDescHeader))
@@ -163,12 +163,12 @@ void nn::hac::AccessControlInfoDesc::fromBytes(const byte_t* data, size_t len)
 	mKernelCapabilities.fromBytes(mRawBinary.data() + hdr.kc.offset.unwrap(), hdr.kc.size.unwrap());
 }
 
-const tc::ByteData& nn::hac::AccessControlInfoDesc::getBytes() const
+const tc::ByteData& pie::hac::AccessControlInfoDesc::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::AccessControlInfoDesc::generateSignature(const tc::crypto::RsaKey& key)
+void pie::hac::AccessControlInfoDesc::generateSignature(const tc::crypto::RsaKey& key)
 {
 	if (mRawBinary.size() == 0)
 		toBytes();
@@ -182,7 +182,7 @@ void nn::hac::AccessControlInfoDesc::generateSignature(const tc::crypto::RsaKey&
 	}
 }
 
-void nn::hac::AccessControlInfoDesc::validateSignature(const tc::crypto::RsaKey& key) const
+void pie::hac::AccessControlInfoDesc::validateSignature(const tc::crypto::RsaKey& key) const
 {
 	if (mRawBinary.size() == 0)
 		throw tc::ArgumentOutOfRangeException(kModuleName, "No Access Control Info Desc binary exists to verify");
@@ -196,7 +196,7 @@ void nn::hac::AccessControlInfoDesc::validateSignature(const tc::crypto::RsaKey&
 	}
 }
 
-void nn::hac::AccessControlInfoDesc::clear()
+void pie::hac::AccessControlInfoDesc::clear()
 {
 	mRawBinary = tc::ByteData();
 	mContentArchiveHeaderSignature2Key = tc::crypto::RsaKey();
@@ -210,82 +210,82 @@ void nn::hac::AccessControlInfoDesc::clear()
 	mKernelCapabilities.clear();
 }
 
-const tc::crypto::RsaKey& nn::hac::AccessControlInfoDesc::getContentArchiveHeaderSignature2Key() const
+const tc::crypto::RsaKey& pie::hac::AccessControlInfoDesc::getContentArchiveHeaderSignature2Key() const
 {
 	return mContentArchiveHeaderSignature2Key;
 }
 
-void nn::hac::AccessControlInfoDesc::setContentArchiveHeaderSignature2Key(const tc::crypto::RsaKey& key)
+void pie::hac::AccessControlInfoDesc::setContentArchiveHeaderSignature2Key(const tc::crypto::RsaKey& key)
 {
 	mContentArchiveHeaderSignature2Key = key;
 }
 
-bool nn::hac::AccessControlInfoDesc::getProductionFlag() const
+bool pie::hac::AccessControlInfoDesc::getProductionFlag() const
 {
 	return mProductionFlag;
 }
 
-void nn::hac::AccessControlInfoDesc::setProductionFlag(bool flag)
+void pie::hac::AccessControlInfoDesc::setProductionFlag(bool flag)
 {
 	mProductionFlag = flag;
 }
 
-bool nn::hac::AccessControlInfoDesc::getUnqualifiedApprovalFlag() const
+bool pie::hac::AccessControlInfoDesc::getUnqualifiedApprovalFlag() const
 {
 	return mUnqualifiedApprovalFlag;
 }
 
-void nn::hac::AccessControlInfoDesc::setUnqualifiedApprovalFlag(bool flag)
+void pie::hac::AccessControlInfoDesc::setUnqualifiedApprovalFlag(bool flag)
 {
 	mUnqualifiedApprovalFlag = flag;
 }
 
-nn::hac::aci::MemoryRegion nn::hac::AccessControlInfoDesc::getMemoryRegion() const
+pie::hac::aci::MemoryRegion pie::hac::AccessControlInfoDesc::getMemoryRegion() const
 {
 	return mMemoryRegion;
 }
 
-void nn::hac::AccessControlInfoDesc::setMemoryRegion(nn::hac::aci::MemoryRegion memory_region)
+void pie::hac::AccessControlInfoDesc::setMemoryRegion(pie::hac::aci::MemoryRegion memory_region)
 {
 	mMemoryRegion = memory_region;
 }
 
-const nn::hac::AccessControlInfoDesc::sProgramIdRestrict&  nn::hac::AccessControlInfoDesc::getProgramIdRestrict() const
+const pie::hac::AccessControlInfoDesc::sProgramIdRestrict&  pie::hac::AccessControlInfoDesc::getProgramIdRestrict() const
 {
 	return mProgramIdRestrict;
 }
 
-void nn::hac::AccessControlInfoDesc::setProgramIdRestrict(const sProgramIdRestrict& pid_restrict)
+void pie::hac::AccessControlInfoDesc::setProgramIdRestrict(const sProgramIdRestrict& pid_restrict)
 {
 	mProgramIdRestrict = pid_restrict;
 }
 
-const nn::hac::FileSystemAccessControl& nn::hac::AccessControlInfoDesc::getFileSystemAccessControl() const
+const pie::hac::FileSystemAccessControl& pie::hac::AccessControlInfoDesc::getFileSystemAccessControl() const
 {
 	return mFileSystemAccessControl;
 }
 
-void nn::hac::AccessControlInfoDesc::setFileSystemAccessControl(const nn::hac::FileSystemAccessControl& fac)
+void pie::hac::AccessControlInfoDesc::setFileSystemAccessControl(const pie::hac::FileSystemAccessControl& fac)
 {
 	mFileSystemAccessControl = fac;
 }
 
-const nn::hac::ServiceAccessControl& nn::hac::AccessControlInfoDesc::getServiceAccessControl() const
+const pie::hac::ServiceAccessControl& pie::hac::AccessControlInfoDesc::getServiceAccessControl() const
 {
 	return mServiceAccessControl;
 }
 
-void nn::hac::AccessControlInfoDesc::setServiceAccessControl(const nn::hac::ServiceAccessControl& sac)
+void pie::hac::AccessControlInfoDesc::setServiceAccessControl(const pie::hac::ServiceAccessControl& sac)
 {
 	mServiceAccessControl = sac;
 }
 
-const nn::hac::KernelCapabilityControl& nn::hac::AccessControlInfoDesc::getKernelCapabilities() const
+const pie::hac::KernelCapabilityControl& pie::hac::AccessControlInfoDesc::getKernelCapabilities() const
 {
 	return mKernelCapabilities;
 }
 
-void nn::hac::AccessControlInfoDesc::setKernelCapabilities(const nn::hac::KernelCapabilityControl& kc)
+void pie::hac::AccessControlInfoDesc::setKernelCapabilities(const pie::hac::KernelCapabilityControl& kc)
 {
 	mKernelCapabilities = kc;
 }

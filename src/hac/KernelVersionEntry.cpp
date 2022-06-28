@@ -1,12 +1,12 @@
-#include <nn/hac/KernelVersionEntry.h>
+#include <pietendo/hac/KernelVersionEntry.h>
 
-nn::hac::KernelVersionEntry::KernelVersionEntry() :
+pie::hac::KernelVersionEntry::KernelVersionEntry() :
 	mCap(kCapId),
 	mVerMajor(0),
 	mVerMinor(0)
 {}
 
-nn::hac::KernelVersionEntry::KernelVersionEntry(const KernelCapabilityEntry & kernel_cap) :
+pie::hac::KernelVersionEntry::KernelVersionEntry(const KernelCapabilityEntry & kernel_cap) :
 	mCap(kCapId),
 	mVerMajor(0),
 	mVerMinor(0)
@@ -14,7 +14,7 @@ nn::hac::KernelVersionEntry::KernelVersionEntry(const KernelCapabilityEntry & ke
 	setKernelCapability(kernel_cap);
 }
 
-nn::hac::KernelVersionEntry::KernelVersionEntry(uint16_t major, uint8_t minor) :
+pie::hac::KernelVersionEntry::KernelVersionEntry(uint16_t major, uint8_t minor) :
 	mCap(kCapId),
 	mVerMajor(0),
 	mVerMinor(0)
@@ -23,30 +23,30 @@ nn::hac::KernelVersionEntry::KernelVersionEntry(uint16_t major, uint8_t minor) :
 	setVerMinor(minor);
 }
 
-void nn::hac::KernelVersionEntry::operator=(const KernelVersionEntry& other)
+void pie::hac::KernelVersionEntry::operator=(const KernelVersionEntry& other)
 {
 	mVerMajor = other.mVerMajor;
 	mVerMinor = other.mVerMinor;
 	updateCapField();
 }
 
-bool nn::hac::KernelVersionEntry::operator==(const KernelVersionEntry& other) const
+bool pie::hac::KernelVersionEntry::operator==(const KernelVersionEntry& other) const
 {
 	return (mVerMajor == other.mVerMajor) \
 		&& (mVerMinor == other.mVerMinor);
 }
 
-bool nn::hac::KernelVersionEntry::operator!=(const KernelVersionEntry& other) const
+bool pie::hac::KernelVersionEntry::operator!=(const KernelVersionEntry& other) const
 {
 	return !(*this == other);
 }
 
-const nn::hac::KernelCapabilityEntry & nn::hac::KernelVersionEntry::getKernelCapability() const
+const pie::hac::KernelCapabilityEntry & pie::hac::KernelVersionEntry::getKernelCapability() const
 {
 	return mCap;
 }
 
-void nn::hac::KernelVersionEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
+void pie::hac::KernelVersionEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
 	if (kernel_cap.getType() != kCapId)
 	{
@@ -57,12 +57,12 @@ void nn::hac::KernelVersionEntry::setKernelCapability(const KernelCapabilityEntr
 	processCapField();
 }
 
-uint16_t nn::hac::KernelVersionEntry::getVerMajor() const
+uint16_t pie::hac::KernelVersionEntry::getVerMajor() const
 {
 	return mVerMajor;
 }
 
-void nn::hac::KernelVersionEntry::setVerMajor(uint16_t major)
+void pie::hac::KernelVersionEntry::setVerMajor(uint16_t major)
 {
 	if (major > kVerMajorMax)
 	{
@@ -73,12 +73,12 @@ void nn::hac::KernelVersionEntry::setVerMajor(uint16_t major)
 	updateCapField();
 }
 
-uint8_t nn::hac::KernelVersionEntry::getVerMinor() const
+uint8_t pie::hac::KernelVersionEntry::getVerMinor() const
 {
 	return mVerMinor;
 }
 
-void nn::hac::KernelVersionEntry::setVerMinor(uint8_t minor)
+void pie::hac::KernelVersionEntry::setVerMinor(uint8_t minor)
 {
 	if (minor > kVerMinorMax)
 	{

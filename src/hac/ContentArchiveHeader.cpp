@@ -1,20 +1,20 @@
 #include <limits>
-#include <nn/hac/ContentArchiveHeader.h>
+#include <pietendo/hac/ContentArchiveHeader.h>
 
 #include <tc/io/IOUtil.h>
 
-nn::hac::ContentArchiveHeader::ContentArchiveHeader()
+pie::hac::ContentArchiveHeader::ContentArchiveHeader()
 {
 	clear();
 }
 
-nn::hac::ContentArchiveHeader::ContentArchiveHeader(const ContentArchiveHeader & other) :
+pie::hac::ContentArchiveHeader::ContentArchiveHeader(const ContentArchiveHeader & other) :
 	ContentArchiveHeader()
 {
 	*this = other;
 }
 
-bool nn::hac::ContentArchiveHeader::operator==(const ContentArchiveHeader & other) const
+bool pie::hac::ContentArchiveHeader::operator==(const ContentArchiveHeader & other) const
 {
 	return (mFormatVersion == other.mFormatVersion) \
 		&& (mDistributionType == other.mDistributionType) \
@@ -31,12 +31,12 @@ bool nn::hac::ContentArchiveHeader::operator==(const ContentArchiveHeader & othe
 		&& (mKeyArea == other.mKeyArea);
 }
 
-bool nn::hac::ContentArchiveHeader::operator!=(const ContentArchiveHeader & other) const
+bool pie::hac::ContentArchiveHeader::operator!=(const ContentArchiveHeader & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ContentArchiveHeader::operator=(const ContentArchiveHeader & other)
+void pie::hac::ContentArchiveHeader::operator=(const ContentArchiveHeader & other)
 {
 	mRawBinary = other.mRawBinary;
 	mDistributionType = other.mDistributionType;
@@ -53,7 +53,7 @@ void nn::hac::ContentArchiveHeader::operator=(const ContentArchiveHeader & other
 	mKeyArea = other.mKeyArea;
 }
 
-void nn::hac::ContentArchiveHeader::toBytes()
+void pie::hac::ContentArchiveHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sContentArchiveHeader));
 	sContentArchiveHeader* hdr = (sContentArchiveHeader*)mRawBinary.data();
@@ -106,7 +106,7 @@ void nn::hac::ContentArchiveHeader::toBytes()
 	}
 }
 
-void nn::hac::ContentArchiveHeader::fromBytes(const byte_t * data, size_t len)
+void pie::hac::ContentArchiveHeader::fromBytes(const byte_t * data, size_t len)
 {
 	if (len < sizeof(sContentArchiveHeader))
 	{
@@ -154,12 +154,12 @@ void nn::hac::ContentArchiveHeader::fromBytes(const byte_t * data, size_t len)
 	}
 }
 
-const tc::ByteData& nn::hac::ContentArchiveHeader::getBytes() const
+const tc::ByteData& pie::hac::ContentArchiveHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ContentArchiveHeader::clear()
+void pie::hac::ContentArchiveHeader::clear()
 {
 	mFormatVersion = nca::FORMAT_NCA3;
 	mDistributionType = nca::DistributionType::Download;
@@ -178,107 +178,107 @@ void nn::hac::ContentArchiveHeader::clear()
 	}
 }
 
-byte_t nn::hac::ContentArchiveHeader::getFormatVersion() const
+byte_t pie::hac::ContentArchiveHeader::getFormatVersion() const
 {
 	return mFormatVersion;
 }
 
-void nn::hac::ContentArchiveHeader::setFormatVersion(byte_t version)
+void pie::hac::ContentArchiveHeader::setFormatVersion(byte_t version)
 {
 	mFormatVersion = version;
 }
 
-nn::hac::nca::DistributionType nn::hac::ContentArchiveHeader::getDistributionType() const
+pie::hac::nca::DistributionType pie::hac::ContentArchiveHeader::getDistributionType() const
 {
 	return mDistributionType;
 }
 
-void nn::hac::ContentArchiveHeader::setDistributionType(nca::DistributionType type)
+void pie::hac::ContentArchiveHeader::setDistributionType(nca::DistributionType type)
 {
 	mDistributionType = type;
 }
 
-nn::hac::nca::ContentType nn::hac::ContentArchiveHeader::getContentType() const
+pie::hac::nca::ContentType pie::hac::ContentArchiveHeader::getContentType() const
 {
 	return mContentType;
 }
 
-void nn::hac::ContentArchiveHeader::setContentType(nca::ContentType type)
+void pie::hac::ContentArchiveHeader::setContentType(nca::ContentType type)
 {
 	mContentType = type;
 }
 
-byte_t nn::hac::ContentArchiveHeader::getKeyGeneration() const
+byte_t pie::hac::ContentArchiveHeader::getKeyGeneration() const
 {
 	return mKeyGeneration;
 }
 
-void nn::hac::ContentArchiveHeader::setKeyGeneration(byte_t gen)
+void pie::hac::ContentArchiveHeader::setKeyGeneration(byte_t gen)
 {
 	mKeyGeneration = gen;
 }
 
-byte_t nn::hac::ContentArchiveHeader::getSignatureKeyGeneration() const
+byte_t pie::hac::ContentArchiveHeader::getSignatureKeyGeneration() const
 {
 	return mSignatureKeyGeneration;
 }
 
-void nn::hac::ContentArchiveHeader::setSignatureKeyGeneration(byte_t gen)
+void pie::hac::ContentArchiveHeader::setSignatureKeyGeneration(byte_t gen)
 {
 	mSignatureKeyGeneration = gen;
 }
 
-byte_t nn::hac::ContentArchiveHeader::getKeyAreaEncryptionKeyIndex() const
+byte_t pie::hac::ContentArchiveHeader::getKeyAreaEncryptionKeyIndex() const
 {
 	return mKaekIndex;
 }
 
-void nn::hac::ContentArchiveHeader::setKeyAreaEncryptionKeyIndex(byte_t index)
+void pie::hac::ContentArchiveHeader::setKeyAreaEncryptionKeyIndex(byte_t index)
 {
 	mKaekIndex = index;
 }
 
-uint64_t nn::hac::ContentArchiveHeader::getContentSize() const
+uint64_t pie::hac::ContentArchiveHeader::getContentSize() const
 {
 	return mContentSize;
 }
 
-void nn::hac::ContentArchiveHeader::setContentSize(uint64_t size)
+void pie::hac::ContentArchiveHeader::setContentSize(uint64_t size)
 {
 	mContentSize = size;
 }
 
-uint64_t nn::hac::ContentArchiveHeader::getProgramId() const
+uint64_t pie::hac::ContentArchiveHeader::getProgramId() const
 {
 	return mProgramId;
 }
 
-void nn::hac::ContentArchiveHeader::setProgramId(uint64_t program_id)
+void pie::hac::ContentArchiveHeader::setProgramId(uint64_t program_id)
 {
 	mProgramId = program_id;
 }
 
-uint32_t nn::hac::ContentArchiveHeader::getContentIndex() const
+uint32_t pie::hac::ContentArchiveHeader::getContentIndex() const
 {
 	return mContentIndex;
 }
 
-void nn::hac::ContentArchiveHeader::setContentIndex(uint32_t index)
+void pie::hac::ContentArchiveHeader::setContentIndex(uint32_t index)
 {
 	mContentIndex = index;
 }
 
-uint32_t nn::hac::ContentArchiveHeader::getSdkAddonVersion() const
+uint32_t pie::hac::ContentArchiveHeader::getSdkAddonVersion() const
 {
 	return mSdkAddonVersion;
 }
 
-void nn::hac::ContentArchiveHeader::setSdkAddonVersion(uint32_t version)
+void pie::hac::ContentArchiveHeader::setSdkAddonVersion(uint32_t version)
 {
 	mSdkAddonVersion = version;
 }
 
-bool nn::hac::ContentArchiveHeader::hasRightsId() const
+bool pie::hac::ContentArchiveHeader::hasRightsId() const
 {
 	bool rightsIdIsSet = false;
 
@@ -291,22 +291,22 @@ bool nn::hac::ContentArchiveHeader::hasRightsId() const
 	return rightsIdIsSet;
 }
 
-const nn::hac::detail::rights_id_t& nn::hac::ContentArchiveHeader::getRightsId() const
+const pie::hac::detail::rights_id_t& pie::hac::ContentArchiveHeader::getRightsId() const
 {
 	return mRightsId;
 }
 
-void nn::hac::ContentArchiveHeader::setRightsId(const nn::hac::detail::rights_id_t& rights_id)
+void pie::hac::ContentArchiveHeader::setRightsId(const pie::hac::detail::rights_id_t& rights_id)
 {
 	mRightsId = rights_id;
 }
 
-const std::vector<nn::hac::ContentArchiveHeader::sPartitionEntry>& nn::hac::ContentArchiveHeader::getPartitionEntryList() const
+const std::vector<pie::hac::ContentArchiveHeader::sPartitionEntry>& pie::hac::ContentArchiveHeader::getPartitionEntryList() const
 {
 	return mPartitionEntryList;
 }
 
-void nn::hac::ContentArchiveHeader::setPartitionEntryList(const std::vector<nn::hac::ContentArchiveHeader::sPartitionEntry>& partition_entry_list)
+void pie::hac::ContentArchiveHeader::setPartitionEntryList(const std::vector<pie::hac::ContentArchiveHeader::sPartitionEntry>& partition_entry_list)
 {
 	mPartitionEntryList = partition_entry_list;
 
@@ -331,22 +331,22 @@ void nn::hac::ContentArchiveHeader::setPartitionEntryList(const std::vector<nn::
 	}
 }
 
-const nn::hac::nca::key_area_t& nn::hac::ContentArchiveHeader::getKeyArea() const
+const pie::hac::nca::key_area_t& pie::hac::ContentArchiveHeader::getKeyArea() const
 {
 	return mKeyArea;
 }
 
-void nn::hac::ContentArchiveHeader::setKeyArea(const nn::hac::nca::key_area_t& key_area)
+void pie::hac::ContentArchiveHeader::setKeyArea(const pie::hac::nca::key_area_t& key_area)
 {
 	mKeyArea = key_area;
 }
 
-int64_t nn::hac::ContentArchiveHeader::blockNumToSize(uint32_t block_num) const
+int64_t pie::hac::ContentArchiveHeader::blockNumToSize(uint32_t block_num) const
 {
 	return block_num * nca::kSectorSize;
 }
 
-uint32_t nn::hac::ContentArchiveHeader::sizeToBlockNum(int64_t real_size) const
+uint32_t pie::hac::ContentArchiveHeader::sizeToBlockNum(int64_t real_size) const
 {
 	static const int64_t kMaxValue = int64_t(std::numeric_limits<uint32_t>::max()) * int64_t(nca::kSectorSize);
 

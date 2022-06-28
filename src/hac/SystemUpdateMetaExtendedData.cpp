@@ -1,16 +1,16 @@
-#include <nn/hac/SystemUpdateMetaExtendedData.h>
+#include <pietendo/hac/SystemUpdateMetaExtendedData.h>
 
-nn::hac::SystemUpdateMetaExtendedData::SystemUpdateMetaExtendedData()
+pie::hac::SystemUpdateMetaExtendedData::SystemUpdateMetaExtendedData()
 {
 	clear();
 }
 
-nn::hac::SystemUpdateMetaExtendedData::SystemUpdateMetaExtendedData(const SystemUpdateMetaExtendedData& other)
+pie::hac::SystemUpdateMetaExtendedData::SystemUpdateMetaExtendedData(const SystemUpdateMetaExtendedData& other)
 {
 	*this = other;
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::operator=(const SystemUpdateMetaExtendedData& other)
+void pie::hac::SystemUpdateMetaExtendedData::operator=(const SystemUpdateMetaExtendedData& other)
 {
 	clear();
 	mRawBinary = other.mRawBinary;
@@ -18,18 +18,18 @@ void nn::hac::SystemUpdateMetaExtendedData::operator=(const SystemUpdateMetaExte
 	mFirmwareVariationInfo = other.mFirmwareVariationInfo;
 }
 
-bool nn::hac::SystemUpdateMetaExtendedData::operator==(const SystemUpdateMetaExtendedData& other) const
+bool pie::hac::SystemUpdateMetaExtendedData::operator==(const SystemUpdateMetaExtendedData& other) const
 {
 	return mFormatVersion == other.mFormatVersion \
 		&& mFirmwareVariationInfo == other.mFirmwareVariationInfo;
 }
 
-bool nn::hac::SystemUpdateMetaExtendedData::operator!=(const SystemUpdateMetaExtendedData& other) const
+bool pie::hac::SystemUpdateMetaExtendedData::operator!=(const SystemUpdateMetaExtendedData& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::toBytes()
+void pie::hac::SystemUpdateMetaExtendedData::toBytes()
 {	
 	if (mFormatVersion == 1)
 	{
@@ -111,7 +111,7 @@ void nn::hac::SystemUpdateMetaExtendedData::toBytes()
 	
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::SystemUpdateMetaExtendedData::fromBytes(const byte_t* bytes, size_t len)
 {
 	clear();
 
@@ -222,34 +222,34 @@ void nn::hac::SystemUpdateMetaExtendedData::fromBytes(const byte_t* bytes, size_
 	}
 }
 
-const tc::ByteData& nn::hac::SystemUpdateMetaExtendedData::getBytes() const
+const tc::ByteData& pie::hac::SystemUpdateMetaExtendedData::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::clear()
+void pie::hac::SystemUpdateMetaExtendedData::clear()
 {
 	mRawBinary = tc::ByteData();
 	mFormatVersion = 0;
 	mFirmwareVariationInfo.clear();
 }
 
-uint32_t nn::hac::SystemUpdateMetaExtendedData::getFormatVersion() const
+uint32_t pie::hac::SystemUpdateMetaExtendedData::getFormatVersion() const
 {
 	return mFormatVersion;
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::setFormatVersion(uint32_t version)
+void pie::hac::SystemUpdateMetaExtendedData::setFormatVersion(uint32_t version)
 {
 	mFormatVersion = version;
 }
 
-const std::vector<nn::hac::SystemUpdateMetaExtendedData::FirmwareVariationInfo>& nn::hac::SystemUpdateMetaExtendedData::getFirmwareVariationInfo() const
+const std::vector<pie::hac::SystemUpdateMetaExtendedData::FirmwareVariationInfo>& pie::hac::SystemUpdateMetaExtendedData::getFirmwareVariationInfo() const
 {
 	return mFirmwareVariationInfo;
 }
 
-void nn::hac::SystemUpdateMetaExtendedData::setFirmwareVariationInfo(const std::vector<nn::hac::SystemUpdateMetaExtendedData::FirmwareVariationInfo>& info)
+void pie::hac::SystemUpdateMetaExtendedData::setFirmwareVariationInfo(const std::vector<pie::hac::SystemUpdateMetaExtendedData::FirmwareVariationInfo>& info)
 {
 	mFirmwareVariationInfo = info;
 }

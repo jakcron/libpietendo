@@ -1,12 +1,12 @@
-#include <nn/hac/IndirectStorageStream.h>
+#include <pietendo/hac/IndirectStorageStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/io/StreamUtil.h>
 
 #include <fmt/core.h>
 #include <tc/cli/FormatUtil.h>
 
-nn::hac::IndirectStorageStream::IndirectStorageStream() :
-	mModuleLabel("nn::hac::IndirectStorageStream"),
+pie::hac::IndirectStorageStream::IndirectStorageStream() :
+	mModuleLabel("pie::hac::IndirectStorageStream"),
 	mBaseStream({nullptr, nullptr}),
 	mStreamLength(0),
 	mStreamPositition(0),
@@ -14,7 +14,7 @@ nn::hac::IndirectStorageStream::IndirectStorageStream() :
 {
 }
 
-nn::hac::IndirectStorageStream::IndirectStorageStream(const std::shared_ptr<tc::io::IStream>& stream0, const std::shared_ptr<tc::io::IStream>& stream1, int64_t stream_length, const nn::hac::BucketTree& bucket_tree) :
+pie::hac::IndirectStorageStream::IndirectStorageStream(const std::shared_ptr<tc::io::IStream>& stream0, const std::shared_ptr<tc::io::IStream>& stream1, int64_t stream_length, const pie::hac::BucketTree& bucket_tree) :
 	IndirectStorageStream()
 {
 	mBaseStream[0] = stream0;
@@ -60,33 +60,33 @@ nn::hac::IndirectStorageStream::IndirectStorageStream(const std::shared_ptr<tc::
 	}
 }
 
-bool nn::hac::IndirectStorageStream::canRead() const
+bool pie::hac::IndirectStorageStream::canRead() const
 {
 	// this stream once initialised must be support read
 	return isStreamInit() ? true : false;
 }
 
-bool nn::hac::IndirectStorageStream::canWrite() const
+bool pie::hac::IndirectStorageStream::canWrite() const
 {
 	return false; // always false this is a read-only stream
 }
-bool nn::hac::IndirectStorageStream::canSeek() const
+bool pie::hac::IndirectStorageStream::canSeek() const
 {
 	// this stream once initialised must be support seek
 	return isStreamInit() ? true : false;
 }
 
-int64_t nn::hac::IndirectStorageStream::length()
+int64_t pie::hac::IndirectStorageStream::length()
 {
 	return isStreamInit() ? 0 : mStreamLength;
 }
 
-int64_t nn::hac::IndirectStorageStream::position()
+int64_t pie::hac::IndirectStorageStream::position()
 {
 	return isStreamInit() ? 0 : mStreamPositition;
 }
 
-size_t nn::hac::IndirectStorageStream::read(byte_t* ptr, size_t count)
+size_t pie::hac::IndirectStorageStream::read(byte_t* ptr, size_t count)
 {
 	if (isStreamInit() == false)
 	{
@@ -111,12 +111,12 @@ size_t nn::hac::IndirectStorageStream::read(byte_t* ptr, size_t count)
 	return data_read_count;
 }
 
-size_t nn::hac::IndirectStorageStream::write(const byte_t* ptr, size_t count)
+size_t pie::hac::IndirectStorageStream::write(const byte_t* ptr, size_t count)
 {
 	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for IndirectStorageStream");
 }
 
-int64_t nn::hac::IndirectStorageStream::seek(int64_t offset, tc::io::SeekOrigin origin)
+int64_t pie::hac::IndirectStorageStream::seek(int64_t offset, tc::io::SeekOrigin origin)
 {
 	if (isStreamInit() == false)
 	{
@@ -128,7 +128,7 @@ int64_t nn::hac::IndirectStorageStream::seek(int64_t offset, tc::io::SeekOrigin 
 	return mStreamPositition;
 }
 
-void nn::hac::IndirectStorageStream::setLength(int64_t length)
+void pie::hac::IndirectStorageStream::setLength(int64_t length)
 {
 	if (isStreamInit() == false)
 	{
@@ -138,7 +138,7 @@ void nn::hac::IndirectStorageStream::setLength(int64_t length)
 	throw tc::NotSupportedException(mModuleLabel+"::setLength()", "setLength is not supported for IndirectStorageStream");
 }
 
-void nn::hac::IndirectStorageStream::flush()
+void pie::hac::IndirectStorageStream::flush()
 {
 	if (mBaseStream[0] != nullptr)
 		mBaseStream[0]->flush();
@@ -147,7 +147,7 @@ void nn::hac::IndirectStorageStream::flush()
 		mBaseStream[1]->flush();
 }
 
-void nn::hac::IndirectStorageStream::dispose()
+void pie::hac::IndirectStorageStream::dispose()
 {
 	if (mBaseStream[0] != nullptr)
 	{
@@ -168,5 +168,5 @@ void nn::hac::IndirectStorageStream::dispose()
 
 	mStreamLength = 0;
 	mStreamPositition = 0;
-	mBucketTree = nn::hac::BucketTree();
+	mBucketTree = pie::hac::BucketTree();
 }

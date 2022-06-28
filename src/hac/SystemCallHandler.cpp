@@ -1,29 +1,29 @@
-#include <nn/hac/SystemCallHandler.h>
-#include <nn/hac/SystemCallEntry.h>
+#include <pietendo/hac/SystemCallHandler.h>
+#include <pietendo/hac/SystemCallEntry.h>
 
-nn::hac::SystemCallHandler::SystemCallHandler() :
+pie::hac::SystemCallHandler::SystemCallHandler() :
 	mIsSet(false),
 	mSystemCallIds()
 {}
 
-void nn::hac::SystemCallHandler::operator=(const SystemCallHandler & other)
+void pie::hac::SystemCallHandler::operator=(const SystemCallHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mSystemCallIds = other.mSystemCallIds;
 }
 
-bool nn::hac::SystemCallHandler::operator==(const SystemCallHandler & other) const
+bool pie::hac::SystemCallHandler::operator==(const SystemCallHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mSystemCallIds == other.mSystemCallIds);
 }
 
-bool nn::hac::SystemCallHandler::operator!=(const SystemCallHandler & other) const
+bool pie::hac::SystemCallHandler::operator!=(const SystemCallHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::SystemCallHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::SystemCallHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() == 0)
 		return;
@@ -49,7 +49,7 @@ void nn::hac::SystemCallHandler::importKernelCapabilityList(const std::vector<Ke
 	mIsSet = true;
 }
 
-void nn::hac::SystemCallHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::SystemCallHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -78,23 +78,23 @@ void nn::hac::SystemCallHandler::exportKernelCapabilityList(std::vector<KernelCa
 	}
 }
 
-void nn::hac::SystemCallHandler::clear()
+void pie::hac::SystemCallHandler::clear()
 {
 	mIsSet = false;
 	mSystemCallIds.reset();
 }
 
-bool nn::hac::SystemCallHandler::isSet() const
+bool pie::hac::SystemCallHandler::isSet() const
 {
 	return mIsSet;
 }
 
-const nn::hac::kc::SystemCallIds& nn::hac::SystemCallHandler::getSystemCallIds() const
+const pie::hac::kc::SystemCallIds& pie::hac::SystemCallHandler::getSystemCallIds() const
 {
 	return mSystemCallIds;
 }
 
-void nn::hac::SystemCallHandler::setSystemCallIds(const nn::hac::kc::SystemCallIds& syscall_ids)
+void pie::hac::SystemCallHandler::setSystemCallIds(const pie::hac::kc::SystemCallIds& syscall_ids)
 {
 	mSystemCallIds = syscall_ids;
 	mIsSet = true;

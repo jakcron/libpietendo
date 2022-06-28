@@ -1,4 +1,4 @@
-#include <nn/hac/HierarchicalIntegrityStream.h>
+#include <pietendo/hac/HierarchicalIntegrityStream.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/io/StreamUtil.h>
@@ -6,8 +6,8 @@
 #include <tc/cli/FormatUtil.h>
 #include <fmt/format.h>
 
-nn::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream() :
-	mModuleLabel("nn::hac::HierarchicalIntegrityStream"),
+pie::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream() :
+	mModuleLabel("pie::hac::HierarchicalIntegrityStream"),
 	mBaseStream(),
 	mDataStreamBlockSize(0),
 	mDataStreamLogicalLength(0),
@@ -17,7 +17,7 @@ nn::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream() :
 {
 }
 
-nn::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream(const std::shared_ptr<tc::io::IStream>& stream, const nn::hac::HierarchicalIntegrityHeader& hash_header) :
+pie::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream(const std::shared_ptr<tc::io::IStream>& stream, const pie::hac::HierarchicalIntegrityHeader& hash_header) :
 	HierarchicalIntegrityStream()
 {
 	mBaseStream = stream;
@@ -25,22 +25,22 @@ nn::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream(const std::sha
 	// validate stream properties
 	if (mBaseStream == nullptr)
 	{
-		throw tc::ObjectDisposedException("nn::hac::HierarchicalIntegrityStream", "stream is null.");
+		throw tc::ObjectDisposedException("pie::hac::HierarchicalIntegrityStream", "stream is null.");
 	}
 	if (mBaseStream->canRead() == false)
 	{
-		throw tc::InvalidOperationException("nn::hac::HierarchicalIntegrityStream", "stream does not support reading.");
+		throw tc::InvalidOperationException("pie::hac::HierarchicalIntegrityStream", "stream does not support reading.");
 	}
 	if (mBaseStream->canSeek() == false)
 	{
-		throw tc::InvalidOperationException("nn::hac::HierarchicalIntegrityStream", "stream does not support seeking.");
+		throw tc::InvalidOperationException("pie::hac::HierarchicalIntegrityStream", "stream does not support seeking.");
 	}
 
 	// create raw master hash table
-	tc::ByteData master_hash_data = tc::ByteData(hash_header.getMasterHashList().size() * sizeof(nn::hac::detail::sha256_hash_t));
+	tc::ByteData master_hash_data = tc::ByteData(hash_header.getMasterHashList().size() * sizeof(pie::hac::detail::sha256_hash_t));
 	for (size_t i = 0; i < hash_header.getMasterHashList().size(); i++)
 	{
-		((nn::hac::detail::sha256_hash_t*)master_hash_data.data())[i] = hash_header.getMasterHashList()[i];
+		((pie::hac::detail::sha256_hash_t*)master_hash_data.data())[i] = hash_header.getMasterHashList()[i];
 	}
 
 	// import layers
@@ -109,31 +109,31 @@ nn::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream(const std::sha
 	//fmt::print("make IVFC data stream done\n");
 }
 
-bool nn::hac::HierarchicalIntegrityStream::canRead() const
+bool pie::hac::HierarchicalIntegrityStream::canRead() const
 {
 	return mDataStream == nullptr ? false : mDataStream->canRead();
 }
 
-bool nn::hac::HierarchicalIntegrityStream::canWrite() const
+bool pie::hac::HierarchicalIntegrityStream::canWrite() const
 {
 	return false; // always false this is a read-only stream
 }
-bool nn::hac::HierarchicalIntegrityStream::canSeek() const
+bool pie::hac::HierarchicalIntegrityStream::canSeek() const
 {
 	return mDataStream == nullptr ? false : mDataStream->canSeek();
 }
 
-int64_t nn::hac::HierarchicalIntegrityStream::length()
+int64_t pie::hac::HierarchicalIntegrityStream::length()
 {
 	return mDataStream == nullptr ? 0 : mDataStreamLogicalLength;
 }
 
-int64_t nn::hac::HierarchicalIntegrityStream::position()
+int64_t pie::hac::HierarchicalIntegrityStream::position()
 {
 	return mDataStream == nullptr ? 0 : mDataStream->position();
 }
 
-size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
+size_t pie::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 {
 	if (mBaseStream == nullptr)
 	{
@@ -217,12 +217,12 @@ size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 
 	if (block_num == 0)
 	{
-		tc::InvalidOperationException("nn::hac::HierarchicalIntegrityStream", "Invalid block number (0 blocks, would have returned before now if count==0)");
+		tc::InvalidOperationException("pie::hac::HierarchicalIntegrityStream", "Invalid block number (0 blocks, would have returned before now if count==0)");
 	}
 
 	if (block_num < continuous_block_num)
 	{
-		tc::InvalidOperationException("nn::hac::HierarchicalIntegrityStream", "Invalid block number (underflow error)");
+		tc::InvalidOperationException("pie::hac::HierarchicalIntegrityStream", "Invalid block number (underflow error)");
 	}
 
 	// allocate memory for partial block
@@ -238,7 +238,7 @@ size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 		// verify block
 		if (validateLayerBlocksWithHashLayer(partial_block.data(), mDataStreamBlockSize, 1, getBlockHash(partial_begin_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
 		}
 
 		// copy out block carving
@@ -258,7 +258,7 @@ size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 		// verify blocks
 		if (validateLayerBlocksWithHashLayer(ptr + data_read_count, mDataStreamBlockSize, continuous_block_num, getBlockHash(continuous_begin_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
 		}
 
 		// increment data read count
@@ -275,7 +275,7 @@ size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 		// verify block
 		if (validateLayerBlocksWithHashLayer(partial_block.data(), mDataStreamBlockSize, 1, getBlockHash(partial_end_block)) == false)
 		{
-			throw tc::crypto::CryptoException("nn::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
+			throw tc::crypto::CryptoException("pie::hac::HierarchicalIntegrityStream", "Data layer block(s) failed hash validation.");
 		}
 
 		// copy out block carving
@@ -292,12 +292,12 @@ size_t nn::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 	return data_read_count;
 }
 
-size_t nn::hac::HierarchicalIntegrityStream::write(const byte_t* ptr, size_t count)
+size_t pie::hac::HierarchicalIntegrityStream::write(const byte_t* ptr, size_t count)
 {
 	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for HierarchicalIntegrityStream");
 }
 
-int64_t nn::hac::HierarchicalIntegrityStream::seek(int64_t offset, tc::io::SeekOrigin origin)
+int64_t pie::hac::HierarchicalIntegrityStream::seek(int64_t offset, tc::io::SeekOrigin origin)
 {
 	if (mDataStream == nullptr)
 	{
@@ -307,7 +307,7 @@ int64_t nn::hac::HierarchicalIntegrityStream::seek(int64_t offset, tc::io::SeekO
 	return mDataStream->seek(offset, origin);
 }
 
-void nn::hac::HierarchicalIntegrityStream::setLength(int64_t length)
+void pie::hac::HierarchicalIntegrityStream::setLength(int64_t length)
 {
 	if (mDataStream == nullptr)
 	{
@@ -317,7 +317,7 @@ void nn::hac::HierarchicalIntegrityStream::setLength(int64_t length)
 	throw tc::NotSupportedException(mModuleLabel+"::setLength()", "setLength is not supported for HierarchicalIntegrityStream");
 }
 
-void nn::hac::HierarchicalIntegrityStream::flush()
+void pie::hac::HierarchicalIntegrityStream::flush()
 {
 	if (mDataStream == nullptr)
 	{
@@ -328,7 +328,7 @@ void nn::hac::HierarchicalIntegrityStream::flush()
 	mBaseStream->flush();
 }
 
-void nn::hac::HierarchicalIntegrityStream::dispose()
+void pie::hac::HierarchicalIntegrityStream::dispose()
 {
 	if (mDataStream.get() != nullptr)
 	{
@@ -352,7 +352,7 @@ void nn::hac::HierarchicalIntegrityStream::dispose()
 	mHashCache = tc::ByteData();
 }
 
-bool nn::hac::HierarchicalIntegrityStream::validateLayerBlocksWithHashLayer(const byte_t* layer, size_t block_size, size_t block_num, const byte_t* hash_layer)
+bool pie::hac::HierarchicalIntegrityStream::validateLayerBlocksWithHashLayer(const byte_t* layer, size_t block_size, size_t block_num, const byte_t* hash_layer)
 {
 	size_t bad_block = block_num;
 	for (size_t i = 0; i < block_num; i++)

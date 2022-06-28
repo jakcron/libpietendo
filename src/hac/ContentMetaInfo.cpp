@@ -1,16 +1,16 @@
-#include <nn/hac/ContentMetaInfo.h>
+#include <pietendo/hac/ContentMetaInfo.h>
 
-nn::hac::ContentMetaInfo::ContentMetaInfo()
+pie::hac::ContentMetaInfo::ContentMetaInfo()
 {
 	clear();
 }
 
-nn::hac::ContentMetaInfo::ContentMetaInfo(const ContentMetaInfo& other)
+pie::hac::ContentMetaInfo::ContentMetaInfo(const ContentMetaInfo& other)
 {
 	*this = other;
 }
 
-void nn::hac::ContentMetaInfo::operator=(const ContentMetaInfo& other)
+void pie::hac::ContentMetaInfo::operator=(const ContentMetaInfo& other)
 {
 	clear();
 	mRawBinary = other.mRawBinary;
@@ -20,7 +20,7 @@ void nn::hac::ContentMetaInfo::operator=(const ContentMetaInfo& other)
 	mAttribute = other.mAttribute;
 }
 
-bool nn::hac::ContentMetaInfo::operator==(const ContentMetaInfo& other) const
+bool pie::hac::ContentMetaInfo::operator==(const ContentMetaInfo& other) const
 {
 	return (mTitleId == other.mTitleId) \
 		&& (mTitleVersion == other.mTitleVersion) \
@@ -28,12 +28,12 @@ bool nn::hac::ContentMetaInfo::operator==(const ContentMetaInfo& other) const
 		&& (mAttribute == other.mAttribute);
 }
 
-bool nn::hac::ContentMetaInfo::operator!=(const ContentMetaInfo& other) const
+bool pie::hac::ContentMetaInfo::operator!=(const ContentMetaInfo& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ContentMetaInfo::toBytes()
+void pie::hac::ContentMetaInfo::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sContentMetaInfo));
 	sContentMetaInfo* info = (sContentMetaInfo*)mRawBinary.data();
@@ -47,7 +47,7 @@ void nn::hac::ContentMetaInfo::toBytes()
 	}
 }
 
-void nn::hac::ContentMetaInfo::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::ContentMetaInfo::fromBytes(const byte_t* bytes, size_t len)
 {
 	if (len < sizeof(sContentMetaInfo))
 	{
@@ -68,12 +68,12 @@ void nn::hac::ContentMetaInfo::fromBytes(const byte_t* bytes, size_t len)
 	}
 }
 
-const tc::ByteData& nn::hac::ContentMetaInfo::getBytes() const
+const tc::ByteData& pie::hac::ContentMetaInfo::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ContentMetaInfo::clear()
+void pie::hac::ContentMetaInfo::clear()
 {
 	mRawBinary = tc::ByteData();
 	mTitleId = 0;
@@ -82,42 +82,42 @@ void nn::hac::ContentMetaInfo::clear()
 	mAttribute.clear();
 }
 
-uint64_t nn::hac::ContentMetaInfo::getTitleId() const
+uint64_t pie::hac::ContentMetaInfo::getTitleId() const
 {
 	return mTitleId;
 }
 
-void nn::hac::ContentMetaInfo::setTitleId(uint64_t title_id)
+void pie::hac::ContentMetaInfo::setTitleId(uint64_t title_id)
 {
 	mTitleId = title_id;
 }
 
-uint32_t nn::hac::ContentMetaInfo::getTitleVersion() const
+uint32_t pie::hac::ContentMetaInfo::getTitleVersion() const
 {
 	return mTitleVersion;
 }
 
-void nn::hac::ContentMetaInfo::setTitleVersion(uint32_t ver)
+void pie::hac::ContentMetaInfo::setTitleVersion(uint32_t ver)
 {
 	mTitleVersion = ver;
 }	
 
-nn::hac::cnmt::ContentMetaType nn::hac::ContentMetaInfo::getContentMetaType() const
+pie::hac::cnmt::ContentMetaType pie::hac::ContentMetaInfo::getContentMetaType() const
 {
 	return mType;
 }
 
-void nn::hac::ContentMetaInfo::setContentMetaType(nn::hac::cnmt::ContentMetaType type)
+void pie::hac::ContentMetaInfo::setContentMetaType(pie::hac::cnmt::ContentMetaType type)
 {
 	mType = type;
 }	
 
-const std::vector<nn::hac::cnmt::ContentMetaAttributeFlag>& nn::hac::ContentMetaInfo::getAttribute() const
+const std::vector<pie::hac::cnmt::ContentMetaAttributeFlag>& pie::hac::ContentMetaInfo::getAttribute() const
 {
 	return mAttribute;
 }
 
-void nn::hac::ContentMetaInfo::setAttribute(const std::vector<nn::hac::cnmt::ContentMetaAttributeFlag>& attr)
+void pie::hac::ContentMetaInfo::setAttribute(const std::vector<pie::hac::cnmt::ContentMetaAttributeFlag>& attr)
 {
 	mAttribute = attr;
 }

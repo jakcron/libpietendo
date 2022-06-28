@@ -1,16 +1,16 @@
-#include <nn/hac/PatchMetaExtendedHeader.h>
+#include <pietendo/hac/PatchMetaExtendedHeader.h>
 
-nn::hac::PatchMetaExtendedHeader::PatchMetaExtendedHeader()
+pie::hac::PatchMetaExtendedHeader::PatchMetaExtendedHeader()
 {
 	clear();
 }
 
-nn::hac::PatchMetaExtendedHeader::PatchMetaExtendedHeader(const PatchMetaExtendedHeader& other)
+pie::hac::PatchMetaExtendedHeader::PatchMetaExtendedHeader(const PatchMetaExtendedHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::PatchMetaExtendedHeader::operator=(const PatchMetaExtendedHeader& other)
+void pie::hac::PatchMetaExtendedHeader::operator=(const PatchMetaExtendedHeader& other)
 {
 	clear();
 	mRawBinary = other.mRawBinary;
@@ -19,19 +19,19 @@ void nn::hac::PatchMetaExtendedHeader::operator=(const PatchMetaExtendedHeader& 
 	mExtendedDataSize = other.mExtendedDataSize;
 }
 
-bool nn::hac::PatchMetaExtendedHeader::operator==(const PatchMetaExtendedHeader& other) const
+bool pie::hac::PatchMetaExtendedHeader::operator==(const PatchMetaExtendedHeader& other) const
 {
 	return (mApplicationId == other.mApplicationId) \
 		&& (mRequiredSystemVersion == other.mRequiredSystemVersion) \
 		&& (mExtendedDataSize == other.mExtendedDataSize);
 }
 
-bool nn::hac::PatchMetaExtendedHeader::operator!=(const PatchMetaExtendedHeader& other) const
+bool pie::hac::PatchMetaExtendedHeader::operator!=(const PatchMetaExtendedHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::PatchMetaExtendedHeader::toBytes()
+void pie::hac::PatchMetaExtendedHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sPatchMetaExtendedHeader));
 	sPatchMetaExtendedHeader* info = (sPatchMetaExtendedHeader*)mRawBinary.data();
@@ -41,7 +41,7 @@ void nn::hac::PatchMetaExtendedHeader::toBytes()
 	info->extended_data_size.wrap(mExtendedDataSize);
 }
 
-void nn::hac::PatchMetaExtendedHeader::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::PatchMetaExtendedHeader::fromBytes(const byte_t* bytes, size_t len)
 {
 	if (len < sizeof(sPatchMetaExtendedHeader))
 	{
@@ -55,12 +55,12 @@ void nn::hac::PatchMetaExtendedHeader::fromBytes(const byte_t* bytes, size_t len
 	mExtendedDataSize = info->extended_data_size.unwrap();
 }
 
-const tc::ByteData& nn::hac::PatchMetaExtendedHeader::getBytes() const
+const tc::ByteData& pie::hac::PatchMetaExtendedHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::PatchMetaExtendedHeader::clear()
+void pie::hac::PatchMetaExtendedHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mApplicationId = 0;
@@ -68,32 +68,32 @@ void nn::hac::PatchMetaExtendedHeader::clear()
 	mExtendedDataSize = 0;
 }
 
-uint64_t nn::hac::PatchMetaExtendedHeader::getApplicationId() const
+uint64_t pie::hac::PatchMetaExtendedHeader::getApplicationId() const
 {
 	return mApplicationId;
 }
 
-void nn::hac::PatchMetaExtendedHeader::setApplicationId(uint64_t application_id)
+void pie::hac::PatchMetaExtendedHeader::setApplicationId(uint64_t application_id)
 {
 	mApplicationId = application_id;
 }
 
-uint32_t nn::hac::PatchMetaExtendedHeader::getRequiredSystemVersion() const
+uint32_t pie::hac::PatchMetaExtendedHeader::getRequiredSystemVersion() const
 {
 	return mRequiredSystemVersion;
 }
 
-void nn::hac::PatchMetaExtendedHeader::setRequiredSystemVersion(uint32_t sys_ver)
+void pie::hac::PatchMetaExtendedHeader::setRequiredSystemVersion(uint32_t sys_ver)
 {
 	mRequiredSystemVersion = sys_ver;
 }
 
-uint32_t nn::hac::PatchMetaExtendedHeader::getExtendedDataSize() const
+uint32_t pie::hac::PatchMetaExtendedHeader::getExtendedDataSize() const
 {
 	return mExtendedDataSize;
 }
 
-void nn::hac::PatchMetaExtendedHeader::setExtendedDataSize(uint32_t size)
+void pie::hac::PatchMetaExtendedHeader::setExtendedDataSize(uint32_t size)
 {
 	mExtendedDataSize = size;
 }

@@ -1,23 +1,23 @@
-#include <nn/hac/AccessControlInfoUtil.h>
+#include <pietendo/hac/AccessControlInfoUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::AccessControlInfoUtil::getMemoryRegionAsString(nn::hac::aci::MemoryRegion mem_region)
+std::string pie::hac::AccessControlInfoUtil::getMemoryRegionAsString(pie::hac::aci::MemoryRegion mem_region)
 {
 	std::stringstream ss;
 
 	switch(mem_region)
 	{
-	case (nn::hac::aci::MemoryRegion::Application):
+	case (pie::hac::aci::MemoryRegion::Application):
 		ss << "Application";
 		break;
-	case (nn::hac::aci::MemoryRegion::Applet):
+	case (pie::hac::aci::MemoryRegion::Applet):
 		ss << "Applet";
 		break;
-	case (nn::hac::aci::MemoryRegion::SecureSystem):
+	case (pie::hac::aci::MemoryRegion::SecureSystem):
 		ss << "SecureSystem";
 		break;
-	case (nn::hac::aci::MemoryRegion::NonSecureSystem):
+	case (pie::hac::aci::MemoryRegion::NonSecureSystem):
 		ss << "NonSecureSystem";
 		break;
 	default:

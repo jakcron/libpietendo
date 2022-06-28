@@ -1,47 +1,47 @@
-#include <nn/hac/HandleTableSizeEntry.h>
+#include <pietendo/hac/HandleTableSizeEntry.h>
 
-nn::hac::HandleTableSizeEntry::HandleTableSizeEntry() :
+pie::hac::HandleTableSizeEntry::HandleTableSizeEntry() :
 	mCap(kCapId),
 	mHandleTableSize(0)
 {}
 
-nn::hac::HandleTableSizeEntry::HandleTableSizeEntry(const KernelCapabilityEntry & kernel_cap) :
+pie::hac::HandleTableSizeEntry::HandleTableSizeEntry(const KernelCapabilityEntry & kernel_cap) :
 	mCap(kCapId),
 	mHandleTableSize(0)
 {
 	setKernelCapability(kernel_cap);
 }
 
-nn::hac::HandleTableSizeEntry::HandleTableSizeEntry(uint16_t size) :
+pie::hac::HandleTableSizeEntry::HandleTableSizeEntry(uint16_t size) :
 	mCap(kCapId),
 	mHandleTableSize(0)
 {
 	setHandleTableSize(size);
 }
 
-void nn::hac::HandleTableSizeEntry::operator=(const HandleTableSizeEntry& other)
+void pie::hac::HandleTableSizeEntry::operator=(const HandleTableSizeEntry& other)
 {
 	mHandleTableSize = other.mHandleTableSize;
 	updateCapField();
 }
 
-bool nn::hac::HandleTableSizeEntry::operator==(const HandleTableSizeEntry& other) const
+bool pie::hac::HandleTableSizeEntry::operator==(const HandleTableSizeEntry& other) const
 {
 	return (mHandleTableSize == other.mHandleTableSize);
 }
 
-bool nn::hac::HandleTableSizeEntry::operator!=(const HandleTableSizeEntry& other) const
+bool pie::hac::HandleTableSizeEntry::operator!=(const HandleTableSizeEntry& other) const
 {
 	return !(*this == other);
 }
 
 
-const nn::hac::KernelCapabilityEntry & nn::hac::HandleTableSizeEntry::getKernelCapability() const
+const pie::hac::KernelCapabilityEntry & pie::hac::HandleTableSizeEntry::getKernelCapability() const
 {
 	return mCap;
 }
 
-void nn::hac::HandleTableSizeEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
+void pie::hac::HandleTableSizeEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
 	if (kernel_cap.getType() != kCapId)
 	{
@@ -52,12 +52,12 @@ void nn::hac::HandleTableSizeEntry::setKernelCapability(const KernelCapabilityEn
 	processCapField();
 }
 
-uint16_t nn::hac::HandleTableSizeEntry::getHandleTableSize() const
+uint16_t pie::hac::HandleTableSizeEntry::getHandleTableSize() const
 {
 	return mHandleTableSize;
 }
 
-void nn::hac::HandleTableSizeEntry::setHandleTableSize(uint16_t size)
+void pie::hac::HandleTableSizeEntry::setHandleTableSize(uint16_t size)
 {
 	if (size > kMaxHandleTableSize)
 	{

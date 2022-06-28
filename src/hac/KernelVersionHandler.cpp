@@ -1,28 +1,28 @@
-#include <nn/hac/KernelVersionHandler.h>
+#include <pietendo/hac/KernelVersionHandler.h>
 
-nn::hac::KernelVersionHandler::KernelVersionHandler() :
+pie::hac::KernelVersionHandler::KernelVersionHandler() :
 	mIsSet(false),
 	mEntry(0,0)
 {}
 
-void nn::hac::KernelVersionHandler::operator=(const KernelVersionHandler & other)
+void pie::hac::KernelVersionHandler::operator=(const KernelVersionHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mEntry.setKernelCapability(other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::KernelVersionHandler::operator==(const KernelVersionHandler & other) const
+bool pie::hac::KernelVersionHandler::operator==(const KernelVersionHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mEntry.getKernelCapability() == other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::KernelVersionHandler::operator!=(const KernelVersionHandler & other) const
+bool pie::hac::KernelVersionHandler::operator!=(const KernelVersionHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::KernelVersionHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::KernelVersionHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() > kMaxKernelCapNum)
 	{ 
@@ -37,7 +37,7 @@ void nn::hac::KernelVersionHandler::importKernelCapabilityList(const std::vector
 	mIsSet = true;
 }
 
-void nn::hac::KernelVersionHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::KernelVersionHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -45,35 +45,35 @@ void nn::hac::KernelVersionHandler::exportKernelCapabilityList(std::vector<Kerne
 	caps.push_back(mEntry.getKernelCapability());
 }
 
-void nn::hac::KernelVersionHandler::clear()
+void pie::hac::KernelVersionHandler::clear()
 {
 	mIsSet = false;
 	mEntry.setVerMajor(0);
 	mEntry.setVerMinor(0);
 }
 
-bool nn::hac::KernelVersionHandler::isSet() const
+bool pie::hac::KernelVersionHandler::isSet() const
 {
 	return mIsSet;
 }
 
-uint16_t nn::hac::KernelVersionHandler::getVerMajor() const
+uint16_t pie::hac::KernelVersionHandler::getVerMajor() const
 {
 	return mEntry.getVerMajor();
 }
 
-void nn::hac::KernelVersionHandler::setVerMajor(uint16_t major)
+void pie::hac::KernelVersionHandler::setVerMajor(uint16_t major)
 {
 	mEntry.setVerMajor(major);
 	mIsSet = true;
 }
 
-uint8_t nn::hac::KernelVersionHandler::getVerMinor() const
+uint8_t pie::hac::KernelVersionHandler::getVerMinor() const
 {
 	return mEntry.getVerMinor();
 }
 
-void nn::hac::KernelVersionHandler::setVerMinor(uint8_t minor)
+void pie::hac::KernelVersionHandler::setVerMinor(uint8_t minor)
 {
 	mEntry.setVerMinor(minor);
 	mIsSet = true;

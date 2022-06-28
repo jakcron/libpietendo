@@ -1,17 +1,17 @@
-#include <nn/hac/PartitionFsUtil.h>
+#include <pietendo/hac/PartitionFsUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::PartitionFsUtil::getFsTypeAsString(nn::hac::PartitionFsHeader::FsType val)
+std::string pie::hac::PartitionFsUtil::getFsTypeAsString(pie::hac::PartitionFsHeader::FsType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::PartitionFsHeader::TYPE_PFS0):
+	case (pie::hac::PartitionFsHeader::TYPE_PFS0):
 		ss << "PFS0";
 		break;
-	case (nn::hac::PartitionFsHeader::TYPE_HFS0):
+	case (pie::hac::PartitionFsHeader::TYPE_HFS0):
 		ss << "HFS0";
 		break;
 	default:
@@ -22,16 +22,16 @@ std::string nn::hac::PartitionFsUtil::getFsTypeAsString(nn::hac::PartitionFsHead
 	return ss.str();
 }
 
-std::string nn::hac::PartitionFsUtil::getFsTypeAsStringDescription(nn::hac::PartitionFsHeader::FsType val)
+std::string pie::hac::PartitionFsUtil::getFsTypeAsStringDescription(pie::hac::PartitionFsHeader::FsType val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::PartitionFsHeader::TYPE_PFS0):
+	case (pie::hac::PartitionFsHeader::TYPE_PFS0):
 		ss << "Partition FileSystem";
 		break;
-	case (nn::hac::PartitionFsHeader::TYPE_HFS0):
+	case (pie::hac::PartitionFsHeader::TYPE_HFS0):
 		ss << "Hashed Partition FileSystem";
 		break;
 	default:

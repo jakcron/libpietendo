@@ -1,18 +1,23 @@
+	/**
+	 * @file FileSystemAccessUtil.h
+	 * @brief Declaration of pie::hac::FileSystemAccessUtil
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/fac.h>
+#include <pietendo/hac/define/fac.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class FileSystemAccessUtil
 {
-namespace hac
-{
-	class FileSystemAccessUtil
-	{
-	public:
-		static std::string getFsAccessFlagAsString(nn::hac::fac::FsAccessFlag flag);
-		static std::string getSaveDataOwnerAccessModeAsString(nn::hac::fac::SaveDataOwnerIdAccessType type);
+public:
+	static std::string getFsAccessFlagAsString(pie::hac::fac::FsAccessFlag flag);
+	static std::string getSaveDataOwnerAccessModeAsString(pie::hac::fac::SaveDataOwnerIdAccessType type);
 
-	private:
-		const std::string kModuleName = "FILE_SYSTEM_ACCESS_UTIL";
-	};
-}
-}
+private:
+	const std::string kModuleName = "FILE_SYSTEM_ACCESS_UTIL";
+};
+
+}} // namespace pie::hac

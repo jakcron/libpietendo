@@ -1,17 +1,17 @@
-#include <nn/es/TicketBody_V2.h>
+#include <pietendo/hac/es/TicketBody_V2.h>
 #include <bitset>
 
-nn::es::TicketBody_V2::TicketBody_V2()
+pie::hac::es::TicketBody_V2::TicketBody_V2()
 {
 	clear();
 }
 
-nn::es::TicketBody_V2::TicketBody_V2(const TicketBody_V2 & other)
+pie::hac::es::TicketBody_V2::TicketBody_V2(const TicketBody_V2 & other)
 {
 	*this = other;
 }
 
-void nn::es::TicketBody_V2::operator=(const TicketBody_V2 & other)
+void pie::hac::es::TicketBody_V2::operator=(const TicketBody_V2 & other)
 {
 	if (other.getBytes().size())
 	{
@@ -39,7 +39,7 @@ void nn::es::TicketBody_V2::operator=(const TicketBody_V2 & other)
 	}
 }
 
-bool nn::es::TicketBody_V2::operator==(const TicketBody_V2 & other) const
+bool pie::hac::es::TicketBody_V2::operator==(const TicketBody_V2 & other) const
 {
 	return (mIssuer == other.mIssuer) \
 		&& (mEncTitleKey == other.mEncTitleKey) \
@@ -58,12 +58,12 @@ bool nn::es::TicketBody_V2::operator==(const TicketBody_V2 & other) const
 		&& (mSectEntrySize == other.mSectEntrySize);
 }
 
-bool nn::es::TicketBody_V2::operator!=(const TicketBody_V2 & other) const
+bool pie::hac::es::TicketBody_V2::operator!=(const TicketBody_V2 & other) const
 {
 	return !(*this == other);
 }
 
-void nn::es::TicketBody_V2::toBytes()
+void pie::hac::es::TicketBody_V2::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sTicketBody_v2));
 	sTicketBody_v2* body = (sTicketBody_v2*)mRawBinary.data();
@@ -91,7 +91,7 @@ void nn::es::TicketBody_V2::toBytes()
 	body->sect_entry_size.wrap(mSectEntrySize);
 }
 
-void nn::es::TicketBody_V2::fromBytes(const byte_t * bytes, size_t len)
+void pie::hac::es::TicketBody_V2::fromBytes(const byte_t * bytes, size_t len)
 {
 	if (bytes == nullptr) { throw tc::ArgumentNullException(kModuleName, "bytes was null."); }
 	if (len < sizeof(sSectionHeader_v2)) { throw tc::ArgumentOutOfRangeException(kModuleName, "Binary too small."); }
@@ -130,12 +130,12 @@ void nn::es::TicketBody_V2::fromBytes(const byte_t * bytes, size_t len)
 	mSectEntrySize = body->sect_entry_size.unwrap();
 }
 
-const tc::ByteData& nn::es::TicketBody_V2::getBytes() const
+const tc::ByteData& pie::hac::es::TicketBody_V2::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::es::TicketBody_V2::clear()
+void pie::hac::es::TicketBody_V2::clear()
 {
 	mRawBinary = tc::ByteData();
 	mIssuer.clear();
@@ -156,12 +156,12 @@ void nn::es::TicketBody_V2::clear()
 	mSectEntrySize = 0;
 }
 
-const std::string & nn::es::TicketBody_V2::getIssuer() const
+const std::string & pie::hac::es::TicketBody_V2::getIssuer() const
 {
 	return mIssuer;
 }
 
-void nn::es::TicketBody_V2::setIssuer(const std::string & issuer)
+void pie::hac::es::TicketBody_V2::setIssuer(const std::string & issuer)
 {
 	if (issuer.length() > ticket::kIssuerSize)
 	{
@@ -171,155 +171,155 @@ void nn::es::TicketBody_V2::setIssuer(const std::string & issuer)
 	mIssuer = issuer;
 }
 
-const byte_t * nn::es::TicketBody_V2::getEncTitleKey() const
+const byte_t * pie::hac::es::TicketBody_V2::getEncTitleKey() const
 {
 	return mEncTitleKey.data();
 }
 
-void nn::es::TicketBody_V2::setEncTitleKey(const byte_t * data, size_t len)
+void pie::hac::es::TicketBody_V2::setEncTitleKey(const byte_t * data, size_t len)
 {
 	mEncTitleKey.fill(0);
 	memcpy(mEncTitleKey.data(), data, std::min<size_t>(len, mEncTitleKey.size()));
 }
 
-nn::es::ticket::TitleKeyEncType nn::es::TicketBody_V2::getTitleKeyEncType() const
+pie::hac::es::ticket::TitleKeyEncType pie::hac::es::TicketBody_V2::getTitleKeyEncType() const
 {
 	return mEncType;
 }
 
-void nn::es::TicketBody_V2::setTitleKeyEncType(ticket::TitleKeyEncType type)
+void pie::hac::es::TicketBody_V2::setTitleKeyEncType(ticket::TitleKeyEncType type)
 {
 	mEncType = type;
 }
 
-uint16_t nn::es::TicketBody_V2::getTicketVersion() const
+uint16_t pie::hac::es::TicketBody_V2::getTicketVersion() const
 {
 	return mTicketVersion;
 }
 
-void nn::es::TicketBody_V2::setTicketVersion(uint16_t version)
+void pie::hac::es::TicketBody_V2::setTicketVersion(uint16_t version)
 {
 	mTicketVersion = version;
 }
 
-nn::es::ticket::LicenseType nn::es::TicketBody_V2::getLicenseType() const
+pie::hac::es::ticket::LicenseType pie::hac::es::TicketBody_V2::getLicenseType() const
 {
 	return mLicenseType;
 }
 
-void nn::es::TicketBody_V2::setLicenseType(ticket::LicenseType type)
+void pie::hac::es::TicketBody_V2::setLicenseType(ticket::LicenseType type)
 {
 	mLicenseType = type;
 }
 
-byte_t nn::es::TicketBody_V2::getCommonKeyId() const
+byte_t pie::hac::es::TicketBody_V2::getCommonKeyId() const
 {
 	return mCommonKeyId;
 }
 
-void nn::es::TicketBody_V2::setCommonKeyId(byte_t id)
+void pie::hac::es::TicketBody_V2::setCommonKeyId(byte_t id)
 {
 	mCommonKeyId = id;
 }
 
-const std::vector<nn::es::ticket::PropertyMaskFlags>& nn::es::TicketBody_V2::getPropertyFlags() const
+const std::vector<pie::hac::es::ticket::PropertyMaskFlags>& pie::hac::es::TicketBody_V2::getPropertyFlags() const
 {
 	return mPropertyFlags;
 }
 
-void nn::es::TicketBody_V2::setPropertyFlags(const std::vector<nn::es::ticket::PropertyMaskFlags>& flags)
+void pie::hac::es::TicketBody_V2::setPropertyFlags(const std::vector<pie::hac::es::ticket::PropertyMaskFlags>& flags)
 {
 	mPropertyFlags = flags;
 }
 
-const byte_t * nn::es::TicketBody_V2::getReservedRegion() const
+const byte_t * pie::hac::es::TicketBody_V2::getReservedRegion() const
 {
 	return mReservedRegion.data();
 }
 
-void nn::es::TicketBody_V2::setReservedRegion(const byte_t * data, size_t len)
+void pie::hac::es::TicketBody_V2::setReservedRegion(const byte_t * data, size_t len)
 {
 	mReservedRegion.fill(0);
 	memcpy(mReservedRegion.data(), data, std::min<size_t>(len, mReservedRegion.size()));
 }
 
-uint64_t nn::es::TicketBody_V2::getTicketId() const
+uint64_t pie::hac::es::TicketBody_V2::getTicketId() const
 {
 	return mTicketId;
 }
 
-void nn::es::TicketBody_V2::setTicketId(uint64_t id)
+void pie::hac::es::TicketBody_V2::setTicketId(uint64_t id)
 {
 	mTicketId = id;
 }
 
-uint64_t nn::es::TicketBody_V2::getDeviceId() const
+uint64_t pie::hac::es::TicketBody_V2::getDeviceId() const
 {
 	return mDeviceId;
 }
 
-void nn::es::TicketBody_V2::setDeviceId(uint64_t id)
+void pie::hac::es::TicketBody_V2::setDeviceId(uint64_t id)
 {
 	mDeviceId = id;
 }
 
-const byte_t * nn::es::TicketBody_V2::getRightsId() const
+const byte_t * pie::hac::es::TicketBody_V2::getRightsId() const
 {
 	return mRightsId.data();
 }
 
-void nn::es::TicketBody_V2::setRightsId(const byte_t * id)
+void pie::hac::es::TicketBody_V2::setRightsId(const byte_t * id)
 {
 	mRightsId.fill(0);
 	memcpy(mRightsId.data(), id, mRightsId.size());
 }
 
-uint32_t nn::es::TicketBody_V2::getAccountId() const
+uint32_t pie::hac::es::TicketBody_V2::getAccountId() const
 {
 	return mAccountId;
 }
 
-void nn::es::TicketBody_V2::setAccountId(uint32_t id)
+void pie::hac::es::TicketBody_V2::setAccountId(uint32_t id)
 {
 	mAccountId = id;
 }
 
-uint32_t nn::es::TicketBody_V2::getSectionTotalSize() const
+uint32_t pie::hac::es::TicketBody_V2::getSectionTotalSize() const
 {
 	return mSectTotalSize;
 }
 
-void nn::es::TicketBody_V2::setSectionTotalSize(uint32_t size)
+void pie::hac::es::TicketBody_V2::setSectionTotalSize(uint32_t size)
 {
 	mSectTotalSize = size;
 }
 
-uint32_t nn::es::TicketBody_V2::getSectionHeaderOffset() const
+uint32_t pie::hac::es::TicketBody_V2::getSectionHeaderOffset() const
 {
 	return mSectHeaderOffset;
 }
 
-void nn::es::TicketBody_V2::setSectionHeaderOffset(uint32_t offset)
+void pie::hac::es::TicketBody_V2::setSectionHeaderOffset(uint32_t offset)
 {
 	mSectHeaderOffset = offset;
 }
 
-uint16_t nn::es::TicketBody_V2::getSectionNum() const
+uint16_t pie::hac::es::TicketBody_V2::getSectionNum() const
 {
 	return mSectNum;
 }
 
-void nn::es::TicketBody_V2::setSectionNum(uint16_t num)
+void pie::hac::es::TicketBody_V2::setSectionNum(uint16_t num)
 {
 	mSectNum = num;
 }
 
-uint16_t nn::es::TicketBody_V2::getSectionEntrySize() const
+uint16_t pie::hac::es::TicketBody_V2::getSectionEntrySize() const
 {
 	return mSectEntrySize;
 }
 
-void nn::es::TicketBody_V2::setSectionEntrySize(uint16_t size)
+void pie::hac::es::TicketBody_V2::setSectionEntrySize(uint16_t size)
 {
 	mSectEntrySize = size;
 }

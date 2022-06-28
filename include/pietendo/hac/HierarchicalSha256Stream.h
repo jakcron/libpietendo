@@ -1,3 +1,10 @@
+	/**
+	 * @file HierarchicalSha256Stream.h
+	 * @brief Declaration of pie::hac::HierarchicalSha256Stream
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
 #include <tc/ByteData.h>
 #include <tc/io/IStream.h>
@@ -8,15 +15,15 @@
 #include <tc/ArgumentOutOfRangeException.h>
 #include <tc/ObjectDisposedException.h>
 
-#include <nn/hac/HierarchicalSha256Header.h>
+#include <pietendo/hac/HierarchicalSha256Header.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 class HierarchicalSha256Stream : public tc::io::IStream
 {
 public:
 	HierarchicalSha256Stream();
-	HierarchicalSha256Stream(const std::shared_ptr<tc::io::IStream>& stream, const nn::hac::HierarchicalSha256Header& hash_header);
+	HierarchicalSha256Stream(const std::shared_ptr<tc::io::IStream>& stream, const pie::hac::HierarchicalSha256Header& hash_header);
 
 		/**
 		 * @brief Indicates whether the current stream supports reading.
@@ -143,4 +150,4 @@ private:
 	bool validateLayerBlocksWithHashLayer(const byte_t* layer, size_t layer_size, size_t block_size, size_t block_num, const byte_t* hash_layer);
 };
 
-}} // namespace nn::hac
+}} // namespace pie::hac

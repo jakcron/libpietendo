@@ -1,16 +1,16 @@
-#include <nn/hac/KernelInitialProcessHeader.h>
+#include <pietendo/hac/KernelInitialProcessHeader.h>
 
-nn::hac::KernelInitialProcessHeader::KernelInitialProcessHeader()
+pie::hac::KernelInitialProcessHeader::KernelInitialProcessHeader()
 {
 	clear();
 }
 
-nn::hac::KernelInitialProcessHeader::KernelInitialProcessHeader(const KernelInitialProcessHeader& other)
+pie::hac::KernelInitialProcessHeader::KernelInitialProcessHeader(const KernelInitialProcessHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::KernelInitialProcessHeader::operator=(const KernelInitialProcessHeader& other)
+void pie::hac::KernelInitialProcessHeader::operator=(const KernelInitialProcessHeader& other)
 {
 	clear();
 	this->mName = other.mName;
@@ -29,7 +29,7 @@ void nn::hac::KernelInitialProcessHeader::operator=(const KernelInitialProcessHe
 	this->mKernelCapabilities = other.mKernelCapabilities;
 }
 
-bool nn::hac::KernelInitialProcessHeader::operator==(const KernelInitialProcessHeader& other) const
+bool pie::hac::KernelInitialProcessHeader::operator==(const KernelInitialProcessHeader& other) const
 {
 	return (this->mName == other.mName) \
 		&& (this->mTitleId == other.mTitleId) \
@@ -47,15 +47,15 @@ bool nn::hac::KernelInitialProcessHeader::operator==(const KernelInitialProcessH
 		&& (this->mKernelCapabilities == other.mKernelCapabilities);
 }
 
-bool nn::hac::KernelInitialProcessHeader::operator!=(const KernelInitialProcessHeader& other) const
+bool pie::hac::KernelInitialProcessHeader::operator!=(const KernelInitialProcessHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::KernelInitialProcessHeader::toBytes()
+void pie::hac::KernelInitialProcessHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sKipHeader));
-	nn::hac::sKipHeader* hdr = (nn::hac::sKipHeader*)mRawBinary.data();
+	pie::hac::sKipHeader* hdr = (pie::hac::sKipHeader*)mRawBinary.data();
 
 	// set header identifers
 	hdr->st_magic.wrap(kip::kKipStructMagic);
@@ -109,7 +109,7 @@ void nn::hac::KernelInitialProcessHeader::toBytes()
 	hdr->flags.data_compress = mDataInfo.is_compressed;
 }
 
-void nn::hac::KernelInitialProcessHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::KernelInitialProcessHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// check input data size
 	if (len < sizeof(sKipHeader))
@@ -125,7 +125,7 @@ void nn::hac::KernelInitialProcessHeader::fromBytes(const byte_t* data, size_t l
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// get sKipHeader ptr
-	const nn::hac::sKipHeader* hdr = (const nn::hac::sKipHeader*)mRawBinary.data();
+	const pie::hac::sKipHeader* hdr = (const pie::hac::sKipHeader*)mRawBinary.data();
 	
 	// check KIP signature
 	if (hdr->st_magic.unwrap() != kip::kKipStructMagic)
@@ -167,12 +167,12 @@ void nn::hac::KernelInitialProcessHeader::fromBytes(const byte_t* data, size_t l
 	mBssSize = hdr->bss.memory_size.unwrap();
 }
 
-const tc::ByteData& nn::hac::KernelInitialProcessHeader::getBytes() const
+const tc::ByteData& pie::hac::KernelInitialProcessHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::KernelInitialProcessHeader::clear()
+void pie::hac::KernelInitialProcessHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mName.clear();
@@ -191,142 +191,142 @@ void nn::hac::KernelInitialProcessHeader::clear()
 	mKernelCapabilities.clear();;
 }
 
-const std::string& nn::hac::KernelInitialProcessHeader::getName() const
+const std::string& pie::hac::KernelInitialProcessHeader::getName() const
 {
 	return mName;
 }
 
-void nn::hac::KernelInitialProcessHeader::setName(const std::string& name)
+void pie::hac::KernelInitialProcessHeader::setName(const std::string& name)
 {
 	mName = name;
 }
 
-uint64_t nn::hac::KernelInitialProcessHeader::getTitleId() const
+uint64_t pie::hac::KernelInitialProcessHeader::getTitleId() const
 {
 	return mTitleId;
 }
 
-void nn::hac::KernelInitialProcessHeader::setTitleId(uint64_t title_id)
+void pie::hac::KernelInitialProcessHeader::setTitleId(uint64_t title_id)
 {
 	mTitleId = title_id;
 }
 
-uint32_t nn::hac::KernelInitialProcessHeader::getVersion() const
+uint32_t pie::hac::KernelInitialProcessHeader::getVersion() const
 {
 	return mVersion;
 }
 
-void nn::hac::KernelInitialProcessHeader::setVersion(uint32_t version)
+void pie::hac::KernelInitialProcessHeader::setVersion(uint32_t version)
 {
 	mVersion = version;
 }
 
-bool nn::hac::KernelInitialProcessHeader::getIs64BitInstructionFlag() const
+bool pie::hac::KernelInitialProcessHeader::getIs64BitInstructionFlag() const
 {
 	return mIs64BitInstructionFlag;
 }
 
-void nn::hac::KernelInitialProcessHeader::setIs64BitInstructionFlag(bool flag)
+void pie::hac::KernelInitialProcessHeader::setIs64BitInstructionFlag(bool flag)
 {
 	mIs64BitInstructionFlag = flag;
 }
 
-bool nn::hac::KernelInitialProcessHeader::getIs64BitAddressSpaceFlag() const
+bool pie::hac::KernelInitialProcessHeader::getIs64BitAddressSpaceFlag() const
 {
 	return mIs64BitAddressSpaceFlag;
 }
 
-void nn::hac::KernelInitialProcessHeader::setIs64BitAddressSpaceFlag(bool flag)
+void pie::hac::KernelInitialProcessHeader::setIs64BitAddressSpaceFlag(bool flag)
 {
 	mIs64BitAddressSpaceFlag = flag;
 }
 
-bool nn::hac::KernelInitialProcessHeader::getUseSecureMemoryFlag() const
+bool pie::hac::KernelInitialProcessHeader::getUseSecureMemoryFlag() const
 {
 	return mUseSecureMemoryFlag;
 }
 
-void nn::hac::KernelInitialProcessHeader::setUseSecureMemoryFlag(bool flag)
+void pie::hac::KernelInitialProcessHeader::setUseSecureMemoryFlag(bool flag)
 {
 	mUseSecureMemoryFlag = flag;
 }
 
-byte_t nn::hac::KernelInitialProcessHeader::getMainThreadPriority() const
+byte_t pie::hac::KernelInitialProcessHeader::getMainThreadPriority() const
 {
 	return mMainThreadPriority;
 }
 
-void nn::hac::KernelInitialProcessHeader::setMainThreadPriority(byte_t priority)
+void pie::hac::KernelInitialProcessHeader::setMainThreadPriority(byte_t priority)
 {
 	mMainThreadPriority = priority;
 }
 
-byte_t nn::hac::KernelInitialProcessHeader::getMainThreadCpuId() const
+byte_t pie::hac::KernelInitialProcessHeader::getMainThreadCpuId() const
 {
 	return mMainThreadCpuId;
 }
 
-void nn::hac::KernelInitialProcessHeader::setMainThreadCpuId(byte_t cpu_id)
+void pie::hac::KernelInitialProcessHeader::setMainThreadCpuId(byte_t cpu_id)
 {
 	mMainThreadCpuId = cpu_id;
 }
 
-uint32_t nn::hac::KernelInitialProcessHeader::getMainThreadStackSize() const
+uint32_t pie::hac::KernelInitialProcessHeader::getMainThreadStackSize() const
 {
 	return mMainThreadStackSize;
 }
 
-void nn::hac::KernelInitialProcessHeader::setMainThreadStackSize(uint32_t size)
+void pie::hac::KernelInitialProcessHeader::setMainThreadStackSize(uint32_t size)
 {
 	mMainThreadStackSize = size;
 }
 
-const nn::hac::KernelInitialProcessHeader::sCodeSegment& nn::hac::KernelInitialProcessHeader::getTextSegmentInfo() const
+const pie::hac::KernelInitialProcessHeader::sCodeSegment& pie::hac::KernelInitialProcessHeader::getTextSegmentInfo() const
 {
 	return mTextInfo;
 }
 
-void nn::hac::KernelInitialProcessHeader::setTextSegmentInfo(const sCodeSegment& info)
+void pie::hac::KernelInitialProcessHeader::setTextSegmentInfo(const sCodeSegment& info)
 {
 	mTextInfo = info;
 }
 
-const nn::hac::KernelInitialProcessHeader::sCodeSegment& nn::hac::KernelInitialProcessHeader::getRoSegmentInfo() const
+const pie::hac::KernelInitialProcessHeader::sCodeSegment& pie::hac::KernelInitialProcessHeader::getRoSegmentInfo() const
 {
 	return mRoInfo;
 }
 
-void nn::hac::KernelInitialProcessHeader::setRoSegmentInfo(const sCodeSegment& info)
+void pie::hac::KernelInitialProcessHeader::setRoSegmentInfo(const sCodeSegment& info)
 {
 	mRoInfo = info;
 }
 
-const nn::hac::KernelInitialProcessHeader::sCodeSegment& nn::hac::KernelInitialProcessHeader::getDataSegmentInfo() const
+const pie::hac::KernelInitialProcessHeader::sCodeSegment& pie::hac::KernelInitialProcessHeader::getDataSegmentInfo() const
 {
 	return mDataInfo;
 }
 
-void nn::hac::KernelInitialProcessHeader::setDataSegmentInfo(const sCodeSegment& info)
+void pie::hac::KernelInitialProcessHeader::setDataSegmentInfo(const sCodeSegment& info)
 {
 	mDataInfo = info;
 }
 
-uint32_t nn::hac::KernelInitialProcessHeader::getBssSize() const
+uint32_t pie::hac::KernelInitialProcessHeader::getBssSize() const
 {
 	return mBssSize;
 }
 
-void nn::hac::KernelInitialProcessHeader::setBssSize(uint32_t size)
+void pie::hac::KernelInitialProcessHeader::setBssSize(uint32_t size)
 {
 	mBssSize = size;
 }
 
-const nn::hac::KernelCapabilityControl& nn::hac::KernelInitialProcessHeader::getKernelCapabilities() const
+const pie::hac::KernelCapabilityControl& pie::hac::KernelInitialProcessHeader::getKernelCapabilities() const
 {
 	return mKernelCapabilities;
 }
 
-void nn::hac::KernelInitialProcessHeader::setKernelCapabilities(const KernelCapabilityControl& kc)
+void pie::hac::KernelInitialProcessHeader::setKernelCapabilities(const KernelCapabilityControl& kc)
 {
 	mKernelCapabilities = kc;
 }

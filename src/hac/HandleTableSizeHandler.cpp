@@ -1,28 +1,28 @@
-#include <nn/hac/HandleTableSizeHandler.h>
+#include <pietendo/hac/HandleTableSizeHandler.h>
 
-nn::hac::HandleTableSizeHandler::HandleTableSizeHandler() :
+pie::hac::HandleTableSizeHandler::HandleTableSizeHandler() :
 	mIsSet(false),
 	mEntry(0)
 {}
 
-void nn::hac::HandleTableSizeHandler::operator=(const HandleTableSizeHandler & other)
+void pie::hac::HandleTableSizeHandler::operator=(const HandleTableSizeHandler & other)
 {
 	mIsSet = other.mIsSet;
 	mEntry.setKernelCapability(other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::HandleTableSizeHandler::operator==(const HandleTableSizeHandler & other) const
+bool pie::hac::HandleTableSizeHandler::operator==(const HandleTableSizeHandler & other) const
 {
 	return (mIsSet == other.mIsSet) \
 		&& (mEntry.getKernelCapability() == other.mEntry.getKernelCapability());
 }
 
-bool nn::hac::HandleTableSizeHandler::operator!=(const HandleTableSizeHandler & other) const
+bool pie::hac::HandleTableSizeHandler::operator!=(const HandleTableSizeHandler & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::HandleTableSizeHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
+void pie::hac::HandleTableSizeHandler::importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps)
 {
 	if (caps.size() > kMaxKernelCapNum)
 	{
@@ -36,7 +36,7 @@ void nn::hac::HandleTableSizeHandler::importKernelCapabilityList(const std::vect
 	mIsSet = true;
 }
 
-void nn::hac::HandleTableSizeHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
+void pie::hac::HandleTableSizeHandler::exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const
 {
 	if (isSet() == false)
 		return;
@@ -44,23 +44,23 @@ void nn::hac::HandleTableSizeHandler::exportKernelCapabilityList(std::vector<Ker
 	caps.push_back(mEntry.getKernelCapability());
 }
 
-void nn::hac::HandleTableSizeHandler::clear()
+void pie::hac::HandleTableSizeHandler::clear()
 {
 	mIsSet = false;
 	mEntry.setHandleTableSize(0);
 }
 
-bool nn::hac::HandleTableSizeHandler::isSet() const
+bool pie::hac::HandleTableSizeHandler::isSet() const
 {
 	return mIsSet;
 }
 
-uint16_t nn::hac::HandleTableSizeHandler::getHandleTableSize() const
+uint16_t pie::hac::HandleTableSizeHandler::getHandleTableSize() const
 {
 	return mEntry.getHandleTableSize();
 }
 
-void nn::hac::HandleTableSizeHandler::setHandleTableSize(uint16_t size)
+void pie::hac::HandleTableSizeHandler::setHandleTableSize(uint16_t size)
 {
 	mEntry.setHandleTableSize(size);
 	mIsSet = true;

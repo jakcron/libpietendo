@@ -1,39 +1,44 @@
+	/**
+	 * @file KernelVersionHandler.h
+	 * @brief Declaration of pie::hac::KernelVersionHandler
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/IKernelCapabilityHandler.h>
-#include <nn/hac/KernelVersionEntry.h>
+#include <pietendo/hac/IKernelCapabilityHandler.h>
+#include <pietendo/hac/KernelVersionEntry.h>
 
-namespace nn
+namespace pie { namespace hac {
+	
+class KernelVersionHandler :
+	public IKernelCapabilityHandler
 {
-namespace hac
-{
-	class KernelVersionHandler :
-		public IKernelCapabilityHandler
-	{
-	public:
-		KernelVersionHandler();
+public:
+	KernelVersionHandler();
 
-		void operator=(const KernelVersionHandler& other);
-		bool operator==(const KernelVersionHandler& other) const;
-		bool operator!=(const KernelVersionHandler& other) const;
+	void operator=(const KernelVersionHandler& other);
+	bool operator==(const KernelVersionHandler& other) const;
+	bool operator!=(const KernelVersionHandler& other) const;
 
-		// kernel capabilty list in/out
-		void importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps);
-		void exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const;
-		void clear();
-		bool isSet() const;
+	// kernel capabilty list in/out
+	void importKernelCapabilityList(const std::vector<KernelCapabilityEntry>& caps);
+	void exportKernelCapabilityList(std::vector<KernelCapabilityEntry>& caps) const;
+	void clear();
+	bool isSet() const;
 
-		// variables
-		uint16_t getVerMajor() const;
-		void setVerMajor(uint16_t major);
-		uint8_t getVerMinor() const;
-		void setVerMinor(uint8_t minor);
+	// variables
+	uint16_t getVerMajor() const;
+	void setVerMajor(uint16_t major);
+	uint8_t getVerMinor() const;
+	void setVerMinor(uint8_t minor);
 
-	private:
-		const std::string kModuleName = "KERNEL_VERSION_HANDLER";
-		static const size_t kMaxKernelCapNum = 1;
+private:
+	const std::string kModuleName = "KERNEL_VERSION_HANDLER";
+	static const size_t kMaxKernelCapNum = 1;
 
-		bool mIsSet;
-		KernelVersionEntry mEntry;
-	};
-}
-}
+	bool mIsSet;
+	KernelVersionEntry mEntry;
+};
+
+}} // namespace pie::hac

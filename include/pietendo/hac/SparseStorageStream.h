@@ -1,13 +1,13 @@
 	/**
 	 * @file    SparseStorageStream.h
-	 * @brief   Declaration of nn::hac::SparseStorageStream
+	 * @brief   Declaration of pie::hac::SparseStorageStream
 	 * @author  Jack (jakcron)
 	 * @version 0.1
 	 * @date    2021/11/14
 	 **/
 #pragma once
 #include <limits>
-#include <nn/hac/IndirectStorageStream.h>
+#include <pietendo/hac/IndirectStorageStream.h>
 
 #include <tc/io/IStream.h>
 
@@ -17,17 +17,17 @@
 #include <tc/NotSupportedException.h>
 #include <tc/io/IOException.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 	/**
 	 * @class SparseStorageStream
 	 * @brief Class for constructing read-only a logical stream from a Nintendo Switch SparseStorage
 	 */
-class SparseStorageStream : public nn::hac::IndirectStorageStream
+class SparseStorageStream : public pie::hac::IndirectStorageStream
 {
 public:
 	SparseStorageStream();
-	SparseStorageStream(const std::shared_ptr<tc::io::IStream>& compacted_stream, int64_t stream_length, const nn::hac::BucketTree& bucket_tree);
+	SparseStorageStream(const std::shared_ptr<tc::io::IStream>& compacted_stream, int64_t stream_length, const pie::hac::BucketTree& bucket_tree);
 
 private:	
 	class ZerosStream : public tc::io::IStream

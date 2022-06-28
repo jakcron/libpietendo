@@ -1,35 +1,35 @@
-#include <nn/hac/PartitionFsSnapshotGenerator.h>
+#include <pietendo/hac/PartitionFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/crypto/Sha256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
-#include <nn/hac/define/pfs.h>
+#include <pietendo/hac/define/pfs.h>
 
 #include <fmt/core.h>
 #include <tc/cli/FormatUtil.h>
 
-nn::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream, ValidationMode validate_mode) :
+pie::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::shared_ptr<tc::io::IStream>& stream, ValidationMode validate_mode) :
 	FileSystemSnapshot()
 {
 	// validate stream properties
 	if (stream == nullptr)
 	{
-		throw tc::ObjectDisposedException("nn::hac::PartitionFsSnapshotGenerator", "Failed to open input stream.");
+		throw tc::ObjectDisposedException("pie::hac::PartitionFsSnapshotGenerator", "Failed to open input stream.");
 	}
 	if (stream->canRead() == false || stream->canSeek() == false)
 	{
-		throw tc::NotSupportedException("nn::hac::PartitionFsSnapshotGenerator", "Input stream requires read/seek permissions.");
+		throw tc::NotSupportedException("pie::hac::PartitionFsSnapshotGenerator", "Input stream requires read/seek permissions.");
 	}
 
 	// validate and read base PartitionFs header
-	nn::hac::sPfsHeader hdr;
-	if (stream->length() < tc::io::IOUtil::castSizeToInt64(sizeof(nn::hac::sPfsHeader)))
+	pie::hac::sPfsHeader hdr;
+	if (stream->length() < tc::io::IOUtil::castSizeToInt64(sizeof(pie::hac::sPfsHeader)))
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::PartitionFsSnapshotGenerator", "Input stream is too small.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "Input stream is too small.");
 	}
 	stream->seek(0, tc::io::SeekOrigin::Begin);
-	stream->read((byte_t*)(&hdr), sizeof(nn::hac::sPfsHeader));
+	stream->read((byte_t*)(&hdr), sizeof(pie::hac::sPfsHeader));
 
 	// parse base header
 	enum FsType
@@ -49,14 +49,14 @@ nn::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::s
 			file_entry_size = sizeof(sHashedPfsFile);
 			break;	
 		default:
-			throw tc::ArgumentOutOfRangeException("nn::hac::PartitionFsSnapshotGenerator", "sPfsHeader header is corrupt (Bad struct magic).");
+			throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "sPfsHeader header is corrupt (Bad struct magic).");
 	}
 
 	// determine complete header size
 	size_t pfs_full_header_size = sizeof(sPfsHeader) + file_entry_size * hdr.file_num.unwrap() + hdr.name_table_size.unwrap();
 	if (stream->length() < tc::io::IOUtil::castSizeToInt64(pfs_full_header_size))
 	{
-		throw tc::ArgumentOutOfRangeException("nn::hac::PartitionFsSnapshotGenerator", "Input stream is too small.");
+		throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "Input stream is too small.");
 	}
 
 	// read raw file entry table data
@@ -86,7 +86,7 @@ nn::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::s
 
 		if (fs_type == TYPE_PFS0)
 		{
-			nn::hac::sPfsFile& file_entry = ((nn::hac::sPfsFile*)file_entry_table_raw.data())[i];
+			pie::hac::sPfsFile& file_entry = ((pie::hac::sPfsFile*)file_entry_table_raw.data())[i];
 
 			tmp.name = std::string((char*)name_table_raw.data() + file_entry.name_offset.unwrap());
 			tmp.offset = file_entry.data_offset.unwrap() + tc::io::IOUtil::castSizeToInt64(pfs_full_header_size);
@@ -96,7 +96,7 @@ nn::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::s
 		}
 		else if (fs_type == TYPE_HFS0)
 		{
-			nn::hac::sHashedPfsFile& file_entry = ((nn::hac::sHashedPfsFile*)file_entry_table_raw.data())[i];
+			pie::hac::sHashedPfsFile& file_entry = ((pie::hac::sHashedPfsFile*)file_entry_table_raw.data())[i];
 
 			tmp.name = std::string((char*)name_table_raw.data() + file_entry.name_offset.unwrap());
 			tmp.offset = file_entry.data_offset.unwrap() + tc::io::IOUtil::castSizeToInt64(pfs_full_header_size);
@@ -135,7 +135,7 @@ nn::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::s
 					std::string error_msg = fmt::format("\"{:s}\" failed hash check.", section[i].name);
 					if (validate_mode == ValidationMode_Throw)
 					{
-						throw tc::crypto::CryptoException("nn::hac::PartitionFsSnapshotGenerator", error_msg);
+						throw tc::crypto::CryptoException("pie::hac::PartitionFsSnapshotGenerator", error_msg);
 					}
 					else if (validate_mode == ValidationMode_Warn)
 					{

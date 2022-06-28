@@ -1,3 +1,10 @@
+	/**
+	 * @file HierarchicalIntegrityStream.h
+	 * @brief Declaration of pie::hac::HierarchicalIntegrityStream
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
 #include <tc/ByteData.h>
 #include <tc/io/IStream.h>
@@ -8,15 +15,15 @@
 #include <tc/ArgumentOutOfRangeException.h>
 #include <tc/ObjectDisposedException.h>
 
-#include <nn/hac/HierarchicalIntegrityHeader.h>
+#include <pietendo/hac/HierarchicalIntegrityHeader.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 class HierarchicalIntegrityStream : public tc::io::IStream
 {
 public:
 	HierarchicalIntegrityStream();
-	HierarchicalIntegrityStream(const std::shared_ptr<tc::io::IStream>& stream, const nn::hac::HierarchicalIntegrityHeader& hash_header);
+	HierarchicalIntegrityStream(const std::shared_ptr<tc::io::IStream>& stream, const pie::hac::HierarchicalIntegrityHeader& hash_header);
 
 		/**
 		 * @brief Indicates whether the current stream supports reading.
@@ -140,4 +147,4 @@ private:
 	bool validateLayerBlocksWithHashLayer(const byte_t* layer, size_t block_size, size_t block_num, const byte_t* hash_layer);
 };
 
-}} // namespace nn::hac
+}} // namespace pie::hac

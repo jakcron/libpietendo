@@ -1,7 +1,14 @@
+	/**
+	 * @file GameCardFsSnapshotGenerator.h
+	 * @brief Declaration of pie::hac::GameCardFsSnapshotGenerator
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
 #include <tc/io/VirtualFileSystem.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 struct GameCardFsSnapshotGenerator : public tc::io::VirtualFileSystem::FileSystemSnapshot
 {
@@ -18,4 +25,4 @@ private:
 	GameCardFsSnapshotGenerator();
 };
 
-}} // namespace nn::hac
+}} // namespace pie::hac

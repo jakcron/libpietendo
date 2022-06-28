@@ -1,33 +1,33 @@
-#include <nn/hac/SystemUpdateMetaExtendedHeader.h>
+#include <pietendo/hac/SystemUpdateMetaExtendedHeader.h>
 
-nn::hac::SystemUpdateMetaExtendedHeader::SystemUpdateMetaExtendedHeader()
+pie::hac::SystemUpdateMetaExtendedHeader::SystemUpdateMetaExtendedHeader()
 {
 	clear();
 }
 
-nn::hac::SystemUpdateMetaExtendedHeader::SystemUpdateMetaExtendedHeader(const SystemUpdateMetaExtendedHeader& other)
+pie::hac::SystemUpdateMetaExtendedHeader::SystemUpdateMetaExtendedHeader(const SystemUpdateMetaExtendedHeader& other)
 {
 	*this = other;
 }
 
-void nn::hac::SystemUpdateMetaExtendedHeader::operator=(const SystemUpdateMetaExtendedHeader& other)
+void pie::hac::SystemUpdateMetaExtendedHeader::operator=(const SystemUpdateMetaExtendedHeader& other)
 {
 	clear();
 	mRawBinary = other.mRawBinary;
 	mExtendedDataSize = other.mExtendedDataSize;
 }
 
-bool nn::hac::SystemUpdateMetaExtendedHeader::operator==(const SystemUpdateMetaExtendedHeader& other) const
+bool pie::hac::SystemUpdateMetaExtendedHeader::operator==(const SystemUpdateMetaExtendedHeader& other) const
 {
 	return (mExtendedDataSize == other.mExtendedDataSize);
 }
 
-bool nn::hac::SystemUpdateMetaExtendedHeader::operator!=(const SystemUpdateMetaExtendedHeader& other) const
+bool pie::hac::SystemUpdateMetaExtendedHeader::operator!=(const SystemUpdateMetaExtendedHeader& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::SystemUpdateMetaExtendedHeader::toBytes()
+void pie::hac::SystemUpdateMetaExtendedHeader::toBytes()
 {
 	mRawBinary = tc::ByteData(sizeof(sSystemUpdateMetaExtendedHeader));
 	sSystemUpdateMetaExtendedHeader* info = (sSystemUpdateMetaExtendedHeader*)mRawBinary.data();
@@ -35,7 +35,7 @@ void nn::hac::SystemUpdateMetaExtendedHeader::toBytes()
 	info->extended_data_size.wrap(mExtendedDataSize);
 }
 
-void nn::hac::SystemUpdateMetaExtendedHeader::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::SystemUpdateMetaExtendedHeader::fromBytes(const byte_t* bytes, size_t len)
 {
 	if (len < sizeof(sSystemUpdateMetaExtendedHeader))
 	{
@@ -47,23 +47,23 @@ void nn::hac::SystemUpdateMetaExtendedHeader::fromBytes(const byte_t* bytes, siz
 	mExtendedDataSize = info->extended_data_size.unwrap();
 }
 
-const tc::ByteData& nn::hac::SystemUpdateMetaExtendedHeader::getBytes() const
+const tc::ByteData& pie::hac::SystemUpdateMetaExtendedHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::SystemUpdateMetaExtendedHeader::clear()
+void pie::hac::SystemUpdateMetaExtendedHeader::clear()
 {
 	mRawBinary = tc::ByteData();
 	mExtendedDataSize = 0;
 }
 
-uint32_t nn::hac::SystemUpdateMetaExtendedHeader::getExtendedDataSize() const
+uint32_t pie::hac::SystemUpdateMetaExtendedHeader::getExtendedDataSize() const
 {
 	return mExtendedDataSize;
 }
 
-void nn::hac::SystemUpdateMetaExtendedHeader::setExtendedDataSize(uint32_t size)
+void pie::hac::SystemUpdateMetaExtendedHeader::setExtendedDataSize(uint32_t size)
 {
 	mExtendedDataSize = size;
 }

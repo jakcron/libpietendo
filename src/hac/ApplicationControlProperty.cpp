@@ -1,17 +1,17 @@
 #include <cstring>
-#include <nn/hac/ApplicationControlProperty.h>
+#include <pietendo/hac/ApplicationControlProperty.h>
 
-nn::hac::ApplicationControlProperty::ApplicationControlProperty()
+pie::hac::ApplicationControlProperty::ApplicationControlProperty()
 {
 	clear();
 }
 
-nn::hac::ApplicationControlProperty::ApplicationControlProperty(const ApplicationControlProperty& other)
+pie::hac::ApplicationControlProperty::ApplicationControlProperty(const ApplicationControlProperty& other)
 {
 	*this = other;
 }
 
-void nn::hac::ApplicationControlProperty::operator=(const ApplicationControlProperty& other)
+void pie::hac::ApplicationControlProperty::operator=(const ApplicationControlProperty& other)
 {
 	clear();
 	mTitle = other.mTitle;
@@ -64,7 +64,7 @@ void nn::hac::ApplicationControlProperty::operator=(const ApplicationControlProp
 	mAccessibleLaunchRequiredVersionApplicationId = other.mAccessibleLaunchRequiredVersionApplicationId;
 }
 
-bool nn::hac::ApplicationControlProperty::operator==(const ApplicationControlProperty& other) const
+bool pie::hac::ApplicationControlProperty::operator==(const ApplicationControlProperty& other) const
 {
 	return (mTitle == other.mTitle) \
 		&& (mIsbn == other.mIsbn) \
@@ -116,14 +116,14 @@ bool nn::hac::ApplicationControlProperty::operator==(const ApplicationControlPro
 		&& (mAccessibleLaunchRequiredVersionApplicationId == other.mAccessibleLaunchRequiredVersionApplicationId);
 }
 
-bool nn::hac::ApplicationControlProperty::operator!=(const ApplicationControlProperty& other) const
+bool pie::hac::ApplicationControlProperty::operator!=(const ApplicationControlProperty& other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::ApplicationControlProperty::toBytes()
+void pie::hac::ApplicationControlProperty::toBytes()
 {
-	mRawBinary = tc::ByteData(sizeof(nn::hac::sApplicationControlProperty));
+	mRawBinary = tc::ByteData(sizeof(pie::hac::sApplicationControlProperty));
 
 	sApplicationControlProperty* nacp = (sApplicationControlProperty*)mRawBinary.data();
 
@@ -242,16 +242,16 @@ void nn::hac::ApplicationControlProperty::toBytes()
 	}
 }
 
-void nn::hac::ApplicationControlProperty::fromBytes(const byte_t* bytes, size_t len)
+void pie::hac::ApplicationControlProperty::fromBytes(const byte_t* bytes, size_t len)
 {
-	if (len < sizeof(nn::hac::sApplicationControlProperty))
+	if (len < sizeof(pie::hac::sApplicationControlProperty))
 	{
 		throw tc::ArgumentOutOfRangeException(kModuleName, "NACP too small");
 	}
 
 	clear();
 
-	mRawBinary = tc::ByteData(sizeof(nn::hac::sApplicationControlProperty));
+	mRawBinary = tc::ByteData(sizeof(pie::hac::sApplicationControlProperty));
 	memcpy(mRawBinary.data(), bytes, mRawBinary.size());
 
 	const sApplicationControlProperty* nacp = (const sApplicationControlProperty*)mRawBinary.data();
@@ -385,12 +385,12 @@ void nn::hac::ApplicationControlProperty::fromBytes(const byte_t* bytes, size_t 
 	}
 }
 
-const tc::ByteData& nn::hac::ApplicationControlProperty::getBytes() const
+const tc::ByteData& pie::hac::ApplicationControlProperty::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::ApplicationControlProperty::clear()
+void pie::hac::ApplicationControlProperty::clear()
 {
 	mRawBinary = tc::ByteData();
 	mTitle.clear();
@@ -442,488 +442,488 @@ void nn::hac::ApplicationControlProperty::clear()
 	mAccessibleLaunchRequiredVersionApplicationId.clear();
 }
 
-const std::vector<nn::hac::ApplicationControlProperty::sTitle>& nn::hac::ApplicationControlProperty::getTitle() const
+const std::vector<pie::hac::ApplicationControlProperty::sTitle>& pie::hac::ApplicationControlProperty::getTitle() const
 {
 	return mTitle;
 }
 
-void nn::hac::ApplicationControlProperty::setTitle(const std::vector<sTitle>& title)
+void pie::hac::ApplicationControlProperty::setTitle(const std::vector<sTitle>& title)
 {
 	mTitle = title;
 }
 
-const std::string& nn::hac::ApplicationControlProperty::getIsbn() const
+const std::string& pie::hac::ApplicationControlProperty::getIsbn() const
 {
 	return mIsbn;
 }
 
-void nn::hac::ApplicationControlProperty::setIsbn(const std::string& isbn)
+void pie::hac::ApplicationControlProperty::setIsbn(const std::string& isbn)
 {
 	mIsbn = isbn;
 }
 
-nn::hac::nacp::StartupUserAccount nn::hac::ApplicationControlProperty::getStartupUserAccount() const
+pie::hac::nacp::StartupUserAccount pie::hac::ApplicationControlProperty::getStartupUserAccount() const
 {
 	return mStartupUserAccount;
 }
 
-void nn::hac::ApplicationControlProperty::setStartupUserAccount(nacp::StartupUserAccount var)
+void pie::hac::ApplicationControlProperty::setStartupUserAccount(nacp::StartupUserAccount var)
 {
 	mStartupUserAccount = var;
 }
 
-nn::hac::nacp::UserAccountSwitchLock nn::hac::ApplicationControlProperty::getUserAccountSwitchLock() const
+pie::hac::nacp::UserAccountSwitchLock pie::hac::ApplicationControlProperty::getUserAccountSwitchLock() const
 {
 	return mUserAccountSwitchLock;
 }
 
-void nn::hac::ApplicationControlProperty::setUserAccountSwitchLock(nacp::UserAccountSwitchLock var)
+void pie::hac::ApplicationControlProperty::setUserAccountSwitchLock(nacp::UserAccountSwitchLock var)
 {
 	mUserAccountSwitchLock = var;
 }
 
-nn::hac::nacp::AddOnContentRegistrationType nn::hac::ApplicationControlProperty::getAddOnContentRegistrationType() const
+pie::hac::nacp::AddOnContentRegistrationType pie::hac::ApplicationControlProperty::getAddOnContentRegistrationType() const
 {
 	return mAddOnContentRegistrationType;
 }
 
-void nn::hac::ApplicationControlProperty::setAddOnContentRegistrationType(nacp::AddOnContentRegistrationType var)
+void pie::hac::ApplicationControlProperty::setAddOnContentRegistrationType(nacp::AddOnContentRegistrationType var)
 {
 	mAddOnContentRegistrationType = var;
 }
 
-const std::vector<nn::hac::nacp::AttributeFlag>& nn::hac::ApplicationControlProperty::getAttribute() const
+const std::vector<pie::hac::nacp::AttributeFlag>& pie::hac::ApplicationControlProperty::getAttribute() const
 {
 	return mAttribute;
 }
 
-void nn::hac::ApplicationControlProperty::setAttribute(const std::vector<nacp::AttributeFlag>& var)
+void pie::hac::ApplicationControlProperty::setAttribute(const std::vector<nacp::AttributeFlag>& var)
 {
 	mAttribute = var;
 }
 
-const std::vector<nn::hac::nacp::Language>& nn::hac::ApplicationControlProperty::getSupportedLanguage() const
+const std::vector<pie::hac::nacp::Language>& pie::hac::ApplicationControlProperty::getSupportedLanguage() const
 {
 	return mSupportedLanguage;
 }
 
-void nn::hac::ApplicationControlProperty::setSupportedLanguage(const std::vector<nacp::Language>& var)
+void pie::hac::ApplicationControlProperty::setSupportedLanguage(const std::vector<nacp::Language>& var)
 {
 	mSupportedLanguage = var;
 }
 
-const std::vector<nn::hac::nacp::ParentalControlFlag>& nn::hac::ApplicationControlProperty::getParentalControl() const
+const std::vector<pie::hac::nacp::ParentalControlFlag>& pie::hac::ApplicationControlProperty::getParentalControl() const
 {
 	return mParentalControl;
 }
 
-void nn::hac::ApplicationControlProperty::setParentalControl(const std::vector<nacp::ParentalControlFlag>& var)
+void pie::hac::ApplicationControlProperty::setParentalControl(const std::vector<nacp::ParentalControlFlag>& var)
 {
 	mParentalControl = var;
 }
 
-nn::hac::nacp::Screenshot nn::hac::ApplicationControlProperty::getScreenshot() const
+pie::hac::nacp::Screenshot pie::hac::ApplicationControlProperty::getScreenshot() const
 {
 	return mScreenshot;
 }
 
-void nn::hac::ApplicationControlProperty::setScreenshot(nacp::Screenshot var)
+void pie::hac::ApplicationControlProperty::setScreenshot(nacp::Screenshot var)
 {
 	mScreenshot = var;
 }
 
-nn::hac::nacp::VideoCapture nn::hac::ApplicationControlProperty::getVideoCapture() const
+pie::hac::nacp::VideoCapture pie::hac::ApplicationControlProperty::getVideoCapture() const
 {
 	return mVideoCapture;
 }
 
-void nn::hac::ApplicationControlProperty::setVideoCapture(nacp::VideoCapture var)
+void pie::hac::ApplicationControlProperty::setVideoCapture(nacp::VideoCapture var)
 {
 	mVideoCapture = var;
 }
 
-nn::hac::nacp::DataLossConfirmation nn::hac::ApplicationControlProperty::getDataLossConfirmation() const
+pie::hac::nacp::DataLossConfirmation pie::hac::ApplicationControlProperty::getDataLossConfirmation() const
 {
 	return mDataLossConfirmation;
 }
 
-void nn::hac::ApplicationControlProperty::setDataLossConfirmation(nacp::DataLossConfirmation var)
+void pie::hac::ApplicationControlProperty::setDataLossConfirmation(nacp::DataLossConfirmation var)
 {
 	mDataLossConfirmation = var;
 }
 
-nn::hac::nacp::PlayLogPolicy nn::hac::ApplicationControlProperty::getPlayLogPolicy() const
+pie::hac::nacp::PlayLogPolicy pie::hac::ApplicationControlProperty::getPlayLogPolicy() const
 {
 	return mPlayLogPolicy;
 }
 
-void nn::hac::ApplicationControlProperty::setPlayLogPolicy(nacp::PlayLogPolicy var)
+void pie::hac::ApplicationControlProperty::setPlayLogPolicy(nacp::PlayLogPolicy var)
 {
 	mPlayLogPolicy = var;
 }
 
-uint64_t nn::hac::ApplicationControlProperty::getPresenceGroupId() const
+uint64_t pie::hac::ApplicationControlProperty::getPresenceGroupId() const
 {
 	return mPresenceGroupId;
 }
 
-void nn::hac::ApplicationControlProperty::setPresenceGroupId(uint64_t var)
+void pie::hac::ApplicationControlProperty::setPresenceGroupId(uint64_t var)
 {
 	mPresenceGroupId = var;
 }
 
-const std::vector<nn::hac::ApplicationControlProperty::sRating>& nn::hac::ApplicationControlProperty::getRatingAge() const
+const std::vector<pie::hac::ApplicationControlProperty::sRating>& pie::hac::ApplicationControlProperty::getRatingAge() const
 {
 	return mRatingAge;
 }
 
-void nn::hac::ApplicationControlProperty::setRatingAge(const std::vector<sRating>& var)
+void pie::hac::ApplicationControlProperty::setRatingAge(const std::vector<sRating>& var)
 {
 	mRatingAge = var;
 }
 
-const std::string& nn::hac::ApplicationControlProperty::getDisplayVersion() const
+const std::string& pie::hac::ApplicationControlProperty::getDisplayVersion() const
 {
 	return mDisplayVersion;
 }
 
-void nn::hac::ApplicationControlProperty::setDisplayVersion(const std::string& var)
+void pie::hac::ApplicationControlProperty::setDisplayVersion(const std::string& var)
 {
 	mDisplayVersion = var;
 }
 
-uint64_t nn::hac::ApplicationControlProperty::getAddOnContentBaseId() const
+uint64_t pie::hac::ApplicationControlProperty::getAddOnContentBaseId() const
 {
 	return mAddOnContentBaseId;
 }
 
-void nn::hac::ApplicationControlProperty::setAddOnContentBaseId(uint64_t var)
+void pie::hac::ApplicationControlProperty::setAddOnContentBaseId(uint64_t var)
 {
 	mAddOnContentBaseId = var;
 }
 
-uint64_t nn::hac::ApplicationControlProperty::getSaveDataOwnerId() const
+uint64_t pie::hac::ApplicationControlProperty::getSaveDataOwnerId() const
 {
 	return mSaveDataOwnerId;
 }
 
-void nn::hac::ApplicationControlProperty::setSaveDataOwnerId(uint64_t var)
+void pie::hac::ApplicationControlProperty::setSaveDataOwnerId(uint64_t var)
 {
 	mSaveDataOwnerId = var;
 }
 
-const nn::hac::ApplicationControlProperty::sStorageSize& nn::hac::ApplicationControlProperty::getUserAccountSaveDataSize() const
+const pie::hac::ApplicationControlProperty::sStorageSize& pie::hac::ApplicationControlProperty::getUserAccountSaveDataSize() const
 {
 	return mUserAccountSaveDataSize;
 }
 
-void nn::hac::ApplicationControlProperty::setUserAccountSaveDataSize(const sStorageSize& var)
+void pie::hac::ApplicationControlProperty::setUserAccountSaveDataSize(const sStorageSize& var)
 {
 	mUserAccountSaveDataSize = var;
 }
 
-const nn::hac::ApplicationControlProperty::sStorageSize& nn::hac::ApplicationControlProperty::getDeviceSaveDataSize() const
+const pie::hac::ApplicationControlProperty::sStorageSize& pie::hac::ApplicationControlProperty::getDeviceSaveDataSize() const
 {
 	return mDeviceSaveDataSize;
 }
 
-void nn::hac::ApplicationControlProperty::setDeviceSaveDataSize(const sStorageSize& var)
+void pie::hac::ApplicationControlProperty::setDeviceSaveDataSize(const sStorageSize& var)
 {
 	mDeviceSaveDataSize = var;
 }
 
-int64_t nn::hac::ApplicationControlProperty::getBcatDeliveryCacheStorageSize() const
+int64_t pie::hac::ApplicationControlProperty::getBcatDeliveryCacheStorageSize() const
 {
 	return mBcatDeliveryCacheStorageSize;
 }
 
-void nn::hac::ApplicationControlProperty::setBcatDeliveryCacheStorageSize(int64_t var)
+void pie::hac::ApplicationControlProperty::setBcatDeliveryCacheStorageSize(int64_t var)
 {
 	mBcatDeliveryCacheStorageSize = var;
 }
 
-const std::string& nn::hac::ApplicationControlProperty::getApplicationErrorCodeCategory() const
+const std::string& pie::hac::ApplicationControlProperty::getApplicationErrorCodeCategory() const
 {
 	return mApplicationErrorCodeCategory;
 }
 
-void nn::hac::ApplicationControlProperty::setApplicationErrorCodeCategory(const std::string& var)
+void pie::hac::ApplicationControlProperty::setApplicationErrorCodeCategory(const std::string& var)
 {
 	mApplicationErrorCodeCategory = var;
 }
 
-const std::vector<uint64_t>& nn::hac::ApplicationControlProperty::getLocalCommunicationId() const
+const std::vector<uint64_t>& pie::hac::ApplicationControlProperty::getLocalCommunicationId() const
 {
 	return mLocalCommunicationId;
 }
 
-void nn::hac::ApplicationControlProperty::setLocalCommunicationId(const std::vector<uint64_t>& var)
+void pie::hac::ApplicationControlProperty::setLocalCommunicationId(const std::vector<uint64_t>& var)
 {
 	mLocalCommunicationId = var;
 }
 
-nn::hac::nacp::LogoType nn::hac::ApplicationControlProperty::getLogoType() const
+pie::hac::nacp::LogoType pie::hac::ApplicationControlProperty::getLogoType() const
 {
 	return mLogoType;
 }
 
-void nn::hac::ApplicationControlProperty::setLogoType(nacp::LogoType var)
+void pie::hac::ApplicationControlProperty::setLogoType(nacp::LogoType var)
 {
 	mLogoType = var;
 }
 
-nn::hac::nacp::LogoHandling nn::hac::ApplicationControlProperty::getLogoHandling() const
+pie::hac::nacp::LogoHandling pie::hac::ApplicationControlProperty::getLogoHandling() const
 {
 	return mLogoHandling;
 }
 
-void nn::hac::ApplicationControlProperty::setLogoHandling(nacp::LogoHandling var)
+void pie::hac::ApplicationControlProperty::setLogoHandling(nacp::LogoHandling var)
 {
 	mLogoHandling = var;
 }
 
-nn::hac::nacp::RuntimeAddOnContentInstall nn::hac::ApplicationControlProperty::getRuntimeAddOnContentInstall() const
+pie::hac::nacp::RuntimeAddOnContentInstall pie::hac::ApplicationControlProperty::getRuntimeAddOnContentInstall() const
 {
 	return mRuntimeAddOnContentInstall;
 }
 
-void nn::hac::ApplicationControlProperty::setRuntimeAddOnContentInstall(nacp::RuntimeAddOnContentInstall var)
+void pie::hac::ApplicationControlProperty::setRuntimeAddOnContentInstall(nacp::RuntimeAddOnContentInstall var)
 {
 	mRuntimeAddOnContentInstall = var;
 }
 
-nn::hac::nacp::RuntimeParameterDelivery nn::hac::ApplicationControlProperty::getRuntimeParameterDelivery() const
+pie::hac::nacp::RuntimeParameterDelivery pie::hac::ApplicationControlProperty::getRuntimeParameterDelivery() const
 {
 	return mRuntimeParameterDelivery;
 }
 
-void nn::hac::ApplicationControlProperty::setRuntimeParameterDelivery(nacp::RuntimeParameterDelivery var)
+void pie::hac::ApplicationControlProperty::setRuntimeParameterDelivery(nacp::RuntimeParameterDelivery var)
 {
 	mRuntimeParameterDelivery = var;
 }
 
-nn::hac::nacp::CrashReport nn::hac::ApplicationControlProperty::getCrashReport() const
+pie::hac::nacp::CrashReport pie::hac::ApplicationControlProperty::getCrashReport() const
 {
 	return mCrashReport;
 }
 
-void nn::hac::ApplicationControlProperty::setCrashReport(nacp::CrashReport var)
+void pie::hac::ApplicationControlProperty::setCrashReport(nacp::CrashReport var)
 {
 	mCrashReport = var;
 }
 
-nn::hac::nacp::Hdcp nn::hac::ApplicationControlProperty::getHdcp() const
+pie::hac::nacp::Hdcp pie::hac::ApplicationControlProperty::getHdcp() const
 {
 	return mHdcp;
 }
 
-void nn::hac::ApplicationControlProperty::setHdcp(nacp::Hdcp var)
+void pie::hac::ApplicationControlProperty::setHdcp(nacp::Hdcp var)
 {
 	mHdcp = var;
 }
 
-uint64_t nn::hac::ApplicationControlProperty::getSeedForPsuedoDeviceId() const
+uint64_t pie::hac::ApplicationControlProperty::getSeedForPsuedoDeviceId() const
 {
 	return mSeedForPsuedoDeviceId;
 }
 
-void nn::hac::ApplicationControlProperty::setSeedForPsuedoDeviceId(uint64_t var)
+void pie::hac::ApplicationControlProperty::setSeedForPsuedoDeviceId(uint64_t var)
 {
 	mSeedForPsuedoDeviceId = var;
 }
 
-const std::string& nn::hac::ApplicationControlProperty::getBcatPassphase() const
+const std::string& pie::hac::ApplicationControlProperty::getBcatPassphase() const
 {
 	return mBcatPassphase;
 }
 
-void nn::hac::ApplicationControlProperty::setBcatPassphase(const std::string& var)
+void pie::hac::ApplicationControlProperty::setBcatPassphase(const std::string& var)
 {
 	mBcatPassphase = var;
 }
 
-const std::vector<nn::hac::nacp::StartupUserAccountOptionFlag>& nn::hac::ApplicationControlProperty::getStartupUserAccountOption() const
+const std::vector<pie::hac::nacp::StartupUserAccountOptionFlag>& pie::hac::ApplicationControlProperty::getStartupUserAccountOption() const
 {
 	return mStartupUserAccountOption;
 }
 
-void nn::hac::ApplicationControlProperty::setStartupUserAccountOption(const std::vector<nacp::StartupUserAccountOptionFlag>& var)
+void pie::hac::ApplicationControlProperty::setStartupUserAccountOption(const std::vector<nacp::StartupUserAccountOptionFlag>& var)
 {
 	mStartupUserAccountOption = var;
 }
 
 
-const nn::hac::ApplicationControlProperty::sStorageSize& nn::hac::ApplicationControlProperty::getUserAccountSaveDataMax() const
+const pie::hac::ApplicationControlProperty::sStorageSize& pie::hac::ApplicationControlProperty::getUserAccountSaveDataMax() const
 {
 	return mUserAccountSaveDataMax;
 }
 
-void nn::hac::ApplicationControlProperty::setUserAccountSaveDataMax(const sStorageSize& var)
+void pie::hac::ApplicationControlProperty::setUserAccountSaveDataMax(const sStorageSize& var)
 {
 	mUserAccountSaveDataMax = var;
 }
 
-const nn::hac::ApplicationControlProperty::sStorageSize& nn::hac::ApplicationControlProperty::getDeviceSaveDataMax() const
+const pie::hac::ApplicationControlProperty::sStorageSize& pie::hac::ApplicationControlProperty::getDeviceSaveDataMax() const
 {
 	return mDeviceSaveDataMax;
 }
 
-void nn::hac::ApplicationControlProperty::setDeviceSaveDataMax(const sStorageSize& var)
+void pie::hac::ApplicationControlProperty::setDeviceSaveDataMax(const sStorageSize& var)
 {
 	mDeviceSaveDataMax = var;
 }
 
-int64_t nn::hac::ApplicationControlProperty::getTemporaryStorageSize() const
+int64_t pie::hac::ApplicationControlProperty::getTemporaryStorageSize() const
 {
 	return mTemporaryStorageSize;
 }
 
-void nn::hac::ApplicationControlProperty::setTemporaryStorageSize(int64_t var)
+void pie::hac::ApplicationControlProperty::setTemporaryStorageSize(int64_t var)
 {
 	mTemporaryStorageSize = var;
 }
 
-const nn::hac::ApplicationControlProperty::sStorageSize& nn::hac::ApplicationControlProperty::getCacheStorageSize() const
+const pie::hac::ApplicationControlProperty::sStorageSize& pie::hac::ApplicationControlProperty::getCacheStorageSize() const
 {
 	return mCacheStorageSize;
 }
 
-void nn::hac::ApplicationControlProperty::setCacheStorageSize(const sStorageSize& var)
+void pie::hac::ApplicationControlProperty::setCacheStorageSize(const sStorageSize& var)
 {
 	mCacheStorageSize = var;
 }
 
-int64_t nn::hac::ApplicationControlProperty::getCacheStorageDataAndJournalSizeMax() const
+int64_t pie::hac::ApplicationControlProperty::getCacheStorageDataAndJournalSizeMax() const
 {
 	return mCacheStorageDataAndJournalSizeMax;
 }
 
-void nn::hac::ApplicationControlProperty::setCacheStorageDataAndJournalSizeMax(int64_t var)
+void pie::hac::ApplicationControlProperty::setCacheStorageDataAndJournalSizeMax(int64_t var)
 {
 	mCacheStorageDataAndJournalSizeMax = var;
 }
 
-uint16_t nn::hac::ApplicationControlProperty::getCacheStorageIndexMax() const
+uint16_t pie::hac::ApplicationControlProperty::getCacheStorageIndexMax() const
 {
 	return mCacheStorageIndexMax;
 }
 
-void nn::hac::ApplicationControlProperty::setCacheStorageIndexMax(uint16_t var)
+void pie::hac::ApplicationControlProperty::setCacheStorageIndexMax(uint16_t var)
 {
 	mCacheStorageIndexMax = var;
 }
 
-const std::vector<uint64_t>& nn::hac::ApplicationControlProperty::getPlayLogQueryableApplicationId() const
+const std::vector<uint64_t>& pie::hac::ApplicationControlProperty::getPlayLogQueryableApplicationId() const
 {
 	return mPlayLogQueryableApplicationId;
 }
 
-void nn::hac::ApplicationControlProperty::setPlayLogQueryableApplicationId(const std::vector<uint64_t>& var)
+void pie::hac::ApplicationControlProperty::setPlayLogQueryableApplicationId(const std::vector<uint64_t>& var)
 {
 	mPlayLogQueryableApplicationId = var;
 }
 
-nn::hac::nacp::PlayLogQueryCapability nn::hac::ApplicationControlProperty::getPlayLogQueryCapability() const
+pie::hac::nacp::PlayLogQueryCapability pie::hac::ApplicationControlProperty::getPlayLogQueryCapability() const
 {
 	return mPlayLogQueryCapability;
 }
 
-void nn::hac::ApplicationControlProperty::setPlayLogQueryCapability(nacp::PlayLogQueryCapability var)
+void pie::hac::ApplicationControlProperty::setPlayLogQueryCapability(nacp::PlayLogQueryCapability var)
 {
 	mPlayLogQueryCapability = var;
 }
 
-const std::vector<nn::hac::nacp::RepairFlag>& nn::hac::ApplicationControlProperty::getRepair() const
+const std::vector<pie::hac::nacp::RepairFlag>& pie::hac::ApplicationControlProperty::getRepair() const
 {
 	return mRepair;
 }
 
-void nn::hac::ApplicationControlProperty::setRepair(const std::vector<nacp::RepairFlag>& var)
+void pie::hac::ApplicationControlProperty::setRepair(const std::vector<nacp::RepairFlag>& var)
 {
 	mRepair = var;
 }
 
-byte_t nn::hac::ApplicationControlProperty::getProgramIndex() const
+byte_t pie::hac::ApplicationControlProperty::getProgramIndex() const
 {
 	return mProgramIndex;
 }
 
-void nn::hac::ApplicationControlProperty::setProgramIndex(byte_t var)
+void pie::hac::ApplicationControlProperty::setProgramIndex(byte_t var)
 {
 	mProgramIndex = var;
 }
 
-const std::vector<nn::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& nn::hac::ApplicationControlProperty::getRequiredNetworkServiceLicenseOnLaunch() const
+const std::vector<pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& pie::hac::ApplicationControlProperty::getRequiredNetworkServiceLicenseOnLaunch() const
 {
 	return mRequiredNetworkServiceLicenseOnLaunch;
 }
 
-void nn::hac::ApplicationControlProperty::setRequiredNetworkServiceLicenseOnLaunch(const std::vector<nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& var)
+void pie::hac::ApplicationControlProperty::setRequiredNetworkServiceLicenseOnLaunch(const std::vector<nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& var)
 {
 	mRequiredNetworkServiceLicenseOnLaunch = var;
 }
 
-const nn::hac::ApplicationControlProperty::sNeighborDetectionClientConfiguration& nn::hac::ApplicationControlProperty::getNeighborDetectionClientConfiguration() const
+const pie::hac::ApplicationControlProperty::sNeighborDetectionClientConfiguration& pie::hac::ApplicationControlProperty::getNeighborDetectionClientConfiguration() const
 {
 	return mNeighborDetectionClientConfiguration;
 }
 
-void nn::hac::ApplicationControlProperty::setNeighborDetectionClientConfiguration(const sNeighborDetectionClientConfiguration& var)
+void pie::hac::ApplicationControlProperty::setNeighborDetectionClientConfiguration(const sNeighborDetectionClientConfiguration& var)
 {
 	mNeighborDetectionClientConfiguration = var;
 }
 
-const nn::hac::ApplicationControlProperty::sJitConfiguration& nn::hac::ApplicationControlProperty::getJitConfiguration() const
+const pie::hac::ApplicationControlProperty::sJitConfiguration& pie::hac::ApplicationControlProperty::getJitConfiguration() const
 {
 	return mJitConfiguration;
 }
 
-void nn::hac::ApplicationControlProperty::setJitConfiguration(const sJitConfiguration& var)
+void pie::hac::ApplicationControlProperty::setJitConfiguration(const sJitConfiguration& var)
 {
 	mJitConfiguration = var;
 }
 
-const nn::hac::nacp::PlayReportPermission& nn::hac::ApplicationControlProperty::getPlayReportPermission() const
+const pie::hac::nacp::PlayReportPermission& pie::hac::ApplicationControlProperty::getPlayReportPermission() const
 {
 	return mPlayReportPermission;
 }
 
-void nn::hac::ApplicationControlProperty::setPlayReportPermission(const nacp::PlayReportPermission& var)
+void pie::hac::ApplicationControlProperty::setPlayReportPermission(const nacp::PlayReportPermission& var)
 {
 	mPlayReportPermission = var;
 }
 
-const nn::hac::nacp::CrashScreenshotForProd& nn::hac::ApplicationControlProperty::getCrashScreenshotForProd() const
+const pie::hac::nacp::CrashScreenshotForProd& pie::hac::ApplicationControlProperty::getCrashScreenshotForProd() const
 {
 	return mCrashScreenshotForProd;
 }
 
-void nn::hac::ApplicationControlProperty::setCrashScreenshotForProd(const nacp::CrashScreenshotForProd& var)
+void pie::hac::ApplicationControlProperty::setCrashScreenshotForProd(const nacp::CrashScreenshotForProd& var)
 {
 	mCrashScreenshotForProd = var;
 }
 
-const nn::hac::nacp::CrashScreenshotForDev& nn::hac::ApplicationControlProperty::getCrashScreenshotForDev() const
+const pie::hac::nacp::CrashScreenshotForDev& pie::hac::ApplicationControlProperty::getCrashScreenshotForDev() const
 {
 	return mCrashScreenshotForDev;
 }
 
-void nn::hac::ApplicationControlProperty::setCrashScreenshotForDev(const nacp::CrashScreenshotForDev& var)
+void pie::hac::ApplicationControlProperty::setCrashScreenshotForDev(const nacp::CrashScreenshotForDev& var)
 {
 	mCrashScreenshotForDev = var;
 }
 
-const std::vector<uint64_t>& nn::hac::ApplicationControlProperty::getAccessibleLaunchRequiredVersionApplicationId() const
+const std::vector<uint64_t>& pie::hac::ApplicationControlProperty::getAccessibleLaunchRequiredVersionApplicationId() const
 {
 	return mAccessibleLaunchRequiredVersionApplicationId;
 }
 
-void nn::hac::ApplicationControlProperty::setAccessibleLaunchRequiredVersionApplicationId(const std::vector<uint64_t>& var)
+void pie::hac::ApplicationControlProperty::setAccessibleLaunchRequiredVersionApplicationId(const std::vector<uint64_t>& var)
 {
 	mAccessibleLaunchRequiredVersionApplicationId = var;
 }
 
-void nn::hac::ApplicationControlProperty::serialiseGroupConfig(const sNeighborDetectionClientConfiguration::sGroupConfiguration& logical, sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised)
+void pie::hac::ApplicationControlProperty::serialiseGroupConfig(const sNeighborDetectionClientConfiguration::sGroupConfiguration& logical, sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised)
 {
 	if (logical.isNull())
 	{
@@ -935,7 +935,7 @@ void nn::hac::ApplicationControlProperty::serialiseGroupConfig(const sNeighborDe
 	memcpy(serialised.key.data(), logical.key.data(), serialised.key.size());
 }
 
-void nn::hac::ApplicationControlProperty::parseGroupConfig(const sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised, sNeighborDetectionClientConfiguration::sGroupConfiguration& logical)
+void pie::hac::ApplicationControlProperty::parseGroupConfig(const sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised, sNeighborDetectionClientConfiguration::sGroupConfiguration& logical)
 {
 	logical.group_id = serialised.group_id.unwrap();
 	memcpy(logical.key.data(), serialised.key.data(), serialised.key.size());

@@ -1,18 +1,18 @@
-#include <nn/hac/HierarchicalIntegrityHeader.h>
+#include <pietendo/hac/HierarchicalIntegrityHeader.h>
 
 #include <fmt/format.h>
 
-nn::hac::HierarchicalIntegrityHeader::HierarchicalIntegrityHeader()
+pie::hac::HierarchicalIntegrityHeader::HierarchicalIntegrityHeader()
 {
 	clear();
 }
 
-nn::hac::HierarchicalIntegrityHeader::HierarchicalIntegrityHeader(const HierarchicalIntegrityHeader & other)
+pie::hac::HierarchicalIntegrityHeader::HierarchicalIntegrityHeader(const HierarchicalIntegrityHeader & other)
 {
 	*this = other;
 }
 
-void nn::hac::HierarchicalIntegrityHeader::operator=(const HierarchicalIntegrityHeader & other)
+void pie::hac::HierarchicalIntegrityHeader::operator=(const HierarchicalIntegrityHeader & other)
 {
 	if (other.getBytes().size() != 0)
 	{
@@ -26,31 +26,31 @@ void nn::hac::HierarchicalIntegrityHeader::operator=(const HierarchicalIntegrity
 	}
 }
 
-bool nn::hac::HierarchicalIntegrityHeader::operator==(const HierarchicalIntegrityHeader & other) const
+bool pie::hac::HierarchicalIntegrityHeader::operator==(const HierarchicalIntegrityHeader & other) const
 {
 	return (mLayerInfo == other.mLayerInfo) \
 		&& (mMasterHashList == other.mMasterHashList);
 }
 
-bool nn::hac::HierarchicalIntegrityHeader::operator!=(const HierarchicalIntegrityHeader & other) const
+bool pie::hac::HierarchicalIntegrityHeader::operator!=(const HierarchicalIntegrityHeader & other) const
 {
 	return !(*this == other);
 }
 
-void nn::hac::HierarchicalIntegrityHeader::toBytes()
+void pie::hac::HierarchicalIntegrityHeader::toBytes()
 {
 	throw tc::NotImplementedException(kModuleName, "toBytes() not implemented");
 }
 
-void nn::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t len)
+void pie::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t len)
 {
 	// validate size for at least header
-	if (len < sizeof(nn::hac::sHierarchicalIntegrityHeader))
+	if (len < sizeof(pie::hac::sHierarchicalIntegrityHeader))
 	{
 		throw tc::ArgumentOutOfRangeException(kModuleName, "Header too small");
 	}
 
-	const nn::hac::sHierarchicalIntegrityHeader* hdr = (const nn::hac::sHierarchicalIntegrityHeader*)data;
+	const pie::hac::sHierarchicalIntegrityHeader* hdr = (const pie::hac::sHierarchicalIntegrityHeader*)data;
 
 	// Validate Header Sig "IVFC"
 	if (hdr->st_magic.unwrap() != hierarchicalintegrity::kStructMagic)
@@ -59,7 +59,7 @@ void nn::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t 
 	}
 
 	// Validate TypeId
-	if (hdr->type_id.unwrap() != (uint32_t)nn::hac::hierarchicalintegrity::TypeId::HAC_RomFs)
+	if (hdr->type_id.unwrap() != (uint32_t)pie::hac::hierarchicalintegrity::TypeId::HAC_RomFs)
 	{
 		throw tc::ArgumentOutOfRangeException(kModuleName, fmt::format("Unsupported type id (0x{:x})", hdr->type_id.unwrap()));
 	}
@@ -67,11 +67,11 @@ void nn::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t 
 	// Validate Layer Num
 	if (hdr->layer_num.unwrap() != hierarchicalintegrity::kDefaultLayerNumForRomFs+1)
 	{
-		throw tc::ArgumentOutOfRangeException(kModuleName, fmt::format("Invalid layer count. (actual={:d}, expected={:d})", hdr->layer_num.unwrap(), nn::hac::hierarchicalintegrity::kDefaultLayerNumForRomFs + 1));
+		throw tc::ArgumentOutOfRangeException(kModuleName, fmt::format("Invalid layer count. (actual={:d}, expected={:d})", hdr->layer_num.unwrap(), pie::hac::hierarchicalintegrity::kDefaultLayerNumForRomFs + 1));
 	}
 	
 	// Get Sizes/Offsets
-	size_t master_hash_offset = align((sizeof(nn::hac::sHierarchicalIntegrityHeader) + sizeof(nn::hac::sHierarchicalIntegrityLayerInfo) * hdr->layer_num.unwrap()), nn::hac::hierarchicalintegrity::kHeaderAlignLen);
+	size_t master_hash_offset = align((sizeof(pie::hac::sHierarchicalIntegrityHeader) + sizeof(pie::hac::sHierarchicalIntegrityLayerInfo) * hdr->layer_num.unwrap()), pie::hac::hierarchicalintegrity::kHeaderAlignLen);
 	size_t total_size = master_hash_offset + hdr->master_hash_size.unwrap();
 
 	// Validate total size
@@ -85,7 +85,7 @@ void nn::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t 
 	memcpy(mRawBinary.data(), data, mRawBinary.size());
 
 	// save layer info
-	const nn::hac::sHierarchicalIntegrityLayerInfo* layer_info = (const nn::hac::sHierarchicalIntegrityLayerInfo*)(mRawBinary.data() + sizeof(nn::hac::sHierarchicalIntegrityHeader));
+	const pie::hac::sHierarchicalIntegrityLayerInfo* layer_info = (const pie::hac::sHierarchicalIntegrityLayerInfo*)(mRawBinary.data() + sizeof(pie::hac::sHierarchicalIntegrityHeader));
 	for (size_t i = 0; i < hierarchicalintegrity::kDefaultLayerNumForRomFs; i++)
 	{
 		mLayerInfo.push_back({layer_info[i].offset.unwrap(), layer_info[i].size.unwrap(), (int64_t)1 << (int64_t)layer_info[i].block_size.unwrap()});
@@ -99,33 +99,33 @@ void nn::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t 
 	}
 }
 
-const tc::ByteData& nn::hac::HierarchicalIntegrityHeader::getBytes() const
+const tc::ByteData& pie::hac::HierarchicalIntegrityHeader::getBytes() const
 {
 	return mRawBinary;
 }
 
-void nn::hac::HierarchicalIntegrityHeader::clear()
+void pie::hac::HierarchicalIntegrityHeader::clear()
 {
 	mLayerInfo.clear();
 	mMasterHashList.clear();
 }
 
-const std::vector<nn::hac::HierarchicalIntegrityHeader::sLayer>& nn::hac::HierarchicalIntegrityHeader::getLayerInfo() const
+const std::vector<pie::hac::HierarchicalIntegrityHeader::sLayer>& pie::hac::HierarchicalIntegrityHeader::getLayerInfo() const
 {
 	return mLayerInfo;
 }
 
-void nn::hac::HierarchicalIntegrityHeader::setLayerInfo(const std::vector<sLayer>& layer_info)
+void pie::hac::HierarchicalIntegrityHeader::setLayerInfo(const std::vector<sLayer>& layer_info)
 {
 	mLayerInfo = layer_info;
 }
 
-const std::vector<nn::hac::detail::sha256_hash_t>& nn::hac::HierarchicalIntegrityHeader::getMasterHashList() const
+const std::vector<pie::hac::detail::sha256_hash_t>& pie::hac::HierarchicalIntegrityHeader::getMasterHashList() const
 {
 	return mMasterHashList;
 }
 
-void nn::hac::HierarchicalIntegrityHeader::setMasterHashList(const std::vector<nn::hac::detail::sha256_hash_t>& master_hash_list)
+void pie::hac::HierarchicalIntegrityHeader::setMasterHashList(const std::vector<pie::hac::detail::sha256_hash_t>& master_hash_list)
 {
 	mMasterHashList = master_hash_list;
 }

@@ -1,11 +1,18 @@
+	/**
+	 * @file BucketTree.h
+	 * @brief Declaration of pie::hac::BucketTree
+	 * @author Jack (jakcron)
+	 * @version 0.1
+	 * @date 2022/06/28
+	 **/
 #pragma once
-#include <nn/hac/define/bktr.h>
+#include <pietendo/hac/define/bktr.h>
 
 #include <tc/ArgumentNullException.h>
 #include <tc/ArgumentOutOfRangeException.h>
 #include <tc/InvalidOperationException.h>
 
-namespace nn { namespace hac {
+namespace pie { namespace hac {
 
 class BucketTree
 {
@@ -137,4 +144,4 @@ private:
 	std::vector<tc::ByteData> mEntryList;
 };
 
-}} // namespace nn::hac
+}} // namespace pie::hac

@@ -1,17 +1,17 @@
-#include <nn/hac/NrrUtil.h>
+#include <pietendo/hac/NrrUtil.h>
 #include <sstream>
 #include <iomanip>
 
-std::string nn::hac::NrrUtil::getNrrKindAsString(nn::hac::nrr::NrrKind val)
+std::string pie::hac::NrrUtil::getNrrKindAsString(pie::hac::nrr::NrrKind val)
 {
 	std::stringstream ss;
 
 	switch (val)
 	{
-	case (nn::hac::nrr::NrrKind::User):
+	case (pie::hac::nrr::NrrKind::User):
 		ss << "User";
 		break;
-	case (nn::hac::nrr::NrrKind::JitPlugin):
+	case (pie::hac::nrr::NrrKind::JitPlugin):
 		ss << "JitPlugin";
 		break;
 	default:
