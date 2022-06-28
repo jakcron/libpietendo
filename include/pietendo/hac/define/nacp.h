@@ -39,183 +39,183 @@ namespace nacp
 
 	static const size_t kMaxAccessibleLaunchRequiredVersionApplicationIdCount = 8;
 
-	enum class AddOnContentRegistrationType : byte_t
+	enum AddOnContentRegistrationType : byte_t
 	{
-		AllOnLaunch = 0,
-		OnDemand = 1
+		AddOnContentRegistrationType_AllOnLaunch = 0,
+		AddOnContentRegistrationType_OnDemand = 1
 	};
 
-	enum class AttributeFlag : byte_t
+	enum AttributeFlag : byte_t
 	{
-		Demo = 0,
-		RetailInteractiveDisplay = 1
+		AttributeFlag_Demo = 0,
+		AttributeFlag_RetailInteractiveDisplay = 1
 	};
 
-	enum class CrashReport : byte_t
+	enum CrashReport : byte_t
 	{
-		Deny = 0,
-		Allow = 1
+		CrashReport_Deny = 0,
+		CrashReport_Allow = 1
 	};
 
-	enum class CrashScreenshotForDev : byte_t
+	enum CrashScreenshotForDev : byte_t
 	{
-		Deny = 0,
-		Allow = 1
+		CrashScreenshotForDev_Deny = 0,
+		CrashScreenshotForDev_Allow = 1
 	};
 
-	enum class CrashScreenshotForProd : byte_t
+	enum CrashScreenshotForProd : byte_t
 	{
-		Deny = 0,
-		Allow = 1
+		CrashScreenshotForProd_Deny = 0,
+		CrashScreenshotForProd_Allow = 1
 	};
 
-	enum class DataLossConfirmation : byte_t
+	enum DataLossConfirmation : byte_t
 	{
-		None = 0,
-		Required = 1
+		DataLossConfirmation_None = 0,
+		DataLossConfirmation_Required = 1
 	};
 
-	enum class Hdcp : byte_t
+	enum Hdcp : byte_t
 	{
-		None = 0,
-		Required = 1
+		Hdcp_None = 0,
+		Hdcp_Required = 1
 	};
 
-	enum class JitConfigurationFlag : uint64_t
+	enum JitConfigurationFlag : uint64_t
 	{
-		Enabled
+		JitConfigurationFlag_Enabled = 0
 	};
 
-	enum class Language : byte_t
+	enum Language : byte_t
 	{
-		AmericanEnglish = 0,
-		BritishEnglish = 1,
-		Japanese = 2,
-		French = 3,
-		German = 4,
-		LatinAmericanSpanish = 5,
-		Spanish = 6,
-		Italian = 7,
-		Dutch = 8,
-		CanadianFrench = 9,
-		Portuguese = 10,
-		Russian = 11,
-		Korean = 12,
-		TraditionalChinese = 13,
-		SimplifiedChinese = 14,
-		BrazilianPortuguese = 15
+		Language_AmericanEnglish = 0,
+		Language_BritishEnglish = 1,
+		Language_Japanese = 2,
+		Language_French = 3,
+		Language_German = 4,
+		Language_LatinAmericanSpanish = 5,
+		Language_Spanish = 6,
+		Language_Italian = 7,
+		Language_Dutch = 8,
+		Language_CanadianFrench = 9,
+		Language_Portuguese = 10,
+		Language_Russian = 11,
+		Language_Korean = 12,
+		Language_TraditionalChinese = 13,
+		Language_SimplifiedChinese = 14,
+		Language_BrazilianPortuguese = 15
 	};
 
-	enum class LogoHandling : byte_t
+	enum LogoHandling : byte_t
 	{
-		Auto = 0,
-		None = 1
+		LogoHandling_Auto = 0,
+		LogoHandling_None = 1
 	};
 
-	enum class LogoType : byte_t
+	enum LogoType : byte_t
 	{
-		LicensedByNintendo = 0,
-		DistributedByNintendo = 1, // Removed in SDK 3.5.2
-		Nintendo = 2
+		LogoType_LicensedByNintendo = 0,
+		LogoType_DistributedByNintendo = 1, // Removed in SDK 3.5.2
+		LogoType_Nintendo = 2
 	};
 
-	enum class Organisation : byte_t
+	enum Organisation : byte_t
 	{
-		CERO = 0,
-		GRACGCRB = 1,
-		GSRMR = 2,
-		ESRB = 3,
-		ClassInd = 4,
-		USK = 5,
-		PEGI = 6,
-		PEGIPortugal = 7,
-		PEGIBBFC = 8,
-		Russian = 9,
-		ACB = 10,
-		OFLC = 11,
-		IARCGeneric = 12
+		Organisation_CERO = 0,
+		Organisation_GRACGCRB = 1,
+		Organisation_GSRMR = 2,
+		Organisation_ESRB = 3,
+		Organisation_ClassInd = 4,
+		Organisation_USK = 5,
+		Organisation_PEGI = 6,
+		Organisation_PEGIPortugal = 7,
+		Organisation_PEGIBBFC = 8,
+		Organisation_Russian = 9,
+		Organisation_ACB = 10,
+		Organisation_OFLC = 11,
+		Organisation_IARCGeneric = 12
 	};
 
-	enum class ParentalControlFlag : uint32_t
+	enum ParentalControlFlag : uint32_t
 	{
-		FreeCommunication = 0
+		ParentalControlFlag_FreeCommunication = 0
 	};
 
-	enum class PlayLogPolicy : byte_t
+	enum PlayLogPolicy : byte_t
 	{
-		Open = 0,
-		LogOnly = 1,
-		None = 2,
-		Closed = 3,
-		All = 0
+		PlayLogPolicy_Open = 0,
+		PlayLogPolicy_LogOnly = 1,
+		PlayLogPolicy_None = 2,
+		PlayLogPolicy_Closed = 3,
+		PlayLogPolicy_All = 0
 	};
 
-	enum class PlayLogQueryCapability : byte_t
+	enum PlayLogQueryCapability : byte_t
 	{
-		None = 0,
-		Whitelist = 1,
-		All = 2
+		PlayLogQueryCapability_None = 0,
+		PlayLogQueryCapability_Whitelist = 1,
+		PlayLogQueryCapability_All = 2
 	};
 
-	enum class PlayReportPermission : byte_t
+	enum PlayReportPermission : byte_t
 	{
-		None = 0,
-		TargetMarketing = 1
+		PlayReportPermission_None = 0,
+		PlayReportPermission_TargetMarketing = 1
 	};
 
-	enum class RepairFlag : byte_t
+	enum RepairFlag : byte_t
 	{
-		SuppressGameCardAccess = 0
+		RepairFlag_SuppressGameCardAccess = 0
 	};
 
-	enum class RequiredNetworkServiceLicenseOnLaunchFlag : byte_t
+	enum RequiredNetworkServiceLicenseOnLaunchFlag : byte_t
 	{
-		Common = 0
+		RequiredNetworkServiceLicenseOnLaunchFlag_Common = 0
 	};
 
-	enum class RuntimeAddOnContentInstall : byte_t
+	enum RuntimeAddOnContentInstall : byte_t
 	{
-		Deny = 0,
-		AllowAppend = 1,
-		AllowAppendButDontDownloadWhenUsingNetwork = 2
+		RuntimeAddOnContentInstall_Deny = 0,
+		RuntimeAddOnContentInstall_AllowAppend = 1,
+		RuntimeAddOnContentInstall_AllowAppendButDontDownloadWhenUsingNetwork = 2
 	};
 
-	enum class RuntimeParameterDelivery : byte_t
+	enum RuntimeParameterDelivery : byte_t
 	{
-		Always = 0,
-		AlwaysIfUserStateMatched = 1,
-		OnRestart = 2
+		RuntimeParameterDelivery_Always = 0,
+		RuntimeParameterDelivery_AlwaysIfUserStateMatched = 1,
+		RuntimeParameterDelivery_OnRestart = 2
 	};
 
-	enum class Screenshot : byte_t
+	enum Screenshot : byte_t
 	{
-		Allow = 0,
-		Deny = 1
+		Screenshot_Allow = 0,
+		Screenshot_Deny = 1
 	};
 
-	enum class StartupUserAccount : byte_t
+	enum StartupUserAccount : byte_t
 	{
-		None = 0,
-		Required = 1,
-		RequiredWithNetworkServiceAccountAvailable = 2
+		StartupUserAccount_None = 0,
+		StartupUserAccount_Required = 1,
+		StartupUserAccount_RequiredWithNetworkServiceAccountAvailable = 2
 	};
 
-	enum class StartupUserAccountOptionFlag : byte_t
+	enum StartupUserAccountOptionFlag : byte_t
 	{
-		IsOptional = 0
+		StartupUserAccountOptionFlag_IsOptional = 0
 	};
 
-	enum class UserAccountSwitchLock : byte_t
+	enum UserAccountSwitchLock : byte_t
 	{
-		Disable = 0,
-		Enable = 1
+		UserAccountSwitchLock_Disable = 0,
+		UserAccountSwitchLock_Enable = 1
 	};
 
-	enum class VideoCapture : byte_t
+	enum VideoCapture : byte_t
 	{
-		Disable = 0,
-		Manual = 1,
-		Enable = 2
+		VideoCapture_Disable = 0,
+		VideoCapture_Manual = 1,
+		VideoCapture_Enable = 2
 	};
 }
 
@@ -228,6 +228,13 @@ struct sApplicationControlProperty
 		tc::bn::string<nacp::kNameLength> name; // utf8
 		tc::bn::string<nacp::kPublisherLength> publisher; // utf8
 	};
+
+	struct sRequiredAddOnContentEntry
+	{
+		uint16_t index : 15;
+		uint16_t flag : 1;
+	};
+	static_assert(sizeof(sRequiredAddOnContentEntry) == sizeof(uint16_t), "sRequiredAddOnContentEntry size.");
 	
 	std::array<sTitle, nacp::kMaxLanguageCount> title;
 	tc::bn::string<nacp::kIsbnLength> isbn; // utf8
@@ -299,7 +306,7 @@ struct sApplicationControlProperty
 		tc::bn::bitarray<sizeof(uint64_t)> jit_configuration_flag;
 		tc::bn::le64<uint64_t> memory_size;
 	} jit_configuration;
-	std::array<tc::bn::le16<uint16_t>, nacp::kRequiredAddOnContentsSetCount> required_add_on_contents_set; // this is a collection of arrays of AddOnContent Indexes (valid values: 1-2000). Bit 0-14: AddOnContentIndex, Bit 15: If set, this array continues with next value, if not set, this array ends with this value
+	std::array<tc::bn::le16<sRequiredAddOnContentEntry>, nacp::kRequiredAddOnContentsSetCount> required_add_on_contents_set; // this is a collection of arrays of AddOnContent Indexes (valid values: 1-2000). Bit 0-14: AddOnContentIndex, Bit 15: If set, this array continues with next value, if not set, this array ends with this value
 	byte_t play_report_permission;
 	byte_t crash_screenshot_for_prod;
 	byte_t crash_screenshot_for_dev;

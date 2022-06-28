@@ -34,7 +34,7 @@ public:
 	
 private:
 	const std::string kModuleName = "SYSTEM_CALL_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::EnableSystemCalls;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_EnableSystemCalls;
 	static const uint32_t kSysCallUpperBits = 3;
 	static const uint32_t kSysCallLowerBits = 24;
 	static const uint32_t kSysCallUpperMax = (1 << kSysCallUpperBits) - 1;

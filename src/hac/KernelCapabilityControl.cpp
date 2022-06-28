@@ -92,32 +92,32 @@ void pie::hac::KernelCapabilityControl::fromBytes(const byte_t * data, size_t le
 		cap.setCap(raw_caps[i].unwrap());
 		switch (cap.getType())
 		{
-			case (kc::KernelCapId::ThreadInfo) :
+			case (kc::KernelCapId_ThreadInfo) :
 				threadInfoCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::EnableSystemCalls):
+			case (kc::KernelCapId_EnableSystemCalls):
 				systemCallCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::MemoryMap):
-			case (kc::KernelCapId::IoMemoryMap):
+			case (kc::KernelCapId_MemoryMap):
+			case (kc::KernelCapId_IoMemoryMap):
 				memoryMapCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::EnableInterrupts):
+			case (kc::KernelCapId_EnableInterrupts):
 				interuptCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::MiscParams):
+			case (kc::KernelCapId_MiscParams):
 				miscParamCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::KernelVersion):
+			case (kc::KernelCapId_KernelVersion):
 				kernelVersionCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::HandleTableSize):
+			case (kc::KernelCapId_HandleTableSize):
 				handleTableSizeCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::MiscFlags):
+			case (kc::KernelCapId_MiscFlags):
 				miscFlagsCaps.push_back(cap);
 				break;
-			case (kc::KernelCapId::Stubbed):
+			case (kc::KernelCapId_Stubbed):
 				// ignore stubbed
 				break;
 			default:

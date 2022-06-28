@@ -202,7 +202,7 @@ void pie::hac::AccessControlInfoDesc::clear()
 	mContentArchiveHeaderSignature2Key = tc::crypto::RsaKey();
 	mProductionFlag = false;
 	mUnqualifiedApprovalFlag = false;
-	mMemoryRegion = aci::MemoryRegion::Application;
+	mMemoryRegion = aci::MemoryRegion_Application;
 	mProgramIdRestrict.min = 0;
 	mProgramIdRestrict.max = 0;
 	mFileSystemAccessControl.clear();

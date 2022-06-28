@@ -34,48 +34,48 @@ namespace gc
 
 	enum KekIndex
 	{
-		KEK_PROD = 0,
-		KEK_DEV = 1
+		KekIndex_Prod = 0,
+		KekIndex_Dev = 1
 	};
 
 	enum RomSize
 	{
-		ROM_SIZE_1GB = 0xFA,
-		ROM_SIZE_2GB = 0xF8,
-		ROM_SIZE_4GB = 0xF0,
-		ROM_SIZE_8GB = 0xE0,
-		ROM_SIZE_16GB = 0xE1,
-		ROM_SIZE_32GB = 0xE2
+		RomSize_1GB = 0xFA,
+		RomSize_2GB = 0xF8,
+		RomSize_4GB = 0xF0,
+		RomSize_8GB = 0xE0,
+		RomSize_16GB = 0xE1,
+		RomSize_32GB = 0xE2
 	};
 
 	enum HeaderFlags
 	{
-		FLAG_AUTOBOOT,
-		FLAG_HISTORY_ERASE,
-		FLAG_REPAIR_TIME_REVISOR_TOOL,
-		FLAG_ALLOW_CUP_TO_CHINA,
-		FLAG_ALLOW_CUP_TO_GLOBAL,
+		HeaderFlags_AutoBoot = 0,
+		HeaderFlags_HistoryErase = 1,
+		HeaderFlags_RepairTimeRevisorTool = 2,
+		HeaderFlags_AllowCupToChina = 3,
+		HeaderFlags_AllowCupToGlobal = 4
 	};
 
 	enum FwVersion
 	{
-		FWVER_DEV = 0,
-		FWVER_PROD = 1,
-		FWVER_PROD_SINCE_4_0_0NUP = 2,
-		FWVER_PROD_SINCE_11_0_0NUP = 4,
-		FWVER_PROD_SINCE_12_0_0NUP = 5,
+		FwVersion_DevKit = 0,
+		FwVersion_Prod = 1,
+		FwVersion_Prod_Since4_0_0NUP = 2,
+		FwVersion_Prod_Since11_0_0NUP = 4,
+		FwVersion_Prod_Since12_0_0NUP = 5
 	};
 
 	enum CardClockRate
 	{
-		CLOCK_RATE_25 = 10551312,
-		CLOCK_RATE_50 = 10551313,
+		CardClockRate_25MHz = 10551312,
+		CardClockRate_50MHz = 10551313
 	};
 
 	enum CompatibilityType
 	{
-		COMPAT_GLOBAL,
-		COMPAT_CHINA
+		CompatibilityType_Global = 0,
+		CompatibilityType_China = 1
 	};
 }
 

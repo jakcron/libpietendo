@@ -51,7 +51,7 @@ private:
 		field |= (uint32_t)(mPage & kMaxPage) << 0;
 		field |= (uint32_t)(mFlag) << kPageBits;
 		mCap.setField(field);
-		mCap.setType(mMapMultiplePages ? kc::KernelCapId::MemoryMap : kc::KernelCapId::IoMemoryMap);
+		mCap.setType(mMapMultiplePages ? kc::KernelCapId_MemoryMap : kc::KernelCapId_IoMemoryMap);
 	}
 
 	inline void processCapField()
@@ -59,7 +59,7 @@ private:
 		uint32_t field = mCap.getField();
 		mPage = (field >> 0) & kMaxPage;
 		mFlag = (field >> kPageBits);
-		mMapMultiplePages = mCap.getType() == kc::KernelCapId::MemoryMap;
+		mMapMultiplePages = mCap.getType() == kc::KernelCapId_MemoryMap;
 	}
 };
 

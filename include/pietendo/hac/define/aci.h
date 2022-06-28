@@ -16,12 +16,12 @@ namespace aci
 	static const uint32_t kAciDescStructMagic = tc::bn::make_struct_magic_uint32("ACID");
 	static const size_t kSectionAlignSize = 0x10;
 
-	enum class MemoryRegion : byte_t
+	enum MemoryRegion : byte_t
 	{
-		Application,
-		Applet,
-		SecureSystem,
-		NonSecureSystem
+		MemoryRegion_Application = 0,
+		MemoryRegion_Applet = 1,
+		MemoryRegion_SecureSystem = 2,
+		MemoryRegion_NonSecureSystem = 3
 	};
 }
 

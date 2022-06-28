@@ -33,7 +33,7 @@ public:
 	void setVerMinor(uint8_t minor);
 private:
 	const std::string kModuleName = "KERNEL_VERSION_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::KernelVersion;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_KernelVersion;
 	static const uint32_t kVerMajorBits = 13;
 	static const uint32_t kVerMajorMax = (1 << kVerMajorBits) - 1;
 	static const uint32_t kVerMinorBits = 4;

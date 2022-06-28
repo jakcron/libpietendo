@@ -61,10 +61,10 @@ void pie::hac::ContentArchiveHeader::toBytes()
 	// set header magic
 	switch(mFormatVersion)
 	{
-	case (nca::FORMAT_NCA2):
+	case (nca::HeaderFormatVersion_NCA2):
 		hdr->st_magic.wrap(nca::kNca2StructMagic);
 		break;
-	case (nca::FORMAT_NCA3):
+	case (nca::HeaderFormatVersion_NCA3):
 		hdr->st_magic.wrap(nca::kNca3StructMagic);
 		break;
 	default:
@@ -124,10 +124,10 @@ void pie::hac::ContentArchiveHeader::fromBytes(const byte_t * data, size_t len)
 	switch(hdr->st_magic.unwrap())
 	{
 		case (nca::kNca2StructMagic) :
-			mFormatVersion = nca::FORMAT_NCA2;
+			mFormatVersion = nca::HeaderFormatVersion_NCA2;
 			break;
 		case (nca::kNca3StructMagic) :
-			mFormatVersion = nca::FORMAT_NCA3;
+			mFormatVersion = nca::HeaderFormatVersion_NCA3;
 			break;
 		throw tc::ArgumentOutOfRangeException(kModuleName, "ContentArchive header corrupt (unrecognised header magic).");
 	}
@@ -161,9 +161,9 @@ const tc::ByteData& pie::hac::ContentArchiveHeader::getBytes() const
 
 void pie::hac::ContentArchiveHeader::clear()
 {
-	mFormatVersion = nca::FORMAT_NCA3;
-	mDistributionType = nca::DistributionType::Download;
-	mContentType = nca::ContentType::Program;
+	mFormatVersion = nca::HeaderFormatVersion_NCA3;
+	mDistributionType = nca::DistributionType_Download;
+	mContentType = nca::ContentType_Program;
 	mKeyGeneration = 0;
 	mKaekIndex = 0;
 	mContentSize = 0;

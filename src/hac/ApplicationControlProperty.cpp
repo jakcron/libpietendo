@@ -231,7 +231,7 @@ void pie::hac::ApplicationControlProperty::toBytes()
 
 	// jit configuration
 	if (mJitConfiguration.is_enabled)
-		nacp->jit_configuration.jit_configuration_flag.set((size_t)nacp::JitConfigurationFlag::Enabled);
+		nacp->jit_configuration.jit_configuration_flag.set((size_t)nacp::JitConfigurationFlag_Enabled);
 	nacp->jit_configuration.memory_size.wrap(mJitConfiguration.memory_size);
 
 	// neighbor detection client configuration
@@ -374,7 +374,7 @@ void pie::hac::ApplicationControlProperty::fromBytes(const byte_t* bytes, size_t
 	mCacheStorageDataAndJournalSizeMax = (int64_t)nacp->cache_storage_data_and_journal_size_max.unwrap();
 
 	// jit configuration
-	mJitConfiguration.is_enabled = nacp->jit_configuration.jit_configuration_flag.test((size_t)nacp::JitConfigurationFlag::Enabled);
+	mJitConfiguration.is_enabled = nacp->jit_configuration.jit_configuration_flag.test((size_t)nacp::JitConfigurationFlag_Enabled);
 	mJitConfiguration.memory_size = nacp->jit_configuration.memory_size.unwrap();
 
 	// neighbor detection client configuration
@@ -395,16 +395,16 @@ void pie::hac::ApplicationControlProperty::clear()
 	mRawBinary = tc::ByteData();
 	mTitle.clear();
 	mIsbn.clear();
-	mStartupUserAccount = nacp::StartupUserAccount::None;
-	mUserAccountSwitchLock = nacp::UserAccountSwitchLock::Disable;
-	mAddOnContentRegistrationType = nacp::AddOnContentRegistrationType::AllOnLaunch;
+	mStartupUserAccount = nacp::StartupUserAccount_None;
+	mUserAccountSwitchLock = nacp::UserAccountSwitchLock_Disable;
+	mAddOnContentRegistrationType = nacp::AddOnContentRegistrationType_AllOnLaunch;
 	mAttribute.clear();
 	mSupportedLanguage.clear();
 	mParentalControl.clear();
-	mScreenshot = nacp::Screenshot::Allow;
-	mVideoCapture = nacp::VideoCapture::Disable;
-	mDataLossConfirmation = nacp::DataLossConfirmation::None;
-	mPlayLogPolicy = nacp::PlayLogPolicy::All;
+	mScreenshot = nacp::Screenshot_Allow;
+	mVideoCapture = nacp::VideoCapture_Disable;
+	mDataLossConfirmation = nacp::DataLossConfirmation_None;
+	mPlayLogPolicy = nacp::PlayLogPolicy_All;
 	mPresenceGroupId = 0;
 	mRatingAge.clear();
 	mDisplayVersion.clear();
@@ -415,11 +415,11 @@ void pie::hac::ApplicationControlProperty::clear()
 	mBcatDeliveryCacheStorageSize = 0;
 	mApplicationErrorCodeCategory.clear();
 	mLocalCommunicationId.clear();
-	mLogoType = nacp::LogoType::Nintendo;
-	mLogoHandling = nacp::LogoHandling::Auto;
-	mRuntimeAddOnContentInstall = nacp::RuntimeAddOnContentInstall::Deny;
-	mCrashReport = nacp::CrashReport::Deny;
-	mHdcp = nacp::Hdcp::None;
+	mLogoType = nacp::LogoType_Nintendo;
+	mLogoHandling = nacp::LogoHandling_Auto;
+	mRuntimeAddOnContentInstall = nacp::RuntimeAddOnContentInstall_Deny;
+	mCrashReport = nacp::CrashReport_Deny;
+	mHdcp = nacp::Hdcp_None;
 	mSeedForPsuedoDeviceId = 0;
 	mBcatPassphase.clear();
 	mStartupUserAccountOption.clear();
@@ -430,15 +430,15 @@ void pie::hac::ApplicationControlProperty::clear()
 	mCacheStorageDataAndJournalSizeMax = 0;
 	mCacheStorageIndexMax = 0;
 	mPlayLogQueryableApplicationId.clear();
-	mPlayLogQueryCapability = nacp::PlayLogQueryCapability::None;
+	mPlayLogQueryCapability = nacp::PlayLogQueryCapability_None;
 	mRepair.clear();
 	mProgramIndex = 0;
 	mRequiredNetworkServiceLicenseOnLaunch.clear();
 	mNeighborDetectionClientConfiguration = sNeighborDetectionClientConfiguration();
 	mJitConfiguration = sJitConfiguration();
-	mPlayReportPermission = nacp::PlayReportPermission::None;
-	mCrashScreenshotForProd = nacp::CrashScreenshotForProd::Deny;
-	mCrashScreenshotForDev = nacp::CrashScreenshotForDev::Deny;
+	mPlayReportPermission = nacp::PlayReportPermission_None;
+	mCrashScreenshotForProd = nacp::CrashScreenshotForProd_Deny;
+	mCrashScreenshotForDev = nacp::CrashScreenshotForDev_Deny;
 	mAccessibleLaunchRequiredVersionApplicationId.clear();
 }
 

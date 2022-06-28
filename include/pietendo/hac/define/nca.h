@@ -34,82 +34,82 @@ namespace nca
 
 	enum HeaderFormatVersion
 	{
-		FORMAT_NCA2 = 2,
-		FORMAT_NCA3 = 3
+		HeaderFormatVersion_NCA2 = 2,
+		HeaderFormatVersion_NCA3 = 3
 	};
 
 	enum ProgramContentPartitionIndex
 	{
-		PARTITION_CODE = 0,
-		PARTITION_DATA = 1,
-		PARTITION_LOGO = 2,
+		ProgramContentPartitionIndex_Code = 0,
+		ProgramContentPartitionIndex_Data = 1,
+		ProgramContentPartitionIndex_Logo = 2,
 	};
 
-	enum class DistributionType : byte_t
+	enum DistributionType : byte_t
 	{
-		Download,
-		GameCard
+		DistributionType_Download = 0,
+		DistributionType_GameCard = 1
 	};
 
-	enum class ContentType : byte_t
+	enum ContentType : byte_t
 	{
-		Program,
-		Meta,
-		Control,
-		Manual,
-		Data,
-		PublicData
+		ContentType_Program = 0,
+		ContentType_Meta = 2,
+		ContentType_Control = 3,
+		ContentType_Manual = 4,
+		ContentType_Data = 5,
+		ContentType_PublicData = 6
 	};
 
 	enum KeyBankIndex
 	{
-		KEY_AESXTS_0,
-		KEY_AESXTS_1,
-		KEY_AESCTR,
-		KEY_UNUSED_3,
-		KEY_AESCTR_HW
+		KeyBankIndex_AesXts0 = 0,
+		KeyBankIndex_AesXts1 = 1,
+		KeyBankIndex_AesCtr = 2,
+		KeyBankIndex_Unused_3 = 3,
+		KeyBankIndex_AesCtrHw = 4
 	};
 
 	enum KeyAreaEncryptionKeyIndex
 	{
-		KAEK_IDX_APPLICATION,
-		KAEK_IDX_OCEAN,
-		KAEK_IDX_SYSTEM
+		KeyAreaEncryptionKeyIndex_Application,
+		KeyAreaEncryptionKeyIndex_Ocean,
+		KeyAreaEncryptionKeyIndex_System
 	};
 
-	enum class FormatType : byte_t
+	enum FormatType : byte_t
 	{
-		RomFs = 0,
-		PartitionFs = 1
+		FormatType_RomFs = 0,
+		FormatType_PartitionFs = 1
 	};
 
-	enum class HashType : byte_t
+	enum HashType : byte_t
 	{
-		Auto = 0,
-		None = 1,
-		HierarchicalSha256 = 2,
-		HierarchicalIntegrity = 3, // IVFC
-		AutoSha3 = 4,
-		HierarchicalSha3256 = 5,
-		HierarchicalIntegritySha3 = 6 // IVFC
+		HashType_Auto = 0,
+		HashType_None = 1,
+		HashType_HierarchicalSha256 = 2,
+		HashType_HierarchicalIntegrity = 3, // IVFC
+		HashType_AutoSha3 = 4,
+		HashType_HierarchicalSha3256 = 5,
+		HashType_HierarchicalIntegritySha3 = 6 // IVFC
 	};
 
-	enum class EncryptionType : byte_t 
+	enum EncryptionType : byte_t 
 	{
-		Auto = 0,
-		None = 1,
-		AesXts = 2,
-		AesCtr = 3,
-		AesCtrEx = 4,
-		AesCtrSkipLayerHash = 5,
-		AesCtrExSkipLayerHash = 6
+		EncryptionType_Auto = 0,
+		EncryptionType_None = 1,
+		EncryptionType_AesXts = 2,
+		EncryptionType_AesCtr = 3,
+		EncryptionType_AesCtrEx = 4,
+		EncryptionType_AesCtrSkipLayerHash = 5,
+		EncryptionType_AesCtrExSkipLayerHash = 6
 	};
 
-	enum class MetaDataHashType : byte_t
+	enum MetaDataHashType : byte_t
 	{
-		None = 0,
-		HierarchicalIntegrity = 1,
-		HierarchicalIntegritySha3 = 2
+		MetaDataHashType_None = 0,
+		MetaDataHashType_HierarchicalIntegrity = 1,
+		MetaDataHashType_HierarchicalIntegritySha3 = 2
 	};
 }
 

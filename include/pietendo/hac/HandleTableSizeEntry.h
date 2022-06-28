@@ -30,7 +30,7 @@ public:
 	void setHandleTableSize(uint16_t size);
 private:
 	const std::string kModuleName = "HANDLE_TABLE_SIZE_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::HandleTableSize;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_HandleTableSize;
 	static const uint16_t kValBits = 10;
 	static const uint16_t kMaxHandleTableSize = (1 << kValBits) - 1;
 

@@ -40,7 +40,7 @@ private:
 	inline uint32_t getCapMask() const { return (1 << ((uint32_t)mType)) - 1; }
 	inline kc::KernelCapId getCapId(uint32_t cap) const
 	{
-		kc::KernelCapId id = kc::KernelCapId::Invalid;
+		kc::KernelCapId id = kc::KernelCapId_Invalid;
 		
 		for (byte_t tmp = 0; tmp < 31; tmp++)
 		{
@@ -51,8 +51,8 @@ private:
 			}
 		}
 
-		if (id == kc::KernelCapId::Invalid && cap == (uint32_t)0xffffffff)
-			id = kc::KernelCapId::Stubbed;
+		if (id == kc::KernelCapId_Invalid && cap == (uint32_t)0xffffffff)
+			id = kc::KernelCapId_Stubbed;
 
 		return id;
 	}

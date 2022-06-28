@@ -14,10 +14,10 @@ namespace nrr
 {
 	static const uint32_t kNrrStructMagic = tc::bn::make_struct_magic_uint32("NRR0");
 
-	enum class NrrKind : byte_t
+	enum NrrKind : byte_t
 	{
-		User = 0,
-		JitPlugin = 1
+		NrrKind_User = 0,
+		NrrKind_JitPlugin = 1
 	};
 }
 

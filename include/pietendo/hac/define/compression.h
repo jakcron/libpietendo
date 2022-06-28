@@ -17,10 +17,10 @@ namespace compression
 	static const size_t kRomfsBlockAlign = 0x10;
 
 	// enums
-	enum class CompressionType : byte_t
+	enum CompressionType : byte_t
 	{
-		None = 0x0,
-		Lz4 = 0x1
+		CompressionType_None = 0x0,
+		CompressionType_Lz4 = 0x1
 	};
 }
 

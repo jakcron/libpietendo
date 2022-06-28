@@ -31,7 +31,7 @@ public:
 	void setFlags(uint32_t flags);
 private:
 	const std::string kModuleName = "MISC_FLAG_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::MiscFlags;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_MiscFlags;
 	static const uint32_t kValueBits = 15;
 	static const uint32_t kMaxVal = (1 << kValueBits) - 1;
 

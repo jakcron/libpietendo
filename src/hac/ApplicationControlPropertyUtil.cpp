@@ -42,10 +42,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getAddOnContentRegistratio
 
 	switch (val)
 	{
-	case (pie::hac::nacp::AddOnContentRegistrationType::AllOnLaunch):
+	case (pie::hac::nacp::AddOnContentRegistrationType_AllOnLaunch):
 		ss << "AllOnLaunch";
 		break;
-	case (pie::hac::nacp::AddOnContentRegistrationType::OnDemand):
+	case (pie::hac::nacp::AddOnContentRegistrationType_OnDemand):
 		ss << "OnDemand";
 		break;
 	default:
@@ -62,10 +62,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getAttributeFlagAsString(p
 
 	switch (val)
 	{
-	case (pie::hac::nacp::AttributeFlag::Demo):
+	case (pie::hac::nacp::AttributeFlag_Demo):
 		ss << "Demo";
 		break;
-	case (pie::hac::nacp::AttributeFlag::RetailInteractiveDisplay):
+	case (pie::hac::nacp::AttributeFlag_RetailInteractiveDisplay):
 		ss << "RetailInteractiveDisplay";
 		break;
 	default:
@@ -82,10 +82,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getCrashReportAsString(pie
 
 	switch (val)
 	{
-	case (pie::hac::nacp::CrashReport::Deny):
+	case (pie::hac::nacp::CrashReport_Deny):
 		ss << "Deny";
 		break;
-	case (pie::hac::nacp::CrashReport::Allow):
+	case (pie::hac::nacp::CrashReport_Allow):
 		ss << "Allow";
 		break;
 	default:
@@ -102,10 +102,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getCrashScreenshotForDevAs
 
 	switch (val)
 	{
-	case (pie::hac::nacp::CrashScreenshotForDev::Deny):
+	case (pie::hac::nacp::CrashScreenshotForDev_Deny):
 		ss << "Deny";
 		break;
-	case (pie::hac::nacp::CrashScreenshotForDev::Allow):
+	case (pie::hac::nacp::CrashScreenshotForDev_Allow):
 		ss << "Allow";
 		break;
 	default:
@@ -122,10 +122,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getCrashScreenshotForProdA
 
 	switch (val)
 	{
-	case (pie::hac::nacp::CrashScreenshotForProd::Deny):
+	case (pie::hac::nacp::CrashScreenshotForProd_Deny):
 		ss << "Deny";
 		break;
-	case (pie::hac::nacp::CrashScreenshotForProd::Allow):
+	case (pie::hac::nacp::CrashScreenshotForProd_Allow):
 		ss << "Allow";
 		break;
 	default:
@@ -142,10 +142,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getDataLossConfirmationAsS
 
 	switch (val)
 	{
-	case (pie::hac::nacp::DataLossConfirmation::None):
+	case (pie::hac::nacp::DataLossConfirmation_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::DataLossConfirmation::Required):
+	case (pie::hac::nacp::DataLossConfirmation_Required):
 		ss << "Required";
 		break;
 	default:
@@ -162,10 +162,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getHdcpAsString(pie::hac::
 
 	switch (val)
 	{
-	case (pie::hac::nacp::Hdcp::None):
+	case (pie::hac::nacp::Hdcp_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::Hdcp::Required):
+	case (pie::hac::nacp::Hdcp_Required):
 		ss << "Required";
 		break;
 	default:
@@ -182,7 +182,7 @@ std::string pie::hac::ApplicationControlPropertyUtil::getJitConfigurationFlagAsS
 
 	switch (val)
 	{
-	case (pie::hac::nacp::JitConfigurationFlag::Enabled):
+	case (pie::hac::nacp::JitConfigurationFlag_Enabled):
 		ss << "Enabled";
 		break;
 	default:
@@ -199,49 +199,49 @@ std::string pie::hac::ApplicationControlPropertyUtil::getLanguageAsString(pie::h
 
 	switch (val)
 	{
-	case (pie::hac::nacp::Language::AmericanEnglish):
+	case (pie::hac::nacp::Language_AmericanEnglish):
 		ss << "AmericanEnglish";
 		break;
-	case (pie::hac::nacp::Language::BritishEnglish):
+	case (pie::hac::nacp::Language_BritishEnglish):
 		ss << "BritishEnglish";
 		break;
-	case (pie::hac::nacp::Language::Japanese):
+	case (pie::hac::nacp::Language_Japanese):
 		ss << "Japanese";
 		break;
-	case (pie::hac::nacp::Language::French):
+	case (pie::hac::nacp::Language_French):
 		ss << "French";
 		break;
-	case (pie::hac::nacp::Language::German):
+	case (pie::hac::nacp::Language_German):
 		ss << "German";
 		break;
-	case (pie::hac::nacp::Language::LatinAmericanSpanish):
+	case (pie::hac::nacp::Language_LatinAmericanSpanish):
 		ss << "LatinAmericanSpanish";
 		break;
-	case (pie::hac::nacp::Language::Spanish):
+	case (pie::hac::nacp::Language_Spanish):
 		ss << "Spanish";
 		break;
-	case (pie::hac::nacp::Language::Italian):
+	case (pie::hac::nacp::Language_Italian):
 		ss << "Italian";
 		break;
-	case (pie::hac::nacp::Language::Dutch):
+	case (pie::hac::nacp::Language_Dutch):
 		ss << "Dutch";
 		break;
-	case (pie::hac::nacp::Language::CanadianFrench):
+	case (pie::hac::nacp::Language_CanadianFrench):
 		ss << "CanadianFrench";
 		break;
-	case (pie::hac::nacp::Language::Portuguese):
+	case (pie::hac::nacp::Language_Portuguese):
 		ss << "Portuguese";
 		break;
-	case (pie::hac::nacp::Language::Russian):
+	case (pie::hac::nacp::Language_Russian):
 		ss << "Russian";
 		break;
-	case (pie::hac::nacp::Language::Korean):
+	case (pie::hac::nacp::Language_Korean):
 		ss << "Korean";
 		break;
-	case (pie::hac::nacp::Language::TraditionalChinese):
+	case (pie::hac::nacp::Language_TraditionalChinese):
 		ss << "TraditionalChinese";
 		break;
-	case (pie::hac::nacp::Language::SimplifiedChinese):
+	case (pie::hac::nacp::Language_SimplifiedChinese):
 		ss << "SimplifiedChinese";
 		break;
 	default:
@@ -258,10 +258,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getLogoHandlingAsString(pi
 
 	switch (val)
 	{
-	case (pie::hac::nacp::LogoHandling::Auto):
+	case (pie::hac::nacp::LogoHandling_Auto):
 		ss << "Auto";
 		break;
-	case (pie::hac::nacp::LogoHandling::None):
+	case (pie::hac::nacp::LogoHandling_None):
 		ss << "None";
 		break;
 	default:
@@ -278,13 +278,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getLogoTypeAsString(pie::h
 
 	switch (val)
 	{
-	case (pie::hac::nacp::LogoType::LicensedByNintendo):
+	case (pie::hac::nacp::LogoType_LicensedByNintendo):
 		ss << "LicensedByNintendo";
 		break;
-	case (pie::hac::nacp::LogoType::DistributedByNintendo):
+	case (pie::hac::nacp::LogoType_DistributedByNintendo):
 		ss << "DistributedByNintendo";
 		break;
-	case (pie::hac::nacp::LogoType::Nintendo):
+	case (pie::hac::nacp::LogoType_Nintendo):
 		ss << "Nintendo";
 		break;
 	default:
@@ -301,43 +301,43 @@ std::string pie::hac::ApplicationControlPropertyUtil::getOrganisationAsString(pi
 
 	switch (val)
 	{
-	case (pie::hac::nacp::Organisation::CERO):
+	case (pie::hac::nacp::Organisation_CERO):
 		ss << "CERO";
 		break;
-	case (pie::hac::nacp::Organisation::GRACGCRB):
+	case (pie::hac::nacp::Organisation_GRACGCRB):
 		ss << "GRACGCRB";
 		break;
-	case (pie::hac::nacp::Organisation::GSRMR):
+	case (pie::hac::nacp::Organisation_GSRMR):
 		ss << "GSRMR";
 		break;
-	case (pie::hac::nacp::Organisation::ESRB):
+	case (pie::hac::nacp::Organisation_ESRB):
 		ss << "ESRB";
 		break;
-	case (pie::hac::nacp::Organisation::ClassInd):
+	case (pie::hac::nacp::Organisation_ClassInd):
 		ss << "ClassInd";
 		break;
-	case (pie::hac::nacp::Organisation::USK):
+	case (pie::hac::nacp::Organisation_USK):
 		ss << "USK";
 		break;
-	case (pie::hac::nacp::Organisation::PEGI):
+	case (pie::hac::nacp::Organisation_PEGI):
 		ss << "PEGI";
 		break;
-	case (pie::hac::nacp::Organisation::PEGIPortugal):
+	case (pie::hac::nacp::Organisation_PEGIPortugal):
 		ss << "PEGIPortugal";
 		break;
-	case (pie::hac::nacp::Organisation::PEGIBBFC):
+	case (pie::hac::nacp::Organisation_PEGIBBFC):
 		ss << "PEGIBBFC";
 		break;
-	case (pie::hac::nacp::Organisation::Russian):
+	case (pie::hac::nacp::Organisation_Russian):
 		ss << "Russian";
 		break;
-	case (pie::hac::nacp::Organisation::ACB):
+	case (pie::hac::nacp::Organisation_ACB):
 		ss << "ACB";
 		break;
-	case (pie::hac::nacp::Organisation::OFLC):
+	case (pie::hac::nacp::Organisation_OFLC):
 		ss << "OFLC";
 		break;
-	case (pie::hac::nacp::Organisation::IARCGeneric):
+	case (pie::hac::nacp::Organisation_IARCGeneric):
 		ss << "IARCGeneric";
 		break;
 	default:
@@ -354,7 +354,7 @@ std::string pie::hac::ApplicationControlPropertyUtil::getParentalControlFlagAsSt
 
 	switch (val)
 	{
-	case (pie::hac::nacp::ParentalControlFlag::FreeCommunication):
+	case (pie::hac::nacp::ParentalControlFlag_FreeCommunication):
 		ss << "FreeCommunication";
 		break;
 	default:
@@ -371,16 +371,16 @@ std::string pie::hac::ApplicationControlPropertyUtil::getPlayLogPolicyAsString(p
 
 	switch (val)
 	{
-	case (pie::hac::nacp::PlayLogPolicy::Open):
+	case (pie::hac::nacp::PlayLogPolicy_Open):
 		ss << "Open";
 		break;
-	case (pie::hac::nacp::PlayLogPolicy::LogOnly):
+	case (pie::hac::nacp::PlayLogPolicy_LogOnly):
 		ss << "LogOnly";
 		break;
-	case (pie::hac::nacp::PlayLogPolicy::None):
+	case (pie::hac::nacp::PlayLogPolicy_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::PlayLogPolicy::Closed):
+	case (pie::hac::nacp::PlayLogPolicy_Closed):
 		ss << "Closed";
 		break;
 	default:
@@ -397,13 +397,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getPlayLogQueryCapabilityA
 
 	switch (val)
 	{
-	case (pie::hac::nacp::PlayLogQueryCapability::None):
+	case (pie::hac::nacp::PlayLogQueryCapability_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::PlayLogQueryCapability::Whitelist):
+	case (pie::hac::nacp::PlayLogQueryCapability_Whitelist):
 		ss << "Whitelist";
 		break;
-	case (pie::hac::nacp::PlayLogQueryCapability::All):
+	case (pie::hac::nacp::PlayLogQueryCapability_All):
 		ss << "All";
 		break;
 	default:
@@ -420,10 +420,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getPlayReportPermissionAsS
 
 	switch (val)
 	{
-	case (pie::hac::nacp::PlayReportPermission::None):
+	case (pie::hac::nacp::PlayReportPermission_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::PlayReportPermission::TargetMarketing):
+	case (pie::hac::nacp::PlayReportPermission_TargetMarketing):
 		ss << "TargetMarketing";
 		break;
 	default:
@@ -440,7 +440,7 @@ std::string pie::hac::ApplicationControlPropertyUtil::getRepairFlagAsString(pie:
 
 	switch (val)
 	{
-	case (pie::hac::nacp::RepairFlag::SuppressGameCardAccess):
+	case (pie::hac::nacp::RepairFlag_SuppressGameCardAccess):
 		ss << "SuppressGameCardAccess";
 		break;
 	default:
@@ -457,7 +457,7 @@ std::string pie::hac::ApplicationControlPropertyUtil::getRequiredNetworkServiceL
 
 	switch (val)
 	{
-	case (pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag::Common):
+	case (pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag_Common):
 		ss << "Common";
 		break;
 	default:
@@ -474,13 +474,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeAddOnContentInst
 
 	switch (val)
 	{
-	case (pie::hac::nacp::RuntimeAddOnContentInstall::Deny):
+	case (pie::hac::nacp::RuntimeAddOnContentInstall_Deny):
 		ss << "Deny";
 		break;
-	case (pie::hac::nacp::RuntimeAddOnContentInstall::AllowAppend):
+	case (pie::hac::nacp::RuntimeAddOnContentInstall_AllowAppend):
 		ss << "AllowAppend";
 		break;
-	case (pie::hac::nacp::RuntimeAddOnContentInstall::AllowAppendButDontDownloadWhenUsingNetwork):
+	case (pie::hac::nacp::RuntimeAddOnContentInstall_AllowAppendButDontDownloadWhenUsingNetwork):
 		ss << "AllowAppendButDontDownloadWhenUsingNetwork";
 		break;
 	default:
@@ -497,13 +497,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeParameterDeliver
 
 	switch (val)
 	{
-	case (pie::hac::nacp::RuntimeParameterDelivery::Always):
+	case (pie::hac::nacp::RuntimeParameterDelivery_Always):
 		ss << "Always";
 		break;
-	case (pie::hac::nacp::RuntimeParameterDelivery::AlwaysIfUserStateMatched):
+	case (pie::hac::nacp::RuntimeParameterDelivery_AlwaysIfUserStateMatched):
 		ss << "AlwaysIfUserStateMatched";
 		break;
-	case (pie::hac::nacp::RuntimeParameterDelivery::OnRestart):
+	case (pie::hac::nacp::RuntimeParameterDelivery_OnRestart):
 		ss << "OnRestart";
 		break;
 	default:
@@ -520,10 +520,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getScreenshotAsString(pie:
 
 	switch (val)
 	{
-	case (pie::hac::nacp::Screenshot::Allow):
+	case (pie::hac::nacp::Screenshot_Allow):
 		ss << "Allow";
 		break;
-	case (pie::hac::nacp::Screenshot::Deny):
+	case (pie::hac::nacp::Screenshot_Deny):
 		ss << "Deny";
 		break;
 	default:
@@ -540,13 +540,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getStartupUserAccountAsStr
 
 	switch (val)
 	{
-	case (pie::hac::nacp::StartupUserAccount::None):
+	case (pie::hac::nacp::StartupUserAccount_None):
 		ss << "None";
 		break;
-	case (pie::hac::nacp::StartupUserAccount::Required):
+	case (pie::hac::nacp::StartupUserAccount_Required):
 		ss << "Required";
 		break;
-	case (pie::hac::nacp::StartupUserAccount::RequiredWithNetworkServiceAccountAvailable):
+	case (pie::hac::nacp::StartupUserAccount_RequiredWithNetworkServiceAccountAvailable):
 		ss << "RequiredWithNetworkServiceAccountAvailable";
 		break;
 	default:
@@ -563,7 +563,7 @@ std::string pie::hac::ApplicationControlPropertyUtil::getStartupUserAccountOptio
 
 	switch (val)
 	{
-	case (pie::hac::nacp::StartupUserAccountOptionFlag::IsOptional):
+	case (pie::hac::nacp::StartupUserAccountOptionFlag_IsOptional):
 		ss << "IsOptional";
 		break;
 	default:
@@ -580,10 +580,10 @@ std::string pie::hac::ApplicationControlPropertyUtil::getUserAccountSwitchLockAs
 
 	switch (val)
 	{
-	case (pie::hac::nacp::UserAccountSwitchLock::Disable):
+	case (pie::hac::nacp::UserAccountSwitchLock_Disable):
 		ss << "Disable";
 		break;
-	case (pie::hac::nacp::UserAccountSwitchLock::Enable):
+	case (pie::hac::nacp::UserAccountSwitchLock_Enable):
 		ss << "Enable";
 		break;
 	default:
@@ -600,13 +600,13 @@ std::string pie::hac::ApplicationControlPropertyUtil::getVideoCaptureAsString(pi
 
 	switch (val)
 	{
-	case (pie::hac::nacp::VideoCapture::Disable):
+	case (pie::hac::nacp::VideoCapture_Disable):
 		ss << "Disable";
 		break;
-	case (pie::hac::nacp::VideoCapture::Manual):
+	case (pie::hac::nacp::VideoCapture_Manual):
 		ss << "Manual";
 		break;
-	case (pie::hac::nacp::VideoCapture::Enable):
+	case (pie::hac::nacp::VideoCapture_Enable):
 		ss << "Enable";
 		break;
 	default:

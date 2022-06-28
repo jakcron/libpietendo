@@ -31,7 +31,7 @@ public:
 	void setProgramType(kc::ProgramType type);
 private:
 	const std::string kModuleName = "MISC_PARAMS_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::MiscParams;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_MiscParams;
 	static const byte_t kValBits = 3;
 	static const byte_t kMaxProgramType = (1 << kValBits) - 1;
 

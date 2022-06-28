@@ -65,11 +65,11 @@ void pie::hac::NsoHeader::toBytes()
 	hdr->text_file_size.wrap(mTextSegmentInfo.file_layout.size);
 	if (mTextSegmentInfo.is_compressed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_TEXT_COMPRESS);
+		hdr->flags.set((size_t)nso::HeaderFlags_TextCompress);
 	}
 	if (mTextSegmentInfo.is_hashed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_TEXT_HASH);
+		hdr->flags.set((size_t)nso::HeaderFlags_TextHash);
 		hdr->text_hash = mTextSegmentInfo.hash;
 	}
 
@@ -80,11 +80,11 @@ void pie::hac::NsoHeader::toBytes()
 	hdr->ro_file_size.wrap(mRoSegmentInfo.file_layout.size);
 	if (mRoSegmentInfo.is_compressed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_RO_COMPRESS);
+		hdr->flags.set((size_t)nso::HeaderFlags_RoCompress);
 	}
 	if (mRoSegmentInfo.is_hashed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_RO_HASH);
+		hdr->flags.set((size_t)nso::HeaderFlags_RoHash);
 		hdr->ro_hash = mRoSegmentInfo.hash;
 	}
 
@@ -95,11 +95,11 @@ void pie::hac::NsoHeader::toBytes()
 	hdr->data_file_size.wrap(mDataSegmentInfo.file_layout.size);
 	if (mDataSegmentInfo.is_compressed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_DATA_COMPRESS);
+		hdr->flags.set((size_t)nso::HeaderFlags_DataCompress);
 	}
 	if (mDataSegmentInfo.is_hashed)
 	{
-		hdr->flags.set((size_t)nso::FLAG_DATA_HASH);
+		hdr->flags.set((size_t)nso::HeaderFlags_DataHash);
 		hdr->data_hash = mDataSegmentInfo.hash;
 	}
 		
@@ -158,24 +158,24 @@ void pie::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
 	mTextSegmentInfo.file_layout.size = hdr->text_file_size.unwrap();
 	mTextSegmentInfo.memory_layout.offset = hdr->text.memory_offset.unwrap();
 	mTextSegmentInfo.memory_layout.size = hdr->text.size.unwrap();
-	mTextSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::FLAG_TEXT_COMPRESS);
-	mTextSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::FLAG_TEXT_HASH);
+	mTextSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::HeaderFlags_TextCompress);
+	mTextSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::HeaderFlags_TextHash);
 	mTextSegmentInfo.hash = hdr->text_hash;
 
 	mRoSegmentInfo.file_layout.offset = hdr->ro.file_offset.unwrap();
 	mRoSegmentInfo.file_layout.size = hdr->ro_file_size.unwrap();
 	mRoSegmentInfo.memory_layout.offset = hdr->ro.memory_offset.unwrap();
 	mRoSegmentInfo.memory_layout.size = hdr->ro.size.unwrap();
-	mRoSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::FLAG_RO_COMPRESS);
-	mRoSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::FLAG_RO_HASH);
+	mRoSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::HeaderFlags_RoCompress);
+	mRoSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::HeaderFlags_RoHash);
 	mRoSegmentInfo.hash = hdr->ro_hash;
 
 	mDataSegmentInfo.file_layout.offset = hdr->data.file_offset.unwrap();
 	mDataSegmentInfo.file_layout.size = hdr->data_file_size.unwrap();
 	mDataSegmentInfo.memory_layout.offset = hdr->data.memory_offset.unwrap();
 	mDataSegmentInfo.memory_layout.size = hdr->data.size.unwrap();
-	mDataSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::FLAG_RO_COMPRESS);
-	mDataSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::FLAG_RO_HASH);
+	mDataSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::HeaderFlags_RoCompress);
+	mDataSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::HeaderFlags_RoHash);
 	mDataSegmentInfo.hash = hdr->data_hash;
 
 	mModuleNameInfo.offset = hdr->module_name_offset.unwrap();

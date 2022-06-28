@@ -18,12 +18,12 @@ namespace nso
 
 	enum HeaderFlags
 	{
-		FLAG_TEXT_COMPRESS,
-		FLAG_RO_COMPRESS,
-		FLAG_DATA_COMPRESS,
-		FLAG_TEXT_HASH,
-		FLAG_RO_HASH,
-		FLAG_DATA_HASH
+		HeaderFlags_TextCompress = 0,
+		HeaderFlags_RoCompress = 1,
+		HeaderFlags_DataCompress = 2,
+		HeaderFlags_TextHash = 3,
+		HeaderFlags_RoHash = 4,
+		HeaderFlags_DataHash = 5
 	};
 }
 

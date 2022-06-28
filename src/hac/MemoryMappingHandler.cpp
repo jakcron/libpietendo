@@ -62,7 +62,7 @@ void pie::hac::MemoryMappingHandler::importKernelCapabilityList(const std::vecto
 			}
 
 			// add to list
-			mMemRange.push_back({ entries[i].getPage(), entries[i+1].getPage(), entries[i].getFlag() ? kc::MemoryPermission::Ro : kc::MemoryPermission::Rw, entries[i+1].getFlag() ? kc::MappingType::Static : kc::MappingType::Io });
+			mMemRange.push_back({ entries[i].getPage(), entries[i+1].getPage(), entries[i].getFlag() ? kc::MemoryPermission_Ro : kc::MemoryPermission_Rw, entries[i+1].getFlag() ? kc::MappingType_Static : kc::MappingType_Io });
 
 			// increment i by two
 			i += 2;
@@ -77,7 +77,7 @@ void pie::hac::MemoryMappingHandler::importKernelCapabilityList(const std::vecto
 			}
 
 			// add to list
-			mMemPage.push_back({ entries[i].getPage(), 1, kc::MemoryPermission::Rw, kc::MappingType::Io });
+			mMemPage.push_back({ entries[i].getPage(), 1, kc::MemoryPermission_Rw, kc::MappingType_Io });
 
 			// increment i by one
 			i += 1;
@@ -99,11 +99,11 @@ void pie::hac::MemoryMappingHandler::exportKernelCapabilityList(std::vector<Kern
 	for (size_t i = 0; i < mMemRange.size(); i++)
 	{
 		cap.setPage(mMemRange[i].addr & kMaxPageAddr);
-		cap.setFlag(mMemRange[i].perm == kc::MemoryPermission::Ro);
+		cap.setFlag(mMemRange[i].perm == kc::MemoryPermission_Ro);
 		caps.push_back(cap.getKernelCapability());
 
 		cap.setPage(mMemRange[i].size & kMaxPageNum);
-		cap.setFlag(mMemRange[i].type == kc::MappingType::Static);
+		cap.setFlag(mMemRange[i].type == kc::MappingType_Static);
 		caps.push_back(cap.getKernelCapability());
 	}
 

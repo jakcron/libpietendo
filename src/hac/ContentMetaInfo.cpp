@@ -78,7 +78,7 @@ void pie::hac::ContentMetaInfo::clear()
 	mRawBinary = tc::ByteData();
 	mTitleId = 0;
 	mTitleVersion = 0;
-	mType = cnmt::ContentMetaType::Application;
+	mType = cnmt::ContentMetaType_Application;
 	mAttribute.clear();
 }
 

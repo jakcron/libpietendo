@@ -12,67 +12,67 @@ namespace pie { namespace hac {
 
 namespace cnmt
 {
-	enum class ContentType : byte_t
+	enum ContentType : byte_t
 	{
-		Meta = 0,
-		Program,
-		Data,
-		Control,
-		HtmlDocument,
-		LegalInformation,
-		DeltaFragment
+		ContentType_Meta = 0,
+		ContentType_Program = 1,
+		ContentType_Data = 2,
+		ContentType_Control = 3,
+		ContentType_HtmlDocument = 4,
+		ContentType_LegalInformation = 5,
+		ContentType_DeltaFragment = 6
 	};
 
-	enum class ContentMetaType : byte_t
+	enum ContentMetaType : byte_t
 	{
-		SystemProgram = 1,
-		SystemData,
-		SystemUpdate,
-		BootImagePackage,
-		BootImagePackageSafe,
+		ContentMetaType_SystemProgram = 0x01,
+		ContentMetaType_SystemData = 0x02,
+		ContentMetaType_SystemUpdate = 0x03,
+		ContentMetaType_BootImagePackage = 0x04,
+		ContentMetaType_BootImagePackageSafe = 0x05,
 
-		Application = 0x80,
-		Patch, // can have extended data
-		AddOnContent,
-		Delta // can have extended data
+		ContentMetaType_Application = 0x80,
+		ContentMetaType_Patch = 0x81, // can have extended data
+		ContentMetaType_AddOnContent = 0x82,
+		ContentMetaType_Delta = 0x83// can have extended data
 	};
 
-	enum class UpdateType : byte_t
+	enum UpdateType : byte_t
 	{
-		ApplyAsDelta,
-		Overwrite,
-		Create
+		UpdateType_ApplyAsDelta = 0,
+		UpdateType_Overwrite = 1,
+		UpdateType_Create = 2
 	};
 
-	enum class ContentInstallType : byte_t 
+	enum ContentInstallType : byte_t 
 	{
-		Full,
-		FragmentOnly
+		ContentInstallType_Full = 0,
+		ContentInstallType_FragmentOnly = 1
 	};
 
-	enum class StorageId : byte_t
+	enum StorageId : byte_t
 	{
-		None,
-		Host,
-		GameCard,
-		BuiltInSystem,
-		BuiltInUser,
-		SdCard,
-		Any
+		StorageId_None = 0,
+		StorageId_Host = 1,
+		StorageId_GameCard = 2,
+		StorageId_BuiltInSystem = 3,
+		StorageId_BuiltInUser = 4,
+		StorageId_SdCard = 5,
+		StorageId_Any = 6
 	};
 
-	enum class ContentMetaAttributeFlag
+	enum ContentMetaAttributeFlag
 	{
-		IncludesExFatDriver,
-		Rebootless,
-		Compacted
+		ContentMetaAttributeFlag_IncludesExFatDriver,
+		ContentMetaAttributeFlag_Rebootless,
+		ContentMetaAttributeFlag_Compacted
 	};
 	
 	using content_meta_attribute_t = tc::bn::bitarray<sizeof(byte_t)>;
 
-	enum class InstallStateFlag
+	enum InstallStateFlag
 	{
-		Committed
+		InstallStateFlag_Committed = 0
 	};
 
 	using install_state_t = tc::bn::bitarray<sizeof(byte_t)>;

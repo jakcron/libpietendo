@@ -37,7 +37,7 @@ public:
 
 private:
 	const std::string kModuleName = "THREAD_INFO_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::ThreadInfo;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_ThreadInfo;
 	static const uint8_t kValBits = 6;
 	static const uint8_t kMaxVal = (1 << kValBits)-1;
 	static const uint8_t kDefaultPriority = 6;

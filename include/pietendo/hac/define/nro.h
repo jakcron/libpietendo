@@ -16,6 +16,8 @@ namespace nro
 	static const uint32_t kDefaultFormatVersion = 0;
 	static const size_t kRoCrtSize = 8;
 	static const size_t kModuleIdSize = 32;
+
+	static const uint64_t kNroHomebrewStructMagic = tc::bn::make_struct_magic_uint64("HOMEBREW");
 }
 
 #pragma pack(push,1)

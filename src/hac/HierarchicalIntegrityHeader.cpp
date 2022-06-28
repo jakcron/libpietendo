@@ -59,7 +59,7 @@ void pie::hac::HierarchicalIntegrityHeader::fromBytes(const byte_t* data, size_t
 	}
 
 	// Validate TypeId
-	if (hdr->type_id.unwrap() != (uint32_t)pie::hac::hierarchicalintegrity::TypeId::HAC_RomFs)
+	if (hdr->type_id.unwrap() != (uint32_t)pie::hac::hierarchicalintegrity::TypeId_HAC_RomFs)
 	{
 		throw tc::ArgumentOutOfRangeException(kModuleName, fmt::format("Unsupported type id (0x{:x})", hdr->type_id.unwrap()));
 	}

@@ -1,14 +1,14 @@
 #include <pietendo/hac/MemoryPageEntry.h>
 
 pie::hac::MemoryPageEntry::MemoryPageEntry() :
-	mCap(kc::KernelCapId::Invalid),
+	mCap(kc::KernelCapId_Invalid),
 	mPage(0),
 	mFlag(false),
 	mMapMultiplePages(false)
 {}
 
 pie::hac::MemoryPageEntry::MemoryPageEntry(const KernelCapabilityEntry & kernel_cap) :
-	mCap(kc::KernelCapId::Invalid),
+	mCap(kc::KernelCapId_Invalid),
 	mPage(0),
 	mFlag(false),
 	mMapMultiplePages(false)
@@ -17,7 +17,7 @@ pie::hac::MemoryPageEntry::MemoryPageEntry(const KernelCapabilityEntry & kernel_
 }
 
 pie::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page) :
-	mCap(kc::KernelCapId::Invalid),
+	mCap(kc::KernelCapId_Invalid),
 	mPage(0),
 	mFlag(false),
 	mMapMultiplePages(false)
@@ -26,7 +26,7 @@ pie::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page) :
 }
 
 pie::hac::MemoryPageEntry::MemoryPageEntry(uint32_t page, bool flag) :
-	mCap(kc::KernelCapId::Invalid),
+	mCap(kc::KernelCapId_Invalid),
 	mPage(0),
 	mFlag(false),
 	mMapMultiplePages(true)
@@ -62,7 +62,7 @@ const pie::hac::KernelCapabilityEntry & pie::hac::MemoryPageEntry::getKernelCapa
 
 void pie::hac::MemoryPageEntry::setKernelCapability(const KernelCapabilityEntry & kernel_cap)
 {
-	if (kernel_cap.getType() != kc::KernelCapId::MemoryMap && kernel_cap.getType() != kc::KernelCapId::IoMemoryMap)
+	if (kernel_cap.getType() != kc::KernelCapId_MemoryMap && kernel_cap.getType() != kc::KernelCapId_IoMemoryMap)
 	{
 		throw tc::ArgumentOutOfRangeException(kModuleName, "KernelCapabilityEntry is not type 'MemoryMap' or 'IOMemoryMap");
 	}

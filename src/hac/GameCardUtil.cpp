@@ -25,10 +25,10 @@ std::string pie::hac::GameCardUtil::getKekIndexAsString(pie::hac::gc::KekIndex v
 
 	switch (val)
 	{
-	case (pie::hac::gc::KEK_PROD):
+	case (pie::hac::gc::KekIndex_Prod):
 		ss << "Production";
 		break;
-	case (pie::hac::gc::KEK_DEV):
+	case (pie::hac::gc::KekIndex_Dev):
 		ss << "Development";
 		break;
 	default:
@@ -45,22 +45,22 @@ std::string pie::hac::GameCardUtil::getRomSizeAsString(pie::hac::gc::RomSize val
 
 	switch (val)
 	{
-	case (pie::hac::gc::ROM_SIZE_1GB):
+	case (pie::hac::gc::RomSize_1GB):
 		ss << "1GB";
 		break;
-	case (pie::hac::gc::ROM_SIZE_2GB):
+	case (pie::hac::gc::RomSize_2GB):
 		ss << "2GB";
 		break;
-	case (pie::hac::gc::ROM_SIZE_4GB):
+	case (pie::hac::gc::RomSize_4GB):
 		ss << "4GB";
 		break;
-	case (pie::hac::gc::ROM_SIZE_8GB):
+	case (pie::hac::gc::RomSize_8GB):
 		ss << "8GB";
 		break;
-	case (pie::hac::gc::ROM_SIZE_16GB):
+	case (pie::hac::gc::RomSize_16GB):
 		ss << "16GB";
 		break;
-	case (pie::hac::gc::ROM_SIZE_32GB):
+	case (pie::hac::gc::RomSize_32GB):
 		ss << "32GB";
 		break;
 	default:
@@ -77,19 +77,19 @@ std::string pie::hac::GameCardUtil::getHeaderFlagsAsString(pie::hac::gc::HeaderF
 
 	switch (val)
 	{
-	case (pie::hac::gc::FLAG_AUTOBOOT):
+	case (pie::hac::gc::HeaderFlags_AutoBoot):
 		ss << "AutoBoot";
 		break;
-	case (pie::hac::gc::FLAG_HISTORY_ERASE):
+	case (pie::hac::gc::HeaderFlags_HistoryErase):
 		ss << "HistoryErase";
 		break;
-	case (pie::hac::gc::FLAG_REPAIR_TIME_REVISOR_TOOL):
+	case (pie::hac::gc::HeaderFlags_RepairTimeRevisorTool):
 		ss << "RepairTimeRevisorTool";
 		break;
-	case (pie::hac::gc::FLAG_ALLOW_CUP_TO_CHINA):
+	case (pie::hac::gc::HeaderFlags_AllowCupToChina):
 		ss << "AllowCupToChina";
 		break;
-	case (pie::hac::gc::FLAG_ALLOW_CUP_TO_GLOBAL):
+	case (pie::hac::gc::HeaderFlags_AllowCupToGlobal):
 		ss << "AllowCupToGlobal";
 		break;
 	default:
@@ -106,19 +106,19 @@ std::string pie::hac::GameCardUtil::getCardFwVersionDescriptionAsString(pie::hac
 
 	switch (val)
 	{
-	case (pie::hac::gc::FWVER_DEV):
+	case (pie::hac::gc::FwVersion_DevKit):
 		ss << "ForDevelopment";
 		break;
-	case (pie::hac::gc::FWVER_PROD):
+	case (pie::hac::gc::FwVersion_Prod):
 		ss << "1.0.0+";
 		break;
-	case (pie::hac::gc::FWVER_PROD_SINCE_4_0_0NUP):
+	case (pie::hac::gc::FwVersion_Prod_Since4_0_0NUP):
 		ss << "4.0.0+";
 		break;
-	case (pie::hac::gc::FWVER_PROD_SINCE_11_0_0NUP):
+	case (pie::hac::gc::FwVersion_Prod_Since11_0_0NUP):
 		ss << "11.0.0+";
 		break;
-	case (pie::hac::gc::FWVER_PROD_SINCE_12_0_0NUP):
+	case (pie::hac::gc::FwVersion_Prod_Since12_0_0NUP):
 		ss << "12.0.0+";
 		break;
 	default:
@@ -135,10 +135,10 @@ std::string pie::hac::GameCardUtil::getCardClockRateAsString(pie::hac::gc::CardC
 
 	switch (val)
 	{
-	case (pie::hac::gc::CLOCK_RATE_25):
+	case (pie::hac::gc::CardClockRate_25MHz):
 		ss << "20 MHz";
 		break;
-	case (pie::hac::gc::CLOCK_RATE_50):
+	case (pie::hac::gc::CardClockRate_50MHz):
 		ss << "50 MHz";
 		break;
 	default:
@@ -155,10 +155,10 @@ std::string pie::hac::GameCardUtil::getCompatibilityTypeAsString(pie::hac::gc::C
 
 	switch (val)
 	{
-	case (pie::hac::gc::COMPAT_GLOBAL):
+	case (pie::hac::gc::CompatibilityType_Global):
 		ss << "Global";
 		break;
-	case (pie::hac::gc::COMPAT_CHINA):
+	case (pie::hac::gc::CompatibilityType_China):
 		ss << "China";
 		break;
 	default:

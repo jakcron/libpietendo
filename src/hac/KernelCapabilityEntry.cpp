@@ -1,7 +1,7 @@
 #include <pietendo/hac/KernelCapabilityEntry.h>
 
 pie::hac::KernelCapabilityEntry::KernelCapabilityEntry() :
-	mType(kc::KernelCapId::Invalid)
+	mType(kc::KernelCapId_Invalid)
 {}
 
 pie::hac::KernelCapabilityEntry::KernelCapabilityEntry(kc::KernelCapId type) :

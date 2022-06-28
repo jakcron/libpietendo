@@ -8,16 +8,16 @@ std::string pie::hac::AccessControlInfoUtil::getMemoryRegionAsString(pie::hac::a
 
 	switch(mem_region)
 	{
-	case (pie::hac::aci::MemoryRegion::Application):
+	case (pie::hac::aci::MemoryRegion_Application):
 		ss << "Application";
 		break;
-	case (pie::hac::aci::MemoryRegion::Applet):
+	case (pie::hac::aci::MemoryRegion_Applet):
 		ss << "Applet";
 		break;
-	case (pie::hac::aci::MemoryRegion::SecureSystem):
+	case (pie::hac::aci::MemoryRegion_SecureSystem):
 		ss << "SecureSystem";
 		break;
-	case (pie::hac::aci::MemoryRegion::NonSecureSystem):
+	case (pie::hac::aci::MemoryRegion_NonSecureSystem):
 		ss << "NonSecureSystem";
 		break;
 	default:

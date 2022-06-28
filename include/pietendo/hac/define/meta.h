@@ -22,18 +22,18 @@ namespace meta
 	static const uint32_t kAlignSystemResourceMask = kAlignSystemResourceSize - 1;
 	static const uint32_t kMaxSystemResourceSize = 0x1FE00000;
 
-	enum class InstructionType : bool
+	enum InstructionType : bool
 	{
-		InstructionType32Bit,
-		InstructionType64Bit
+		InstructionType_32Bit = false,
+		InstructionType_64Bit = true
 	};
 
-	enum class ProcessAddressSpace : byte_t
+	enum ProcessAddressSpace : byte_t
 	{
-		AddressSpace32Bit,
-		AddressSpace64BitOld,
-		AddressSpace32BitNoReserved,
-		AddressSpace64Bit
+		ProcessAddressSpace_32Bit = 0,
+		ProcessAddressSpace_64BitOld = 1,
+		ProcessAddressSpace_32BitNoReserved = 2,
+		ProcessAddressSpace_64Bit = 3
 	};
 }
 #pragma pack(push,1)

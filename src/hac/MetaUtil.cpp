@@ -8,16 +8,16 @@ std::string pie::hac::MetaUtil::getProcessAddressSpaceAsString(pie::hac::meta::P
 
 	switch(type)
 	{
-	case (pie::hac::meta::ProcessAddressSpace::AddressSpace32Bit):
+	case (pie::hac::meta::ProcessAddressSpace_32Bit):
 		ss << "AddressSpace32Bit";
 		break;
-	case (pie::hac::meta::ProcessAddressSpace::AddressSpace64BitOld):
+	case (pie::hac::meta::ProcessAddressSpace_64BitOld):
 		ss << "AddressSpace64BitOld";
 		break;
-	case (pie::hac::meta::ProcessAddressSpace::AddressSpace32BitNoReserved):
+	case (pie::hac::meta::ProcessAddressSpace_32BitNoReserved):
 		ss << "AddressSpace32BitNoReserved";
 		break;
-	case (pie::hac::meta::ProcessAddressSpace::AddressSpace64Bit):
+	case (pie::hac::meta::ProcessAddressSpace_64Bit):
 		ss << "AddressSpace64Bit";
 		break;
 	default:

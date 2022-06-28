@@ -37,7 +37,7 @@ public:
 
 private:
 	const std::string kModuleName = "INTERUPT_ENTRY";
-	static const kc::KernelCapId kCapId = kc::KernelCapId::EnableInterrupts;
+	static const kc::KernelCapId kCapId = kc::KernelCapId_EnableInterrupts;
 
 	KernelCapabilityEntry mCap;
 	uint32_t mInterupt[kInteruptNum];

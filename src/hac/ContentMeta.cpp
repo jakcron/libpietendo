@@ -110,23 +110,23 @@ void pie::hac::ContentMeta::fromBytes(const byte_t* data, size_t len)
 	{
 		switch (mType)
 		{
-			case (cnmt::ContentMetaType::Application):
+			case (cnmt::ContentMetaType_Application):
 				mApplicationMetaExtendedHeader.fromBytes(data + getExtendedHeaderOffset(), hdr->exhdr_size.unwrap());
 				exdata_size = 0;
 				break;
-			case (cnmt::ContentMetaType::Patch):
+			case (cnmt::ContentMetaType_Patch):
 				mPatchMetaExtendedHeader.fromBytes(data + getExtendedHeaderOffset(), hdr->exhdr_size.unwrap());
 				exdata_size = mPatchMetaExtendedHeader.getExtendedDataSize();
 				break;
-			case (cnmt::ContentMetaType::AddOnContent):
+			case (cnmt::ContentMetaType_AddOnContent):
 				mAddOnContentMetaExtendedHeader.fromBytes(data + getExtendedHeaderOffset(), hdr->exhdr_size.unwrap());
 				exdata_size = 0;
 				break;
-			case (cnmt::ContentMetaType::Delta):
+			case (cnmt::ContentMetaType_Delta):
 				mDeltaMetaExtendedHeader.fromBytes(data + getExtendedHeaderOffset(), hdr->exhdr_size.unwrap());
 				exdata_size = mDeltaMetaExtendedHeader.getExtendedDataSize();
 				break;
-			case (cnmt::ContentMetaType::SystemUpdate):
+			case (cnmt::ContentMetaType_SystemUpdate):
 				mSystemUpdateMetaExtendedHeader.fromBytes(data + getExtendedHeaderOffset(), hdr->exhdr_size.unwrap());
 				exdata_size = mSystemUpdateMetaExtendedHeader.getExtendedDataSize();
 				break;
@@ -166,15 +166,15 @@ void pie::hac::ContentMeta::fromBytes(const byte_t* data, size_t len)
 	{
 		switch (mType)
 		{
-			case (cnmt::ContentMetaType::Patch):
+			case (cnmt::ContentMetaType_Patch):
 				mPatchMetaExtendedData = tc::ByteData(exdata_size);
 				memcpy(mPatchMetaExtendedData.data(), data + getExtendedDataOffset(hdr->exhdr_size.unwrap(), hdr->content_count.unwrap(), hdr->content_meta_count.unwrap()), exdata_size);
 				break;
-			case (cnmt::ContentMetaType::Delta):
+			case (cnmt::ContentMetaType_Delta):
 				mDeltaMetaExtendedData = tc::ByteData(exdata_size);
 				memcpy(mDeltaMetaExtendedData.data(), data + getExtendedDataOffset(hdr->exhdr_size.unwrap(), hdr->content_count.unwrap(), hdr->content_meta_count.unwrap()), exdata_size);
 				break;
-			case (cnmt::ContentMetaType::SystemUpdate):
+			case (cnmt::ContentMetaType_SystemUpdate):
 				mSystemUpdateMetaExtendedData.fromBytes(data + getExtendedDataOffset(hdr->exhdr_size.unwrap(), hdr->content_count.unwrap(), hdr->content_meta_count.unwrap()), exdata_size);
 				break;
 			default:
@@ -203,10 +203,10 @@ void pie::hac::ContentMeta::clear()
 	mRawBinary = tc::ByteData();
 	mTitleId = 0;
 	mTitleVersion = 0;
-	mType = cnmt::ContentMetaType::SystemProgram;
+	mType = cnmt::ContentMetaType_SystemProgram;
 	mAttribute.clear();
-	mStorageId = cnmt::StorageId::None;
-	mContentInstallType = cnmt::ContentInstallType::Full;
+	mStorageId = cnmt::StorageId_None;
+	mContentInstallType = cnmt::ContentInstallType_Full;
 	mInstallState.clear();
 	mRequiredDownloadSystemVersion = 0;
 	mApplicationMetaExtendedHeader.clear();
@@ -418,19 +418,19 @@ bool pie::hac::ContentMeta::validateExtendedHeaderSize(cnmt::ContentMetaType typ
 
 	switch (type)
 	{
-		case (cnmt::ContentMetaType::Application):
+		case (cnmt::ContentMetaType_Application):
 			validSize = (exhdrSize == sizeof(sApplicationMetaExtendedHeader));
 			break;
-		case (cnmt::ContentMetaType::Patch):
+		case (cnmt::ContentMetaType_Patch):
 			validSize = (exhdrSize == sizeof(sPatchMetaExtendedHeader));
 			break;
-		case (cnmt::ContentMetaType::AddOnContent):
+		case (cnmt::ContentMetaType_AddOnContent):
 			validSize = (exhdrSize == sizeof(sAddOnContentMetaExtendedHeader));
 			break;
-		case (cnmt::ContentMetaType::Delta):
+		case (cnmt::ContentMetaType_Delta):
 			validSize = (exhdrSize == sizeof(sDeltaMetaExtendedHeader));
 			break;
-		case (cnmt::ContentMetaType::SystemUpdate):
+		case (cnmt::ContentMetaType_SystemUpdate):
 			validSize = (exhdrSize == sizeof(sSystemUpdateMetaExtendedHeader));
 			break;
 		default:
@@ -443,17 +443,17 @@ bool pie::hac::ContentMeta::validateExtendedHeaderSize(cnmt::ContentMetaType typ
 size_t pie::hac::ContentMeta::getExtendedDataSize(cnmt::ContentMetaType type, const byte_t * data) const
 {
 	size_t exdata_len = 0;
-	if (type == cnmt::ContentMetaType::Patch)
+	if (type == cnmt::ContentMetaType_Patch)
 	{
 		const sPatchMetaExtendedHeader* exhdr = (const sPatchMetaExtendedHeader*)(data);
 		exdata_len = exhdr->extended_data_size.unwrap();
 	}
-	else if (type == cnmt::ContentMetaType::Delta)
+	else if (type == cnmt::ContentMetaType_Delta)
 	{
 		const sDeltaMetaExtendedHeader* exhdr = (const sDeltaMetaExtendedHeader*)(data);
 		exdata_len = exhdr->extended_data_size.unwrap();
 	}
-	else if (type == cnmt::ContentMetaType::SystemUpdate)
+	else if (type == cnmt::ContentMetaType_SystemUpdate)
 	{
 		const sSystemUpdateMetaExtendedHeader* exhdr = (const sSystemUpdateMetaExtendedHeader*)(data);
 		exdata_len = exhdr->extended_data_size.unwrap();

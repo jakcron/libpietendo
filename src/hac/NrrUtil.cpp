@@ -8,10 +8,10 @@ std::string pie::hac::NrrUtil::getNrrKindAsString(pie::hac::nrr::NrrKind val)
 
 	switch (val)
 	{
-	case (pie::hac::nrr::NrrKind::User):
+	case (pie::hac::nrr::NrrKind_User):
 		ss << "User";
 		break;
-	case (pie::hac::nrr::NrrKind::JitPlugin):
+	case (pie::hac::nrr::NrrKind_JitPlugin):
 		ss << "JitPlugin";
 		break;
 	default:

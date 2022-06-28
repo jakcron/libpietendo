@@ -50,10 +50,10 @@ std::string pie::hac::ContentArchiveUtil::getFormatHeaderVersionAsString(pie::ha
 
 	switch (val)
 	{
-	case (pie::hac::nca::FORMAT_NCA2):
+	case (pie::hac::nca::HeaderFormatVersion_NCA2):
 		str = "NCA2";
 		break;
-	case (pie::hac::nca::FORMAT_NCA3):
+	case (pie::hac::nca::HeaderFormatVersion_NCA3):
 		str = "NCA3";
 		break;
 	default:
@@ -70,13 +70,13 @@ std::string pie::hac::ContentArchiveUtil::getProgramContentParititionIndexAsStri
 
 	switch (val)
 	{
-	case (pie::hac::nca::PARTITION_CODE):
+	case (pie::hac::nca::ProgramContentPartitionIndex_Code):
 		str = "code";
 		break;
-	case (pie::hac::nca::PARTITION_DATA):
+	case (pie::hac::nca::ProgramContentPartitionIndex_Data):
 		str = "data";
 		break;
-	case (pie::hac::nca::PARTITION_LOGO):
+	case (pie::hac::nca::ProgramContentPartitionIndex_Logo):
 		str = "logo";
 		break;
 	default:
@@ -93,10 +93,10 @@ std::string pie::hac::ContentArchiveUtil::getDistributionTypeAsString(pie::hac::
 
 	switch (val)
 	{
-	case (pie::hac::nca::DistributionType::Download):
+	case (pie::hac::nca::DistributionType_Download):
 		str = "Download";
 		break;
-	case (pie::hac::nca::DistributionType::GameCard):
+	case (pie::hac::nca::DistributionType_GameCard):
 		str = "Game Card";
 		break;
 	default:
@@ -113,22 +113,22 @@ std::string pie::hac::ContentArchiveUtil::getContentTypeAsString(pie::hac::nca::
 
 	switch (val)
 	{
-	case (pie::hac::nca::ContentType::Program):
+	case (pie::hac::nca::ContentType_Program):
 		str = "Program";
 		break;
-	case (pie::hac::nca::ContentType::Meta):
+	case (pie::hac::nca::ContentType_Meta):
 		str = "Meta";
 		break;
-	case (pie::hac::nca::ContentType::Control):
+	case (pie::hac::nca::ContentType_Control):
 		str = "Control";
 		break;
-	case (pie::hac::nca::ContentType::Manual):
+	case (pie::hac::nca::ContentType_Manual):
 		str = "Manual";
 		break;
-	case (pie::hac::nca::ContentType::Data):
+	case (pie::hac::nca::ContentType_Data):
 		str = "Data";
 		break;
-	case (pie::hac::nca::ContentType::PublicData):
+	case (pie::hac::nca::ContentType_PublicData):
 		str = "PublicData";
 		break;
 	default:
@@ -145,10 +145,10 @@ std::string pie::hac::ContentArchiveUtil::getFormatTypeAsString(pie::hac::nca::F
 
 	switch (val)
 	{
-	case (pie::hac::nca::FormatType::RomFs):
+	case (pie::hac::nca::FormatType_RomFs):
 		str = "RomFs";
 		break;
-	case (pie::hac::nca::FormatType::PartitionFs):
+	case (pie::hac::nca::FormatType_PartitionFs):
 		str = "PartitionFs";
 		break;
 	default:
@@ -165,25 +165,25 @@ std::string pie::hac::ContentArchiveUtil::getHashTypeAsString(pie::hac::nca::Has
 
 	switch (val)
 	{
-	case (pie::hac::nca::HashType::Auto):
+	case (pie::hac::nca::HashType_Auto):
 		str = "Auto";
 		break;
-	case (pie::hac::nca::HashType::None):
+	case (pie::hac::nca::HashType_None):
 		str = "None";
 		break;
-	case (pie::hac::nca::HashType::HierarchicalSha256):
+	case (pie::hac::nca::HashType_HierarchicalSha256):
 		str = "HierarchicalSha256";
 		break;
-	case (pie::hac::nca::HashType::HierarchicalIntegrity):
+	case (pie::hac::nca::HashType_HierarchicalIntegrity):
 		str = "HierarchicalIntegrity";
 		break;
-	case (pie::hac::nca::HashType::AutoSha3):
+	case (pie::hac::nca::HashType_AutoSha3):
 		str = "AutoSha3";
 		break;
-	case (pie::hac::nca::HashType::HierarchicalSha3256):
+	case (pie::hac::nca::HashType_HierarchicalSha3256):
 		str = "HierarchicalSha3256";
 		break;
-	case (pie::hac::nca::HashType::HierarchicalIntegritySha3):
+	case (pie::hac::nca::HashType_HierarchicalIntegritySha3):
 		str = "HierarchicalIntegritySha3";
 		break;
 	default:
@@ -200,25 +200,25 @@ std::string pie::hac::ContentArchiveUtil::getEncryptionTypeAsString(pie::hac::nc
 
 	switch (val)
 	{
-	case (pie::hac::nca::EncryptionType::Auto):
+	case (pie::hac::nca::EncryptionType_Auto):
 		str = "Auto";
 		break;
-	case (pie::hac::nca::EncryptionType::None):
+	case (pie::hac::nca::EncryptionType_None):
 		str = "None";
 		break;
-	case (pie::hac::nca::EncryptionType::AesXts):
+	case (pie::hac::nca::EncryptionType_AesXts):
 		str = "AesXts";
 		break;
-	case (pie::hac::nca::EncryptionType::AesCtr):
+	case (pie::hac::nca::EncryptionType_AesCtr):
 		str = "AesCtr";
 		break;
-	case (pie::hac::nca::EncryptionType::AesCtrEx):
+	case (pie::hac::nca::EncryptionType_AesCtrEx):
 		str = "AesCtrEx";
 		break;
-	case (pie::hac::nca::EncryptionType::AesCtrSkipLayerHash):
+	case (pie::hac::nca::EncryptionType_AesCtrSkipLayerHash):
 		str = "AesCtrSkipLayerHash";
 		break;
-	case (pie::hac::nca::EncryptionType::AesCtrExSkipLayerHash):
+	case (pie::hac::nca::EncryptionType_AesCtrExSkipLayerHash):
 		str = "AesCtrExSkipLayerHash";
 		break;
 	default:
@@ -236,13 +236,13 @@ std::string pie::hac::ContentArchiveUtil::getMetaDataHashTypeAsString(pie::hac::
 
 	switch (val)
 	{
-	case (pie::hac::nca::MetaDataHashType::None):
+	case (pie::hac::nca::MetaDataHashType_None):
 		str = "None";
 		break;
-	case (pie::hac::nca::MetaDataHashType::HierarchicalIntegrity):
+	case (pie::hac::nca::MetaDataHashType_HierarchicalIntegrity):
 		str = "HierarchicalIntegrity";
 		break;
-	case (pie::hac::nca::MetaDataHashType::HierarchicalIntegritySha3):
+	case (pie::hac::nca::MetaDataHashType_HierarchicalIntegritySha3):
 		str = "HierarchicalIntegritySha3";
 		break;
 	default:
@@ -259,13 +259,13 @@ std::string pie::hac::ContentArchiveUtil::getKeyAreaEncryptionKeyIndexAsString(p
 
 	switch (val)
 	{
-	case (pie::hac::nca::KAEK_IDX_APPLICATION):
+	case (pie::hac::nca::KeyAreaEncryptionKeyIndex_Application):
 		str = "Application";
 		break;
-	case (pie::hac::nca::KAEK_IDX_OCEAN):
+	case (pie::hac::nca::KeyAreaEncryptionKeyIndex_Ocean):
 		str = "Ocean";
 		break;
-	case (pie::hac::nca::KAEK_IDX_SYSTEM):
+	case (pie::hac::nca::KeyAreaEncryptionKeyIndex_System):
 		str = "System";
 		break;
 	default:

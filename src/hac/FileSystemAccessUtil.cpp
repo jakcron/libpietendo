@@ -8,118 +8,118 @@ std::string pie::hac::FileSystemAccessUtil::getFsAccessFlagAsString(pie::hac::fa
 
 	switch(flag)
 	{
-	case (pie::hac::fac::FsAccessFlag::ApplicationInfo):
+	case (pie::hac::fac::FsAccessFlag_ApplicationInfo):
 		ss << "ApplicationInfo";
 		break;
-	case (pie::hac::fac::FsAccessFlag::BootModeControl):
+	case (pie::hac::fac::FsAccessFlag_BootModeControl):
 		ss << "BootModeControl";
 		break;
-	case (pie::hac::fac::FsAccessFlag::Calibration):
+	case (pie::hac::fac::FsAccessFlag_Calibration):
 		ss << "Calibration";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SystemSaveData):
+	case (pie::hac::fac::FsAccessFlag_SystemSaveData):
 		ss << "SystemSaveData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::GameCard):
+	case (pie::hac::fac::FsAccessFlag_GameCard):
 		ss << "GameCard";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataBackUp):
+	case (pie::hac::fac::FsAccessFlag_SaveDataBackUp):
 		ss << "SaveDataBackUp";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataManagement):
+	case (pie::hac::fac::FsAccessFlag_SaveDataManagement):
 		ss << "SaveDataManagement";
 		break;
-	case (pie::hac::fac::FsAccessFlag::BisAllRaw):
+	case (pie::hac::fac::FsAccessFlag_BisAllRaw):
 		ss << "BisAllRaw";
 		break;
-	case (pie::hac::fac::FsAccessFlag::GameCardRaw):
+	case (pie::hac::fac::FsAccessFlag_GameCardRaw):
 		ss << "GameCardRaw";
 		break;
-	case (pie::hac::fac::FsAccessFlag::GameCardPrivate):
+	case (pie::hac::fac::FsAccessFlag_GameCardPrivate):
 		ss << "GameCardPrivate";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SetTime):
+	case (pie::hac::fac::FsAccessFlag_SetTime):
 		ss << "SetTime";
 		break;
-	case (pie::hac::fac::FsAccessFlag::ContentManager):
+	case (pie::hac::fac::FsAccessFlag_ContentManager):
 		ss << "ContentManager";
 		break;
-	case (pie::hac::fac::FsAccessFlag::ImageManager):
+	case (pie::hac::fac::FsAccessFlag_ImageManager):
 		ss << "ImageManager";
 		break;
-	case (pie::hac::fac::FsAccessFlag::CreateSaveData):
+	case (pie::hac::fac::FsAccessFlag_CreateSaveData):
 		ss << "CreateSaveData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SystemSaveDataManagement):
+	case (pie::hac::fac::FsAccessFlag_SystemSaveDataManagement):
 		ss << "SystemSaveDataManagement";
 		break;
-	case (pie::hac::fac::FsAccessFlag::BisFileSystem):
+	case (pie::hac::fac::FsAccessFlag_BisFileSystem):
 		ss << "BisFileSystem";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SystemUpdate):
+	case (pie::hac::fac::FsAccessFlag_SystemUpdate):
 		ss << "SystemUpdate";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataMeta):
+	case (pie::hac::fac::FsAccessFlag_SaveDataMeta):
 		ss << "SaveDataMeta";
 		break;
-	case (pie::hac::fac::FsAccessFlag::DeviceSaveData):
+	case (pie::hac::fac::FsAccessFlag_DeviceSaveData):
 		ss << "DeviceSaveData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SettingsControl):
+	case (pie::hac::fac::FsAccessFlag_SettingsControl):
 		ss << "SettingsControl";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SystemData):
+	case (pie::hac::fac::FsAccessFlag_SystemData):
 		ss << "SystemData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SdCard):
+	case (pie::hac::fac::FsAccessFlag_SdCard):
 		ss << "SdCard";
 		break;
-	case (pie::hac::fac::FsAccessFlag::Host):
+	case (pie::hac::fac::FsAccessFlag_Host):
 		ss << "Host";
 		break;
-	case (pie::hac::fac::FsAccessFlag::FillBis):
+	case (pie::hac::fac::FsAccessFlag_FillBis):
 		ss << "FillBis";
 		break;
-	case (pie::hac::fac::FsAccessFlag::CorruptSaveData):
+	case (pie::hac::fac::FsAccessFlag_CorruptSaveData):
 		ss << "CorruptSaveData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataForDebug):
+	case (pie::hac::fac::FsAccessFlag_SaveDataForDebug):
 		ss << "SaveDataForDebug";
 		break;
-	case (pie::hac::fac::FsAccessFlag::FormatSdCard):
+	case (pie::hac::fac::FsAccessFlag_FormatSdCard):
 		ss << "FormatSdCard";
 		break;
-	case (pie::hac::fac::FsAccessFlag::GetRightsId):
+	case (pie::hac::fac::FsAccessFlag_GetRightsId):
 		ss << "GetRightsId";
 		break;
-	case (pie::hac::fac::FsAccessFlag::RegisterExternalKey):
+	case (pie::hac::fac::FsAccessFlag_RegisterExternalKey):
 		ss << "RegisterExternalKey";
 		break;
-	case (pie::hac::fac::FsAccessFlag::RegisterUpdatePartition):
+	case (pie::hac::fac::FsAccessFlag_RegisterUpdatePartition):
 		ss << "RegisterUpdatePartition";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataTransfer):
+	case (pie::hac::fac::FsAccessFlag_SaveDataTransfer):
 		ss << "SaveDataTransfer";
 		break;
-	case (pie::hac::fac::FsAccessFlag::DeviceDetection):
+	case (pie::hac::fac::FsAccessFlag_DeviceDetection):
 		ss << "DeviceDetection";
 		break;
-	case (pie::hac::fac::FsAccessFlag::AccessFailureResolution):
+	case (pie::hac::fac::FsAccessFlag_AccessFailureResolution):
 		ss << "AccessFailureResolution";
 		break;
-	case (pie::hac::fac::FsAccessFlag::SaveDataTransferVersion2):
+	case (pie::hac::fac::FsAccessFlag_SaveDataTransferVersion2):
 		ss << "SaveDataTransferVersion2";
 		break;
-	case (pie::hac::fac::FsAccessFlag::RegisterProgramIndexMapInfo):
+	case (pie::hac::fac::FsAccessFlag_RegisterProgramIndexMapInfo):
 		ss << "RegisterProgramIndexMapInfo";
 		break;
-	case (pie::hac::fac::FsAccessFlag::CreateOwnSaveData):
+	case (pie::hac::fac::FsAccessFlag_CreateOwnSaveData):
 		ss << "CreateOwnSaveData";
 		break;
-	case (pie::hac::fac::FsAccessFlag::Debug):
+	case (pie::hac::fac::FsAccessFlag_Debug):
 		ss << "Debug";
 		break;
-	case (pie::hac::fac::FsAccessFlag::FullPermission):
+	case (pie::hac::fac::FsAccessFlag_FullPermission):
 		ss << "FullPermission";
 		break;
 	default:
@@ -136,13 +136,13 @@ std::string pie::hac::FileSystemAccessUtil::getSaveDataOwnerAccessModeAsString(p
 
 	switch(type)
 	{
-	case (pie::hac::fac::SaveDataOwnerIdAccessType::Read):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType_Read):
 		ss << "Read";
 		break;
-	case (pie::hac::fac::SaveDataOwnerIdAccessType::Write):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType_Write):
 		ss << "Write";
 		break;
-	case (pie::hac::fac::SaveDataOwnerIdAccessType::ReadWrite):
+	case (pie::hac::fac::SaveDataOwnerIdAccessType_ReadWrite):
 		ss << "ReadWrite";
 		break;
 	default:

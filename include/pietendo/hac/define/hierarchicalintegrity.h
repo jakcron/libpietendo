@@ -18,10 +18,10 @@ namespace hierarchicalintegrity
 	static const size_t kSaltSourceLen = 0x20;
 	static const size_t kHacRomfsMasterHashLen = 0x20;
 
-	enum class TypeId
+	enum TypeId
 	{
-		CTR_RomFs = 0x10000, // Nintendo 3DS
-		HAC_RomFs = 0x20000 // Nintendo Switch
+		TypeId_CTR_RomFs = 0x10000, // Nintendo 3DS
+		TypeId_HAC_RomFs = 0x20000 // Nintendo Switch
 	};
 }
 
