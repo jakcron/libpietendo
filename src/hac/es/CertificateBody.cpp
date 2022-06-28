@@ -1,16 +1,16 @@
-#include <pietendo/hac/pki/CertificateBody.h>
+#include <pietendo/hac/es/CertificateBody.h>
 
-pie::hac::pki::CertificateBody::CertificateBody()
+pie::hac::es::CertificateBody::CertificateBody()
 {
 	clear();
 }
 
-pie::hac::pki::CertificateBody::CertificateBody(const CertificateBody& other)
+pie::hac::es::CertificateBody::CertificateBody(const CertificateBody& other)
 {
 	*this = other;
 }
 
-void pie::hac::pki::CertificateBody::operator=(const CertificateBody& other)
+void pie::hac::es::CertificateBody::operator=(const CertificateBody& other)
 {
 	mRawBinary = other.mRawBinary;
 	mIssuer = other.mIssuer;
@@ -22,7 +22,7 @@ void pie::hac::pki::CertificateBody::operator=(const CertificateBody& other)
 	mEcdsa240PublicKey = other.mEcdsa240PublicKey;
 }
 
-bool pie::hac::pki::CertificateBody::operator==(const CertificateBody& other) const
+bool pie::hac::es::CertificateBody::operator==(const CertificateBody& other) const
 {
 	return (mIssuer == other.mIssuer) \
 		&& (mSubject == other.mSubject) \
@@ -36,12 +36,12 @@ bool pie::hac::pki::CertificateBody::operator==(const CertificateBody& other) co
 		&& (mEcdsa240PublicKey.s == other.mEcdsa240PublicKey.s);
 }
 
-bool pie::hac::pki::CertificateBody::operator!=(const CertificateBody& other) const
+bool pie::hac::es::CertificateBody::operator!=(const CertificateBody& other) const
 {
 	return !(*this == other);
 }
 
-void pie::hac::pki::CertificateBody::toBytes()
+void pie::hac::es::CertificateBody::toBytes()
 {
 	// get public key size
 	size_t pubkeySize = 0;
@@ -90,7 +90,7 @@ void pie::hac::pki::CertificateBody::toBytes()
 	}
 }
 
-void pie::hac::pki::CertificateBody::fromBytes(const byte_t* src, size_t size)
+void pie::hac::es::CertificateBody::fromBytes(const byte_t* src, size_t size)
 {
 	if (src == nullptr) { throw tc::ArgumentNullException(kModuleName, "src was null."); }
 	if (size < sizeof(sCertificateHeader)) { tc::ArgumentOutOfRangeException(kModuleName, "src was too small."); }
@@ -150,13 +150,13 @@ void pie::hac::pki::CertificateBody::fromBytes(const byte_t* src, size_t size)
 	}
 }
 
-const tc::ByteData& pie::hac::pki::CertificateBody::getBytes() const
+const tc::ByteData& pie::hac::es::CertificateBody::getBytes() const
 {
 	return mRawBinary;
 }
 
 
-void pie::hac::pki::CertificateBody::clear()
+void pie::hac::es::CertificateBody::clear()
 {
 	mIssuer.clear();
 	mSubject.clear();
@@ -165,15 +165,15 @@ void pie::hac::pki::CertificateBody::clear()
 
 	mRsa4096PublicKey = tc::crypto::RsaKey();
 	mRsa2048PublicKey = tc::crypto::RsaKey();
-	memset(&mEcdsa240PublicKey, 0, sizeof(pie::hac::pki::sEcdsa233PublicKey));
+	memset(&mEcdsa240PublicKey, 0, sizeof(pie::hac::es::sEcdsa233PublicKey));
 }
 
-const std::string& pie::hac::pki::CertificateBody::getIssuer() const
+const std::string& pie::hac::es::CertificateBody::getIssuer() const
 {
 	return mIssuer;
 }
 
-void pie::hac::pki::CertificateBody::setIssuer(const std::string& issuer)
+void pie::hac::es::CertificateBody::setIssuer(const std::string& issuer)
 {
 	if (issuer.size() > cert::kIssuerSize)
 	{
@@ -183,22 +183,22 @@ void pie::hac::pki::CertificateBody::setIssuer(const std::string& issuer)
 	mIssuer = issuer;
 }
 
-pie::hac::pki::cert::PublicKeyType pie::hac::pki::CertificateBody::getPublicKeyType() const
+pie::hac::es::cert::PublicKeyType pie::hac::es::CertificateBody::getPublicKeyType() const
 {
 	return mPublicKeyType;
 }
 
-void pie::hac::pki::CertificateBody::setPublicKeyType(cert::PublicKeyType type)
+void pie::hac::es::CertificateBody::setPublicKeyType(cert::PublicKeyType type)
 {
 	mPublicKeyType = type;
 }
 
-const std::string& pie::hac::pki::CertificateBody::getSubject() const
+const std::string& pie::hac::es::CertificateBody::getSubject() const
 {
 	return mSubject;
 }
 
-void pie::hac::pki::CertificateBody::setSubject(const std::string& subject)
+void pie::hac::es::CertificateBody::setSubject(const std::string& subject)
 {
 	if (subject.size() > cert::kSubjectSize)
 	{
@@ -208,22 +208,22 @@ void pie::hac::pki::CertificateBody::setSubject(const std::string& subject)
 	mSubject = subject;
 }
 
-uint32_t pie::hac::pki::CertificateBody::getCertId() const
+uint32_t pie::hac::es::CertificateBody::getCertId() const
 {
 	return mCertId;
 }
 
-void pie::hac::pki::CertificateBody::setCertId(uint32_t id)
+void pie::hac::es::CertificateBody::setCertId(uint32_t id)
 {
 	mCertId = id;
 }
 
-const tc::crypto::RsaKey& pie::hac::pki::CertificateBody::getRsa4096PublicKey() const
+const tc::crypto::RsaKey& pie::hac::es::CertificateBody::getRsa4096PublicKey() const
 {
 	return mRsa4096PublicKey;
 }
 
-void pie::hac::pki::CertificateBody::setRsa4096PublicKey(const tc::crypto::RsaKey& key)
+void pie::hac::es::CertificateBody::setRsa4096PublicKey(const tc::crypto::RsaKey& key)
 {
 	if (key.n.size() != cert::kRsa4096Size) { throw tc::ArgumentOutOfRangeException(kModuleName, "RSA4096 public key a bad modulus size"); }
 
@@ -233,12 +233,12 @@ void pie::hac::pki::CertificateBody::setRsa4096PublicKey(const tc::crypto::RsaKe
 	mRsa4096PublicKey.e = tc::ByteData(kPublicExponent, sizeof(kPublicExponent));
 }
 
-const tc::crypto::RsaKey& pie::hac::pki::CertificateBody::getRsa2048PublicKey() const
+const tc::crypto::RsaKey& pie::hac::es::CertificateBody::getRsa2048PublicKey() const
 {
 	return mRsa2048PublicKey;
 }
 
-void pie::hac::pki::CertificateBody::setRsa2048PublicKey(const tc::crypto::RsaKey& key)
+void pie::hac::es::CertificateBody::setRsa2048PublicKey(const tc::crypto::RsaKey& key)
 {
 	if (key.n.size() != cert::kRsa2048Size) { throw tc::ArgumentOutOfRangeException(kModuleName, "RSA2048 public key a bad modulus size"); }
 
@@ -248,12 +248,12 @@ void pie::hac::pki::CertificateBody::setRsa2048PublicKey(const tc::crypto::RsaKe
 	mRsa2048PublicKey.e = tc::ByteData(kPublicExponent, sizeof(kPublicExponent));
 }
 
-const pie::hac::pki::sEcdsa233PublicKey& pie::hac::pki::CertificateBody::getEcdsa240PublicKey() const
+const pie::hac::es::sEcdsa233PublicKey& pie::hac::es::CertificateBody::getEcdsa240PublicKey() const
 {
 	return mEcdsa240PublicKey;
 }
 
-void pie::hac::pki::CertificateBody::setEcdsa240PublicKey(const pie::hac::pki::sEcdsa233PublicKey& key)
+void pie::hac::es::CertificateBody::setEcdsa240PublicKey(const pie::hac::es::sEcdsa233PublicKey& key)
 {
 	mEcdsa240PublicKey = key;
 }

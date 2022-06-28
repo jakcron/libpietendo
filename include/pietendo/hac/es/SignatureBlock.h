@@ -1,6 +1,6 @@
 	/**
 	 * @file SignatureBlock.h
-	 * @brief Declaration of pie::hac::pki::SignatureBlock
+	 * @brief Declaration of pie::hac::es::SignatureBlock
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/28
@@ -9,9 +9,9 @@
 #include <tc/ByteData.h>
 #include <tc/ArgumentNullException.h>
 #include <tc/ArgumentOutOfRangeException.h>
-#include <pietendo/hac/pki/sign.h>
+#include <pietendo/hac/es/sign.h>
 
-namespace pie { namespace hac { namespace pki {
+namespace pie { namespace hac { namespace es {
 
 class SignatureBlock
 {
@@ -31,8 +31,8 @@ public:
 	// variables
 	void clear();
 
-	pki::sign::SignatureId getSignType() const;
-	void setSignType(pki::sign::SignatureId type);
+	es::sign::SignatureId getSignType() const;
+	void setSignType(es::sign::SignatureId type);
 
 	bool isLittleEndian() const;
 	void setLittleEndian(bool isLE);
@@ -48,9 +48,9 @@ private:
 	tc::ByteData mRawBinary;
 
 	// variables
-	pki::sign::SignatureId mSignType;
+	es::sign::SignatureId mSignType;
 	bool mIsLittleEndian;
 	tc::ByteData mSignature;
 };
 
-}}} // namespace pie::hac::pki
+}}} // namespace pie::hac::es

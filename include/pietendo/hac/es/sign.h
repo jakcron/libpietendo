@@ -1,14 +1,14 @@
 	/**
 	 * @file sign.h
-	 * @brief Declaration of PKI Signature structs and constants for the HAC library.
+	 * @brief Declaration of ES Signature structs and constants for the HAC library.
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/28
 	 **/
 #pragma once
-#include <pietendo/hac/pki/cert.h>
+#include <pietendo/hac/es/cert.h>
 
-namespace pie { namespace hac { namespace pki {
+namespace pie { namespace hac { namespace es {
 
 namespace sign
 {
@@ -64,4 +64,4 @@ struct sEcdsa240SignBlock
 };
 #pragma pack(pop)
 
-}}} // namespace pie::hac::pki
+}}} // namespace pie::hac::es

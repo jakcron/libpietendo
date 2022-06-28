@@ -1,15 +1,15 @@
 	/**
 	 * @file SignedData.h
-	 * @brief Declaration of pie::hac::pki::SignedData
+	 * @brief Declaration of pie::hac::es::SignedData
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/28
 	 **/
 #pragma once
 #include <tc/types.h>
-#include <pietendo/hac/pki/SignatureBlock.h>
+#include <pietendo/hac/es/SignatureBlock.h>
 
-namespace pie { namespace hac { namespace pki {
+namespace pie { namespace hac { namespace es {
 
 template <class T>
 class SignedData
@@ -30,7 +30,7 @@ public:
 	// variables
 	void clear();
 
-	const pki::SignatureBlock& getSignature() const;
+	const es::SignatureBlock& getSignature() const;
 	void setSignature(const SignatureBlock& signature);
 
 	const T& getBody() const;
@@ -116,7 +116,7 @@ inline void SignedData<T>::clear()
 }
 
 template <class T>
-inline const pki::SignatureBlock& SignedData<T>::getSignature() const
+inline const es::SignatureBlock& SignedData<T>::getSignature() const
 {
 	return mSignature;
 }
@@ -139,4 +139,4 @@ inline void SignedData<T>::setBody(const T& body)
 	mBody = body;
 }
 
-}}} // namespace pie::hac::pki
+}}} // namespace pie::hac::es

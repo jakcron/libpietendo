@@ -1,15 +1,15 @@
 	/**
 	 * @file cert.h
-	 * @brief Declaration of PKI Certificate structs and constants for the HAC library.
+	 * @brief Declaration of ES Certificate structs and constants for the HAC library.
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/28
 	 **/
 #pragma once
 #include <tc/types.h>
-#include <pietendo/hac/pki/ecdsa.h>
+#include <pietendo/hac/es/ecdsa.h>
 
-namespace pie { namespace hac { namespace pki {
+namespace pie { namespace hac { namespace es {
 
 namespace cert
 {
@@ -58,4 +58,4 @@ struct sEcdsa240PublicKeyBlock
 };
 #pragma pack(pop)
 
-}}} // namespace pie::hac::pki
+}}} // namespace pie::hac::es

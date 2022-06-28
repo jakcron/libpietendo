@@ -1,15 +1,15 @@
 	/**
 	 * @file CertificateBody.h
-	 * @brief Declaration of pie::hac::pki::CertificateBody
+	 * @brief Declaration of pie::hac::es::CertificateBody
 	 * @author Jack (jakcron)
 	 * @version 0.1
 	 * @date 2022/06/28
 	 **/
 #pragma once
 #include <tc.h>
-#include <pietendo/hac/pki/cert.h>
+#include <pietendo/hac/es/cert.h>
 
-namespace pie { namespace hac { namespace pki {
+namespace pie { namespace hac { namespace es {
 
 class CertificateBody
 {
@@ -32,7 +32,7 @@ public:
 	const std::string& getIssuer() const;
 	void setIssuer(const std::string& issuer);
 
-	pki::cert::PublicKeyType getPublicKeyType() const;
+	es::cert::PublicKeyType getPublicKeyType() const;
 	void setPublicKeyType(cert::PublicKeyType type);
 
 	const std::string& getSubject() const;
@@ -47,8 +47,8 @@ public:
 	const tc::crypto::RsaKey& getRsa2048PublicKey() const;
 	void setRsa2048PublicKey(const tc::crypto::RsaKey& key);
 
-	const pie::hac::pki::sEcdsa233PublicKey& getEcdsa240PublicKey() const;
-	void setEcdsa240PublicKey(const pie::hac::pki::sEcdsa233PublicKey& key);
+	const pie::hac::es::sEcdsa233PublicKey& getEcdsa240PublicKey() const;
+	void setEcdsa240PublicKey(const pie::hac::es::sEcdsa233PublicKey& key);
 	
 private:
 	const std::string kModuleName = "CERTIFICATE_BODY";
@@ -64,7 +64,7 @@ private:
 
 	tc::crypto::RsaKey mRsa4096PublicKey;
 	tc::crypto::RsaKey mRsa2048PublicKey;
-	pie::hac::pki::sEcdsa233PublicKey mEcdsa240PublicKey;
+	pie::hac::es::sEcdsa233PublicKey mEcdsa240PublicKey;
 };
 
-}}} // namespace pie::hac::pki
+}}} // namespace pie::hac::es
