@@ -16,7 +16,8 @@ pie::ctr::IvfcStream::IvfcStream() :
 	mDataStreamBlockSize(0),
 	mDataStreamLogicalLength(0),
 	mDataStream(),
-	mHashCache()
+	mHashCache(),
+	mHash()
 {
 }
 
@@ -297,12 +298,12 @@ size_t pie::ctr::IvfcStream::read(byte_t* ptr, size_t count)
 
 	if (block_num == 0)
 	{
-		tc::InvalidOperationException("pie::ctr::IvfcStream", "Invalid block number (0 blocks, would have returned before now if count==0)");
+		throw tc::InvalidOperationException("pie::ctr::IvfcStream", "Invalid block number (0 blocks, would have returned before now if count==0)");
 	}
 
 	if (block_num < continuous_block_num)
 	{
-		tc::InvalidOperationException("pie::ctr::IvfcStream", "Invalid block number (underflow error)");
+		throw tc::InvalidOperationException("pie::ctr::IvfcStream", "Invalid block number (underflow error)");
 	}
 
 	// allocate memory for partial block
