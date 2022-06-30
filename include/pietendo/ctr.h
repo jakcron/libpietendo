@@ -20,7 +20,7 @@
 #include <pietendo/ctr/ivfc.h>
 #include <pietendo/ctr/ncch.h>
 #include <pietendo/ctr/romfs.h>
-#include <pietendo/ctr/smdh.h>
+#include <pietendo/ctr/systemmenudata.h>
 
 // Wrapped IStream
 #include <pietendo/ctr/IvfcStream.h>
