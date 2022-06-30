@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\pietendo">
+      <UniqueIdentifier>{19d302bb-4eff-4d74-b56c-b33e5f1fc445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\ctr">
+      <UniqueIdentifier>{4900eaed-54db-418f-9221-addc20116e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\es">
+      <UniqueIdentifier>{bd9eede5-ee2d-4652-8b45-6b44f3b3a803}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\hac">
+      <UniqueIdentifier>{35070cff-8d36-49b4-beeb-f0c50900a6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\ctr\es">
+      <UniqueIdentifier>{29bacec8-69b7-402a-8882-8508584eb1dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\hac\define">
+      <UniqueIdentifier>{bf646f8a-8f04-455e-a2a2-d40747bcc8bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\pietendo\hac\es">
+      <UniqueIdentifier>{2347da30-2cef-495d-93bb-66c79fd8d0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ctr">
+      <UniqueIdentifier>{3a200d92-6b12-41c7-a5ec-8a66f56c6ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hac">
+      <UniqueIdentifier>{9e477dc7-166f-4307-8f93-e2df092b1f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ctr\es">
+      <UniqueIdentifier>{5b786368-c5e1-4eaf-939d-4a33b01e87a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hac\es">
+      <UniqueIdentifier>{de5684e3-d216-40ca-b242-f2d279597e72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\pietendo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr.h">
+      <Filter>Header Files\pietendo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es.h">
+      <Filter>Header Files\pietendo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac.h">
+      <Filter>Header Files\pietendo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\bcwav.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cci.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CciFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cia.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CiaFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cro.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\crr.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CtrKeyGenerator.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\exefs.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ExeFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\exheader.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\firm.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ivfc.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\IvfcStream.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ncch.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\romfs.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\RomFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\systemmenudata.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\systemupdater.h">
+      <Filter>Header Files\pietendo\ctr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Certificate.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\ISigner.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\RsaSigner.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Signature.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Ticket.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\TitleMetaData.h">
+      <Filter>Header Files\pietendo\ctr\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es\cert.h">
+      <Filter>Header Files\pietendo\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es\sign.h">
+      <Filter>Header Files\pietendo\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es\ticket.h">
+      <Filter>Header Files\pietendo\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es\tmd.h">
+      <Filter>Header Files\pietendo\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\es\types.h">
+      <Filter>Header Files\pietendo\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfo.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfoDesc.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfoUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AddOnContentMetaExtendedHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AesKeygen.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationControlProperty.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationControlPropertyUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationMetaExtendedHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\AssetHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\CombinedFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentInfo.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMeta.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMetaInfo.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMetaUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\DeltaMetaExtendedHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\FileSystemAccessControl.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\FileSystemAccessUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityStream.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalSha256Header.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalSha256Stream.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\IdConverter.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\IKernelCapabilityHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\IniHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\InteruptEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\InteruptHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityControl.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelInitialProcessHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelVersionEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelVersionHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MemoryMappingHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MemoryPageEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\Meta.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MetaUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscFlagsEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscFlagsHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscParamsEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscParamsHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\NroHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\NrrUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\NsoHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsUtil.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\PatchMetaExtendedHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\Result.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\RomFsSnapshotGenerator.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ServiceAccessControl.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ServiceAccessControlEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemCallEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemCallHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemUpdateMetaExtendedData.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemUpdateMetaExtendedHeader.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ThreadInfoEntry.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\ThreadInfoHandler.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aci.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aesctrexstorage.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aset.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\bktr.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\cnmt.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\compressedstorage.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\compression.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\delta.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\fac.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\gc.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\hierarchicalintegrity.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\hierarchicalsha256.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\indirectstorage.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\ini.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\kc.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\kip.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\meta.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nacp.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nca.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nro.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nrr.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nso.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\pfs.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\romfs.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\types.h">
+      <Filter>Header Files\pietendo\hac\define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\cert.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\CertificateBody.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\ecdsa.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SectionHeader_V2.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\sign.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignatureBlock.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignedData.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignUtils.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\ticket.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\TicketBody_V2.h">
+      <Filter>Header Files\pietendo\hac\es</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\ctr\CciFsSnapshotGenerator.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\CiaFsSnapshotGenerator.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\CtrKeyGenerator.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\ExeFsSnapshotGenerator.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\IvfcStream.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\RomFsSnapshotGenerator.cpp">
+      <Filter>Source Files\ctr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\es\Certificate.cpp">
+      <Filter>Source Files\ctr\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\es\RsaSigner.cpp">
+      <Filter>Source Files\ctr\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\es\Signature.cpp">
+      <Filter>Source Files\ctr\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\es\Ticket.cpp">
+      <Filter>Source Files\ctr\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ctr\es\TitleMetaData.cpp">
+      <Filter>Source Files\ctr\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfo.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfoDesc.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfoUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AddOnContentMetaExtendedHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AesKeygen.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ApplicationControlProperty.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ApplicationControlPropertyUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ApplicationMetaExtendedHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\AssetHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\CombinedFsSnapshotGenerator.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentArchiveHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentArchiveUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentInfo.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentMeta.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentMetaInfo.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ContentMetaUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\DeltaMetaExtendedHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\FileSystemAccessControl.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\FileSystemAccessUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\GameCardFsSnapshotGenerator.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\GameCardHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\GameCardUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HandleTableSizeEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HandleTableSizeHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityStream.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HierarchicalSha256Header.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\HierarchicalSha256Stream.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\IdConverter.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\IniHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\InteruptEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\InteruptHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityControl.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelInitialProcessHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelVersionEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\KernelVersionHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MemoryMappingHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MemoryPageEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\Meta.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MetaUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MiscFlagsEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MiscFlagsHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MiscParamsEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\MiscParamsHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\NroHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\NrrUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\NsoHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\PartitionFsHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\PartitionFsSnapshotGenerator.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\PartitionFsUtil.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\PatchMetaExtendedHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\Result.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\RomFsSnapshotGenerator.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ServiceAccessControl.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ServiceAccessControlEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\SystemCallEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\SystemCallHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\SystemUpdateMetaExtendedData.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\SystemUpdateMetaExtendedHeader.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ThreadInfoEntry.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\ThreadInfoHandler.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\es\CertificateBody.cpp">
+      <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\es\SectionHeader_V2.cpp">
+      <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\es\SignatureBlock.cpp">
+      <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\es\SignUtils.cpp">
+      <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\es\TicketBody_V2.cpp">
+      <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

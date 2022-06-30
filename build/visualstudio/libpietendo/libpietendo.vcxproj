@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{5addd009-9d25-40be-b2a6-2f3ab4dcbbd2}</ProjectGuid>
+    <RootNamespace>libpietendo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\deps\libmbedtls\include;$(SolutionDir)..\..\deps\libfmt\include;$(SolutionDir)..\..\deps\libtoolchain\include;$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\deps\libmbedtls\include;$(SolutionDir)..\..\deps\libfmt\include;$(SolutionDir)..\..\deps\libtoolchain\include;$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\deps\libmbedtls\include;$(SolutionDir)..\..\deps\libfmt\include;$(SolutionDir)..\..\deps\libtoolchain\include;$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\deps\libmbedtls\include;$(SolutionDir)..\..\deps\libfmt\include;$(SolutionDir)..\..\deps\libtoolchain\include;$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\pietendo.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\bcwav.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cci.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CciFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cia.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CiaFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\cro.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\crr.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\CtrKeyGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Certificate.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\ISigner.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\RsaSigner.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Signature.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\Ticket.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\es\TitleMetaData.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\exefs.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ExeFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\exheader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\firm.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ivfc.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\IvfcStream.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\ncch.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\romfs.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\RomFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\systemmenudata.h" />
+    <ClInclude Include="..\..\..\include\pietendo\ctr\systemupdater.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es\cert.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es\sign.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es\ticket.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es\tmd.h" />
+    <ClInclude Include="..\..\..\include\pietendo\es\types.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfo.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfoDesc.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AccessControlInfoUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AddOnContentMetaExtendedHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AesKeygen.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationControlProperty.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationControlPropertyUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationMetaExtendedHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\AssetHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\CombinedFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentInfo.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMeta.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMetaInfo.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ContentMetaUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aci.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aesctrexstorage.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\aset.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\bktr.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\cnmt.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\compressedstorage.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\compression.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\delta.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\fac.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\gc.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\hierarchicalintegrity.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\hierarchicalsha256.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\indirectstorage.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\ini.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\kc.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\kip.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\meta.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nacp.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nca.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nro.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nrr.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\nso.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\pfs.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\romfs.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\define\types.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\DeltaMetaExtendedHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\cert.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\CertificateBody.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\ecdsa.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SectionHeader_V2.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\sign.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignatureBlock.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignedData.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\SignUtils.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\ticket.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\es\TicketBody_V2.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\FileSystemAccessControl.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\FileSystemAccessUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\GameCardUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityStream.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalSha256Header.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalSha256Stream.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\IdConverter.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\IKernelCapabilityHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\IniHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\InteruptEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\InteruptHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityControl.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelCapabilityUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelInitialProcessHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelVersionEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\KernelVersionHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MemoryMappingHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MemoryPageEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\Meta.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MetaUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscFlagsEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscFlagsHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscParamsEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\MiscParamsHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\NroHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\NrrUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\NsoHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\PartitionFsUtil.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\PatchMetaExtendedHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\Result.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\RomFsSnapshotGenerator.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ServiceAccessControl.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ServiceAccessControlEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemCallEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemCallHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemUpdateMetaExtendedData.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\SystemUpdateMetaExtendedHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ThreadInfoEntry.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\ThreadInfoHandler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\ctr\CciFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\CiaFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\CtrKeyGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\es\Certificate.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\es\RsaSigner.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\es\Signature.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\es\Ticket.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\es\TitleMetaData.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\ExeFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\IvfcStream.cpp" />
+    <ClCompile Include="..\..\..\src\ctr\RomFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfo.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfoDesc.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AccessControlInfoUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AddOnContentMetaExtendedHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AesKeygen.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ApplicationControlProperty.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ApplicationControlPropertyUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ApplicationMetaExtendedHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\AssetHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\CombinedFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentArchiveHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentArchiveUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentInfo.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentMeta.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentMetaInfo.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ContentMetaUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\DeltaMetaExtendedHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\es\CertificateBody.cpp" />
+    <ClCompile Include="..\..\..\src\hac\es\SectionHeader_V2.cpp" />
+    <ClCompile Include="..\..\..\src\hac\es\SignatureBlock.cpp" />
+    <ClCompile Include="..\..\..\src\hac\es\SignUtils.cpp" />
+    <ClCompile Include="..\..\..\src\hac\es\TicketBody_V2.cpp" />
+    <ClCompile Include="..\..\..\src\hac\FileSystemAccessControl.cpp" />
+    <ClCompile Include="..\..\..\src\hac\FileSystemAccessUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\GameCardFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\hac\GameCardHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\GameCardUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HandleTableSizeEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HandleTableSizeHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityStream.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HierarchicalSha256Header.cpp" />
+    <ClCompile Include="..\..\..\src\hac\HierarchicalSha256Stream.cpp" />
+    <ClCompile Include="..\..\..\src\hac\IdConverter.cpp" />
+    <ClCompile Include="..\..\..\src\hac\IniHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\InteruptEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\InteruptHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityControl.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelCapabilityUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelInitialProcessHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelVersionEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\KernelVersionHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MemoryMappingHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MemoryPageEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\Meta.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MetaUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MiscFlagsEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MiscFlagsHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MiscParamsEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\MiscParamsHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\NroHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\NrrUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\NsoHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\PartitionFsHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\PartitionFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\hac\PartitionFsUtil.cpp" />
+    <ClCompile Include="..\..\..\src\hac\PatchMetaExtendedHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\Result.cpp" />
+    <ClCompile Include="..\..\..\src\hac\RomFsSnapshotGenerator.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ServiceAccessControl.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ServiceAccessControlEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\SystemCallEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\SystemCallHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\SystemUpdateMetaExtendedData.cpp" />
+    <ClCompile Include="..\..\..\src\hac\SystemUpdateMetaExtendedHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ThreadInfoEntry.cpp" />
+    <ClCompile Include="..\..\..\src\hac\ThreadInfoHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)..\..\deps\libfmt\build\visualstudio\libfmt\libfmt.vcxproj">
+      <Project>{f4b0540e-0aae-4006-944b-356944ef61fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionDir)..\..\deps\libmbedtls\build\visualstudio\libmbedtls\libmbedtls.vcxproj">
+      <Project>{7a7c66f3-2b5b-4e23-85d8-2a74fedad92c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionDir)..\..\deps\libtoolchain\build\visualstudio\libtoolchain\libtoolchain.vcxproj">
+      <Project>{e194e4b8-1482-40a2-901b-75d4387822e9}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
