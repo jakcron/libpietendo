@@ -52,7 +52,7 @@ pie::ctr::es::TitleMetaDataDeserialiser::TitleMetaDataDeserialiser(const std::sh
 	size_t cmd_table_num = tmd->v1Head.cmdGroups[0].nCmds.unwrap();
 	size_t tmd_full_size = sizeof(pie::es::ESV1TitleMeta) + (cmd_table_num * sizeof(pie::es::ESV1ContentMeta));
 
-	if (tmd_stream->length() < (tmd_full_size))
+	if (tmd_stream->length() < int64_t(tmd_full_size))
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "TMD was too small.");
 	}
