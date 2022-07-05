@@ -16,13 +16,13 @@ namespace pie { namespace es {
 	 */
 enum ESTitleType : uint32_t
 {
-	ESTitleType_NC_TITLE   = 0x1, /**< NetCard Title - End-of-life (bit0) */
-	ESTitleType_NG_TITLE   = 0x2, /**< NextGen Title - Wii/NDEV (bit1) */
-	ESTitleType_DS_TITLE   = 0x4, /**< DS Title - TWL/DSi (bit2) */
-	ESTitleType_DATA       = 0x8, /**< Data Title (bit3) */
-	ESTitleType_CT_TITLE   = 0x40, /**< CTR Title - CTR/3DS (bit6) */
-	ESTitleType_GVM_TITLE  = 0x80, /**< GVM = ? (bit7, from BroadOn libraries) */
-	ESTitleType_CAFE_TITLE = 0x100, /**< Cafe Title - WiiU (bit8, from WiiU sdk) */
+	ESTitleType_NC_TITLE   = (1 << 0), /**< NetCard Title - NetCard, End-of-life (bit0) */
+	ESTitleType_NG_TITLE   = (1 << 1), /**< NextGen Title - Wii/NDEV (bit1) */
+	ESTitleType_DS_TITLE   = (1 << 2), /**< DS Title - TWL/DSi (bit2) */
+	ESTitleType_DATA       = (1 << 3), /**< Data Title (bit3) */
+	ESTitleType_CT_TITLE   = (1 << 6), /**< CTR Title - CTR/3DS (bit6) */
+	ESTitleType_GVM_TITLE  = (1 << 7), /**< GVM Title - ??? (bit7) */
+	ESTitleType_CAFE_TITLE = (1 << 8), /**< Cafe Title - WiiU (bit8) */
 };
 
 	/**
@@ -31,16 +31,33 @@ enum ESTitleType : uint32_t
 	 * These flags describe properties about a particular content.
 	 * 
 	 * Support flags vary from platform to platform.
+	 * 
+	 * RVL (Wii) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_OPTIONAL
+	 * * ESContentType_SHARED
+	 * 
+	 * TWL (DSi) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * 
+	 * CTR (3DS) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_OPTIONAL
+	 * 
+	 * CAFE (WiiU) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_HASHED
+	 * * ESContentType_SHA1_HASH
+	 * * ESContentType_OPTIONAL
 	 */
 enum ESContentType : uint16_t
 {
-	ESContentType_ENCRYPTED = 0x1, /**< Encrypted - (bit0, from broadOn & b4) */
-	ESContentType_DISC      = 0x2, /**< Disc - (bit1, from broadOn & b4)) */
-	ESContentType_HASHED    = 0x2, /**< Hashed - (bit1, from b4) */
-	ESContentType_CFM       = 0x4, /**< CFM - (bit2, from broadOn & b4) */
-	ESContentType_SHA1_HASH = 0x2000, /**< SHA1 Hash - (bit13, from b4 (wiiu sdk) */
-	ESContentType_OPTIONAL  = 0x4000, /**< Optional - (bit14, from broadOn & b4) */
-	ESContentType_SHARED    = 0x8000, /**< Shared - (bit15,from broadOn & b4) */
+	ESContentType_ENCRYPTED = (1 <<  0), /**< Encrypted - (bit0) */
+	ESContentType_HASHED    = (1 <<  1), /**< Hashed - (bit1) */
+	ESContentType_CFM       = (1 <<  2), /**< CFM - (bit2) */
+	ESContentType_SHA1_HASH = (1 << 13), /**< SHA1 Hash - (bit13) */
+	ESContentType_OPTIONAL  = (1 << 14), /**< Optional - (bit14) */
+	ESContentType_SHARED    = (1 << 15), /**< Shared - (bit15) */
 };
 
 	/**
@@ -115,6 +132,7 @@ struct ESTitleMetaHeader
 	uint8_t                   version;            /**< TMD version number */
 	uint8_t                   caCrlVersion;       /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;   /**< Signer CRL version number */
+	uint8_t                   customFlag;         /**< 1-byte custom flag. Used only in WiiU vWii TMDs (set to 1). */
 	tc::bn::be64<uint64_t>    sysVersion;         /**< System software version number */
 	tc::bn::be64<uint64_t>    titleId;            /**< 64-bit title id */
 	tc::bn::be32<ESTitleType> type;               /**< 32-bit title type */
