@@ -30,7 +30,7 @@ enum ESTitleType : uint32_t
 	 * @details
 	 * These flags describe properties about a particular content.
 	 * 
-	 * Support flags vary from platform to platform.
+	 * Supported flags vary from platform to platform.
 	 * 
 	 * RVL (Wii) supported flags:
 	 * * ESContentType_ENCRYPTED
@@ -187,8 +187,8 @@ static_assert(sizeof(ESTitleMeta) == 484, "ESTitleMeta size");
 	 * @brief TitleMetaData (format v1)
 	 * 
 	 * Platforms that use this version:
-	 * * Nintendo WiiU (CAFE)
 	 * * Nintendo 3DS (CTR)
+	 * * Nintendo WiiU (CAFE)
 	 */
 struct ESV1TitleMeta
 {
