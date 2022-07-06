@@ -34,6 +34,7 @@ enum ESTitleType : uint32_t
 	 * 
 	 * RVL (Wii) supported flags:
 	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_HASHED
 	 * * ESContentType_OPTIONAL
 	 * * ESContentType_SHARED
 	 * 
@@ -53,11 +54,11 @@ enum ESTitleType : uint32_t
 enum ESContentType : uint16_t
 {
 	ESContentType_ENCRYPTED = (1 <<  0), /**< Encrypted - (bit0) */
-	ESContentType_HASHED    = (1 <<  1), /**< Hashed - (bit1) */
-	ESContentType_CFM       = (1 <<  2), /**< CFM - (bit2) */
+	ESContentType_HASHED    = (1 <<  1), /**< Hashed (Previously this was called DISC, because only RVL discs had the hashed data) - (bit1) */
+	ESContentType_CFM       = (1 <<  2), /**< Content File Metadata - (bit2) */
 	ESContentType_SHA1_HASH = (1 << 13), /**< SHA1 Hash - (bit13) */
-	ESContentType_OPTIONAL  = (1 << 14), /**< Optional - (bit14) */
-	ESContentType_SHARED    = (1 << 15), /**< Shared - (bit15) */
+	ESContentType_OPTIONAL  = (1 << 14), /**< Optional Content - (bit14) */
+	ESContentType_SHARED    = (1 << 15), /**< Shared Content - (bit15) */
 };
 
 	/**
