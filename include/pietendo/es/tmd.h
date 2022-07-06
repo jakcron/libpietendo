@@ -11,18 +11,22 @@
 namespace pie { namespace es {
 
 	/**
-	 * @brief ES title type
+	 * @brief ES title type (bitmask)
+	 * @details
 	 * 
+	 * These flags describe the type of title, however these aren't always set.
 	 */
 enum ESTitleType : uint32_t
 {
-	//ESTitleType_NC_TITLE   = (1 << 0), /**< NetCard Title - NetCard, End-of-life (bit0) */
-	//ESTitleType_NG_TITLE   = (1 << 1), /**< NextGen Title - Wii/NDEV (bit1) */
-	//ESTitleType_DS_TITLE   = (1 << 2), /**< DS Title - TWL/DSi (bit2) */
-	//ESTitleType_DATA       = (1 << 3), /**< Data Title (bit3) */
-	//ESTitleType_CT_TITLE   = (1 << 6), /**< CTR Title - CTR/3DS (bit6) */
-	//ESTitleType_GVM_TITLE  = (1 << 7), /**< GVM Title - Graphics Virtual Machine (bit7) */
-	//ESTitleType_CAFE_TITLE = (1 << 8), /**< Cafe Title - WiiU (bit8) */
+	ESTitleType_NC_TITLE   = 0, /**< NC Title - NetCard */
+	ESTitleType_NG_TITLE   = 1, /**< NG Title - NextGen/NDEV/RVL/Wii */
+	ESTitleType_DS_TITLE   = 2, /**< DS Title */
+	ESTitleType_STREAM     = 4, /**< Stream */
+	ESTitleType_DATA       = 8, /**< Data */
+	ESTitleType_CACHE_DATA = 0x10, /**< Cache Data */
+	ESTitleType_CT_TITLE   = 0x40, /**< CTR Title - CTR/3DS */
+	ESTitleType_GVM_TITLE  = 0x80, /**< GVM Title - Graphics Virtual Machine */
+	ESTitleType_CAFE_TITLE = 0x100, /**< CAFE Title - CAFE/WiiU */
 };
 
 	/**
