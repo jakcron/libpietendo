@@ -16,13 +16,13 @@ namespace pie { namespace es {
 	 */
 enum ESTitleType : uint32_t
 {
-	ESTitleType_NC_TITLE   = (1 << 0), /**< NetCard Title - NetCard, End-of-life (bit0) */
-	ESTitleType_NG_TITLE   = (1 << 1), /**< NextGen Title - Wii/NDEV (bit1) */
-	ESTitleType_DS_TITLE   = (1 << 2), /**< DS Title - TWL/DSi (bit2) */
-	ESTitleType_DATA       = (1 << 3), /**< Data Title (bit3) */
-	ESTitleType_CT_TITLE   = (1 << 6), /**< CTR Title - CTR/3DS (bit6) */
-	ESTitleType_GVM_TITLE  = (1 << 7), /**< GVM Title - ??? (bit7) */
-	ESTitleType_CAFE_TITLE = (1 << 8), /**< Cafe Title - WiiU (bit8) */
+	//ESTitleType_NC_TITLE   = (1 << 0), /**< NetCard Title - NetCard, End-of-life (bit0) */
+	//ESTitleType_NG_TITLE   = (1 << 1), /**< NextGen Title - Wii/NDEV (bit1) */
+	//ESTitleType_DS_TITLE   = (1 << 2), /**< DS Title - TWL/DSi (bit2) */
+	//ESTitleType_DATA       = (1 << 3), /**< Data Title (bit3) */
+	//ESTitleType_CT_TITLE   = (1 << 6), /**< CTR Title - CTR/3DS (bit6) */
+	//ESTitleType_GVM_TITLE  = (1 << 7), /**< GVM Title - Graphics Virtual Machine (bit7) */
+	//ESTitleType_CAFE_TITLE = (1 << 8), /**< Cafe Title - WiiU (bit8) */
 };
 
 	/**
