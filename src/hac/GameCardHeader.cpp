@@ -112,8 +112,8 @@ void pie::hac::GameCardHeader::fromBytes(const byte_t* data, size_t len)
 
 	mRomAreaStartPage = hdr->rom_area_start_page.unwrap();
 	mBackupAreaStartPage = hdr->backup_area_start_page.unwrap();
-	mKekIndex = hdr->key_flag & 7;
-	mTitleKeyDecIndex = (hdr->key_flag >> 4) & 7;
+	mKekIndex = hdr->key_flag & 0xf;
+	mTitleKeyDecIndex = (hdr->key_flag >> 4) & 0xf;
 	mRomSize = hdr->rom_size;
 	mCardHeaderVersion = hdr->card_header_version;
 	for (size_t i = 0; i < hdr->flags.bit_size(); i++)
