@@ -21,7 +21,7 @@ enum ESSigType : uint32_t
     ESSigType_RSA4096_SHA256 = 0x00010003, /**< __RSA4096-PKCS1-SHA2-256__ signature */
     ESSigType_RSA2048_SHA256 = 0x00010004, /**< __RSA2048-PKCS1-SHA2-256__ signature (note that Switch Ticket has this word swapped) */
     ESSigType_ECC_SHA256     = 0x00010005, /**< __ECDSA233-SHA256__ signature */
-    ESSigType_HMAC_SHA1      = 0x00010006, /**< __HMAC-SHA1__ signature */
+    ESSigType_HMAC_SHA1      = 0x00010006, /**< __HMAC-SHA1__ signature (This uses the ESSigRsa2048 sign structure, with spare sig space padded with nulls) */
 };
 
 	/**
