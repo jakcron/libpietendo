@@ -137,7 +137,7 @@ struct ESTitleMetaHeader
 	uint8_t                   version;            /**< TMD version number */
 	uint8_t                   caCrlVersion;       /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;   /**< Signer CRL version number */
-	uint8_t                   customFlag;         /**< 1-byte custom flag. Used only in WiiU vWii TMDs (set to 1). */
+	uint8_t                   platformVersion;    /**< Platform version number. Used only in WiiU to differentiate between Wii and vWii TMDs (set to 1 for vWii). */
 	tc::bn::be64<uint64_t>    sysVersion;         /**< System software version number */
 	tc::bn::be64<uint64_t>    titleId;            /**< 64-bit title id */
 	tc::bn::be32<ESTitleType> type;               /**< 32-bit title type */
