@@ -2,8 +2,8 @@
 	 * @file tmd.h
 	 * @brief Declaration of TitleMeta structs and enums for the ES library.
 	 * @author Jack (jakcron)
-	 * @version 0.1
-	 * @date 2022/06/25
+	 * @version 0.2
+	 * @date 2022/09/22
 	 **/
 #pragma once
 #include <pietendo/es/sign.h>
