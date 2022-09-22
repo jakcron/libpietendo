@@ -143,6 +143,9 @@ pie::ctr::es::TicketDeserialiser::TicketDeserialiser(const std::shared_ptr<tc::i
 	this->license_type = tik->head.licenseType;
 	this->key_id = tik->head.keyId;
 
+	// process property mask
+	this->preinstall_flag = tik->head.propertyMask.unwrap() & pie::es::ESPropertyMaskFlag_PRE_INSTALL;
+
 	// process data from reserved field
 	auto custom_data = (TicketReservedForCtr*)tik->head.reserved.data();
 	this->ec_account_id = custom_data->ec_account_id.unwrap();
