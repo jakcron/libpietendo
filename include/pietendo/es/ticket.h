@@ -267,7 +267,7 @@ struct ESV2Ticket
 	using ESRightsId = std::array<byte_t, 16>;
 	using ESV2TicketReserved = std::array<byte_t, 8>;
 
-	ESSigRsa2048            sig;                /**< RSA 2048-bit sign of the ticket */
+	ESSigRsa2048_LE         sig;                /**< RSA 2048-bit sign of the ticket */
 	ESV2TitleKey            titleKey;           /**< Published title key */
 	uint8_t                 version;            /**< Ticket data structure version number */
 	uint8_t                 titleKeyType;       /**< Title key encryption type */
