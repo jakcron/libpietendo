@@ -275,7 +275,7 @@ struct ESV2Ticket
 	uint8_t                 licenseType;        /**< License type */
 	uint8_t                 keyId;              /**< Common key ID */
 	tc::bn::le16<uint16_t>  propertyMask;       /**< 16-bit property mask */
-	ESV2TicketReserved      reservedRegion;     /**< probably the accessTitleId & mask */
+	ESV2TicketReserved      reserved;           /**< Reserved (probably the accessTitleId & mask and later scrapped) */
 	tc::bn::le64<uint64_t>  ticketId;           /**< Unique 64bit ticket ID */
 	tc::bn::le64<uint64_t>  deviceId;           /**< Unique 64bit device ID */
 	ESRightsId              rightsId;           /**< Unique 128bit rights ID */
