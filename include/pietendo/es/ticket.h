@@ -92,10 +92,10 @@ enum ESV1SectionHeaderFlag : uint16_t
 	 * * __COMMON__ - TitleKey is encrypted using AES128-CBC with the CommonKey (as indicated in the ticket header).
 	 * * __PERSONALIZED__ - Same as __COMMON__ but the encrypted payload is further encrypted using RSA2048-OAEP, with the device specific RSA key.
 	 */
-enum ESV2TitleKekType : byte_t
+enum ESV2TitleKeyType : byte_t
 {
-	ESV2TitleKekType_COMMON = 0, /**< Common `AES128-CBC(TitleKey)` */
-	ESV2TitleKekType_PERSONALIZED = 1, /**< Personalized `RSA2048-OAEP(AES128-CBC(TitleKey))` */
+	ESV2TitleKeyType_COMMON = 0, /**< Common `AES128-CBC(TitleKey)` */
+	ESV2TitleKeyType_PERSONALIZED = 1, /**< Personalized `RSA2048-OAEP(AES128-CBC(TitleKey))` */
 };
 
 #pragma pack(push, 4)
@@ -270,7 +270,7 @@ struct ESV2Ticket
 	ESSigRsa2048            sig;                /**< RSA 2048-bit sign of the ticket */
 	ESV2TitleKey            titleKey;           /**< Published title key */
 	uint8_t                 version;            /**< Ticket data structure version number */
-	uint8_t                 keyType;            /**< Title key encryption key type */
+	uint8_t                 titleKeyType;       /**< Title key encryption type */
 	tc::bn::le16<uint16_t>  ticketVersion;      /**< 16-bit ticket version */
 	uint8_t                 licenseType;        /**< License type */
 	uint8_t                 keyId;              /**< Common key ID */
