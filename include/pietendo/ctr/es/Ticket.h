@@ -49,6 +49,8 @@ public:
 	uint16_t ticket_version;
 	byte_t license_type;
 	byte_t key_id;
+	// property mask flags
+	bool preinstall_flag;
 	// reserved region data
 	uint32_t ec_account_id;
 	// lp record

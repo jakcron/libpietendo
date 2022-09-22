@@ -2,8 +2,8 @@
 	 * @file ticket.h
 	 * @brief Declaration of Ticket structs and enums for the ES library.
 	 * @author Jack (jakcron)
-	 * @version 0.1
-	 * @date 2022/06/25
+	 * @version 0.2
+	 * @date 2022/09/22
 	 **/
 #pragma once
 #include <pietendo/es/sign.h>
@@ -67,7 +67,7 @@ enum ESItemType : uint32_t
 	 * @brief ES PropertyMask flags
 	 * 
 	 */
-enum class ESPropertyMaskFlag : uint16_t
+enum ESPropertyMaskFlag : uint16_t
 {
 	ESPropertyMaskFlag_PRE_INSTALL = 0x1, /**< Pre-install */
 	ESPropertyMaskFlag_SHARED_TITLE = 0x2, /**< Shared title */
@@ -92,10 +92,10 @@ enum ESV1SectionHeaderFlag : uint16_t
 	 * * __COMMON__ - TitleKey is encrypted using AES128-CBC with the CommonKey (as indicated in the ticket header).
 	 * * __PERSONALIZED__ - Same as __COMMON__ but the encrypted payload is further encrypted using RSA2048-OAEP, with the device specific RSA key.
 	 */
-enum ESV2TitleKekType : byte_t
+enum ESV2TitleKeyType : byte_t
 {
-	ESV2TitleKekType_COMMON = 0, /**< Common `AES128-CBC(TitleKey)` */
-	ESV2TitleKekType_PERSONALIZED = 1, /**< Personalized `RSA2048-OAEP(AES128-CBC(TitleKey))` */
+	ESV2TitleKeyType_COMMON = 0, /**< Common `AES128-CBC(TitleKey)` */
+	ESV2TitleKeyType_PERSONALIZED = 1, /**< Personalized `RSA2048-OAEP(AES128-CBC(TitleKey))` */
 };
 
 #pragma pack(push, 4)
@@ -135,7 +135,7 @@ struct ESTicket
 	using ESLimitedPlayArray = std::array<ESLimitedPlayEntry, 8>;
 
 	ESSigRsa2048              sig;               /**< RSA 2048-bit sign of the ticket */
-	detail::Ecc233PublicKey   serverPubKey;      /**< Ticketing server public key */
+	detail::EccB233PublicKey  serverPubKey;      /**< Ticketing server public key */
 	uint8_t                   version;           /**< Ticket data structure version number */
 	uint8_t                   caCrlVersion;      /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;  /**< Signer CRL version number */
@@ -267,15 +267,15 @@ struct ESV2Ticket
 	using ESRightsId = std::array<byte_t, 16>;
 	using ESV2TicketReserved = std::array<byte_t, 8>;
 
-	ESSigRsa2048            sig;                /**< RSA 2048-bit sign of the ticket */
+	ESSigRsa2048_LE         sig;                /**< RSA 2048-bit sign of the ticket */
 	ESV2TitleKey            titleKey;           /**< Published title key */
 	uint8_t                 version;            /**< Ticket data structure version number */
-	uint8_t                 keyType;            /**< Title key encryption key type */
+	uint8_t                 titleKeyType;       /**< Title key encryption type */
 	tc::bn::le16<uint16_t>  ticketVersion;      /**< 16-bit ticket version */
 	uint8_t                 licenseType;        /**< License type */
 	uint8_t                 keyId;              /**< Common key ID */
 	tc::bn::le16<uint16_t>  propertyMask;       /**< 16-bit property mask */
-	ESV2TicketReserved      reservedRegion;     /**< probably the accessTitleId & mask */
+	ESV2TicketReserved      reserved;           /**< Reserved (probably the accessTitleId & mask and later scrapped) */
 	tc::bn::le64<uint64_t>  ticketId;           /**< Unique 64bit ticket ID */
 	tc::bn::le64<uint64_t>  deviceId;           /**< Unique 64bit device ID */
 	ESRightsId              rightsId;           /**< Unique 128bit rights ID */

@@ -2,8 +2,8 @@
 	 * @file types.h
 	 * @brief Declaration of common structs and data types for the ES library
 	 * @author Jack (jakcron)
-	 * @version 0.1
-	 * @date 2022/06/25
+	 * @version 0.2
+	 * @date 2022/09/22
 	 **/
 #pragma once
 #include <tc/types.h>
@@ -37,9 +37,9 @@ static const size_t kSha1Size = 20;
 using Sha1Hash = std::array<uint8_t, kSha1Size>;
 using Sha1Hmac = std::array<uint8_t, kSha1Size>;
 
-static const size_t kSha256Size = 32;
-using Sha256Hash = std::array<uint8_t, kSha256Size>;
-using Sha256Hmac = std::array<uint8_t, kSha256Size>;
+static const size_t kSha2256Size = 32;
+using Sha2256Hash = std::array<uint8_t, kSha2256Size>;
+using Sha2256Hmac = std::array<uint8_t, kSha2256Size>;
 
 static const size_t kRsaPublicExponentSize = 4;
 using RsaPublicExponent = std::array<uint8_t, kRsaPublicExponentSize>;
@@ -72,19 +72,19 @@ struct Rsa4096PrivateKey
 };
 using Rsa4096Sig = Rsa4096Integer;
 
-static const size_t kEcc233Size = 60;
-using Ecc233Integer = std::array<uint8_t, kEcc233Size / 2>;
-struct Ecc233Point
+static const size_t kEccB233Size = 0x1E; //  = (233 / 8) + ((233 % 8) ? 1 : 0)
+using EccB233Integer = std::array<uint8_t, kEccB233Size>;
+struct EccB233Point
 {
-	Ecc233Integer x;
-	Ecc233Integer y;
+	EccB233Integer x;
+	EccB233Integer y;
 };
-using Ecc233PrivateKey = Ecc233Integer;
-using Ecc233PublicKey = Ecc233Point;
-struct Ecc233Sig
+using EccB233PrivateKey = EccB233Integer;
+using EccB233PublicKey = EccB233Point;
+struct EccB233Sig
 {
-	Ecc233Integer r;
-	Ecc233Integer s;
+	EccB233Integer r;
+	EccB233Integer s;
 };
 
 #pragma pack(pop)

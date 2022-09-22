@@ -2,8 +2,8 @@
 	 * @file tmd.h
 	 * @brief Declaration of TitleMeta structs and enums for the ES library.
 	 * @author Jack (jakcron)
-	 * @version 0.1
-	 * @date 2022/06/25
+	 * @version 0.2
+	 * @date 2022/09/22
 	 **/
 #pragma once
 #include <pietendo/es/sign.h>
@@ -11,18 +11,22 @@
 namespace pie { namespace es {
 
 	/**
-	 * @brief ES title type
+	 * @brief ES title type (bitmask)
+	 * @details
 	 * 
+	 * These flags describe the type of title, however these aren't always set.
 	 */
 enum ESTitleType : uint32_t
 {
-	ESTitleType_NC_TITLE   = 0x1, /**< NetCard Title - End-of-life (bit0) */
-	ESTitleType_NG_TITLE   = 0x2, /**< NextGen Title - Wii/NDEV (bit1) */
-	ESTitleType_DS_TITLE   = 0x4, /**< DS Title - TWL/DSi (bit2) */
-	ESTitleType_DATA       = 0x8, /**< Data Title (bit3) */
-	ESTitleType_CT_TITLE   = 0x40, /**< CTR Title - CTR/3DS (bit6) */
-	ESTitleType_GVM_TITLE  = 0x80, /**< GVM = ? (bit7, from BroadOn libraries) */
-	ESTitleType_CAFE_TITLE = 0x100, /**< Cafe Title - WiiU (bit8, from WiiU sdk) */
+	ESTitleType_NC_TITLE   = 0, /**< NC Title - NetCard */
+	ESTitleType_NG_TITLE   = 1, /**< NG Title - NextGen/NDEV/RVL/Wii */
+	ESTitleType_DS_TITLE   = 2, /**< DS Title */
+	ESTitleType_STREAM     = 4, /**< Stream */
+	ESTitleType_DATA       = 8, /**< Data */
+	ESTitleType_CACHE_DATA = 0x10, /**< Cache Data */
+	ESTitleType_CT_TITLE   = 0x40, /**< CTR Title - CTR/3DS */
+	ESTitleType_GVM_TITLE  = 0x80, /**< GVM Title - Graphics Virtual Machine */
+	ESTitleType_CAFE_TITLE = 0x100, /**< CAFE Title - CAFE/WiiU */
 };
 
 	/**
@@ -30,17 +34,35 @@ enum ESTitleType : uint32_t
 	 * @details
 	 * These flags describe properties about a particular content.
 	 * 
-	 * Support flags vary from platform to platform.
+	 * Supported flags vary from platform to platform.
+	 * 
+	 * RVL (Wii) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_HASHED
+	 * * ESContentType_OPTIONAL
+	 * * ESContentType_SHARED
+	 * 
+	 * TWL (DSi) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * 
+	 * CTR (3DS) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_OPTIONAL
+	 * 
+	 * CAFE (WiiU) supported flags:
+	 * * ESContentType_ENCRYPTED
+	 * * ESContentType_HASHED
+	 * * ESContentType_SHA1_HASH
+	 * * ESContentType_OPTIONAL
 	 */
 enum ESContentType : uint16_t
 {
-	ESContentType_ENCRYPTED = 0x1, /**< Encrypted - (bit0, from broadOn & b4) */
-	ESContentType_DISC      = 0x2, /**< Disc - (bit1, from broadOn & b4)) */
-	ESContentType_HASHED    = 0x2, /**< Hashed - (bit1, from b4) */
-	ESContentType_CFM       = 0x4, /**< CFM - (bit2, from broadOn & b4) */
-	ESContentType_SHA1_HASH = 0x2000, /**< SHA1 Hash - (bit13, from b4 (wiiu sdk) */
-	ESContentType_OPTIONAL  = 0x4000, /**< Optional - (bit14, from broadOn & b4) */
-	ESContentType_SHARED    = 0x8000, /**< Shared - (bit15,from broadOn & b4) */
+	ESContentType_ENCRYPTED = (1 <<  0), /**< Encrypted - (bit0) */
+	ESContentType_HASHED    = (1 <<  1), /**< Hashed (Previously this was called DISC, because only RVL discs had the hashed data) - (bit1) */
+	ESContentType_CFM       = (1 <<  2), /**< Content File Metadata - (bit2) */
+	ESContentType_SHA1_HASH = (1 << 13), /**< SHA1 Hash - (bit13) */
+	ESContentType_OPTIONAL  = (1 << 14), /**< Optional Content - (bit14) */
+	ESContentType_SHARED    = (1 << 15), /**< Shared Content - (bit15) */
 };
 
 	/**
@@ -115,6 +137,7 @@ struct ESTitleMetaHeader
 	uint8_t                   version;            /**< TMD version number */
 	uint8_t                   caCrlVersion;       /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;   /**< Signer CRL version number */
+	uint8_t                   platformVersion;    /**< Platform version number. Used only in WiiU to differentiate between Wii and vWii TMDs (set to 1 for vWii). */
 	tc::bn::be64<uint64_t>    sysVersion;         /**< System software version number */
 	tc::bn::be64<uint64_t>    titleId;            /**< 64-bit title id */
 	tc::bn::be32<ESTitleType> type;               /**< 32-bit title type */
@@ -169,8 +192,8 @@ static_assert(sizeof(ESTitleMeta) == 484, "ESTitleMeta size");
 	 * @brief TitleMetaData (format v1)
 	 * 
 	 * Platforms that use this version:
-	 * * Nintendo WiiU (CAFE)
 	 * * Nintendo 3DS (CTR)
+	 * * Nintendo WiiU (CAFE)
 	 */
 struct ESV1TitleMeta
 {

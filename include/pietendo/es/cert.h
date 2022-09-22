@@ -17,7 +17,7 @@ enum ESCertPubKeyType : uint32_t
 {
 	ESCertPubKeyType_RSA4096 = 0, /**< RSA 4096 bit key */
 	ESCertPubKeyType_RSA2048 = 1, /**< RSA 2048 bit key */
-	ESCertPubKeyType_ECC233 = 2, /**< ECC 233 bit key */
+	ESCertPubKeyType_ECCB233 = 2, /**< ECC B233 bit key */
 };
 
 	/**
@@ -57,37 +57,37 @@ struct ESCertHeader
 static_assert(sizeof(ESCertHeader) == 72, "ESCertHeader size");
 
 	/**
-	 * @brief Certificate Public Key (RSA2048)
+	 * @brief Certificate Public Key (RSA-2048)
 	 * 
 	 */
 struct ESCertRsa2048PublicKey
 {
-	detail::Rsa2048PublicKey pubKey; /**< RSA2048 Public Key */
+	detail::Rsa2048PublicKey pubKey; /**< RSA-2048 Public Key */
 	detail::Padding<52>      pad;    /**< Padding */
 };
 static_assert(sizeof(ESCertRsa2048PublicKey) == 312, "ESCertRsa2048PublicKey size");
 
 	/**
-	 * @brief Certificate Public Key (RSA4096)
+	 * @brief Certificate Public Key (RSA-4096)
 	 * 
 	 */
 struct ESCertRsa4096PublicKey
 {
-	detail::Rsa4096PublicKey pubKey; /**< RSA4096 Public Key */
+	detail::Rsa4096PublicKey pubKey; /**< RSA-4096 Public Key */
 	detail::Padding<52>      pad;    /**< Padding */
 };
 static_assert(sizeof(ESCertRsa4096PublicKey) == 568, "ESCertRsa4096PublicKey size");
 
 	/**
-	 * @brief Certificate Public Key (ECC233)
+	 * @brief Certificate Public Key (ECC-B233)
 	 * 
 	 */
-struct ESCertEcc233PublicKey
+struct ESCertEccB233PublicKey
 {
-	detail::Ecc233PublicKey pubKey; /**< ECC233 Public Key */
-	detail::Padding<60>     pad;    /**< Padding */
+	detail::EccB233PublicKey pubKey; /**< ECC-B233 Public Key */
+	detail::Padding<60>      pad;    /**< Padding */
 };
-static_assert(sizeof(ESCertEcc233PublicKey) == 120, "ESCertEcc233PublicKey size");
+static_assert(sizeof(ESCertEccB233PublicKey) == 120, "ESCertEccB233PublicKey size");
 
 	/**
 	 * @brief Root Certificate
@@ -95,7 +95,7 @@ static_assert(sizeof(ESCertEcc233PublicKey) == 120, "ESCertEcc233PublicKey size"
 	 */
 struct ESRootCert
 {
-	ESSigRsa4096             sig;  /**< RSA 4096-bit sign of the certificate */
+	ESSigRsa4096             sig;  /**< RSA-4096 sign of the certificate */
 	ESCertHeader             head; /**< Certificate header */
 	ESCertRsa4096PublicKey   body; /**< Certificate body */
 };
@@ -108,7 +108,7 @@ static_assert(sizeof(ESRootCert) == 1280, "ESRootCert size");
 	 */
 struct ESCACert
 {
-	ESSigRsa4096             sig;  /**< RSA 4096-bit sign of the certificate */
+	ESSigRsa4096             sig;  /**< RSA-4096 sign of the certificate */
 	ESCertHeader             head; /**< Certificate header */
 	ESCertRsa2048PublicKey   body; /**< Certificate body */
 };
@@ -120,7 +120,7 @@ static_assert(sizeof(ESCACert) == 1024, "ESCACert size");
 	 */
 struct ESCASignedCert
 {
-	ESSigRsa2048             sig;  /**< RSA 2048-bit sign of the certificate */
+	ESSigRsa2048             sig;  /**< RSA-2048 sign of the certificate */
 	ESCertHeader             head; /**< Certificate header */
 	ESCertRsa2048PublicKey   body; /**< Certificate body */
 };
@@ -133,9 +133,9 @@ static_assert(sizeof(ESCASignedCert) == 768, "ESCASignedCert size");
 	 */
 struct ESDeviceCert
 {
-	ESSigRsa2048             sig;  /**< RSA 2048-bit sign of the certificate */
+	ESSigRsa2048             sig;  /**< RSA-2048 sign of the certificate */
 	ESCertHeader             head; /**< Certificate header */
-	ESCertEcc233PublicKey    body; /**< Certificate body */
+	ESCertEccB233PublicKey   body; /**< Certificate body */
 };
 static_assert(sizeof(ESDeviceCert) == 576, "ESDeviceCert size");
 
@@ -146,9 +146,9 @@ static_assert(sizeof(ESDeviceCert) == 576, "ESDeviceCert size");
 	 */
 struct ESDeviceSignedCert
 {
-	ESSigEcc233              sig;  /**< ECDSA 233-bit sign of the certificate */
+	ESSigEccB233             sig;  /**< ECC-B233 sign of the certificate */
 	ESCertHeader             head; /**< Certificate header */
-	ESCertEcc233PublicKey    body; /**< Certificate body */
+	ESCertEccB233PublicKey   body; /**< Certificate body */
 };
 static_assert(sizeof(ESDeviceSignedCert) == 384, "ESDeviceSignedCert size");
 
