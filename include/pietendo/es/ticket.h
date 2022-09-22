@@ -67,7 +67,7 @@ enum ESItemType : uint32_t
 	 * @brief ES PropertyMask flags
 	 * 
 	 */
-enum class ESPropertyMaskFlag : uint16_t
+enum ESPropertyMaskFlag : uint16_t
 {
 	ESPropertyMaskFlag_PRE_INSTALL = 0x1, /**< Pre-install */
 	ESPropertyMaskFlag_SHARED_TITLE = 0x2, /**< Shared title */
