@@ -135,7 +135,7 @@ struct ESTicket
 	using ESLimitedPlayArray = std::array<ESLimitedPlayEntry, 8>;
 
 	ESSigRsa2048              sig;               /**< RSA 2048-bit sign of the ticket */
-	detail::Ecc233PublicKey   serverPubKey;      /**< Ticketing server public key */
+	detail::EccB233PublicKey  serverPubKey;      /**< Ticketing server public key */
 	uint8_t                   version;           /**< Ticket data structure version number */
 	uint8_t                   caCrlVersion;      /**< CA CRL version number */
 	uint8_t                   signerCrlVersion;  /**< Signer CRL version number */
