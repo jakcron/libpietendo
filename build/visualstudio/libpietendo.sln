@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpietendo", "libpietendo\libpietendo\libpietendo.vcxproj", "{5ADDD009-9D25-40BE-B2A6-2F3AB4DCBBD2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpietendo", "libpietendo\libpietendo.vcxproj", "{5ADDD009-9D25-40BE-B2A6-2F3AB4DCBBD2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7A7C66F3-2B5B-4E23-85D8-2A74FEDAD92C} = {7A7C66F3-2B5B-4E23-85D8-2A74FEDAD92C}
 		{E194E4B8-1482-40A2-901B-75D4387822E9} = {E194E4B8-1482-40A2-901B-75D4387822E9}
 		{F4B0540E-0AAE-4006-944B-356944EF61FA} = {F4B0540E-0AAE-4006-944B-356944EF61FA}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpietendo-test", "libpietendo\libpietendo-test\libpietendo-test.vcxproj", "{5B3505B6-B385-4286-BD43-BD7942BC228D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpietendo-test", "libpietendo-test\libpietendo-test.vcxproj", "{5B3505B6-B385-4286-BD43-BD7942BC228D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5ADDD009-9D25-40BE-B2A6-2F3AB4DCBBD2} = {5ADDD009-9D25-40BE-B2A6-2F3AB4DCBBD2}
 		{7A7C66F3-2B5B-4E23-85D8-2A74FEDAD92C} = {7A7C66F3-2B5B-4E23-85D8-2A74FEDAD92C}
