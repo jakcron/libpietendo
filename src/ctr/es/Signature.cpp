@@ -13,16 +13,16 @@ size_t pie::ctr::es::getSignatureSizeFromSigType(pie::es::ESSigType sig_type)
 	switch (sig_type)
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa4096);
 			break;
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa2048);
 			break;
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
-			signature_size = sizeof(pie::es::ESSigEcc233);
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
+			signature_size = sizeof(pie::es::ESSigEccB233);
 			break;
 		default:
 			signature_size = 0;
@@ -37,16 +37,16 @@ size_t pie::ctr::es::getSignatureIssuerOffset(pie::es::ESSigType sig_type)
 	switch (sig_type)
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 			issuer_offset = sizeof(pie::es::ESSigRsa4096) - sizeof(pie::es::ESIssuer);
 			break;
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
 			issuer_offset = sizeof(pie::es::ESSigRsa2048) - sizeof(pie::es::ESIssuer);
 			break;
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
-			issuer_offset = sizeof(pie::es::ESSigEcc233) - sizeof(pie::es::ESIssuer);
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
+			issuer_offset = sizeof(pie::es::ESSigEccB233) - sizeof(pie::es::ESIssuer);
 			break;
 		default:
 			issuer_offset = 0;
@@ -81,7 +81,7 @@ pie::ctr::es::SignatureDeserialiser::SignatureDeserialiser(const std::shared_ptr
 		tc::bn::be32<pie::es::ESSigType>    sigType;
 		pie::es::ESSigRsa4096 rsa4096;
 		pie::es::ESSigRsa2048 rsa2048;
-		pie::es::ESSigEcc233 ecdsa233;
+		pie::es::ESSigEccB233 ecdsa233;
 	} signature_data;
 	size_t signature_size = 0;
 
@@ -93,16 +93,16 @@ pie::ctr::es::SignatureDeserialiser::SignatureDeserialiser(const std::shared_ptr
 	switch (signature_data.sigType.unwrap())
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa4096);
 			break;
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa2048);
 			break;
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
-			signature_size = sizeof(pie::es::ESSigEcc233);
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
+			signature_size = sizeof(pie::es::ESSigEccB233);
 			break;
 		default:
 			throw tc::ArgumentOutOfRangeException(mModuleLabel, "Unexpected signature type.");
@@ -118,18 +118,18 @@ pie::ctr::es::SignatureDeserialiser::SignatureDeserialiser(const std::shared_ptr
 	switch (signature_data.sigType.unwrap())
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 			this->sig = tc::ByteData(signature_data.rsa4096.sig.data(), signature_data.rsa4096.sig.size());
 			this->issuer = signature_data.rsa4096.issuer.decode();
 			break;
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
 			this->sig = tc::ByteData(signature_data.rsa2048.sig.data(), signature_data.rsa2048.sig.size());
 			this->issuer = signature_data.rsa2048.issuer.decode();
 			break;
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
-			this->sig = tc::ByteData((byte_t*)&signature_data.ecdsa233.sig, sizeof(pie::es::detail::Ecc233Sig));
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
+			this->sig = tc::ByteData((byte_t*)&signature_data.ecdsa233.sig, sizeof(pie::es::detail::EccB233Sig));
 			this->issuer = signature_data.ecdsa233.issuer.decode();
 			break;
 		default:

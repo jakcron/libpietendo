@@ -27,8 +27,8 @@ size_t pie::ctr::es::getCertificateSize(byte_t* data)
 		case pie::es::ESCertPubKeyType_RSA2048:
 			public_key_size = sizeof(pie::es::ESCertRsa2048PublicKey);
 			break;
-		case pie::es::ESCertPubKeyType_ECC233:
-			public_key_size = sizeof(pie::es::ESCertEcc233PublicKey);
+		case pie::es::ESCertPubKeyType_ECCB233:
+			public_key_size = sizeof(pie::es::ESCertEccB233PublicKey);
 			break;
 		default:
 			return 0;
@@ -47,16 +47,16 @@ size_t pie::ctr::es::getCertificateSignatureSize(byte_t* data)
 	switch (sig_type)
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa4096);
 			break;
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
 			signature_size = sizeof(pie::es::ESSigRsa2048);
 			break;
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
-			signature_size = sizeof(pie::es::ESSigEcc233);
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
+			signature_size = sizeof(pie::es::ESSigEccB233);
 			break;
 		default:
 			return 0;
@@ -120,11 +120,11 @@ pie::ctr::es::CertificateDeserialiser::CertificateDeserialiser(const std::shared
 	switch (this->signature.sig_type)
 	{
 		case pie::es::ESSigType_RSA4096_SHA1:
-		case pie::es::ESSigType_RSA4096_SHA256:
+		case pie::es::ESSigType_RSA4096_SHA2256:
 		case pie::es::ESSigType_RSA2048_SHA1:
-		case pie::es::ESSigType_RSA2048_SHA256:
-		case pie::es::ESSigType_ECC_SHA1:
-		case pie::es::ESSigType_ECC_SHA256:
+		case pie::es::ESSigType_RSA2048_SHA2256:
+		case pie::es::ESSigType_ECCB233_SHA1:
+		case pie::es::ESSigType_ECCB233_SHA2256:
 			break;
 		default:
 			throw tc::ArgumentOutOfRangeException(mModuleLabel, "CERT had unexpected signature type.");
@@ -144,7 +144,7 @@ pie::ctr::es::CertificateDeserialiser::CertificateDeserialiser(const std::shared
 	{
 		pie::es::ESCertRsa4096PublicKey rsa4096;
 		pie::es::ESCertRsa2048PublicKey rsa2048;
-		pie::es::ESCertEcc233PublicKey ecc233;
+		pie::es::ESCertEccB233PublicKey ecc233;
 	} public_key;
 	size_t public_key_size;
 
@@ -156,8 +156,8 @@ pie::ctr::es::CertificateDeserialiser::CertificateDeserialiser(const std::shared
 		case pie::es::ESCertPubKeyType_RSA2048:
 			public_key_size = sizeof(pie::es::ESCertRsa2048PublicKey);
 			break;
-		case pie::es::ESCertPubKeyType_ECC233:
-			public_key_size = sizeof(pie::es::ESCertEcc233PublicKey);
+		case pie::es::ESCertPubKeyType_ECCB233:
+			public_key_size = sizeof(pie::es::ESCertEccB233PublicKey);
 			break;
 		default:
 			throw tc::ArgumentOutOfRangeException(mModuleLabel, "CERT had unexpected public key type.");
@@ -192,8 +192,8 @@ pie::ctr::es::CertificateDeserialiser::CertificateDeserialiser(const std::shared
 		case pie::es::ESCertPubKeyType_RSA2048:
 			memcpy(&this->rsa2048_public_key, &public_key.rsa2048.pubKey, sizeof(pie::es::detail::Rsa2048PublicKey));
 			break;
-		case pie::es::ESCertPubKeyType_ECC233:
-			memcpy(&this->ecc233_public_key, &public_key.ecc233.pubKey, sizeof(pie::es::detail::Ecc233PublicKey));
+		case pie::es::ESCertPubKeyType_ECCB233:
+			memcpy(&this->ecc233_public_key, &public_key.ecc233.pubKey, sizeof(pie::es::detail::EccB233PublicKey));
 			break;
 	}
 	

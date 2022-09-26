@@ -31,7 +31,7 @@ pie::ctr::es::TicketDeserialiser::TicketDeserialiser(const std::shared_ptr<tc::i
 
 	// get pointer
 	pie::es::ESV1Ticket* tik = (pie::es::ESV1Ticket*)tik_data.data();
-	if (tik->head.sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA256)
+	if (tik->head.sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA2256)
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "TIK had unexpected signature type.");
 	}

@@ -140,7 +140,7 @@ pie::ctr::CiaFsSnapshotGenerator::CiaFsSnapshotGenerator(const std::shared_ptr<t
 
 			// get pointer
 			pie::es::ESV1TitleMeta* tmd = (pie::es::ESV1TitleMeta*)tmd_data.data();
-			if (tmd->sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA256)
+			if (tmd->sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA2256)
 			{
 				throw tc::ArgumentOutOfRangeException("pie::ctr::CiaFsSnapshotGenerator", "TMD had unexpected signature type.");
 			}

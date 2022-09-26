@@ -99,7 +99,7 @@ public:
 	pie::es::ESCertPubKeyType public_key_type;
 	pie::es::detail::Rsa4096PublicKey rsa4096_public_key;
 	pie::es::detail::Rsa2048PublicKey rsa2048_public_key;
-	pie::es::detail::Ecc233PublicKey ecc233_public_key;
+	pie::es::detail::EccB233PublicKey ecc233_public_key;
 };
 
 class CertificateDeserialiser : public Certificate

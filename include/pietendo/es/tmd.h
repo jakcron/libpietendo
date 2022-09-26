@@ -121,7 +121,7 @@ struct ESV1ContentMeta
 	tc::bn::be16<uint16_t> index;  /**< Content index, unique per title */
 	tc::bn::be16<uint16_t> type;   /**< Content type */
 	tc::bn::be64<uint64_t> size;   /**< Unencrypted content size in bytes */
-	detail::Sha256Hash     hash;   /**< Hash of the content */
+	detail::Sha2256Hash     hash;  /**< Hash of the content */
 };
 static_assert(sizeof(ESV1ContentMeta) == 48, "ESV1ContentMeta size");
 
@@ -156,7 +156,7 @@ struct ESV1ContentMetaGroup
 {
 	tc::bn::be16<uint16_t> offset;             /**< Offset content index */
 	tc::bn::be16<uint16_t> nCmds;              /**< Number of CMDs in this group */
-	detail::Sha256Hash     groupHash;          /**< Hash for this group of CMDs */
+	detail::Sha2256Hash    groupHash;          /**< Hash for this group of CMDs */
 };
 static_assert(sizeof(ESV1ContentMetaGroup) == 36, "ESV1ContentMetaGroup size");
 
@@ -168,7 +168,7 @@ struct ESV1TitleMetaHeader
 {
 	using ESV1ContentMetaGroupArray = std::array<ESV1ContentMetaGroup, ES_MAX_CMD_GROUPS>;
 
-	detail::Sha256Hash        hash;          /**< Hash for the CMD groups */
+	detail::Sha2256Hash       hash;          /**< Hash for the CMD groups */
 	ESV1ContentMetaGroupArray cmdGroups;     /**< CMD Groups */
 };
 static_assert(sizeof(ESV1TitleMetaHeader) == 2336, "ESV1TitleMetaHeader size");

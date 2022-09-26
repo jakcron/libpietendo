@@ -30,7 +30,7 @@ pie::ctr::es::TitleMetaDataDeserialiser::TitleMetaDataDeserialiser(const std::sh
 
 	// get pointer
 	pie::es::ESV1TitleMeta* tmd = (pie::es::ESV1TitleMeta*)tmd_data.data();
-	if (tmd->sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA256)
+	if (tmd->sig.sigType.unwrap() != pie::es::ESSigType_RSA2048_SHA2256)
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "TMD had unexpected signature type.");
 	}
