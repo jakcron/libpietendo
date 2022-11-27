@@ -18,7 +18,7 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	mDirParentVaddrMap(),
 	mFileEntryTable()
 {
-	//std::cout << "RomFsSnapshotGenerator begin" << std::endl;
+	//fmt::print("RomFsSnapshotGenerator BEGIN\n");
 
 	// validate stream properties
 	if (mBaseStream == nullptr)
@@ -30,7 +30,7 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 		throw tc::NotSupportedException("pie::hac::RomFsSnapshotGenerator", "Input stream requires read/seek permissions.");
 	}
 
-	//std::cout << "pos() -> " << mBaseStream->position() << std::endl;
+	//fmt::print("pos() -> 0x{:08x}\n", mBaseStream->position());
 
 	// validate and read ROMFS header
 	pie::hac::sRomfsHeader hdr;
@@ -42,13 +42,22 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	mBaseStream->read((byte_t*)(&hdr), sizeof(pie::hac::sRomfsHeader));
 
 	/*
-	std::cout << "hdr.header_size             : " << hdr.header_size.unwrap() << std::endl;
-	std::cout << "sizeof(pie::hac::sRomfsHeader)  : " << sizeof(pie::hac::sRomfsHeader) << std::endl;
-	std::cout << "hdr.dir_hash_bucket.offset : " << hdr.dir_hash_bucket.offset.unwrap() << std::endl;
-	std::cout << "hdr.data_offset             : " << hdr.data_offset.unwrap() << std::endl;
-	std::cout << "expected data offset        : " << align<int64_t>(hdr.header_size.unwrap(), pie::hac::romfs::kRomfsHeaderAlign) << std::endl;
+	fmt::print("RomFsHeader:\n");
+	fmt::print(" > header_size = 0x{:04x} (expected: 0x{:04x})\n", hdr.header_size.unwrap(), sizeof(pie::hac::sRomfsHeader));
+	fmt::print(" > dir_hash_bucket\n");
+	fmt::print("   > offset =    0x{:04x}\n", hdr.dir_hash_bucket.offset.unwrap());
+	fmt::print("   > size =      0x{:04x}\n", hdr.dir_hash_bucket.size.unwrap());
+	fmt::print(" > dir_entry\n");
+	fmt::print("   > offset =    0x{:04x}\n", hdr.dir_entry.offset.unwrap());
+	fmt::print("   > size =      0x{:04x}\n", hdr.dir_entry.size.unwrap());
+	fmt::print(" > file_hash_bucket\n");
+	fmt::print("   > offset =    0x{:04x}\n", hdr.file_hash_bucket.offset.unwrap());
+	fmt::print("   > size =      0x{:04x}\n", hdr.file_hash_bucket.size.unwrap());
+	fmt::print(" > file_entry\n");
+	fmt::print("   > offset =    0x{:04x}\n", hdr.file_entry.offset.unwrap());
+	fmt::print("   > size =      0x{:04x}\n", hdr.file_entry.size.unwrap());
+	fmt::print(" > data_offset = 0x{:04x} (expected: 0x{:04x})\n", hdr.data_offset.unwrap(), align<int64_t>(hdr.header_size.unwrap(), pie::hac::romfs::kRomfsHeaderAlign));
 	*/
-
 
 	if (hdr.header_size.unwrap() != sizeof(pie::hac::sRomfsHeader) ||
 	    hdr.dir_entry.offset.unwrap() != (hdr.dir_hash_bucket.offset.unwrap() + hdr.dir_hash_bucket.size.unwrap()) ||
@@ -61,62 +70,74 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	mDataOffset = hdr.data_offset.unwrap();
 
 	// get dir entry ptr
-	mDirEntryTable = tc::ByteData(tc::io::IOUtil::castInt64ToSize(hdr.dir_entry.size.unwrap()));
-	mBaseStream->seek(hdr.dir_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	mBaseStream->read(mDirEntryTable.data(), mDirEntryTable.size());
-	
+	if (hdr.dir_entry.size.unwrap() > 0)
+	{
+		mDirEntryTable = tc::ByteData(tc::io::IOUtil::castInt64ToSize(hdr.dir_entry.size.unwrap()));
+		mBaseStream->seek(hdr.dir_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
+		mBaseStream->read(mDirEntryTable.data(), mDirEntryTable.size());
+	}
+	else
+	{
+		mDirEntryTable = tc::ByteData();
+	}
 
 	// get file entry ptr
-	mFileEntryTable = tc::ByteData(tc::io::IOUtil::castInt64ToSize(hdr.file_entry.size.unwrap()));
-	mBaseStream->seek(hdr.file_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	mBaseStream->read(mFileEntryTable.data(), mFileEntryTable.size());
-
-	//std::cout << "DirTable:" << std::endl;
-	//std::cout << tc::cli::FormatUtil::formatBytesAsHxdHexString(mDirEntryTable.data(), mDirEntryTable.size());
+	if (hdr.file_entry.size.unwrap() > 0)
+	{
+		mFileEntryTable = tc::ByteData(tc::io::IOUtil::castInt64ToSize(hdr.file_entry.size.unwrap()));
+		mBaseStream->seek(hdr.file_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
+		mBaseStream->read(mFileEntryTable.data(), mFileEntryTable.size());
+	}
+	else
+	{
+		mFileEntryTable = tc::ByteData();
+	}
 
 	/*
+	fmt::print("DirTable:\n");
+	fmt::print("{:s}", tc::cli::FormatUtil::formatBytesAsHxdHexString(mDirEntryTable.data(), mDirEntryTable.size()));
 	for (uint32_t v_addr = 0; v_addr < mDirEntryTable.size();)
 	{
-		std::cout << "Dir:            0x" << std::hex << v_addr << std::endl;
-		std::cout << " > parent:       0x" << std::hex << getDirEntry(v_addr)->parent_offset.unwrap() << std::endl;
-		std::cout << " > sibling:      0x" << std::hex << getDirEntry(v_addr)->sibling_offset.unwrap() << std::endl;
-		std::cout << " > child_offset: 0x" << std::hex << getDirEntry(v_addr)->child_offset.unwrap() << std::endl;
-		std::cout << " > file_offset:  0x" << std::hex << getDirEntry(v_addr)->file_offset.unwrap() << std::endl;
-		std::cout << " > hash_sibling: 0x" << std::hex << getDirEntry(v_addr)->hash_sibling_offset.unwrap() << std::endl;
-		std::cout << " > name_size:    0x" << std::hex << getDirEntry(v_addr)->name_size.unwrap() << std::endl;
+		fmt::print("Dir:             0x{:08x}\n", v_addr);
+		fmt::print(" > parent:       0x{:08x}\n", getDirEntry(v_addr)->parent_offset.unwrap());
+		fmt::print(" > sibling:      0x{:08x}\n", getDirEntry(v_addr)->sibling_offset.unwrap());
+		fmt::print(" > child_offset: 0x{:08x}\n", getDirEntry(v_addr)->child_offset.unwrap());
+		fmt::print(" > file_offset:  0x{:08x}\n", getDirEntry(v_addr)->file_offset.unwrap());
+		fmt::print(" > hash_sibling: 0x{:08x}\n", getDirEntry(v_addr)->hash_sibling_offset.unwrap());
+		fmt::print(" > name_size:    0x{:08x}\n", getDirEntry(v_addr)->name_size.unwrap());
 
 		uint32_t total_size = sizeof(pie::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
-		std::cout << " > entry_size:   0x" << std::hex << total_size << std::endl;
+		fmt::print(" > entry_size:   0x{:x}\n", total_size);
 
 		if (getDirEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
-			std::cout << "DirEntry looks sus" << std::endl;
+			fmt::print("DirEntry looks sus\n");
 			break;
 		}
 
 		v_addr += total_size;
 	}
 	*/
-
-	//std::cout << "FileTable:" << std::endl;
-	//std::cout << tc::cli::FormatUtil::formatBytesAsHxdHexString(mFileEntryTable.data(), mFileEntryTable.size());
+	
 	/*
+	fmt::print("FileTable:\n");
+	fmt::print("{:s}", tc::cli::FormatUtil::formatBytesAsHxdHexString(mFileEntryTable.data(), mFileEntryTable.size()));
 	for (uint32_t v_addr = 0; v_addr < mFileEntryTable.size();)
 	{
-		std::cout << "File:            0x" << std::hex << v_addr << std::endl;
-		std::cout << " > parent:       0x" << std::hex << getFileEntry(v_addr)->parent_offset.unwrap() << std::endl;
-		std::cout << " > sibling:      0x" << std::hex << getFileEntry(v_addr)->sibling_offset.unwrap() << std::endl;
-		std::cout << " > data_offset:  0x" << std::hex << getFileEntry(v_addr)->data_offset.unwrap() << std::endl;
-		std::cout << " > data_size:    0x" << std::hex << getFileEntry(v_addr)->data_size.unwrap() << std::endl;
-		std::cout << " > hash_sibling: 0x" << std::hex << getFileEntry(v_addr)->hash_sibling_offset.unwrap() << std::endl;
-		std::cout << " > name_size:    0x" << std::hex << getFileEntry(v_addr)->name_size.unwrap() << std::endl;
+		fmt::print("File:            0x{:08x}\n", v_addr);
+		fmt::print(" > parent:       0x{:08x}\n", getFileEntry(v_addr)->parent_offset.unwrap());
+		fmt::print(" > sibling:      0x{:08x}\n", getFileEntry(v_addr)->sibling_offset.unwrap());
+		fmt::print(" > data_offset:  0x{:08x}\n", getFileEntry(v_addr)->data_offset.unwrap());
+		fmt::print(" > data_size:    0x{:08x}\n", getFileEntry(v_addr)->data_size.unwrap());
+		fmt::print(" > hash_sibling: 0x{:08x}\n", getFileEntry(v_addr)->hash_sibling_offset.unwrap());
+		fmt::print(" > name_size:    0x{:08x}\n", getFileEntry(v_addr)->name_size.unwrap());
 
 		uint32_t total_size = sizeof(pie::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
-		std::cout << " > entry_size:   0x" << std::hex << total_size << std::endl;
+		fmt::print(" > entry_size:   0x{:x}\n", total_size);
 
 		if (getFileEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
-			std::cout << "FileEntry looks sus" << std::endl;
+			fmt::print("DirEntry looks sus\n");
 			break;
 		}
 
@@ -124,7 +145,9 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	}
 	*/
 
-	if (getDirEntry(0)->parent_offset.unwrap() != 0 ||
+	// validate root directory entry
+	if (mDirEntryTable.size() == 0 ||
+		getDirEntry(0)->parent_offset.unwrap() != 0 ||
 	    getDirEntry(0)->sibling_offset.unwrap() != 0xffffffff ||
 	    getDirEntry(0)->name_size.unwrap() != 0)
 	{
@@ -175,15 +198,14 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 			dir_entries[parent_index].dir_listing.dir_list.push_back(file_name_str);
 		}
 		
-
-		uint32_t total_size = sizeof(pie::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t entry_total_size = sizeof(pie::hac::sRomfsDirEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
 
 		if (getDirEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
 			throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "Possibly corrupted directory entry");
 		}
 
-		v_addr += total_size;
+		v_addr += entry_total_size;
 	}
 
 	// add files
@@ -226,13 +248,15 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 		// add name to parent directory listing
 		dir_entries[parent_index].dir_listing.file_list.push_back(file_name_str);
 
-		uint32_t total_size = sizeof(pie::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t entry_total_size = sizeof(pie::hac::sRomfsFileEntry) + align<uint32_t>(getFileEntry(v_addr)->name_size.unwrap(), 4);
 
 		if (getFileEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
 			throw tc::InvalidOperationException("pie::hac::RomFsSnapshotGenerator", "Possibly corrupted file entry");
 		}
 
-		v_addr += total_size;
+		v_addr += entry_total_size;
 	}
+
+	//fmt::print("RomFsSnapshotGenerator END\n");
 }
