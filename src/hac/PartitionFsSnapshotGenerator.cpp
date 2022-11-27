@@ -59,6 +59,16 @@ pie::hac::PartitionFsSnapshotGenerator::PartitionFsSnapshotGenerator(const std::
 		throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "Input stream is too small.");
 	}
 
+	if (hdr.file_num.unwrap() == 0)
+	{
+		throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "sPfsHeader header is corrupt (file count was 0)");
+	}
+
+	if (hdr.name_table_size.unwrap() == 0)
+	{
+		throw tc::ArgumentOutOfRangeException("pie::hac::PartitionFsSnapshotGenerator", "sPfsHeader header is corrupt (name table size was 0)");
+	}
+
 	// read raw file entry table data
 	tc::ByteData file_entry_table_raw = tc::ByteData(file_entry_size * hdr.file_num.unwrap());
 	stream->read(file_entry_table_raw.data(), file_entry_table_raw.size());
