@@ -270,7 +270,12 @@ size_t pie::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 	{
 		// read block
 		this->seek(blockToOffset(partial_end_block), tc::io::SeekOrigin::Begin);
-		mDataStream->read(partial_block.data(), partial_block.size());
+		size_t data_read = mDataStream->read(partial_block.data(), partial_block.size());
+		// clean buffer (buffer may be full of rubbish from partial begin read
+		// and data stream can be not multiple of block size)
+		if (data_read < partial_block.size()) {
+			memset(partial_block.data() + data_read, 0, partial_block.size() - data_read);
+		}
 		
 		// verify block
 		if (validateLayerBlocksWithHashLayer(partial_block.data(), mDataStreamBlockSize, 1, getBlockHash(partial_end_block)) == false)
