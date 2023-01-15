@@ -187,6 +187,8 @@
     <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationControlPropertyUtil.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\ApplicationMetaExtendedHeader.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\AssetHeader.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\BKTREncryptedStream.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\BKTRSubsectionEncryptedStream.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\CombinedFsSnapshotGenerator.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveHeader.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\ContentArchiveUtil.h" />
@@ -299,6 +301,8 @@
     <ClCompile Include="..\..\..\src\hac\ApplicationControlPropertyUtil.cpp" />
     <ClCompile Include="..\..\..\src\hac\ApplicationMetaExtendedHeader.cpp" />
     <ClCompile Include="..\..\..\src\hac\AssetHeader.cpp" />
+    <ClCompile Include="..\..\..\src\hac\BKTREncryptedStream.cpp" />
+    <ClCompile Include="..\..\..\src\hac\BKTRSubsectionEncryptedStream.cpp" />
     <ClCompile Include="..\..\..\src\hac\CombinedFsSnapshotGenerator.cpp" />
     <ClCompile Include="..\..\..\src\hac\ContentArchiveHeader.cpp" />
     <ClCompile Include="..\..\..\src\hac\ContentArchiveUtil.cpp" />

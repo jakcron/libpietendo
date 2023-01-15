@@ -450,6 +450,12 @@
     <ClInclude Include="..\..\..\include\pietendo\hac\es\TicketBody_V2.h">
       <Filter>Header Files\pietendo\hac\es</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\BKTREncryptedStream.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\pietendo\hac\BKTRSubsectionEncryptedStream.h">
+      <Filter>Header Files\pietendo\hac</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\ctr\CciFsSnapshotGenerator.cpp">
@@ -688,6 +694,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\hac\es\TicketBody_V2.cpp">
       <Filter>Source Files\hac\es</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\BKTREncryptedStream.cpp">
+      <Filter>Source Files\hac</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hac\BKTRSubsectionEncryptedStream.cpp">
+      <Filter>Source Files\hac</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
