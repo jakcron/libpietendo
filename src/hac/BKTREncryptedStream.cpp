@@ -91,15 +91,15 @@ pie::hac::BKTREncryptedStream::BKTREncryptedStream(const std::shared_ptr<tc::io:
 			// Select reader for each indirect storage entry
 			switch (entry.storage_index) 
 			{
-				case indirectstorage::StorageSource_BaseRomFs:
-					indirect_entry.reader = mBaseReader;
-					break;
-				case indirectstorage::StorageSource_PatchRomFs:
-					indirect_entry.reader = mPatchReader;
-					break;
-				default:
-					throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index));
-					break;
+			case indirectstorage::StorageSource_BaseRomFs:
+				indirect_entry.reader = mBaseReader;
+				break;
+			case indirectstorage::StorageSource_PatchRomFs:
+				indirect_entry.reader = mPatchReader;
+				break;
+			default:
+				throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index));
+				break;
 			}
 			indirect_entry.physical_offset = entry.phys_offset;
 			indirect_entry.virtual_offset = virtual_offset;
