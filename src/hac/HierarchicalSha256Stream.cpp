@@ -284,7 +284,7 @@ size_t pie::hac::HierarchicalSha256Stream::read(byte_t* ptr, size_t count)
 
 size_t pie::hac::HierarchicalSha256Stream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for HierarchicalSha256Stream");
+	throw tc::NotSupportedException(mModuleLabel+"::write()", "write is not supported for HierarchicalSha256Stream");
 }
 
 int64_t pie::hac::HierarchicalSha256Stream::seek(int64_t offset, tc::io::SeekOrigin origin)

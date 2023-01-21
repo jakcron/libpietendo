@@ -299,7 +299,7 @@ size_t pie::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 
 size_t pie::hac::HierarchicalIntegrityStream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for HierarchicalIntegrityStream");
+	throw tc::NotSupportedException(mModuleLabel+"::write()", "write is not supported for HierarchicalIntegrityStream");
 }
 
 int64_t pie::hac::HierarchicalIntegrityStream::seek(int64_t offset, tc::io::SeekOrigin origin)

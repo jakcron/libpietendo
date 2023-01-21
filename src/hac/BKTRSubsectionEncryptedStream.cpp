@@ -179,7 +179,7 @@ size_t pie::hac::BKTRSubsectionEncryptedStream::read(byte_t* ptr, size_t count)
 
 size_t pie::hac::BKTRSubsectionEncryptedStream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(kClassName+"::write()", "write is not implemented for BKTRSubsectionEncryptedStream");
+	throw tc::NotSupportedException(kClassName+"::write()", "write is not supported for BKTRSubsectionEncryptedStream");
 }
 
 int64_t pie::hac::BKTRSubsectionEncryptedStream::seek(int64_t offset, tc::io::SeekOrigin origin)
@@ -189,7 +189,7 @@ int64_t pie::hac::BKTRSubsectionEncryptedStream::seek(int64_t offset, tc::io::Se
 
 void pie::hac::BKTRSubsectionEncryptedStream::setLength(int64_t length)
 {
-	throw tc::NotImplementedException(kClassName+"::setLength()", "setLength is not implemented for BKTRSubsectionEncryptedStream");
+	throw tc::NotSupportedException(kClassName+"::setLength()", "setLength is not supported for BKTRSubsectionEncryptedStream");
 }
 
 void pie::hac::BKTRSubsectionEncryptedStream::flush()
