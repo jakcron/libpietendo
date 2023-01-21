@@ -58,15 +58,28 @@ pie::ctr::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	mDataOffset = hdr.data_offset.unwrap();
 
 	// get dir entry ptr
-	mDirEntryTable = tc::ByteData(hdr.dir_entry.size.unwrap());
-	mBaseStream->seek(hdr.dir_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	mBaseStream->read(mDirEntryTable.data(), mDirEntryTable.size());
-	
+	if (hdr.dir_entry.size.unwrap() > 0)
+	{
+		mDirEntryTable = tc::ByteData(hdr.dir_entry.size.unwrap());
+		mBaseStream->seek(hdr.dir_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
+		mBaseStream->read(mDirEntryTable.data(), mDirEntryTable.size());
+	}
+	else
+	{
+		mDirEntryTable = tc::ByteData();
+	}
 
 	// get file entry ptr
-	mFileEntryTable = tc::ByteData(hdr.file_entry.size.unwrap());
-	mBaseStream->seek(hdr.file_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	mBaseStream->read(mFileEntryTable.data(), mFileEntryTable.size());
+	if (hdr.file_entry.size.unwrap() > 0)
+	{
+		mFileEntryTable = tc::ByteData(hdr.file_entry.size.unwrap());
+		mBaseStream->seek(hdr.file_entry.offset.unwrap(), tc::io::SeekOrigin::Begin);
+		mBaseStream->read(mFileEntryTable.data(), mFileEntryTable.size());
+	}
+	else
+	{
+		mFileEntryTable = tc::ByteData();
+	}
 
 	//std::cout << "DirTable:" << std::endl;
 	//std::cout << tc::cli::FormatUtil::formatBytesAsHxdHexString(mDirEntryTable.data(), mDirEntryTable.size());
@@ -121,7 +134,9 @@ pie::ctr::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 	}
 	*/
 
-	if (getDirEntry(0)->parent_offset.unwrap() != 0 ||
+	// validate root directory entry
+ 	if (mDirEntryTable.size() == 0 ||
+		getDirEntry(0)->parent_offset.unwrap() != 0 ||
 	    getDirEntry(0)->sibling_offset.unwrap() != 0xffffffff ||
 	    getDirEntry(0)->name_size.unwrap() != 0)
 	{
@@ -180,14 +195,14 @@ pie::ctr::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 		}
 		
 
-		uint32_t total_size = sizeof(pie::ctr::RomFsDirectoryEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
+		uint32_t entry_total_size = sizeof(pie::ctr::RomFsDirectoryEntry) + align<uint32_t>(getDirEntry(v_addr)->name_size.unwrap(), 4);
 
 		if (getDirEntry(v_addr)->sibling_offset.unwrap() < v_addr)
 		{
 			throw tc::InvalidOperationException("pie::ctr::RomFsSnapshotGenerator", "Possibly corrupted directory entry");
 		}
 
-		v_addr += total_size;
+		v_addr += entry_total_size;
 	}
 
 	// add files
@@ -266,7 +281,7 @@ void pie::ctr::RomFsSnapshotGenerator::addFile(const pie::ctr::RomFsFileEntry* f
 	else
 	{
 		// empty stream
-		tmp.stream = std::shared_ptr<tc::io::SubStream>(new tc::io::SubStream());
+		tmp.stream = std::shared_ptr<tc::io::EmptyStream>(new tc::io::EmptyStream());
 	}
 
 	// save/transcode file name

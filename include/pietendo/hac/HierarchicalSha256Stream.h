@@ -2,17 +2,18 @@
 	 * @file HierarchicalSha256Stream.h
 	 * @brief Declaration of pie::hac::HierarchicalSha256Stream
 	 * @author Jack (jakcron)
-	 * @version 0.1
-	 * @date 2022/06/28
+	 * @version 0.2
+	 * @date 2023/01/21
 	 **/
 #pragma once
 #include <tc/ByteData.h>
 #include <tc/io/IStream.h>
 #include <tc/io/IOUtil.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
 #include <tc/ArgumentOutOfRangeException.h>
+#include <tc/NotSupportedException.h>
 #include <tc/ObjectDisposedException.h>
 
 #include <pietendo/hac/HierarchicalSha256Header.h>
@@ -70,18 +71,8 @@ public:
 	size_t read(byte_t* ptr, size_t count);
 
 		/**
-		 * @brief Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
-		 * 
-		 * @param[in] ptr Pointer to an array of bytes. This method copies @p count bytes from @p ptr to the current stream.
-		 * @param[in] count The number of bytes to be written to the current stream.
-		 * 
-		 * @return The total number of bytes written to the stream. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
-		 * 
-		 * @pre A stream must support writing for @ref write to work. 
-		 * @note Use @ref canWrite to determine if this stream supports writing.
-		 * @note Exceptions thrown by the base stream are not altered/intercepted, refer to that module's documentation for those exceptions.
-		 * 
-		 * @throw tc::ArgumentOutOfRangeException @p count exceeds the length of writeable data in the sub stream.
+		 * @brief Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written. @ref write is not supported for @ref HierarchicalSha256Stream.
+		 * @throw tc::NotSupportedException @ref write is not supported for @ref HierarchicalSha256Stream.
 		 * @throw tc::ObjectDisposedException Methods were called after the stream was closed.
 		 **/
 	size_t write(const byte_t* ptr, size_t count);
@@ -104,8 +95,8 @@ public:
 	int64_t seek(int64_t offset, tc::io::SeekOrigin origin);
 
 		/**
-		 * @brief Sets the length of the current stream. This is not implemented for @ref SubStream.
-		 * @throw tc::NotImplementedException @ref setLength is not implemented for @ref SubStream
+		 * @brief Sets the length of the current stream. This is not supported for @ref SubStream.
+		 * @throw tc::NotSupportedException @ref setLength is not supported for @ref SubStream
 		 * @throw tc::ObjectDisposedException Methods were called after the stream was closed.
 		 **/
 	void setLength(int64_t length);
@@ -141,11 +132,11 @@ private:
 
 	// hash cache for data layer
 	tc::ByteData mHashCache;
-	inline byte_t* getBlockHash(size_t begin_block) { return mHashCache.data() + (begin_block * tc::crypto::Sha256Generator::kHashSize); }
+	inline byte_t* getBlockHash(size_t begin_block) { return mHashCache.data() + (begin_block * tc::crypto::Sha2256Generator::kHashSize); }
 
 	// hash calc temp
-	std::array<byte_t, tc::crypto::Sha256Generator::kHashSize> mHash;
-	std::shared_ptr<tc::crypto::Sha256Generator> mHashCalc;
+	std::array<byte_t, tc::crypto::Sha2256Generator::kHashSize> mHash;
+	std::shared_ptr<tc::crypto::Sha2256Generator> mHashCalc;
 
 	bool validateLayerBlocksWithHashLayer(const byte_t* layer, size_t layer_size, size_t block_size, size_t block_num, const byte_t* hash_layer);
 };

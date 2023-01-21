@@ -1,6 +1,6 @@
 #include <pietendo/ctr/ExeFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
 #include <tc/io/MemoryStream.h>
 
@@ -78,7 +78,7 @@ pie::ctr::ExeFsSnapshotGenerator::ExeFsSnapshotGenerator(const std::shared_ptr<t
 	dir_entry_path_map[tc::io::Path("/")] = dir_entries.size()-1;
 
 	// populate virtual filesystem
-	std::array<byte_t, tc::crypto::Sha256Generator::kHashSize> hash_tmp;
+	std::array<byte_t, tc::crypto::Sha2256Generator::kHashSize> hash_tmp;
 	for (size_t i = 0; i < section.size(); i++)
 	{
 		if (section[i].size != 0)
@@ -92,7 +92,7 @@ pie::ctr::ExeFsSnapshotGenerator::ExeFsSnapshotGenerator(const std::shared_ptr<t
 				stream->seek(section[i].offset + sizeof(pie::ctr::ExeFsHeader), tc::io::SeekOrigin::Begin);
 				stream->read(tmp_data.data(), tmp_data.size());
 
-				tc::crypto::GenerateSha256Hash(hash_tmp.data(), tmp_data.data(), tmp_data.size());
+				tc::crypto::GenerateSha2256Hash(hash_tmp.data(), tmp_data.data(), tmp_data.size());
 				if (memcmp(hash_tmp.data(), section[i].hash.data(), hash_tmp.size()) != 0)
 				{
 					throw tc::crypto::CryptoException("pie::ctr::ExeFsSnapshotGenerator", "File failed hash check.");

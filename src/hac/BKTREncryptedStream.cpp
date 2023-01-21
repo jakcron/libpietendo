@@ -211,7 +211,7 @@ size_t pie::hac::BKTREncryptedStream::read(byte_t* ptr, size_t count)
 
 size_t pie::hac::BKTREncryptedStream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(kClassName+"::write()", "write is not implemented for BKTREncryptedStream");
+	throw tc::NotSupportedException(kClassName+"::write()", "write is not supported for BKTREncryptedStream");
 }
 
 int64_t pie::hac::BKTREncryptedStream::seek(int64_t offset, tc::io::SeekOrigin origin)
@@ -221,7 +221,7 @@ int64_t pie::hac::BKTREncryptedStream::seek(int64_t offset, tc::io::SeekOrigin o
 
 void pie::hac::BKTREncryptedStream::setLength(int64_t length)
 {
-	throw tc::NotImplementedException(kClassName+"::setLength()", "setLength is not implemented for BKTREncryptedStream");
+	throw tc::NotSupportedException(kClassName+"::setLength()", "setLength is not supported for BKTREncryptedStream");
 }
 
 void pie::hac::BKTREncryptedStream::flush()

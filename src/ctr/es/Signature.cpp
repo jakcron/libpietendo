@@ -3,7 +3,7 @@
 
 #include <pietendo/es/cert.h>
 #include <tc/ByteData.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 #include <tc/cli.h>
 

@@ -13,7 +13,7 @@ pie::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream() :
 	mDataStreamLogicalLength(0),
 	mDataStream(),
 	mHashCache(),
-	mHashCalc(new tc::crypto::Sha256Generator())
+	mHashCalc(new tc::crypto::Sha2256Generator())
 {
 }
 
@@ -299,7 +299,7 @@ size_t pie::hac::HierarchicalIntegrityStream::read(byte_t* ptr, size_t count)
 
 size_t pie::hac::HierarchicalIntegrityStream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for HierarchicalIntegrityStream");
+	throw tc::NotSupportedException(mModuleLabel+"::write()", "write is not supported for HierarchicalIntegrityStream");
 }
 
 int64_t pie::hac::HierarchicalIntegrityStream::seek(int64_t offset, tc::io::SeekOrigin origin)

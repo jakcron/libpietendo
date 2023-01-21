@@ -2,8 +2,8 @@
 	 * @file    BKTRSubsectionEncryptedStream.h
 	 * @brief   Declaration of pie::hac::BKTRSubsectionEncryptedStream
 	 * @author  Sam (sagumamugas)
-	 * @version 0.1
-	 * @date    2023/01/10
+	 * @version 0.2
+	 * @date    2023/01/21
 	 **/
 #pragma once
 #include <list>
@@ -14,7 +14,6 @@
 #include <tc/ArgumentOutOfRangeException.h>
 #include <tc/ObjectDisposedException.h>
 #include <tc/NotSupportedException.h>
-#include <tc/NotImplementedException.h>
 #include <tc/io/IOException.h>
 
 #include <pietendo/hac/define/nca.h>
@@ -114,8 +113,8 @@ public:
 	size_t read(byte_t* ptr, size_t count);
 
 		/**
-		 * @brief Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written. @ref write is not implemented for @ref BKTRSubsectionEncryptedStream.
-		 * @throw tc::NotImplementedException @ref write is not implemented for @ref BKTRSubsectionEncryptedStream.
+		 * @brief Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written. @ref write is not supported for @ref BKTRSubsectionEncryptedStream.
+		 * @throw tc::NotSupportedException @ref write is not supported for @ref BKTRSubsectionEncryptedStream.
 		 * @throw tc::ObjectDisposedException Methods were called after the stream was closed.
 		 **/
 	size_t write(const byte_t* ptr, size_t count);
@@ -138,8 +137,8 @@ public:
 	int64_t seek(int64_t offset, tc::io::SeekOrigin origin);
 
 		/**
-		 * @brief Sets the length of the current stream. This is not implemented for @ref BKTRSubsectionEncryptedStream.
-		 * @throw tc::NotImplementedException @ref setLength is not implemented for @ref BKTRSubsectionEncryptedStream.
+		 * @brief Sets the length of the current stream. This is not supported for @ref BKTRSubsectionEncryptedStream.
+		 * @throw tc::NotSupportedException @ref setLength is not supported for @ref BKTRSubsectionEncryptedStream.
 		 * @throw tc::ObjectDisposedException Methods were called after the stream was closed.
 		 **/
 	void setLength(int64_t length);
