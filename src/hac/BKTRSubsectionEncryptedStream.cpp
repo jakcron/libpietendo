@@ -29,7 +29,7 @@ pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream() :
 {
 }
 
-pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std::shared_ptr<tc::io::IStream>& stream, const key_t& key, const counter_t& counter, const pie::hac::sContentArchiveFsHeaderPatchInfo& patch_info) :
+pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std::shared_ptr<tc::io::IStream>& stream, const key_t& key, const counter_t& counter, const pie::hac::sContentArchiveBucketInfo& bucket_info) :
 	BKTRSubsectionEncryptedStream()
 {
 	// validate stream properties
@@ -49,12 +49,12 @@ pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std
 	tc::crypto::Aes128CtrEncryptedStream sections_reader(stream, key, counter);
 
 	// validate and read subsection header
-	if (sections_reader.length() < patch_info.aes_ctr_ex_bucket.offset.unwrap() + patch_info.aes_ctr_ex_bucket.size.unwrap())
+	if (sections_reader.length() < bucket_info.offset.unwrap() + bucket_info.size.unwrap())
 	{
 		throw tc::ArgumentOutOfRangeException(kClassName, "Input stream is too small.");
 	}
-	tc::ByteData subsection_block_raw = tc::ByteData(patch_info.aes_ctr_ex_bucket.size.unwrap());
-	sections_reader.seek(patch_info.aes_ctr_ex_bucket.offset.unwrap(), tc::io::SeekOrigin::Begin);
+	tc::ByteData subsection_block_raw = tc::ByteData(bucket_info.size.unwrap());
+	sections_reader.seek(bucket_info.offset.unwrap(), tc::io::SeekOrigin::Begin);
 	sections_reader.read(subsection_block_raw.data(), subsection_block_raw.size());
 	const pie::hac::sAesCtrExStorageBlock* subsection_block = (const pie::hac::sAesCtrExStorageBlock*)subsection_block_raw.data();
 

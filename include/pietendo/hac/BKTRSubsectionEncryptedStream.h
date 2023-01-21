@@ -56,10 +56,10 @@ public:
 		/** 
 		 * @brief Create BKTRSubsectionEncryptedStream
 		 * 
-		 * @param[in] stream     The base IStream object which this stream will decrypt data from.
-		 * @param[in] key        AES128 Encryption Key. See @ref key_t.
-		 * @param[in] counter    AES128-CTR Counter relative to offset 0x0 of the base stream. See @ref counter_t.
-		 * @param[in] patch_info BKTR section
+		 * @param[in] stream      The base IStream object which this stream will decrypt data from.
+		 * @param[in] key         AES128 Encryption Key. See @ref key_t.
+		 * @param[in] counter     AES128-CTR Counter relative to offset 0x0 of the base stream. See @ref counter_t.
+		 * @param[in] bucket_info AesCtrEx bucket info
 		 * 
 		 * @pre The sub stream must be a subset of the base stream.
 		 * @pre A stream must support seeking for @ref seek to work. 
@@ -67,7 +67,7 @@ public:
 		 * @throw tc::ArgumentNullException @p stream is a @p nullptr.
 		 * @throw tc::NotSupportedException The base stream does not support seeking or reading.
 		 **/
-	BKTRSubsectionEncryptedStream(const std::shared_ptr<tc::io::IStream>& stream, const key_t& key, const counter_t& counter, const pie::hac::sContentArchiveFsHeaderPatchInfo& patch_info);
+	BKTRSubsectionEncryptedStream(const std::shared_ptr<tc::io::IStream>& stream, const key_t& key, const counter_t& counter, const pie::hac::sContentArchiveBucketInfo& bucket_info);
 
 		/**
 		 * @brief Indicates whether the current stream supports reading.

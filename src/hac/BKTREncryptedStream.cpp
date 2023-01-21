@@ -66,7 +66,7 @@ pie::hac::BKTREncryptedStream::BKTREncryptedStream(const std::shared_ptr<tc::io:
 
 	// Prepare base reader (from base NCA) and patch reader (from update NCA)
 	mBaseReader = base;
-	mPatchReader = std::make_shared<pie::hac::BKTRSubsectionEncryptedStream>(pie::hac::BKTRSubsectionEncryptedStream(stream, key, counter, patch_info));
+	mPatchReader = std::make_shared<pie::hac::BKTRSubsectionEncryptedStream>(pie::hac::BKTRSubsectionEncryptedStream(stream, key, counter, patch_info.aes_ctr_ex_bucket));
 	
 	mLength = indirect_block->header.total_size;
 	int64_t end_virtual_offset = indirect_block->header.total_size;
