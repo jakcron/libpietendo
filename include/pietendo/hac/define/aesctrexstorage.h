@@ -26,6 +26,42 @@ struct sAesCtrExStorageEntry
 };
 static_assert(sizeof(sAesCtrExStorageEntry) == 0x10, "sAesCtrExStorageEntry size.");
 
+struct sAesCtrExStorageBucket
+{
+	union { // this union ensure size of kNodeSize
+		struct {
+			struct {
+				tc::bn::pad<4> reserved;
+				tc::bn::le32<uint32_t> entry_count;
+				tc::bn::le64<uint64_t> end_offset_bucket;
+			} header;
+			std::array<sAesCtrExStorageEntry, (aesctrexstorage::kNodeSize - sizeof(header) ) / sizeof(sAesCtrExStorageEntry)> entries;
+		};
+		std::array<byte_t, aesctrexstorage::kNodeSize> raw;
+	};
+};
+static_assert(sizeof(sAesCtrExStorageBucket) == aesctrexstorage::kNodeSize, "sAesCtrExStorageBucket size.");
+
+#ifdef _WIN32
+#pragma warning(disable : 4200) // silence warnings for usage of empty arrays in stucts 
+#endif
+
+struct sAesCtrExStorageBlock
+{
+	struct {
+		std::array<byte_t, 0x4> reserved_0;
+		tc::bn::le32<uint32_t> bucket_count;
+		tc::bn::le64<uint64_t> total_size;
+	} header;
+	std::array<tc::bn::le64<uint64_t>, (0x4000 - sizeof(header)) / sizeof(tc::bn::le64<uint64_t>)> base_physical_bucket_offset;
+	sAesCtrExStorageBucket buckets[];
+};
+static_assert(sizeof(sAesCtrExStorageBlock) == 0x4000, "sAesCtrExStorageBlock size.");
+
+#ifdef _WIN32
+#pragma warning(default : 4200)
+#endif
+
 #pragma pack(pop)
 
 }} // namespace pie::hac
