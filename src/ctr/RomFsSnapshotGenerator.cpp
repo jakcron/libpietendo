@@ -266,7 +266,7 @@ void pie::ctr::RomFsSnapshotGenerator::addFile(const pie::ctr::RomFsFileEntry* f
 	else
 	{
 		// empty stream
-		tmp.stream = std::shared_ptr<tc::io::SubStream>(new tc::io::SubStream());
+		tmp.stream = std::shared_ptr<tc::io::EmptyStream>(new tc::io::EmptyStream());
 	}
 
 	// save/transcode file name

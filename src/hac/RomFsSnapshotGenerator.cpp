@@ -1,6 +1,7 @@
 #include <pietendo/hac/RomFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/MemoryStream.h>
+#include <tc/io/EmptyStream.h>
 #include <tc/io/IOUtil.h>
 #include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
@@ -228,7 +229,10 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 		else
 		{
 			// empty stream
-			file_tmp.stream = std::shared_ptr<tc::io::MemoryStream>(new tc::io::MemoryStream());
+			file_tmp.stream = std::shared_ptr<tc::io::EmptyStream>(new tc::io::EmptyStream());
+			fmt::print("stream properties: canRead()  = {}\n", file_tmp.stream->canRead());
+			fmt::print("stream properties: canWrite() = {}\n", file_tmp.stream->canWrite());
+			fmt::print("stream properties: canSeek()  = {}\n", file_tmp.stream->canSeek());
 		}
 
 		// save file name
