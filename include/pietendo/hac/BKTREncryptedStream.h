@@ -165,8 +165,8 @@ private:
 	size_t mCurrentPos;
 
 	struct IndirectEntry {
-		std::shared_ptr<tc::io::IStream> mReader;
-		// offset in mReader (source offset)
+		std::shared_ptr<tc::io::IStream> reader;
+		// offset in reader (source offset)
 		int64_t physical_offset;
 		// destination offset
 		int64_t virtual_offset;
@@ -181,4 +181,4 @@ private:
 	std::shared_ptr<tc::io::IStream> mPatchReader;
 };
 
-}} // namespace tc::crypto
+}} // namespace pie::hac

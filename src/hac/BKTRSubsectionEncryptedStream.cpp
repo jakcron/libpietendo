@@ -3,10 +3,6 @@
 #include <tc/io/StreamUtil.h>
 
 #include <pietendo/hac/define/aesctrexstorage.h>
-/*
-#include <fmt/core.h>
-#include <tc/cli/FormatUtil.h>
-*/
 
 // inline utils
 inline uint64_t castInt64ToUint64(int64_t val) { return val < 0 ? 0 : uint64_t(val); }
@@ -57,10 +53,10 @@ pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std
 	{
 		throw tc::ArgumentOutOfRangeException(kClassName, "Input stream is too small.");
 	}
-	tc::ByteData tmp_data = tc::ByteData(patch_info.aes_ctr_ex_bucket.size.unwrap());
+	tc::ByteData subsection_block_raw = tc::ByteData(patch_info.aes_ctr_ex_bucket.size.unwrap());
 	sections_reader.seek(patch_info.aes_ctr_ex_bucket.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	sections_reader.read(tmp_data.data(), tmp_data.size());
-	const pie::hac::sAesCtrExStorageBlock* subsectionBlock = (const pie::hac::sAesCtrExStorageBlock*)tmp_data.data();
+	sections_reader.read(subsection_block_raw.data(), subsection_block_raw.size());
+	const pie::hac::sAesCtrExStorageBlock* subsection_block = (const pie::hac::sAesCtrExStorageBlock*)subsection_block_raw.data();
 
 	mLength = stream->length();
 	auto new_counter = counter;
@@ -68,21 +64,24 @@ pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std
 	// Relation generation -> decrypted IStream
 	std::map<uint32_t, std::shared_ptr<tc::io::IStream>> generationMap;
 
-	for (size_t i = 0; i < subsectionBlock->header.bucket_count; ++i) {
-		const sAesCtrExStorageBucket& subsection = subsectionBlock->buckets[i];
-		for (size_t j = 0; j < subsection.header.entry_count; ++j) {
-			const sAesCtrExStorageEntry& entry = subsection.entries[j];
+	for (size_t i = 0; i < subsection_block->header.bucket_count; ++i)
+	{
+		const pie::hac::sAesCtrExStorageBucket& subsection = subsection_block->buckets[i];
+		for (size_t j = 0; j < subsection.header.entry_count; ++j)
+		{
+			const pie::hac::sAesCtrExStorageEntry& entry = subsection.entries[j];
 			uint32_t newGeneration = entry.generation;
 			int64_t subsec_offset = entry.offset;
 			int64_t end_offset = (j + 1 == subsection.header.entry_count) ? subsection.header.end_offset_bucket : subsection.entries[j + 1].offset;
 			setGenerationAesCtr(newGeneration, new_counter.data());
 			std::shared_ptr<tc::io::IStream>& reader = generationMap[entry.generation];
-			if (reader == nullptr) {
+			if (reader == nullptr)
+			{
 				reader = std::make_shared<tc::crypto::Aes128CtrEncryptedStream>(tc::crypto::Aes128CtrEncryptedStream(stream, key, new_counter));
 			}
 
 			Subsection& current_subsection = mSubsections[subsec_offset];
-			current_subsection.mReader = reader;
+			current_subsection.reader = reader;
 			current_subsection.offset = subsec_offset;
 			current_subsection.end_offset = end_offset;
 		}
@@ -91,7 +90,8 @@ pie::hac::BKTRSubsectionEncryptedStream::BKTRSubsectionEncryptedStream(const std
 
 bool pie::hac::BKTRSubsectionEncryptedStream::canRead() const
 {
-	for (auto stream : mStreams) {
+	for (auto stream : mStreams) 
+	{
 		if (!stream->canRead())
 			return false;
 	}
@@ -104,7 +104,8 @@ bool pie::hac::BKTRSubsectionEncryptedStream::canWrite() const
 }
 bool pie::hac::BKTRSubsectionEncryptedStream::canSeek() const
 {
-	for (auto stream : mStreams) {
+	for (auto stream : mStreams)
+	{
 		if (!stream->canSeek())
 			return false;
 	}
@@ -145,7 +146,7 @@ size_t pie::hac::BKTRSubsectionEncryptedStream::read(byte_t* ptr, size_t count)
 	// and in case ask for a offset greater (or equal) to last entry its return "end", so its safe to get previous entry
 	const Subsection& section = (--mSubsections.upper_bound(current_pos))->second;
 
-	std::shared_ptr<IStream> reader = section.mReader;
+	std::shared_ptr<tc::io::IStream> reader = section.reader;
 
 	// determine begin & end offsets
 	int64_t begin_read_offset    = current_pos;
@@ -153,7 +154,8 @@ size_t pie::hac::BKTRSubsectionEncryptedStream::read(byte_t* ptr, size_t count)
 	int64_t count_partial_read   = count;
 	int64_t end_offset_section = section.end_offset;
 
-	if (end_read_offset > end_offset_section) {
+	if (end_read_offset > end_offset_section)
+	{
 		count_partial_read = end_offset_section - begin_read_offset;
 	}
 
@@ -161,7 +163,8 @@ size_t pie::hac::BKTRSubsectionEncryptedStream::read(byte_t* ptr, size_t count)
 	data_read_count += reader->read(ptr, count_partial_read);
 
 	// reads from diferent subsections
-	if (count_partial_read != count) {
+	if (count_partial_read != count)
+	{
 		seek(count_partial_read, tc::io::SeekOrigin::Current);
 		// read remeaning data (recursively)
 		data_read_count += read(ptr + count_partial_read, count - count_partial_read);
@@ -191,7 +194,8 @@ void pie::hac::BKTRSubsectionEncryptedStream::setLength(int64_t length)
 
 void pie::hac::BKTRSubsectionEncryptedStream::flush()
 {
-	for (auto stream : mStreams) {
+	for (auto stream : mStreams)
+	{
 		stream->flush();
 	}
 }

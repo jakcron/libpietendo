@@ -3,15 +3,9 @@
 #include <tc/io/StreamUtil.h>
 
 #include <pietendo/hac/BKTRSubsectionEncryptedStream.h>
-
 #include <pietendo/hac/define/indirectstorage.h>
 
 #include <fmt/format.h>
-/*
-#include <fmt/core.h>
-#include <tc/cli/FormatUtil.h>
-*/
-#include <cassert>
 
 // inline utils
 inline int64_t virtualToPhysical(int64_t virtual_begin, int64_t physical_begin, int64_t virtual_offset) {
@@ -65,43 +59,47 @@ pie::hac::BKTREncryptedStream::BKTREncryptedStream(const std::shared_ptr<tc::io:
 	{
 		throw tc::ArgumentOutOfRangeException(kClassName, "Input stream is too small.");
 	}
-	tc::ByteData tmp_data = tc::ByteData(patch_info.indirect_bucket.size.unwrap());
+	tc::ByteData indirect_block_raw = tc::ByteData(patch_info.indirect_bucket.size.unwrap());
 	sections_reader.seek(patch_info.indirect_bucket.offset.unwrap(), tc::io::SeekOrigin::Begin);
-	sections_reader.read(tmp_data.data(), tmp_data.size() );
-	const pie::hac::sIndirectStorageBlock* indirectBlock = (const pie::hac::sIndirectStorageBlock*)tmp_data.data();
+	sections_reader.read(indirect_block_raw.data(), indirect_block_raw.size());
+	const pie::hac::sIndirectStorageBlock* indirect_block = (const pie::hac::sIndirectStorageBlock*)indirect_block_raw.data();
 
 	// Prepare base reader (from base NCA) and patch reader (from update NCA)
 	mBaseReader = base;
-	mPatchReader = std::make_shared<BKTRSubsectionEncryptedStream>(pie::hac::BKTRSubsectionEncryptedStream(stream, key, counter, patch_info));
+	mPatchReader = std::make_shared<pie::hac::BKTRSubsectionEncryptedStream>(pie::hac::BKTRSubsectionEncryptedStream(stream, key, counter, patch_info));
 	
-	mLength = indirectBlock->header.total_size;
-	int64_t end_virtual_offset = indirectBlock->header.total_size;
+	mLength = indirect_block->header.total_size;
+	int64_t end_virtual_offset = indirect_block->header.total_size;
 
 	// Reverse lookup to save size from virtual offset
-	for (size_t i = indirectBlock->header.bucket_count; i > 0; --i) {
-		const sIndirectStorageBucket& bucket = indirectBlock->buckets[i - 1];
-		int64_t base_virtual_offset = indirectBlock->base_virtual_bucket_offset[i - 1];
-		for (size_t j = bucket.header.entry_count; j > 0; --j) {
-			const sIndirectStorageEntry& entry = bucket.entries[j - 1];
+	for (size_t i = indirect_block->header.bucket_count; i > 0; --i)
+	{
+		const pie::hac::sIndirectStorageBucket& bucket = indirect_block->buckets[i - 1];
+		int64_t base_virtual_offset = indirect_block->base_virtual_bucket_offset[i - 1];
+		for (size_t j = bucket.header.entry_count; j > 0; --j)
+		{
+			const pie::hac::sIndirectStorageEntry& entry = bucket.entries[j - 1];
 			int64_t virtual_offset = base_virtual_offset + entry.virt_offset;
 
 			// Check ordered entries
-			if (virtual_offset > end_virtual_offset) {
-				throw tc::InvalidOperationException(kClassName, "Indirec storage not ascending ordered.");
+			if (virtual_offset > end_virtual_offset)
+			{
+				throw tc::InvalidOperationException(kClassName, "Indirect storage not ascending ordered.");
 			}
 
 			IndirectEntry& indirect_entry = mIndirectEntries[virtual_offset];
 			// Select reader for each indirect storage entry
-			switch (entry.storage_index) {
-			case indirectstorage::StorageSource_BaseRomFs:
-				indirect_entry.mReader = mBaseReader;
-				break;
-			case indirectstorage::StorageSource_PatchRomFs:
-				indirect_entry.mReader = mPatchReader;
-				break;
-			default:
-				throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index));
-				break;
+			switch (entry.storage_index) 
+			{
+				case indirectstorage::StorageSource_BaseRomFs:
+					indirect_entry.reader = mBaseReader;
+					break;
+				case indirectstorage::StorageSource_PatchRomFs:
+					indirect_entry.reader = mPatchReader;
+					break;
+				default:
+					throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index));
+					break;
 			}
 			indirect_entry.physical_offset = entry.phys_offset;
 			indirect_entry.virtual_offset = virtual_offset;
@@ -114,10 +112,12 @@ pie::hac::BKTREncryptedStream::BKTREncryptedStream(const std::shared_ptr<tc::io:
 
 bool pie::hac::BKTREncryptedStream::canRead() const
 {
-	if (mBaseReader == nullptr || !mBaseReader->canRead()) {
+	if (mBaseReader == nullptr || !mBaseReader->canRead())
+	{
 		return false;
 	}
-	if (mPatchReader == nullptr || !mPatchReader->canRead()) {
+	if (mPatchReader == nullptr || !mPatchReader->canRead())
+	{
 		return false;
 	}
 	return true;
@@ -127,12 +127,15 @@ bool pie::hac::BKTREncryptedStream::canWrite() const
 {
 	return false; // always false this is a read-only stream
 }
+
 bool pie::hac::BKTREncryptedStream::canSeek() const
 {
-	if (mBaseReader == nullptr || !mBaseReader->canSeek()) {
+	if (mBaseReader == nullptr || !mBaseReader->canSeek())
+	{
 		return false;
 	}
-	if (mPatchReader == nullptr || !mPatchReader->canSeek()) {
+	if (mPatchReader == nullptr || !mPatchReader->canSeek())
+	{
 		return false;
 	}
 	return true;
@@ -172,7 +175,7 @@ size_t pie::hac::BKTREncryptedStream::read(byte_t* ptr, size_t count)
 	// and in case ask for a offset greater (or equal) to last entry its return "end", so its safe to get previous entry
 	const IndirectEntry& entry = (--mIndirectEntries.upper_bound(current_pos))->second;
 
-	std::shared_ptr<IStream> reader = entry.mReader;
+	std::shared_ptr<tc::io::IStream> reader = entry.reader;
 
 	// determine begin & end offsets
 	int64_t begin_read_offset	= current_pos;
@@ -181,7 +184,8 @@ size_t pie::hac::BKTREncryptedStream::read(byte_t* ptr, size_t count)
 	int64_t end_first_relocation = entry.virtual_offset + entry.size;
 
 	// check 
-	if (end_read_offset > end_first_relocation) {
+	if (end_read_offset > end_first_relocation)
+	{
 		// Read for first relocation
 		count_first_relocation = end_first_relocation - begin_read_offset;
 	}
@@ -190,11 +194,12 @@ size_t pie::hac::BKTREncryptedStream::read(byte_t* ptr, size_t count)
 	reader->seek(physical_reader_offset, tc::io::SeekOrigin::Begin);
 	data_read_count += reader->read(ptr, count_first_relocation);
 
-	if (count_first_relocation != count) {
+	if (count_first_relocation != count)
+	{
 		// update position to continue reading
-		seek(count_first_relocation, tc::io::SeekOrigin::Current);
+		this->seek(count_first_relocation, tc::io::SeekOrigin::Current);
 		// read data from other(s) storages (recursively)
-		data_read_count += read(ptr + count_first_relocation, count - count_first_relocation);
+		data_read_count += this->read(ptr + count_first_relocation, count - count_first_relocation);
 	}
 
 	// update expected logical position

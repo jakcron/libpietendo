@@ -163,7 +163,7 @@ private:
 	size_t mCurrentPos;
 
 	struct Subsection {
-		std::shared_ptr<tc::io::IStream> mReader;
+		std::shared_ptr<tc::io::IStream> reader;
 		int64_t offset;
 		int64_t end_offset;
 	};
@@ -172,4 +172,4 @@ private:
 	std::vector<std::shared_ptr<tc::io::IStream>> mStreams;
 };
 
-}} // namespace tc::crypto
+}} // namespace pie::hac
