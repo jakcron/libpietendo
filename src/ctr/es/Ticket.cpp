@@ -3,7 +3,7 @@
 
 #include <pietendo/es/ticket.h>
 #include <tc/ByteData.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 #include <tc/cli.h>
 
@@ -129,7 +129,7 @@ pie::ctr::es::TicketDeserialiser::TicketDeserialiser(const std::shared_ptr<tc::i
 	// generate hash
 	byte_t* tik_hash_begin = (byte_t*)&tik->head.sig.issuer;
 	size_t tik_hash_size = tik_data.size() - size_t(tik_hash_begin - tik_data.data());
-	tc::crypto::GenerateSha256Hash(this->calculated_hash.data(), tik_hash_begin, tik_hash_size);
+	tc::crypto::GenerateSha2256Hash(this->calculated_hash.data(), tik_hash_begin, tik_hash_size);
 
 	// basic fields
 	this->signature.sig_type = tik->head.sig.sigType.unwrap();

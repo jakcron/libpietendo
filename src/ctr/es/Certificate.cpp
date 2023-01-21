@@ -3,7 +3,7 @@
 
 #include <pietendo/es/cert.h>
 #include <tc/ByteData.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 #include <tc/cli.h>
 
@@ -176,7 +176,7 @@ pie::ctr::es::CertificateDeserialiser::CertificateDeserialiser(const std::shared
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "CERT had unexpected size after reading.");
 	}
-	tc::crypto::GenerateSha256Hash(calculated_hash.data(), total_cert_data.data() + getCertificateSignableOffset(total_cert_data.data()), pie::ctr::es::getCertificateSignableSize(total_cert_data.data()));
+	tc::crypto::GenerateSha2256Hash(calculated_hash.data(), total_cert_data.data() + getCertificateSignableOffset(total_cert_data.data()), pie::ctr::es::getCertificateSignableSize(total_cert_data.data()));
 
 
 	// store properties

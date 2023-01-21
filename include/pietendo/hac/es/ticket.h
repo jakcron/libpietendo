@@ -52,7 +52,7 @@ namespace ticket
 
 	static const size_t kIssuerSize = 0x40;
 	static const byte_t kFormatVersion = 2;
-	static const size_t kEncTitleKeySize = tc::crypto::Rsa2048OaepSha256Encryptor::kBlockSize;
+	static const size_t kEncTitleKeySize = tc::crypto::Rsa2048OaepSha2256Encryptor::kBlockSize;
 	static const size_t kReservedRegionSize = 8;
 	static const size_t kRightsIdSize = 16;
 }

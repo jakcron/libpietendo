@@ -13,7 +13,7 @@ pie::hac::HierarchicalIntegrityStream::HierarchicalIntegrityStream() :
 	mDataStreamLogicalLength(0),
 	mDataStream(),
 	mHashCache(),
-	mHashCalc(new tc::crypto::Sha256Generator())
+	mHashCalc(new tc::crypto::Sha2256Generator())
 {
 }
 

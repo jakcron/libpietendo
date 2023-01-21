@@ -131,15 +131,15 @@ pie::ctr::IvfcStream::IvfcStream(const std::shared_ptr<tc::io::IStream>& stream)
 	}
 
 	// validate hash tree
-	if ((section[DataLevel2].block_num * tc::crypto::Sha256Generator::kHashSize) != section[HashLevel1].size)
+	if ((section[DataLevel2].block_num * tc::crypto::Sha2256Generator::kHashSize) != section[HashLevel1].size)
 	{
 		throw tc::ArgumentOutOfRangeException("pie::ctr::IvfcStream", "IVFC level1 hash table had unexpected size.");
 	}
-	if ((section[HashLevel1].block_num * tc::crypto::Sha256Generator::kHashSize) != section[HashLevel0].size)
+	if ((section[HashLevel1].block_num * tc::crypto::Sha2256Generator::kHashSize) != section[HashLevel0].size)
 	{
 		throw tc::ArgumentOutOfRangeException("pie::ctr::IvfcStream", "IVFC level0 hash table had unexpected size.");
 	}
-	if ((section[HashLevel0].block_num * tc::crypto::Sha256Generator::kHashSize) != section[MasterHash].size)
+	if ((section[HashLevel0].block_num * tc::crypto::Sha2256Generator::kHashSize) != section[MasterHash].size)
 	{
 		throw tc::ArgumentOutOfRangeException("pie::ctr::IvfcStream", "IVFC master hash table had unexpected size.");
 	}
@@ -375,7 +375,7 @@ size_t pie::ctr::IvfcStream::read(byte_t* ptr, size_t count)
 
 size_t pie::ctr::IvfcStream::write(const byte_t* ptr, size_t count)
 {
-	throw tc::NotImplementedException(mModuleLabel+"::write()", "write is not supported for IvfcStream");
+	throw tc::NotSupportedException(mModuleLabel+"::write()", "write is not supported for IvfcStream");
 }
 
 int64_t pie::ctr::IvfcStream::seek(int64_t offset, tc::io::SeekOrigin origin)

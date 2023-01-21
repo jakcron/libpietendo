@@ -9,7 +9,7 @@
 #include <tc/ByteData.h>
 #include <tc/io/IStream.h>
 #include <tc/io/IOUtil.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
 #include <tc/ArgumentOutOfRangeException.h>
@@ -138,11 +138,11 @@ private:
 
 	// hash cache for data layer
 	tc::ByteData mHashCache;
-	inline byte_t* getBlockHash(size_t begin_block) { return mHashCache.data() + (begin_block * tc::crypto::Sha256Generator::kHashSize); }
+	inline byte_t* getBlockHash(size_t begin_block) { return mHashCache.data() + (begin_block * tc::crypto::Sha2256Generator::kHashSize); }
 
 	// hash calc temp
-	std::array<byte_t, tc::crypto::Sha256Generator::kHashSize> mHash;
-	std::shared_ptr<tc::crypto::Sha256Generator> mHashCalc;
+	std::array<byte_t, tc::crypto::Sha2256Generator::kHashSize> mHash;
+	std::shared_ptr<tc::crypto::Sha2256Generator> mHashCalc;
 
 	bool validateLayerBlocksWithHashLayer(const byte_t* layer, size_t block_size, size_t block_num, const byte_t* hash_layer);
 };

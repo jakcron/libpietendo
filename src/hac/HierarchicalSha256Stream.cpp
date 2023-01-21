@@ -13,7 +13,7 @@ pie::hac::HierarchicalSha256Stream::HierarchicalSha256Stream() :
 	mDataStreamLogicalLength(0),
 	mDataStream(),
 	mHashCache(),
-	mHashCalc(new tc::crypto::Sha256Generator())
+	mHashCalc(new tc::crypto::Sha2256Generator())
 {
 }
 

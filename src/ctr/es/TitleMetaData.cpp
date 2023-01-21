@@ -3,7 +3,7 @@
 
 #include <pietendo/es/tmd.h>
 #include <tc/ByteData.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 pie::ctr::es::TitleMetaDataDeserialiser::TitleMetaDataDeserialiser(const std::shared_ptr<tc::io::IStream>& tmd_stream) :
 	TitleMetaData(),
@@ -68,20 +68,20 @@ pie::ctr::es::TitleMetaDataDeserialiser::TitleMetaDataDeserialiser(const std::sh
 	tmd = (pie::es::ESV1TitleMeta*)tmd_data.data();
 
 	// hash for staged validiation
-	std::array<byte_t, tc::crypto::Sha256Generator::kHashSize> hash;
+	std::array<byte_t, tc::crypto::Sha2256Generator::kHashSize> hash;
 
 	// calculate hash for optional signature validation later
-	tc::crypto::GenerateSha256Hash(calculated_hash.data(), (byte_t*)&tmd->sig.issuer, (size_t)((byte_t*)&tmd->v1Head.cmdGroups - (byte_t*)&tmd->sig.issuer));
+	tc::crypto::GenerateSha2256Hash(calculated_hash.data(), (byte_t*)&tmd->sig.issuer, (size_t)((byte_t*)&tmd->v1Head.cmdGroups - (byte_t*)&tmd->sig.issuer));
 
 	// verify v1 ESV1ContentMetaGroup array using hash in v1 header
-	tc::crypto::GenerateSha256Hash(hash.data(), (byte_t*)&tmd->v1Head.cmdGroups, sizeof(tmd->v1Head.cmdGroups));
+	tc::crypto::GenerateSha2256Hash(hash.data(), (byte_t*)&tmd->v1Head.cmdGroups, sizeof(tmd->v1Head.cmdGroups));
 	if (memcmp(hash.data(), tmd->v1Head.hash.data(), hash.size()) != 0)
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "TMD had invalid CMD group hash.");
 	}
 
 	// verify ESV1ContentMeta array
-	tc::crypto::GenerateSha256Hash(hash.data(), (byte_t*)&tmd->contents, cmd_table_num * sizeof(pie::es::ESV1ContentMeta));
+	tc::crypto::GenerateSha2256Hash(hash.data(), (byte_t*)&tmd->contents, cmd_table_num * sizeof(pie::es::ESV1ContentMeta));
 	if (memcmp(hash.data(), tmd->v1Head.cmdGroups[0].groupHash.data(), hash.size()) != 0)
 	{
 		throw tc::ArgumentOutOfRangeException(mModuleLabel, "TMD had invalid CMD group[0] hash.");

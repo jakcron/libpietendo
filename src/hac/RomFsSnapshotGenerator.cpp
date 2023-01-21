@@ -2,7 +2,7 @@
 #include <tc/io/SubStream.h>
 #include <tc/io/MemoryStream.h>
 #include <tc/io/IOUtil.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
 #include <pietendo/hac/define/romfs.h>

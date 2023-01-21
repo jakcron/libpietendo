@@ -174,9 +174,9 @@ void pie::hac::AccessControlInfoDesc::generateSignature(const tc::crypto::RsaKey
 		toBytes();
 
 	detail::sha256_hash_t hash;
-	tc::crypto::GenerateSha256Hash(hash.data(), mRawBinary.data() + sizeof(detail::rsa2048_signature_t), mRawBinary.size() - sizeof(detail::rsa2048_signature_t));
+	tc::crypto::GenerateSha2256Hash(hash.data(), mRawBinary.data() + sizeof(detail::rsa2048_signature_t), mRawBinary.size() - sizeof(detail::rsa2048_signature_t));
 
-	if (tc::crypto::SignRsa2048PssSha256(mRawBinary.data(), hash.data(), key) == false)
+	if (tc::crypto::SignRsa2048PssSha2256(mRawBinary.data(), hash.data(), key) == false)
 	{
 		throw tc::crypto::CryptoException(kModuleName, "Failed to sign Access Control Info Desc");
 	}
@@ -188,9 +188,9 @@ void pie::hac::AccessControlInfoDesc::validateSignature(const tc::crypto::RsaKey
 		throw tc::ArgumentOutOfRangeException(kModuleName, "No Access Control Info Desc binary exists to verify");
 
 	detail::sha256_hash_t hash;
-	tc::crypto::GenerateSha256Hash(hash.data(), mRawBinary.data() + sizeof(detail::rsa2048_signature_t), mRawBinary.size() - sizeof(detail::rsa2048_signature_t));
+	tc::crypto::GenerateSha2256Hash(hash.data(), mRawBinary.data() + sizeof(detail::rsa2048_signature_t), mRawBinary.size() - sizeof(detail::rsa2048_signature_t));
 
-	if (tc::crypto::VerifyRsa2048PssSha256(mRawBinary.data(), hash.data(), key) == false)
+	if (tc::crypto::VerifyRsa2048PssSha2256(mRawBinary.data(), hash.data(), key) == false)
 	{
 		throw tc::crypto::CryptoException(kModuleName, "Failed to verify Access Control Info Desc");
 	}

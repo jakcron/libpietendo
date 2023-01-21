@@ -1,7 +1,7 @@
 #include <pietendo/hac/GameCardFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
 #include <tc/io/IOUtil.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 #include <tc/crypto/CryptoException.h>
 
 #include <pietendo/hac/PartitionFsHeader.h>
@@ -82,7 +82,7 @@ pie::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sh
 		// validate header if required
 		if (validate_mode == ValidationMode_Warn || validate_mode == ValidationMode_Throw)
 		{
-			tc::crypto::GenerateSha256Hash(calc_hash.data(), part_header_raw.data(), part_header_raw.size());
+			tc::crypto::GenerateSha2256Hash(calc_hash.data(), part_header_raw.data(), part_header_raw.size());
 			if (memcmp(calc_hash.data(), dirItr->hash.data(), calc_hash.size()) != 0)
 			{
 				std::string error_msg = fmt::format("Partition \"{:s}\" failed hash check.", dirItr->name);
@@ -169,7 +169,7 @@ pie::hac::GameCardFsSnapshotGenerator::GameCardFsSnapshotGenerator(const std::sh
 				stream->seek(fileItr->offset, tc::io::SeekOrigin::Begin);
 				stream->read(tmp_data.data(), tmp_data.size());
 
-				tc::crypto::GenerateSha256Hash(calc_hash.data(), tmp_data.data(), tmp_data.size());
+				tc::crypto::GenerateSha2256Hash(calc_hash.data(), tmp_data.data(), tmp_data.size());
 				if (memcmp(calc_hash.data(), fileItr->hash.data(), calc_hash.size()) != 0)
 				{
 					std::string error_msg = fmt::format("\"{:s}\" failed hash check.", fileItr->name);

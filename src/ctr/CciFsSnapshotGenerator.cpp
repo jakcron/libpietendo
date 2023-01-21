@@ -1,6 +1,6 @@
 #include <pietendo/ctr/CciFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 #include <pietendo/ctr/cci.h>
 

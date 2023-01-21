@@ -1,6 +1,6 @@
 #include <pietendo/ctr/CiaFsSnapshotGenerator.h>
 #include <tc/io/SubStream.h>
-#include <tc/crypto/Sha256Generator.h>
+#include <tc/crypto/Sha2256Generator.h>
 
 #include <pietendo/ctr/cia.h>
 #include <pietendo/es/tmd.h>
@@ -150,18 +150,18 @@ pie::ctr::CiaFsSnapshotGenerator::CiaFsSnapshotGenerator(const std::shared_ptr<t
 			}
 
 			// hash for staged validiation
-			std::array<byte_t, tc::crypto::Sha256Generator::kHashSize> hash;
+			std::array<byte_t, tc::crypto::Sha2256Generator::kHashSize> hash;
 
 			// TODO validate signature
 			/*
-			tc::crypto::GenerateSha256Hash(hash.data(), (byte_t*)&tmd->sig.issuer, (size_t)((byte_t*)&tmd->v1Head.cmdGroups - (byte_t*)&tmd->sig.issuer));
-			if (tc::crypto::VerifyRsa2048Pkcs1Sha256(tmd->sig.sig.data(), hash.data(), <rsa key here>))
+			tc::crypto::GenerateSha2256Hash(hash.data(), (byte_t*)&tmd->sig.issuer, (size_t)((byte_t*)&tmd->v1Head.cmdGroups - (byte_t*)&tmd->sig.issuer));
+			if (tc::crypto::VerifyRsa2048Pkcs1Sha2256(tmd->sig.sig.data(), hash.data(), <rsa key here>))
 			{
 				throw tc::ArgumentOutOfRangeException("pie::ctr::CiaFsMetaGenerator", "TMD had invalid signature.");
 			}
 			*/
 
-			tc::crypto::GenerateSha256Hash(hash.data(), (byte_t*)&tmd->v1Head.cmdGroups, sizeof(tmd->v1Head.cmdGroups));
+			tc::crypto::GenerateSha2256Hash(hash.data(), (byte_t*)&tmd->v1Head.cmdGroups, sizeof(tmd->v1Head.cmdGroups));
 			if (memcmp(hash.data(), tmd->v1Head.hash.data(), hash.size()) != 0)
 			{
 				throw tc::ArgumentOutOfRangeException("pie::ctr::CiaFsSnapshotGenerator", "TMD had invalid CMD group hash.");
@@ -182,7 +182,7 @@ pie::ctr::CiaFsSnapshotGenerator::CiaFsSnapshotGenerator(const std::shared_ptr<t
 				throw tc::ArgumentOutOfRangeException("pie::ctr::CiaFsSnapshotGenerator", "TMD had unexpected size");
 			}
 
-			tc::crypto::GenerateSha256Hash(hash.data(), (byte_t*)&tmd->contents, cmd_table_num * sizeof(pie::es::ESV1ContentMeta));
+			tc::crypto::GenerateSha2256Hash(hash.data(), (byte_t*)&tmd->contents, cmd_table_num * sizeof(pie::es::ESV1ContentMeta));
 			if (memcmp(hash.data(), tmd->v1Head.cmdGroups[0].groupHash.data(), hash.size()) != 0)
 			{
 				throw tc::ArgumentOutOfRangeException("pie::ctr::CiaFsSnapshotGenerator", "TMD had invalid CMD group[0] hash.");
