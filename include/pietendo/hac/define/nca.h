@@ -54,11 +54,11 @@ namespace nca
 	enum ContentType : byte_t
 	{
 		ContentType_Program = 0,
-		ContentType_Meta = 2,
-		ContentType_Control = 3,
-		ContentType_Manual = 4,
-		ContentType_Data = 5,
-		ContentType_PublicData = 6
+		ContentType_Meta = 1,
+		ContentType_Control = 2,
+		ContentType_Manual = 3,
+		ContentType_Data = 4,
+		ContentType_PublicData = 5
 	};
 
 	enum KeyBankIndex
