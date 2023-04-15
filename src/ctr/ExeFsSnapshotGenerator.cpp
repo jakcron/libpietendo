@@ -33,7 +33,7 @@ pie::ctr::ExeFsSnapshotGenerator::ExeFsSnapshotGenerator(const std::shared_ptr<t
 	stream->seek(0, tc::io::SeekOrigin::Begin);
 	stream->read((byte_t*)(&hdr), sizeof(pie::ctr::ExeFsHeader));
 
-	if (hdr.file_table[0].name[0] == 0 || hdr.file_table[0].offset.unwrap() != 0 || hdr.hash_table[pie::ctr::ExeFsHeader::kFileNum - 1][0] == 0)
+	if (hdr.file_table[0].name[0] == 0 || hdr.file_table[0].offset.unwrap() != 0)
 	{
 		throw tc::ArgumentOutOfRangeException("pie::ctr::ExeFsSnapshotGenerator", "ExeFsHeader is corrupted (Bad first entry).");
 	}
