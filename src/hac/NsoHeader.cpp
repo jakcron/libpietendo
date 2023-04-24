@@ -174,8 +174,8 @@ void pie::hac::NsoHeader::fromBytes(const byte_t* data, size_t len)
 	mDataSegmentInfo.file_layout.size = hdr->data_file_size.unwrap();
 	mDataSegmentInfo.memory_layout.offset = hdr->data.memory_offset.unwrap();
 	mDataSegmentInfo.memory_layout.size = hdr->data.size.unwrap();
-	mDataSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::HeaderFlags_RoCompress);
-	mDataSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::HeaderFlags_RoHash);
+	mDataSegmentInfo.is_compressed = hdr->flags.test((size_t)nso::HeaderFlags_DataCompress);
+	mDataSegmentInfo.is_hashed = hdr->flags.test((size_t)nso::HeaderFlags_DataHash);
 	mDataSegmentInfo.hash = hdr->data_hash;
 
 	mModuleNameInfo.offset = hdr->module_name_offset.unwrap();
