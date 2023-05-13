@@ -4,9 +4,7 @@
 
 #include <pietendo/ctr/cci.h>
 
-#include <iostream>
-#include <iomanip>
-#include <sstream>
+#include <fmt/format.h>
 #include <tc/cli/FormatUtil.h>
 
 
@@ -100,13 +98,9 @@ pie::ctr::CciFsShapshotGenerator::CciFsShapshotGenerator(const std::shared_ptr<t
 	{
 		if (partition[i].size != 0)
 		{
-			std::stringstream ss;
-			ss << std::hex << std::setfill('0') << std::setw(2) << i;
-			ss << "_";
-			ss << std::hex << std::setfill('0') << std::setw(16) << partition[i].title_id;
-			ss << ".app";
+			std::string partition_file_name = fmt::format("{:02x}_{:016x}.app", i, partition[i].title_id);
 
-			addFile(ss.str(), partition[i].offset, partition[i].size);
+			addFile(partition_file_name, partition[i].offset, partition[i].size);
 		}
 	}
 }
