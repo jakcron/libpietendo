@@ -5,9 +5,7 @@
 #include <pietendo/ctr/cia.h>
 #include <pietendo/es/tmd.h>
 
-#include <iostream>
-#include <iomanip>
-#include <sstream>
+#include <fmt/format.h>
 #include <tc/cli/FormatUtil.h>
 
 
@@ -201,12 +199,11 @@ pie::ctr::CiaFsSnapshotGenerator::CiaFsSnapshotGenerator(const std::shared_ptr<t
 				*/
 				if (hdr.content_bitarray.test(tmd->contents[i].index.unwrap()))				
 				{
-					std::stringstream ss;
-					ss << std::hex << std::setfill('0') << std::setw(8) << tmd->contents[i].cid.unwrap() << ".app";
+					std::string content_file_name = fmt::format("{:08x}.app", i, tmd->contents[i].cid.unwrap());
 
 					int64_t content_size = align<int64_t>(tmd->contents[i].size.unwrap(), CiaHeader::kCiaContentAlignment);
 
-					addFile(ss.str(), section[Content].offset + content_offset, content_size);
+					addFile(content_file_name, section[Content].offset + content_offset, content_size);
 					
 					content_offset += content_size;
 				}

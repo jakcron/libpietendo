@@ -147,7 +147,7 @@ namespace nacp
 		PlayLogPolicy_LogOnly = 1,
 		PlayLogPolicy_None = 2,
 		PlayLogPolicy_Closed = 3,
-		PlayLogPolicy_All = 0
+		PlayLogPolicy_All = 0 // legacy value
 	};
 
 	enum PlayLogQueryCapability : byte_t

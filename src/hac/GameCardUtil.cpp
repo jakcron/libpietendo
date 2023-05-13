@@ -1,6 +1,5 @@
 #include <pietendo/hac/GameCardUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 void pie::hac::GameCardUtil::getXciHeaderAesIv(const pie::hac::sGcHeader* hdr, pie::hac::detail::aes_iv_t& iv)
 {
@@ -21,150 +20,150 @@ void pie::hac::GameCardUtil::decryptXciHeader(pie::hac::sGcHeader* hdr, const by
 
 std::string pie::hac::GameCardUtil::getKekIndexAsString(pie::hac::gc::KekIndex val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::KekIndex_Prod):
-		ss << "Production";
+		str = "Production";
 		break;
 	case (pie::hac::gc::KekIndex_Dev):
-		ss << "Development";
+		str = "Development";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::GameCardUtil::getRomSizeAsString(pie::hac::gc::RomSize val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::RomSize_1GB):
-		ss << "1GB";
+		str = "1GB";
 		break;
 	case (pie::hac::gc::RomSize_2GB):
-		ss << "2GB";
+		str = "2GB";
 		break;
 	case (pie::hac::gc::RomSize_4GB):
-		ss << "4GB";
+		str = "4GB";
 		break;
 	case (pie::hac::gc::RomSize_8GB):
-		ss << "8GB";
+		str = "8GB";
 		break;
 	case (pie::hac::gc::RomSize_16GB):
-		ss << "16GB";
+		str = "16GB";
 		break;
 	case (pie::hac::gc::RomSize_32GB):
-		ss << "32GB";
+		str = "32GB";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::GameCardUtil::getHeaderFlagsAsString(pie::hac::gc::HeaderFlags val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::HeaderFlags_AutoBoot):
-		ss << "AutoBoot";
+		str = "AutoBoot";
 		break;
 	case (pie::hac::gc::HeaderFlags_HistoryErase):
-		ss << "HistoryErase";
+		str = "HistoryErase";
 		break;
 	case (pie::hac::gc::HeaderFlags_RepairTimeRevisorTool):
-		ss << "RepairTimeRevisorTool";
+		str = "RepairTimeRevisorTool";
 		break;
 	case (pie::hac::gc::HeaderFlags_AllowCupToChina):
-		ss << "AllowCupToChina";
+		str = "AllowCupToChina";
 		break;
 	case (pie::hac::gc::HeaderFlags_AllowCupToGlobal):
-		ss << "AllowCupToGlobal";
+		str = "AllowCupToGlobal";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::GameCardUtil::getCardFwVersionDescriptionAsString(pie::hac::gc::FwVersion val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::FwVersion_DevKit):
-		ss << "ForDevelopment";
+		str = "ForDevelopment";
 		break;
 	case (pie::hac::gc::FwVersion_Prod):
-		ss << "1.0.0+";
+		str = "1.0.0+";
 		break;
 	case (pie::hac::gc::FwVersion_Prod_Since4_0_0NUP):
-		ss << "4.0.0+";
+		str = "4.0.0+";
 		break;
 	case (pie::hac::gc::FwVersion_Prod_Since11_0_0NUP):
-		ss << "11.0.0+";
+		str = "11.0.0+";
 		break;
 	case (pie::hac::gc::FwVersion_Prod_Since12_0_0NUP):
-		ss << "12.0.0+";
+		str = "12.0.0+";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(16) << std::setfill('0') << (uint64_t)val;
+		str = fmt::format("unk_0x{:016x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::GameCardUtil::getCardClockRateAsString(pie::hac::gc::CardClockRate val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::CardClockRate_25MHz):
-		ss << "20 MHz";
+		str = "20 MHz";
 		break;
 	case (pie::hac::gc::CardClockRate_50MHz):
-		ss << "50 MHz";
+		str = "50 MHz";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(8) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:08x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::GameCardUtil::getCompatibilityTypeAsString(pie::hac::gc::CompatibilityType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::gc::CompatibilityType_Global):
-		ss << "Global";
+		str = "Global";
 		break;
 	case (pie::hac::gc::CompatibilityType_China):
-		ss << "China";
+		str = "China";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }

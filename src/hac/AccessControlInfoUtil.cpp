@@ -1,29 +1,28 @@
 #include <pietendo/hac/AccessControlInfoUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 std::string pie::hac::AccessControlInfoUtil::getMemoryRegionAsString(pie::hac::aci::MemoryRegion mem_region)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(mem_region)
 	{
 	case (pie::hac::aci::MemoryRegion_Application):
-		ss << "Application";
+		str = "Application";
 		break;
 	case (pie::hac::aci::MemoryRegion_Applet):
-		ss << "Applet";
+		str = "Applet";
 		break;
 	case (pie::hac::aci::MemoryRegion_SecureSystem):
-		ss << "SecureSystem";
+		str = "SecureSystem";
 		break;
 	case (pie::hac::aci::MemoryRegion_NonSecureSystem):
-		ss << "NonSecureSystem";
+		str = "NonSecureSystem";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << (uint32_t)mem_region;
+		str = fmt::format("unk_0x{:x}", (uint32_t)mem_region);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
