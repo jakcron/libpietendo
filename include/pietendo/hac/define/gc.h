@@ -25,6 +25,7 @@ namespace gc
 	static const uint32_t kCertAreaPageCount = 64;
 	static const uint32_t kNormalAreaStartPageAddress = kReservedAreaPageCount + kCertAreaPageCount + kCardHeaderPageCount + kCardKeyAreaPageCount;
 	*/
+	using gc_page_t = std::array<byte_t, kPageSize>;
 	using upp_hash_t = std::array<byte_t, kUppHashLen>;
 
 	const std::string kUpdatePartitionStr = "update"; 
@@ -80,12 +81,6 @@ namespace gc
 }
 
 #pragma pack(push,1)
-
-struct sGcPage
-{
-	byte_t data[gc::kPageSize];
-};
-static_assert(sizeof(sGcPage) == gc::kPageSize, "sGcPage size.");
 
 struct sGcHeader
 {
@@ -147,12 +142,12 @@ static_assert(sizeof(sGcInitialData) == 0x3C, "sGcInitialData size.");
 struct sGcKeyDataRegion
 {
 	union {
-		std::array<sGcPage, 1> raw_page;
+		std::array<gc::gc_page_t, 1> raw_page;
 		sGcInitialData initial_data; // AES128-CCM encrypted {titlekey[16]}
 	} initial_data_region;
 
 	union {
-		std::array<sGcPage, 6> raw_pages;
+		std::array<gc::gc_page_t, 6> raw_pages;
 		struct {
 			std::array<byte_t, gc::kPageSize * 6> encrypted_data; // AES128-CTR encrypted {titlekey[16]}
 		} enc;
@@ -162,7 +157,7 @@ struct sGcKeyDataRegion
 	} title_key_region;
 	
 	union {
-		std::array<sGcPage, 1> raw_page;
+		std::array<gc::gc_page_t, 1> raw_page;
 		struct {
 			detail::rsa2048_block_t encrypted_data; // RSA2048-OAEP-SHA256 encrypted AES-CTR data used for encrypted_00 {key[16],iv[16]}
 		} enc;
