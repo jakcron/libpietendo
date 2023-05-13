@@ -1,6 +1,5 @@
 #include <pietendo/hac/ApplicationControlPropertyUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 bool pie::hac::ApplicationControlPropertyUtil::validateSaveDataSizeMax(int64_t size, int64_t alignment)
 {
@@ -17,602 +16,602 @@ std::string pie::hac::ApplicationControlPropertyUtil::getSaveDataSizeAsString(in
 	static const int64_t kKiloByte = 1024;
 	static const int64_t kMegaByte = 1024 * 1024;
 
-	std::stringstream ss;
+	std::string str;
 
 
 	if (size < kKiloByte)
 	{
-		ss << size << " B";
+		str = fmt::format("{:d} B", size);
 	}
 	else if (size < kMegaByte)
 	{
-		ss << (size/kKiloByte) << " KiB";
+		str = fmt::format("{:d} KiB", (size/kKiloByte));
 	}
 	else
 	{
-		ss << (size/kMegaByte) << " MiB";
+		str = fmt::format("{:d} MiB", (size/kMegaByte));
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getAddOnContentRegistrationTypeAsString(pie::hac::nacp::AddOnContentRegistrationType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::AddOnContentRegistrationType_AllOnLaunch):
-		ss << "AllOnLaunch";
+		str = "AllOnLaunch";
 		break;
 	case (pie::hac::nacp::AddOnContentRegistrationType_OnDemand):
-		ss << "OnDemand";
+		str = "OnDemand";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getAttributeFlagAsString(pie::hac::nacp::AttributeFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::AttributeFlag_Demo):
-		ss << "Demo";
+		str = "Demo";
 		break;
 	case (pie::hac::nacp::AttributeFlag_RetailInteractiveDisplay):
-		ss << "RetailInteractiveDisplay";
+		str = "RetailInteractiveDisplay";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getCrashReportAsString(pie::hac::nacp::CrashReport val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::CrashReport_Deny):
-		ss << "Deny";
+		str = "Deny";
 		break;
 	case (pie::hac::nacp::CrashReport_Allow):
-		ss << "Allow";
+		str = "Allow";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getCrashScreenshotForDevAsString(pie::hac::nacp::CrashScreenshotForDev val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::CrashScreenshotForDev_Deny):
-		ss << "Deny";
+		str = "Deny";
 		break;
 	case (pie::hac::nacp::CrashScreenshotForDev_Allow):
-		ss << "Allow";
+		str = "Allow";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getCrashScreenshotForProdAsString(pie::hac::nacp::CrashScreenshotForProd val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::CrashScreenshotForProd_Deny):
-		ss << "Deny";
+		str = "Deny";
 		break;
 	case (pie::hac::nacp::CrashScreenshotForProd_Allow):
-		ss << "Allow";
+		str = "Allow";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getDataLossConfirmationAsString(pie::hac::nacp::DataLossConfirmation val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::DataLossConfirmation_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::DataLossConfirmation_Required):
-		ss << "Required";
+		str = "Required";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getHdcpAsString(pie::hac::nacp::Hdcp val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::Hdcp_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::Hdcp_Required):
-		ss << "Required";
+		str = "Required";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getJitConfigurationFlagAsString(pie::hac::nacp::JitConfigurationFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::JitConfigurationFlag_Enabled):
-		ss << "Enabled";
+		str = "Enabled";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(8) << std::setfill('0') << (uint64_t)val;
+		str = fmt::format("unk_0x{:08x}", (uint64_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getLanguageAsString(pie::hac::nacp::Language val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::Language_AmericanEnglish):
-		ss << "AmericanEnglish";
+		str = "AmericanEnglish";
 		break;
 	case (pie::hac::nacp::Language_BritishEnglish):
-		ss << "BritishEnglish";
+		str = "BritishEnglish";
 		break;
 	case (pie::hac::nacp::Language_Japanese):
-		ss << "Japanese";
+		str = "Japanese";
 		break;
 	case (pie::hac::nacp::Language_French):
-		ss << "French";
+		str = "French";
 		break;
 	case (pie::hac::nacp::Language_German):
-		ss << "German";
+		str = "German";
 		break;
 	case (pie::hac::nacp::Language_LatinAmericanSpanish):
-		ss << "LatinAmericanSpanish";
+		str = "LatinAmericanSpanish";
 		break;
 	case (pie::hac::nacp::Language_Spanish):
-		ss << "Spanish";
+		str = "Spanish";
 		break;
 	case (pie::hac::nacp::Language_Italian):
-		ss << "Italian";
+		str = "Italian";
 		break;
 	case (pie::hac::nacp::Language_Dutch):
-		ss << "Dutch";
+		str = "Dutch";
 		break;
 	case (pie::hac::nacp::Language_CanadianFrench):
-		ss << "CanadianFrench";
+		str = "CanadianFrench";
 		break;
 	case (pie::hac::nacp::Language_Portuguese):
-		ss << "Portuguese";
+		str = "Portuguese";
 		break;
 	case (pie::hac::nacp::Language_Russian):
-		ss << "Russian";
+		str = "Russian";
 		break;
 	case (pie::hac::nacp::Language_Korean):
-		ss << "Korean";
+		str = "Korean";
 		break;
 	case (pie::hac::nacp::Language_TraditionalChinese):
-		ss << "TraditionalChinese";
+		str = "TraditionalChinese";
 		break;
 	case (pie::hac::nacp::Language_SimplifiedChinese):
-		ss << "SimplifiedChinese";
+		str = "SimplifiedChinese";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getLogoHandlingAsString(pie::hac::nacp::LogoHandling val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::LogoHandling_Auto):
-		ss << "Auto";
+		str = "Auto";
 		break;
 	case (pie::hac::nacp::LogoHandling_None):
-		ss << "None";
+		str = "None";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getLogoTypeAsString(pie::hac::nacp::LogoType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::LogoType_LicensedByNintendo):
-		ss << "LicensedByNintendo";
+		str = "LicensedByNintendo";
 		break;
 	case (pie::hac::nacp::LogoType_DistributedByNintendo):
-		ss << "DistributedByNintendo";
+		str = "DistributedByNintendo";
 		break;
 	case (pie::hac::nacp::LogoType_Nintendo):
-		ss << "Nintendo";
+		str = "Nintendo";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getOrganisationAsString(pie::hac::nacp::Organisation val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::Organisation_CERO):
-		ss << "CERO";
+		str = "CERO";
 		break;
 	case (pie::hac::nacp::Organisation_GRACGCRB):
-		ss << "GRACGCRB";
+		str = "GRACGCRB";
 		break;
 	case (pie::hac::nacp::Organisation_GSRMR):
-		ss << "GSRMR";
+		str = "GSRMR";
 		break;
 	case (pie::hac::nacp::Organisation_ESRB):
-		ss << "ESRB";
+		str = "ESRB";
 		break;
 	case (pie::hac::nacp::Organisation_ClassInd):
-		ss << "ClassInd";
+		str = "ClassInd";
 		break;
 	case (pie::hac::nacp::Organisation_USK):
-		ss << "USK";
+		str = "USK";
 		break;
 	case (pie::hac::nacp::Organisation_PEGI):
-		ss << "PEGI";
+		str = "PEGI";
 		break;
 	case (pie::hac::nacp::Organisation_PEGIPortugal):
-		ss << "PEGIPortugal";
+		str = "PEGIPortugal";
 		break;
 	case (pie::hac::nacp::Organisation_PEGIBBFC):
-		ss << "PEGIBBFC";
+		str = "PEGIBBFC";
 		break;
 	case (pie::hac::nacp::Organisation_Russian):
-		ss << "Russian";
+		str = "Russian";
 		break;
 	case (pie::hac::nacp::Organisation_ACB):
-		ss << "ACB";
+		str = "ACB";
 		break;
 	case (pie::hac::nacp::Organisation_OFLC):
-		ss << "OFLC";
+		str = "OFLC";
 		break;
 	case (pie::hac::nacp::Organisation_IARCGeneric):
-		ss << "IARCGeneric";
+		str = "IARCGeneric";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getParentalControlFlagAsString(pie::hac::nacp::ParentalControlFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::ParentalControlFlag_FreeCommunication):
-		ss << "FreeCommunication";
+		str = "FreeCommunication";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getPlayLogPolicyAsString(pie::hac::nacp::PlayLogPolicy val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::PlayLogPolicy_Open):
-		ss << "Open";
+		str = "Open";
 		break;
 	case (pie::hac::nacp::PlayLogPolicy_LogOnly):
-		ss << "LogOnly";
+		str = "LogOnly";
 		break;
 	case (pie::hac::nacp::PlayLogPolicy_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::PlayLogPolicy_Closed):
-		ss << "Closed";
+		str = "Closed";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getPlayLogQueryCapabilityAsString(pie::hac::nacp::PlayLogQueryCapability val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::PlayLogQueryCapability_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::PlayLogQueryCapability_Whitelist):
-		ss << "Whitelist";
+		str = "Whitelist";
 		break;
 	case (pie::hac::nacp::PlayLogQueryCapability_All):
-		ss << "All";
+		str = "All";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getPlayReportPermissionAsString(pie::hac::nacp::PlayReportPermission val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::PlayReportPermission_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::PlayReportPermission_TargetMarketing):
-		ss << "TargetMarketing";
+		str = "TargetMarketing";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getRepairFlagAsString(pie::hac::nacp::RepairFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::RepairFlag_SuppressGameCardAccess):
-		ss << "SuppressGameCardAccess";
+		str = "SuppressGameCardAccess";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getRequiredNetworkServiceLicenseOnLaunchFlagAsString(pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag_Common):
-		ss << "Common";
+		str = "Common";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeAddOnContentInstallAsString(pie::hac::nacp::RuntimeAddOnContentInstall val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::RuntimeAddOnContentInstall_Deny):
-		ss << "Deny";
+		str = "Deny";
 		break;
 	case (pie::hac::nacp::RuntimeAddOnContentInstall_AllowAppend):
-		ss << "AllowAppend";
+		str = "AllowAppend";
 		break;
 	case (pie::hac::nacp::RuntimeAddOnContentInstall_AllowAppendButDontDownloadWhenUsingNetwork):
-		ss << "AllowAppendButDontDownloadWhenUsingNetwork";
+		str = "AllowAppendButDontDownloadWhenUsingNetwork";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeParameterDeliveryAsString(pie::hac::nacp::RuntimeParameterDelivery val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::RuntimeParameterDelivery_Always):
-		ss << "Always";
+		str = "Always";
 		break;
 	case (pie::hac::nacp::RuntimeParameterDelivery_AlwaysIfUserStateMatched):
-		ss << "AlwaysIfUserStateMatched";
+		str = "AlwaysIfUserStateMatched";
 		break;
 	case (pie::hac::nacp::RuntimeParameterDelivery_OnRestart):
-		ss << "OnRestart";
+		str = "OnRestart";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getScreenshotAsString(pie::hac::nacp::Screenshot val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::Screenshot_Allow):
-		ss << "Allow";
+		str = "Allow";
 		break;
 	case (pie::hac::nacp::Screenshot_Deny):
-		ss << "Deny";
+		str = "Deny";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getStartupUserAccountAsString(pie::hac::nacp::StartupUserAccount val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::StartupUserAccount_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::nacp::StartupUserAccount_Required):
-		ss << "Required";
+		str = "Required";
 		break;
 	case (pie::hac::nacp::StartupUserAccount_RequiredWithNetworkServiceAccountAvailable):
-		ss << "RequiredWithNetworkServiceAccountAvailable";
+		str = "RequiredWithNetworkServiceAccountAvailable";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getStartupUserAccountOptionFlagAsString(pie::hac::nacp::StartupUserAccountOptionFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::StartupUserAccountOptionFlag_IsOptional):
-		ss << "IsOptional";
+		str = "IsOptional";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getUserAccountSwitchLockAsString(pie::hac::nacp::UserAccountSwitchLock val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::UserAccountSwitchLock_Disable):
-		ss << "Disable";
+		str = "Disable";
 		break;
 	case (pie::hac::nacp::UserAccountSwitchLock_Enable):
-		ss << "Enable";
+		str = "Enable";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ApplicationControlPropertyUtil::getVideoCaptureAsString(pie::hac::nacp::VideoCapture val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nacp::VideoCapture_Disable):
-		ss << "Disable";
+		str = "Disable";
 		break;
 	case (pie::hac::nacp::VideoCapture_Manual):
-		ss << "Manual";
+		str = "Manual";
 		break;
 	case (pie::hac::nacp::VideoCapture_Enable):
-		ss << "Enable";
+		str = "Enable";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }

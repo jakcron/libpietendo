@@ -1,197 +1,195 @@
 #include <pietendo/hac/ContentMetaUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 std::string pie::hac::ContentMetaUtil::getContentTypeAsString(pie::hac::cnmt::ContentType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::ContentType_Meta):
-		ss << "Meta";
+		str = "Meta";
 		break;
 	case (pie::hac::cnmt::ContentType_Program):
-		ss << "Program";
+		str = "Program";
 		break;
 	case (pie::hac::cnmt::ContentType_Data):
-		ss << "Data";
+		str = "Data";
 		break;
 	case (pie::hac::cnmt::ContentType_Control):
-		ss << "Control";
+		str = "Control";
 		break;
 	case (pie::hac::cnmt::ContentType_HtmlDocument):
-		ss << "HtmlDocument";
+		str = "HtmlDocument";
 		break;
 	case (pie::hac::cnmt::ContentType_LegalInformation):
-		ss << "LegalInformation";
+		str = "LegalInformation";
 		break;
 	case (pie::hac::cnmt::ContentType_DeltaFragment):
-		ss << "DeltaFragment";
+		str = "DeltaFragment";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getContentMetaTypeAsString(pie::hac::cnmt::ContentMetaType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::ContentMetaType_SystemProgram):
-		ss << "SystemProgram";
+		str = "SystemProgram";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_SystemData):
-		ss << "SystemData";
+		str = "SystemData";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_SystemUpdate):
-		ss << "SystemUpdate";
+		str = "SystemUpdate";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_BootImagePackage):
-		ss << "BootImagePackage";
+		str = "BootImagePackage";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_BootImagePackageSafe):
-		ss << "BootImagePackageSafe";
+		str = "BootImagePackageSafe";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_Application):
-		ss << "Application";
+		str = "Application";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_Patch):
-		ss << "Patch";
+		str = "Patch";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_AddOnContent):
-		ss << "AddOnContent";
+		str = "AddOnContent";
 		break;
 	case (pie::hac::cnmt::ContentMetaType_Delta):
-		ss << "Delta";
+		str = "Delta";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getUpdateTypeAsString(pie::hac::cnmt::UpdateType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::UpdateType_ApplyAsDelta):
-		ss << "ApplyAsDelta";
+		str = "ApplyAsDelta";
 		break;
 	case (pie::hac::cnmt::UpdateType_Overwrite):
-		ss << "Overwrite";
+		str = "Overwrite";
 		break;
 	case (pie::hac::cnmt::UpdateType_Create):
-		ss << "Create";
+		str = "Create";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getContentInstallTypeAsString(pie::hac::cnmt::ContentInstallType val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::ContentInstallType_Full):
-		ss << "Full";
+		str = "Full";
 		break;
 	case (pie::hac::cnmt::ContentInstallType_FragmentOnly):
-		ss << "FragmentOnly";
+		str = "FragmentOnly";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getStorageIdAsString(pie::hac::cnmt::StorageId val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::StorageId_None):
-		ss << "None";
+		str = "None";
 		break;
 	case (pie::hac::cnmt::StorageId_Host):
-		ss << "Host";
+		str = "Host";
 		break;
 	case (pie::hac::cnmt::StorageId_GameCard):
-		ss << "GameCard";
+		str = "GameCard";
 		break;
 	case (pie::hac::cnmt::StorageId_BuiltInSystem):
-		ss << "BuiltInSystem";
+		str = "BuiltInSystem";
 		break;
 	case (pie::hac::cnmt::StorageId_BuiltInUser):
-		ss << "BuiltInUser";
+		str = "BuiltInUser";
 		break;
 	case (pie::hac::cnmt::StorageId_SdCard):
-		ss << "SdCard";
+		str = "SdCard";
 		break;
 	case (pie::hac::cnmt::StorageId_Any):
-		ss << "Any";
+		str = "Any";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getContentMetaAttributeFlagAsString(pie::hac::cnmt::ContentMetaAttributeFlag val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::cnmt::ContentMetaAttributeFlag_IncludesExFatDriver):
-		ss << "IncludesExFatDriver";
+		str = "IncludesExFatDriver";
 		break;
 	case (pie::hac::cnmt::ContentMetaAttributeFlag_Rebootless):
-		ss << "Rebootless";
+		str = "Rebootless";
 		break;
 	case (pie::hac::cnmt::ContentMetaAttributeFlag_Compacted):
-		ss << "Compacted";
+		str = "Compacted";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::ContentMetaUtil::getVersionAsString(uint32_t version)
 {
-	std::stringstream ss;
+	std::string str;
 
-	ss << (uint32_t)((version>>26) & 0x3f);
-	ss << ".";
-	ss << (uint32_t)((version>>20) & 0x3f);
-	ss << ".";
-	ss << (uint32_t)((version>>16) & 0xf);
-	ss << "-";
-	ss << (uint32_t)((version>>8) & 0xff);
-	ss << ".";
-	ss << (uint32_t)((version>>0) & 0xff);
+	uint32_t major,minor,micro,patch_major,patch_minor;
+	major = (uint32_t)((version>>26) & 0x3f);
+	minor = (uint32_t)((version>>20) & 0x3f);
+	micro = (uint32_t)((version>>16) & 0xf);
+	patch_major = (uint32_t)((version>>8) & 0xff);
+	patch_minor = (uint32_t)((version>>0) & 0xff);
 
-	return ss.str();
+	str = fmt::format("{:d}.{:d}.{:d}-{:d}.{:d}", major,minor,micro,patch_major,patch_minor);
+
+	return str;
 }

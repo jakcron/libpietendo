@@ -1,23 +1,22 @@
 #include <pietendo/hac/NrrUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 std::string pie::hac::NrrUtil::getNrrKindAsString(pie::hac::nrr::NrrKind val)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch (val)
 	{
 	case (pie::hac::nrr::NrrKind_User):
-		ss << "User";
+		str = "User";
 		break;
 	case (pie::hac::nrr::NrrKind_JitPlugin):
-		ss << "JitPlugin";
+		str = "JitPlugin";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)val;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }

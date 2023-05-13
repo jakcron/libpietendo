@@ -1,29 +1,28 @@
 #include <pietendo/hac/MetaUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 std::string pie::hac::MetaUtil::getProcessAddressSpaceAsString(pie::hac::meta::ProcessAddressSpace type)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(type)
 	{
 	case (pie::hac::meta::ProcessAddressSpace_32Bit):
-		ss << "AddressSpace32Bit";
+		str = "AddressSpace32Bit";
 		break;
 	case (pie::hac::meta::ProcessAddressSpace_64BitOld):
-		ss << "AddressSpace64BitOld";
+		str = "AddressSpace64BitOld";
 		break;
 	case (pie::hac::meta::ProcessAddressSpace_32BitNoReserved):
-		ss << "AddressSpace32BitNoReserved";
+		str = "AddressSpace32BitNoReserved";
 		break;
 	case (pie::hac::meta::ProcessAddressSpace_64Bit):
-		ss << "AddressSpace64Bit";
+		str = "AddressSpace64Bit";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)type;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)type);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }

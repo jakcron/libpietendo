@@ -1,484 +1,483 @@
 #include <pietendo/hac/KernelCapabilityUtil.h>
-#include <sstream>
-#include <iomanip>
+#include <fmt/format.h>
 
 std::string pie::hac::KernelCapabilityUtil::getMiscFlagsBitAsString(pie::hac::kc::MiscFlagsBit flag)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(flag)
 	{
 	case (pie::hac::kc::MiscFlagsBit_EnableDebug):
-		ss << "EnableDebug";
+		str = "EnableDebug";
 		break;
 	case (pie::hac::kc::MiscFlagsBit_ForceDebug):
-		ss << "ForceDebug";
+		str = "ForceDebug";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)flag;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)flag);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::KernelCapabilityUtil::getProgramTypeAsString(pie::hac::kc::ProgramType type)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(type)
 	{
 	case (pie::hac::kc::ProgramType_System):
-		ss << "System";
+		str = "System";
 		break;
 	case (pie::hac::kc::ProgramType_Application):
-		ss << "Application";
+		str = "Application";
 		break;
 	case (pie::hac::kc::ProgramType_Applet):
-		ss << "Applet";
+		str = "Applet";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)type;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)type);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::KernelCapabilityUtil::getMemoryPermissionAsString(pie::hac::kc::MemoryPermission type)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(type)
 	{
 	case (pie::hac::kc::MemoryPermission_Rw):
-		ss << "Rw";
+		str = "Rw";
 		break;
 	case (pie::hac::kc::MemoryPermission_Ro):
-		ss << "Ro";
+		str = "Ro";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)type;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)type);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::KernelCapabilityUtil::getMappingTypeAsString(pie::hac::kc::MappingType type)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(type)
 	{
 	case (pie::hac::kc::MappingType_Io):
-		ss << "Io";
+		str = "Io";
 		break;
 	case (pie::hac::kc::MappingType_Static):
-		ss << "Static";
+		str = "Static";
 		break;
 	default:
-		ss << "unk_0x" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)type;
+		str = fmt::format("unk_0x{:02x}", (uint32_t)type);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
 
 std::string pie::hac::KernelCapabilityUtil::getSystemCallIdAsString(pie::hac::kc::SystemCallId syscall_id)
 {
-	std::stringstream ss;
+	std::string str;
 
 	switch(syscall_id)
 	{
 	case (pie::hac::kc::SystemCallId_Unknown0):
-		ss << "Unknown0";
+		str = "Unknown0";
 		break;
 	case (pie::hac::kc::SystemCallId_SetHeapSize):
-		ss << "SetHeapSize";
+		str = "SetHeapSize";
 		break;
 	case (pie::hac::kc::SystemCallId_SetMemoryPermission):
-		ss << "SetMemoryPermission";
+		str = "SetMemoryPermission";
 		break;
 	case (pie::hac::kc::SystemCallId_SetMemoryAttribute):
-		ss << "SetMemoryAttribute";
+		str = "SetMemoryAttribute";
 		break;
 	case (pie::hac::kc::SystemCallId_MapMemory):
-		ss << "MapMemory";
+		str = "MapMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapMemory):
-		ss << "UnmapMemory";
+		str = "UnmapMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_QueryMemory):
-		ss << "QueryMemory";
+		str = "QueryMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_ExitProcess):
-		ss << "ExitProcess";
+		str = "ExitProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateThread):
-		ss << "CreateThread";
+		str = "CreateThread";
 		break;
 	case (pie::hac::kc::SystemCallId_StartThread):
-		ss << "StartThread";
+		str = "StartThread";
 		break;
 	case (pie::hac::kc::SystemCallId_ExitThread):
-		ss << "ExitThread";
+		str = "ExitThread";
 		break;
 	case (pie::hac::kc::SystemCallId_SleepThread):
-		ss << "SleepThread";
+		str = "SleepThread";
 		break;
 	case (pie::hac::kc::SystemCallId_GetThreadPriority):
-		ss << "GetThreadPriority";
+		str = "GetThreadPriority";
 		break;
 	case (pie::hac::kc::SystemCallId_SetThreadPriority):
-		ss << "SetThreadPriority";
+		str = "SetThreadPriority";
 		break;
 	case (pie::hac::kc::SystemCallId_GetThreadCoreMask):
-		ss << "GetThreadCoreMask";
+		str = "GetThreadCoreMask";
 		break;
 	case (pie::hac::kc::SystemCallId_SetThreadCoreMask):
-		ss << "SetThreadCoreMask";
+		str = "SetThreadCoreMask";
 		break;
 	case (pie::hac::kc::SystemCallId_GetCurrentProcessorNumber):
-		ss << "GetCurrentProcessorNumber";
+		str = "GetCurrentProcessorNumber";
 		break;
 	case (pie::hac::kc::SystemCallId_SignalEvent):
-		ss << "SignalEvent";
+		str = "SignalEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_ClearEvent):
-		ss << "ClearEvent";
+		str = "ClearEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_MapSharedMemory):
-		ss << "MapSharedMemory";
+		str = "MapSharedMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapSharedMemory):
-		ss << "UnmapSharedMemory";
+		str = "UnmapSharedMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateTransferMemory):
-		ss << "CreateTransferMemory";
+		str = "CreateTransferMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_CloseHandle):
-		ss << "CloseHandle";
+		str = "CloseHandle";
 		break;
 	case (pie::hac::kc::SystemCallId_ResetSignal):
-		ss << "ResetSignal";
+		str = "ResetSignal";
 		break;
 	case (pie::hac::kc::SystemCallId_WaitSynchronization):
-		ss << "WaitSynchronization";
+		str = "WaitSynchronization";
 		break;
 	case (pie::hac::kc::SystemCallId_CancelSynchronization):
-		ss << "CancelSynchronization";
+		str = "CancelSynchronization";
 		break;
 	case (pie::hac::kc::SystemCallId_ArbitrateLock):
-		ss << "ArbitrateLock";
+		str = "ArbitrateLock";
 		break;
 	case (pie::hac::kc::SystemCallId_ArbitrateUnlock):
-		ss << "ArbitrateUnlock";
+		str = "ArbitrateUnlock";
 		break;
 	case (pie::hac::kc::SystemCallId_WaitProcessWideKeyAtomic):
-		ss << "WaitProcessWideKeyAtomic";
+		str = "WaitProcessWideKeyAtomic";
 		break;
 	case (pie::hac::kc::SystemCallId_SignalProcessWideKey):
-		ss << "SignalProcessWideKey";
+		str = "SignalProcessWideKey";
 		break;
 	case (pie::hac::kc::SystemCallId_GetSystemTick):
-		ss << "GetSystemTick";
+		str = "GetSystemTick";
 		break;
 	case (pie::hac::kc::SystemCallId_ConnectToNamedPort):
-		ss << "ConnectToNamedPort";
+		str = "ConnectToNamedPort";
 		break;
 	case (pie::hac::kc::SystemCallId_SendSyncRequestLight):
-		ss << "SendSyncRequestLight";
+		str = "SendSyncRequestLight";
 		break;
 	case (pie::hac::kc::SystemCallId_SendSyncRequest):
-		ss << "SendSyncRequest";
+		str = "SendSyncRequest";
 		break;
 	case (pie::hac::kc::SystemCallId_SendSyncRequestWithUserBuffer):
-		ss << "SendSyncRequestWithUserBuffer";
+		str = "SendSyncRequestWithUserBuffer";
 		break;
 	case (pie::hac::kc::SystemCallId_SendAsyncRequestWithUserBuffer):
-		ss << "SendAsyncRequestWithUserBuffer";
+		str = "SendAsyncRequestWithUserBuffer";
 		break;
 	case (pie::hac::kc::SystemCallId_GetProcessId):
-		ss << "GetProcessId";
+		str = "GetProcessId";
 		break;
 	case (pie::hac::kc::SystemCallId_GetThreadId):
-		ss << "GetThreadId";
+		str = "GetThreadId";
 		break;
 	case (pie::hac::kc::SystemCallId_Break):
-		ss << "Break";
+		str = "Break";
 		break;
 	case (pie::hac::kc::SystemCallId_OutputDebugString):
-		ss << "OutputDebugString";
+		str = "OutputDebugString";
 		break;
 	case (pie::hac::kc::SystemCallId_ReturnFromException):
-		ss << "ReturnFromException";
+		str = "ReturnFromException";
 		break;
 	case (pie::hac::kc::SystemCallId_GetInfo):
-		ss << "GetInfo";
+		str = "GetInfo";
 		break;
 	case (pie::hac::kc::SystemCallId_FlushEntireDataCache):
-		ss << "FlushEntireDataCache";
+		str = "FlushEntireDataCache";
 		break;
 	case (pie::hac::kc::SystemCallId_FlushDataCache):
-		ss << "FlushDataCache";
+		str = "FlushDataCache";
 		break;
 	case (pie::hac::kc::SystemCallId_MapPhysicalMemory):
-		ss << "MapPhysicalMemory";
+		str = "MapPhysicalMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapPhysicalMemory):
-		ss << "UnmapPhysicalMemory";
+		str = "UnmapPhysicalMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_GetDebugFutureThreadInfo):
-		ss << "GetDebugFutureThreadInfo";
+		str = "GetDebugFutureThreadInfo";
 		break;
 	case (pie::hac::kc::SystemCallId_GetLastThreadInfo):
-		ss << "GetLastThreadInfo";
+		str = "GetLastThreadInfo";
 		break;
 	case (pie::hac::kc::SystemCallId_GetResourceLimitLimitValue):
-		ss << "GetResourceLimitLimitValue";
+		str = "GetResourceLimitLimitValue";
 		break;
 	case (pie::hac::kc::SystemCallId_GetResourceLimitCurrentValue):
-		ss << "GetResourceLimitCurrentValue";
+		str = "GetResourceLimitCurrentValue";
 		break;
 	case (pie::hac::kc::SystemCallId_SetThreadActivity):
-		ss << "SetThreadActivity";
+		str = "SetThreadActivity";
 		break;
 	case (pie::hac::kc::SystemCallId_GetThreadContext3):
-		ss << "GetThreadContext3";
+		str = "GetThreadContext3";
 		break;
 	case (pie::hac::kc::SystemCallId_WaitForAddress):
-		ss << "WaitForAddress";
+		str = "WaitForAddress";
 		break;
 	case (pie::hac::kc::SystemCallId_SignalToAddress):
-		ss << "SignalToAddress";
+		str = "SignalToAddress";
 		break;
 	case (pie::hac::kc::SystemCallId_SynchronizePreemptionState):
-		ss << "SynchronizePreemptionState";
+		str = "SynchronizePreemptionState";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown55):
-		ss << "Unknown55";
+		str = "Unknown55";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown56):
-		ss << "Unknown56";
+		str = "Unknown56";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown57):
-		ss << "Unknown57";
+		str = "Unknown57";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown58):
-		ss << "Unknown58";
+		str = "Unknown58";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown59):
-		ss << "Unknown59";
+		str = "Unknown59";
 		break;
 	case (pie::hac::kc::SystemCallId_KernelDebug):
-		ss << "KernelDebug";
+		str = "KernelDebug";
 		break;
 	case (pie::hac::kc::SystemCallId_ChangeKernelTraceState):
-		ss << "ChangeKernelTraceState";
+		str = "ChangeKernelTraceState";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown62):
-		ss << "Unknown62";
+		str = "Unknown62";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown63):
-		ss << "Unknown63";
+		str = "Unknown63";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateSession):
-		ss << "CreateSession";
+		str = "CreateSession";
 		break;
 	case (pie::hac::kc::SystemCallId_AcceptSession):
-		ss << "AcceptSession";
+		str = "AcceptSession";
 		break;
 	case (pie::hac::kc::SystemCallId_ReplyAndReceiveLight):
-		ss << "ReplyAndReceiveLight";
+		str = "ReplyAndReceiveLight";
 		break;
 	case (pie::hac::kc::SystemCallId_ReplyAndReceive):
-		ss << "ReplyAndReceive";
+		str = "ReplyAndReceive";
 		break;
 	case (pie::hac::kc::SystemCallId_ReplyAndReceiveWithUserBuffer):
-		ss << "ReplyAndReceiveWithUserBuffer";
+		str = "ReplyAndReceiveWithUserBuffer";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateEvent):
-		ss << "CreateEvent";
+		str = "CreateEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown70):
-		ss << "Unknown70";
+		str = "Unknown70";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown71):
-		ss << "Unknown71";
+		str = "Unknown71";
 		break;
 	case (pie::hac::kc::SystemCallId_MapPhysicalMemoryUnsafe):
-		ss << "MapPhysicalMemoryUnsafe";
+		str = "MapPhysicalMemoryUnsafe";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapPhysicalMemoryUnsafe):
-		ss << "UnmapPhysicalMemoryUnsafe";
+		str = "UnmapPhysicalMemoryUnsafe";
 		break;
 	case (pie::hac::kc::SystemCallId_SetUnsafeLimit):
-		ss << "SetUnsafeLimit";
+		str = "SetUnsafeLimit";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateCodeMemory):
-		ss << "CreateCodeMemory";
+		str = "CreateCodeMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_ControlCodeMemory):
-		ss << "ControlCodeMemory";
+		str = "ControlCodeMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_SleepSystem):
-		ss << "SleepSystem";
+		str = "SleepSystem";
 		break;
 	case (pie::hac::kc::SystemCallId_ReadWriteRegister):
-		ss << "ReadWriteRegister";
+		str = "ReadWriteRegister";
 		break;
 	case (pie::hac::kc::SystemCallId_SetProcessActivity):
-		ss << "SetProcessActivity";
+		str = "SetProcessActivity";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateSharedMemory):
-		ss << "CreateSharedMemory";
+		str = "CreateSharedMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_MapTransferMemory):
-		ss << "MapTransferMemory";
+		str = "MapTransferMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapTransferMemory):
-		ss << "UnmapTransferMemory";
+		str = "UnmapTransferMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateInterruptEvent):
-		ss << "CreateInterruptEvent";
+		str = "CreateInterruptEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_QueryPhysicalAddress):
-		ss << "QueryPhysicalAddress";
+		str = "QueryPhysicalAddress";
 		break;
 	case (pie::hac::kc::SystemCallId_QueryIoMapping):
-		ss << "QueryIoMapping";
+		str = "QueryIoMapping";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateDeviceAddressSpace):
-		ss << "CreateDeviceAddressSpace";
+		str = "CreateDeviceAddressSpace";
 		break;
 	case (pie::hac::kc::SystemCallId_AttachDeviceAddressSpace):
-		ss << "AttachDeviceAddressSpace";
+		str = "AttachDeviceAddressSpace";
 		break;
 	case (pie::hac::kc::SystemCallId_DetachDeviceAddressSpace):
-		ss << "DetachDeviceAddressSpace";
+		str = "DetachDeviceAddressSpace";
 		break;
 	case (pie::hac::kc::SystemCallId_MapDeviceAddressSpaceByForce):
-		ss << "MapDeviceAddressSpaceByForce";
+		str = "MapDeviceAddressSpaceByForce";
 		break;
 	case (pie::hac::kc::SystemCallId_MapDeviceAddressSpaceAligned):
-		ss << "MapDeviceAddressSpaceAligned";
+		str = "MapDeviceAddressSpaceAligned";
 		break;
 	case (pie::hac::kc::SystemCallId_MapDeviceAddressSpace):
-		ss << "MapDeviceAddressSpace";
+		str = "MapDeviceAddressSpace";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapDeviceAddressSpace):
-		ss << "UnmapDeviceAddressSpace";
+		str = "UnmapDeviceAddressSpace";
 		break;
 	case (pie::hac::kc::SystemCallId_InvalidateProcessDataCache):
-		ss << "InvalidateProcessDataCache";
+		str = "InvalidateProcessDataCache";
 		break;
 	case (pie::hac::kc::SystemCallId_StoreProcessDataCache):
-		ss << "StoreProcessDataCache";
+		str = "StoreProcessDataCache";
 		break;
 	case (pie::hac::kc::SystemCallId_FlushProcessDataCache):
-		ss << "FlushProcessDataCache";
+		str = "FlushProcessDataCache";
 		break;
 	case (pie::hac::kc::SystemCallId_DebugActiveProcess):
-		ss << "DebugActiveProcess";
+		str = "DebugActiveProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_BreakDebugProcess):
-		ss << "BreakDebugProcess";
+		str = "BreakDebugProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_TerminateDebugProcess):
-		ss << "TerminateDebugProcess";
+		str = "TerminateDebugProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_GetDebugEvent):
-		ss << "GetDebugEvent";
+		str = "GetDebugEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_ContinueDebugEvent):
-		ss << "ContinueDebugEvent";
+		str = "ContinueDebugEvent";
 		break;
 	case (pie::hac::kc::SystemCallId_GetProcessList):
-		ss << "GetProcessList";
+		str = "GetProcessList";
 		break;
 	case (pie::hac::kc::SystemCallId_GetThreadList):
-		ss << "GetThreadList";
+		str = "GetThreadList";
 		break;
 	case (pie::hac::kc::SystemCallId_GetDebugThreadContext):
-		ss << "GetDebugThreadContext";
+		str = "GetDebugThreadContext";
 		break;
 	case (pie::hac::kc::SystemCallId_SetDebugThreadContext):
-		ss << "SetDebugThreadContext";
+		str = "SetDebugThreadContext";
 		break;
 	case (pie::hac::kc::SystemCallId_QueryDebugProcessMemory):
-		ss << "QueryDebugProcessMemory";
+		str = "QueryDebugProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_ReadDebugProcessMemory):
-		ss << "ReadDebugProcessMemory";
+		str = "ReadDebugProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_WriteDebugProcessMemory):
-		ss << "WriteDebugProcessMemory";
+		str = "WriteDebugProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_SetHardwareBreakPoint):
-		ss << "SetHardwareBreakPoint";
+		str = "SetHardwareBreakPoint";
 		break;
 	case (pie::hac::kc::SystemCallId_GetDebugThreadParam):
-		ss << "GetDebugThreadParam";
+		str = "GetDebugThreadParam";
 		break;
 	case (pie::hac::kc::SystemCallId_Unknown110):
-		ss << "Unknown110";
+		str = "Unknown110";
 		break;
 	case (pie::hac::kc::SystemCallId_GetSystemInfo):
-		ss << "GetSystemInfo";
+		str = "GetSystemInfo";
 		break;
 	case (pie::hac::kc::SystemCallId_CreatePort):
-		ss << "CreatePort";
+		str = "CreatePort";
 		break;
 	case (pie::hac::kc::SystemCallId_ManageNamedPort):
-		ss << "ManageNamedPort";
+		str = "ManageNamedPort";
 		break;
 	case (pie::hac::kc::SystemCallId_ConnectToPort):
-		ss << "ConnectToPort";
+		str = "ConnectToPort";
 		break;
 	case (pie::hac::kc::SystemCallId_SetProcessMemoryPermission):
-		ss << "SetProcessMemoryPermission";
+		str = "SetProcessMemoryPermission";
 		break;
 	case (pie::hac::kc::SystemCallId_MapProcessMemory):
-		ss << "MapProcessMemory";
+		str = "MapProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapProcessMemory):
-		ss << "UnmapProcessMemory";
+		str = "UnmapProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_QueryProcessMemory):
-		ss << "QueryProcessMemory";
+		str = "QueryProcessMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_MapProcessCodeMemory):
-		ss << "MapProcessCodeMemory";
+		str = "MapProcessCodeMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_UnmapProcessCodeMemory):
-		ss << "UnmapProcessCodeMemory";
+		str = "UnmapProcessCodeMemory";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateProcess):
-		ss << "CreateProcess";
+		str = "CreateProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_StartProcess):
-		ss << "StartProcess";
+		str = "StartProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_TerminateProcess):
-		ss << "TerminateProcess";
+		str = "TerminateProcess";
 		break;
 	case (pie::hac::kc::SystemCallId_GetProcessInfo):
-		ss << "GetProcessInfo";
+		str = "GetProcessInfo";
 		break;
 	case (pie::hac::kc::SystemCallId_CreateResourceLimit):
-		ss << "CreateResourceLimit";
+		str = "CreateResourceLimit";
 		break;
 	case (pie::hac::kc::SystemCallId_SetResourceLimitLimitValue):
-		ss << "SetResourceLimitLimitValue";
+		str = "SetResourceLimitLimitValue";
 		break;
 	case (pie::hac::kc::SystemCallId_CallSecureMonitor):
-		ss << "CallSecureMonitor";
+		str = "CallSecureMonitor";
 		break;
 	default:
-		ss << "syscall_id_" << std::hex << std::setw(2) << std::setfill('0') << (uint32_t)syscall_id;
+		str = fmt::format("syscall_id_{:02x}", (uint32_t)syscall_id);
 		break;
 	}
 
-	return ss.str();
+	return str;
 }
