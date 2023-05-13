@@ -243,6 +243,9 @@ std::string pie::hac::ApplicationControlPropertyUtil::getLanguageAsString(pie::h
 	case (pie::hac::nacp::Language_SimplifiedChinese):
 		str = "SimplifiedChinese";
 		break;
+	case (pie::hac::nacp::Language_BrazilianPortuguese):
+		str = "BrazilianPortuguese";
+		break;
 	default:
 		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
 		break;
