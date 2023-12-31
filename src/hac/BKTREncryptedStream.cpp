@@ -98,7 +98,7 @@ pie::hac::BKTREncryptedStream::BKTREncryptedStream(const std::shared_ptr<tc::io:
 				indirect_entry.reader = mPatchReader;
 				break;
 			default:
-				throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index));
+				throw tc::NotSupportedException(kClassName, fmt::format("StorageSource({:d}) not supported", entry.storage_index.unwrap()));
 				break;
 			}
 			indirect_entry.physical_offset = entry.phys_offset;
