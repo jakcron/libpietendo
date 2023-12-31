@@ -4,7 +4,7 @@
 
 ![Platform](https://img.shields.io/badge/platform-linux:%20x86__64,%20i386%20%7C%20windows:%20x86__64,%20i386%20%7C%20macOS:%20x86__64,%20arm64-lightgrey.svg)
 
-![Version](https://img.shields.io/badge/version-0.0.0%20%7C%20prerelease-green.svg)
+![Version](https://img.shields.io/badge/version-0.7.2%20%7C%20prerelease-green.svg)
 
 Library for parsing Nintendo file formats.
 
