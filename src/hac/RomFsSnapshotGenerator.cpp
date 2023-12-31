@@ -230,9 +230,9 @@ pie::hac::RomFsSnapshotGenerator::RomFsSnapshotGenerator(const std::shared_ptr<t
 		{
 			// empty stream
 			file_tmp.stream = std::shared_ptr<tc::io::EmptyStream>(new tc::io::EmptyStream());
-			fmt::print("stream properties: canRead()  = {}\n", file_tmp.stream->canRead());
-			fmt::print("stream properties: canWrite() = {}\n", file_tmp.stream->canWrite());
-			fmt::print("stream properties: canSeek()  = {}\n", file_tmp.stream->canSeek());
+			//fmt::print("stream properties: canRead()  = {}\n", file_tmp.stream->canRead());
+			//fmt::print("stream properties: canWrite() = {}\n", file_tmp.stream->canWrite());
+			//fmt::print("stream properties: canSeek()  = {}\n", file_tmp.stream->canSeek());
 		}
 
 		// save file name
