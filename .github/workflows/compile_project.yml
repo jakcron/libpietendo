@@ -1,4 +1,4 @@
-name: Compile Main Branches
+name: Compile Project (Push/PR/Release)
 
 on:
   push:
@@ -30,12 +30,12 @@ jobs:
            arch: arm64
            bin_ext: .a
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Clone submodules
       run: git submodule init && git submodule update
     - name: Compile ${{ matrix.prog }}
       run: make PROJECT_PLATFORM_ARCH=${{ matrix.arch }} deps all
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.prog }}-${{ matrix.dist }}
         path: ./bin/${{ matrix.prog }}${{ matrix.bin_ext }}
@@ -60,14 +60,14 @@ jobs:
            build_path: Release
            bin_ext: .lib
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v1.3
     - name: Clone submodules
       run: git submodule init && git submodule update
     - name: Compile ${{ matrix.prog }}
       run: msbuild .\build\visualstudio\${{ matrix.prog }}.sln /p:configuration=${{ matrix.configuration }} /p:platform=${{ matrix.platform }} 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.prog }}-${{ matrix.dist }}
         path: .\build\visualstudio\${{ matrix.build_path }}\${{ matrix.prog }}${{ matrix.bin_ext }}
