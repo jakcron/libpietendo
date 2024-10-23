@@ -27,6 +27,7 @@ namespace nacp
 	static const size_t kNeighborDetectionGroupConfigurationKeyLength = 16;
 	static const size_t kReceivableGroupConfigurationCount = 16;
 	static const size_t kRequiredAddOnContentsSetCount = 32;
+	static const size_t kPlatformSpecificRegionLength = 1024;
 
 	static const int8_t kUnusedAgeRating = -1;
 
@@ -45,10 +46,32 @@ namespace nacp
 		AddOnContentRegistrationType_OnDemand = 1
 	};
 
+	enum AlbumFileExport : byte_t
+	{
+		AlbumFileExport_Allow = 0,
+		AlbumFileExport_Deny = 1
+	};
+	
+	enum AppropriateAgeForChina : byte_t
+	{
+		AppropriateAgeForChina_None = 0,
+		AppropriateAgeForChina_Age8 = 1,
+		AppropriateAgeForChina_Age12 = 2,
+		AppropriateAgeForChina_Age16 = 3
+	};
+
 	enum AttributeFlag : byte_t
 	{
 		AttributeFlag_Demo = 0,
 		AttributeFlag_RetailInteractiveDisplay = 1
+	};
+
+	enum ContentsAvailabilityTransitionPolicy : byte_t
+	{
+		ContentsAvailabilityTransitionPolicy_NoPolicy = 0,
+		ContentsAvailabilityTransitionPolicy_Legacy = 0, // legacy value, same as NoPolicy
+		ContentsAvailabilityTransitionPolicy_Stable = 1,
+		ContentsAvailabilityTransitionPolicy_Changeable = 2
 	};
 
 	enum CrashReport : byte_t
@@ -187,6 +210,12 @@ namespace nacp
 		RuntimeParameterDelivery_OnRestart = 2
 	};
 
+	enum RuntimeUpgrade : byte_t
+	{
+		RuntimeUpgrade_Deny = 0,
+		RuntimeUpgrade_Allow = 1
+	};
+
 	enum Screenshot : byte_t
 	{
 		Screenshot_Allow = 0,
@@ -203,6 +232,11 @@ namespace nacp
 	enum StartupUserAccountOptionFlag : byte_t
 	{
 		StartupUserAccountOptionFlag_IsOptional = 0
+	};
+
+	enum SupportingLimitedApplicationLicensesFlag : uint32_t
+	{
+		SupportingLimitedApplicationLicensesFlag_Demo = 0
 	};
 
 	enum UserAccountSwitchLock : byte_t
@@ -264,7 +298,8 @@ struct sApplicationControlProperty
 	byte_t logo_handling;
 	byte_t runtime_add_on_content_install;
 	byte_t runtime_parameter_delivery;
-	std::array<byte_t, 0x2> reserved_00;
+	byte_t appropriate_age_for_china;
+	byte_t reserved_00;
 	byte_t crash_report; // default=1=Allow
 	byte_t hdcp;
 	tc::bn::le64<uint64_t> seed_for_pseudo_device_id;
@@ -280,13 +315,18 @@ struct sApplicationControlProperty
 	tc::bn::le64<uint64_t> cache_storage_journal_size;
 	tc::bn::le64<uint64_t> cache_storage_data_and_journal_size_max;
 	tc::bn::le16<uint16_t> cache_storage_index_max;
-	std::array<byte_t, 0x6> reserved_01; // alignment to 0x8 bytes
+	byte_t reserved_01;
+	byte_t runtime_upgrade;
+	tc::bn::bitarray<sizeof(uint32_t)> supporting_limited_application_licenses;
 	std::array<tc::bn::le64<uint64_t>, nacp::kPlayLogQueryableApplicationIdCount> play_log_queryable_application_id;
 	byte_t play_log_query_capability;
 	tc::bn::bitarray<sizeof(byte_t)> repair_flag;
 	byte_t program_index; // last byte of programId, (programId - programIndex) is used as default values for PresenceGroupId, SaveDataOwnerId, LocalCommunicationId
 	tc::bn::bitarray<sizeof(byte_t)> required_network_service_license_on_launch_flag;
-	std::array<byte_t, 0x4> reserved_02;
+	byte_t application_error_code_prefix;
+	byte_t reserved_02;
+	byte_t acd_index;
+	byte_t apparent_platform;
 	struct sNeighborDetectionClientConfiguration
 	{
 		// note that group config is empty if both group_id and key are 0/nulls
@@ -310,12 +350,16 @@ struct sApplicationControlProperty
 	byte_t play_report_permission;
 	byte_t crash_screenshot_for_prod;
 	byte_t crash_screenshot_for_dev;
-	std::array<byte_t, 0x5> reserved_03;
+	byte_t contents_availability_transition_policy;
+	std::array<byte_t, 0x4> reserved_03;	
 	struct sAccessibleLaunchRequiredVersion
 	{
 		std::array<tc::bn::le64<uint64_t>, nacp::kMaxAccessibleLaunchRequiredVersionApplicationIdCount> application_id;
 	} accessible_launch_required_verison;
-	std::array<byte_t, 3000> _pad_to_0x4000;
+	std::array<byte_t, 144> reserved_04;
+	byte_t album_file_export;
+	std::array<byte_t, 1831> reserved_05;
+	std::array<byte_t, nacp::kPlatformSpecificRegionLength> platform_specific_region;
 };
 static_assert(sizeof(sApplicationControlProperty) == 0x4000, "sApplicationControlProperty size.");
 

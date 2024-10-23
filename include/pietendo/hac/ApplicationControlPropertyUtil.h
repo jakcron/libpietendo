@@ -18,7 +18,10 @@ public:
 	static std::string getSaveDataSizeAsString(int64_t size);
 
 	static std::string getAddOnContentRegistrationTypeAsString(pie::hac::nacp::AddOnContentRegistrationType val);
+	static std::string getAlbumFileExportAsString(pie::hac::nacp::AlbumFileExport val);
+	static std::string getAppropriateAgeForChinaAsString(pie::hac::nacp::AppropriateAgeForChina val);
 	static std::string getAttributeFlagAsString(pie::hac::nacp::AttributeFlag val);
+	static std::string getContentsAvailabilityTransitionPolicyAsString(pie::hac::nacp::ContentsAvailabilityTransitionPolicy val);
 	static std::string getCrashReportAsString(pie::hac::nacp::CrashReport val);
 	static std::string getCrashScreenshotForDevAsString(pie::hac::nacp::CrashScreenshotForDev val);
 	static std::string getCrashScreenshotForProdAsString(pie::hac::nacp::CrashScreenshotForProd val);
@@ -37,9 +40,11 @@ public:
 	static std::string getRequiredNetworkServiceLicenseOnLaunchFlagAsString(pie::hac::nacp::RequiredNetworkServiceLicenseOnLaunchFlag val);
 	static std::string getRuntimeAddOnContentInstallAsString(pie::hac::nacp::RuntimeAddOnContentInstall val);
 	static std::string getRuntimeParameterDeliveryAsString(pie::hac::nacp::RuntimeParameterDelivery val);
+	static std::string getRuntimeUpgradeAsString(pie::hac::nacp::RuntimeUpgrade val);
 	static std::string getScreenshotAsString(pie::hac::nacp::Screenshot val);
 	static std::string getStartupUserAccountAsString(pie::hac::nacp::StartupUserAccount val);
 	static std::string getStartupUserAccountOptionFlagAsString(pie::hac::nacp::StartupUserAccountOptionFlag val);
+	static std::string getSupportingLimitedApplicationLicensesFlagAsString(pie::hac::nacp::SupportingLimitedApplicationLicensesFlag val);
 	static std::string getUserAccountSwitchLockAsString(pie::hac::nacp::UserAccountSwitchLock val);
 	static std::string getVideoCaptureAsString(pie::hac::nacp::VideoCapture val);
 };

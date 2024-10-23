@@ -55,6 +55,53 @@ std::string pie::hac::ApplicationControlPropertyUtil::getAddOnContentRegistratio
 	return str;
 }
 
+std::string pie::hac::ApplicationControlPropertyUtil::getAlbumFileExportAsString(pie::hac::nacp::AlbumFileExport val)
+{
+	std::string str;
+
+	switch (val)
+	{
+	case (pie::hac::nacp::AlbumFileExport_Allow):
+		str = "Allow";
+		break;
+	case (pie::hac::nacp::AlbumFileExport_Deny):
+		str = "Deny";
+		break;
+	default:
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
+		break;
+	}
+
+	return str;
+}
+
+std::string pie::hac::ApplicationControlPropertyUtil::getAppropriateAgeForChinaAsString(pie::hac::nacp::AppropriateAgeForChina val)
+{
+	std::string str;
+
+	switch (val)
+	{
+	case (pie::hac::nacp::AppropriateAgeForChina_None):
+		str = "None";
+		break;
+	case (pie::hac::nacp::AppropriateAgeForChina_Age8):
+		str = "Age8";
+		break;
+	case (pie::hac::nacp::AppropriateAgeForChina_Age12):
+		str = "Age12";
+		break;
+	case (pie::hac::nacp::AppropriateAgeForChina_Age16):
+		str = "Age16";
+		break;
+	default:
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
+		break;
+	}
+
+	return str;
+}
+
+
 std::string pie::hac::ApplicationControlPropertyUtil::getAttributeFlagAsString(pie::hac::nacp::AttributeFlag val)
 {
 	std::string str;
@@ -66,6 +113,29 @@ std::string pie::hac::ApplicationControlPropertyUtil::getAttributeFlagAsString(p
 		break;
 	case (pie::hac::nacp::AttributeFlag_RetailInteractiveDisplay):
 		str = "RetailInteractiveDisplay";
+		break;
+	default:
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
+		break;
+	}
+
+	return str;
+}
+
+std::string pie::hac::ApplicationControlPropertyUtil::getContentsAvailabilityTransitionPolicyAsString(pie::hac::nacp::ContentsAvailabilityTransitionPolicy val)
+{
+	std::string str;
+
+	switch (val)
+	{
+	case (pie::hac::nacp::ContentsAvailabilityTransitionPolicy_NoPolicy):
+		str = "NoPolicy";
+		break;
+	case (pie::hac::nacp::ContentsAvailabilityTransitionPolicy_Stable):
+		str = "Stable";
+		break;
+	case (pie::hac::nacp::ContentsAvailabilityTransitionPolicy_Changeable):
+		str = "Changeable";
 		break;
 	default:
 		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
@@ -516,6 +586,26 @@ std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeParameterDeliver
 	return str;
 }
 
+std::string pie::hac::ApplicationControlPropertyUtil::getRuntimeUpgradeAsString(pie::hac::nacp::RuntimeUpgrade val)
+{
+	std::string str;
+
+	switch (val)
+	{
+	case (pie::hac::nacp::RuntimeUpgrade_Deny):
+		str = "Deny";
+		break;
+	case (pie::hac::nacp::RuntimeUpgrade_Allow):
+		str = "Allow";
+		break;
+	default:
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
+		break;
+	}
+
+	return str;
+}
+
 std::string pie::hac::ApplicationControlPropertyUtil::getScreenshotAsString(pie::hac::nacp::Screenshot val)
 {
 	std::string str;
@@ -567,6 +657,23 @@ std::string pie::hac::ApplicationControlPropertyUtil::getStartupUserAccountOptio
 	{
 	case (pie::hac::nacp::StartupUserAccountOptionFlag_IsOptional):
 		str = "IsOptional";
+		break;
+	default:
+		str = fmt::format("unk_0x{:02x}", (uint32_t)val);
+		break;
+	}
+
+	return str;
+}
+
+std::string pie::hac::ApplicationControlPropertyUtil::getSupportingLimitedApplicationLicensesFlagAsString(pie::hac::nacp::SupportingLimitedApplicationLicensesFlag val)
+{
+	std::string str;
+
+	switch (val)
+	{
+	case (pie::hac::nacp::SupportingLimitedApplicationLicensesFlag_Demo):
+		str = "Demo";
 		break;
 	default:
 		str = fmt::format("unk_0x{:02x}", (uint32_t)val);

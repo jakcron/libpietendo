@@ -57,7 +57,7 @@ void pie::hac::ContentInfo::fromBytes(const byte_t* bytes, size_t len)
 
 	mHash = info->content_hash;
 	mContentId = info->content_id;
-	mSize = (uint64_t)(info->size_lower.unwrap()) | (uint64_t)(info->size_higher.unwrap()) << 32;
+	mSize = (int64_t)((uint64_t)(info->size_lower.unwrap()) | (uint64_t)(info->size_higher.unwrap()) << 32);
 	mType = (cnmt::ContentType)info->content_type;
 	mIdOffset = info->id_offset;
 }
@@ -92,12 +92,12 @@ void pie::hac::ContentInfo::setContentId(const pie::hac::cnmt::content_id_t& con
 	mContentId = content_id;
 }
 
-size_t pie::hac::ContentInfo::getContentSize() const
+int64_t pie::hac::ContentInfo::getContentSize() const
 {
 	return mSize;
 }
 
-void pie::hac::ContentInfo::setContentSize(size_t size)
+void pie::hac::ContentInfo::setContentSize(int64_t size)
 {
 	mSize = size;
 }

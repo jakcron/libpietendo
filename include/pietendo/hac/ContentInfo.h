@@ -34,8 +34,8 @@ public:
 	const cnmt::content_id_t& getContentId() const;
 	void setContentId(const cnmt::content_id_t& content_id);
 
-	size_t getContentSize() const;
-	void setContentSize(size_t size);
+	int64_t getContentSize() const;
+	void setContentSize(int64_t size);
 
 	cnmt::ContentType getContentType() const;
 	void setContentType(cnmt::ContentType type);
@@ -52,7 +52,7 @@ private:
 	// variables
 	pie::hac::detail::sha256_hash_t mHash;
 	cnmt::content_id_t mContentId;
-	size_t mSize;
+	int64_t mSize;
 	cnmt::ContentType mType;
 	byte_t mIdOffset;
 };

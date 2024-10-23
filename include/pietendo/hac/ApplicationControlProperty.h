@@ -214,6 +214,33 @@ public:
 		}
 	};
 
+	struct sPlatformSpecificRegion
+	{
+		std::array<byte_t, nacp::kPlatformSpecificRegionLength> data;
+
+		sPlatformSpecificRegion()
+		{
+			memset(data.data(), 0, data.size());
+		}
+
+		sPlatformSpecificRegion& operator=(const sPlatformSpecificRegion& other)
+		{
+			memcpy(data.data(), other.data.data(), data.size());
+		
+			return *this;
+		}
+
+		bool operator==(const sPlatformSpecificRegion& other) const
+		{
+			return memcmp(data.data(), other.data.data(), data.size()) == 0;
+		}
+
+		bool operator!=(const sPlatformSpecificRegion& other) const
+		{
+			return !operator==(other);
+		}
+	};
+
 	ApplicationControlProperty();
 	ApplicationControlProperty(const ApplicationControlProperty& other);
 
@@ -307,6 +334,9 @@ public:
 	nacp::RuntimeParameterDelivery getRuntimeParameterDelivery() const;
 	void setRuntimeParameterDelivery(nacp::RuntimeParameterDelivery var);
 
+	nacp::AppropriateAgeForChina getAppropriateAgeForChina() const;
+	void setAppropriateAgeForChina(nacp::AppropriateAgeForChina var);
+
 	nacp::CrashReport getCrashReport() const;
 	void setCrashReport(nacp::CrashReport var);
 
@@ -340,6 +370,12 @@ public:
 	uint16_t getCacheStorageIndexMax() const;
 	void setCacheStorageIndexMax(uint16_t var);
 
+	nacp::RuntimeUpgrade getRuntimeUpgrade() const;
+	void setRuntimeUpgrade(nacp::RuntimeUpgrade var);
+
+	const std::vector<nacp::SupportingLimitedApplicationLicensesFlag>& getSupportingLimitedApplicationLicenses() const;
+	void setSupportingLimitedApplicationLicenses(const std::vector<nacp::SupportingLimitedApplicationLicensesFlag>& var);
+
 	const std::vector<uint64_t>& getPlayLogQueryableApplicationId() const;
 	void setPlayLogQueryableApplicationId(const std::vector<uint64_t>& var);
 
@@ -355,23 +391,41 @@ public:
 	const std::vector<nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& getRequiredNetworkServiceLicenseOnLaunch() const;
 	void setRequiredNetworkServiceLicenseOnLaunch(const std::vector<nacp::RequiredNetworkServiceLicenseOnLaunchFlag>& var);
 
+	byte_t getApplicationErrorCodePrefix() const;
+	void setApplicationErrorCodePrefix(byte_t var);
+
+	byte_t getAcdIndex() const;
+	void setAcdIndex(byte_t var);
+
+	byte_t getApparentPlatform() const;
+	void setApparentPlatform(byte_t var);
+
 	const sNeighborDetectionClientConfiguration& getNeighborDetectionClientConfiguration() const;
 	void setNeighborDetectionClientConfiguration(const sNeighborDetectionClientConfiguration& var);
 
 	const sJitConfiguration& getJitConfiguration() const;
 	void setJitConfiguration(const sJitConfiguration& var);
 
-	const nacp::PlayReportPermission& getPlayReportPermission() const;
-	void setPlayReportPermission(const nacp::PlayReportPermission& var);
+	nacp::PlayReportPermission getPlayReportPermission() const;
+	void setPlayReportPermission(nacp::PlayReportPermission var);
 
-	const nacp::CrashScreenshotForProd& getCrashScreenshotForProd() const;
-	void setCrashScreenshotForProd(const nacp::CrashScreenshotForProd& var);
+	nacp::CrashScreenshotForProd getCrashScreenshotForProd() const;
+	void setCrashScreenshotForProd(nacp::CrashScreenshotForProd var);
 
-	const nacp::CrashScreenshotForDev& getCrashScreenshotForDev() const;
-	void setCrashScreenshotForDev(const nacp::CrashScreenshotForDev& var);
+	nacp::CrashScreenshotForDev getCrashScreenshotForDev() const;
+	void setCrashScreenshotForDev(nacp::CrashScreenshotForDev var);
+
+	nacp::ContentsAvailabilityTransitionPolicy getContentsAvailabilityTransitionPolicy() const;
+	void setContentsAvailabilityTransitionPolicy(nacp::ContentsAvailabilityTransitionPolicy var);
 
 	const std::vector<uint64_t>& getAccessibleLaunchRequiredVersionApplicationId() const;
 	void setAccessibleLaunchRequiredVersionApplicationId(const std::vector<uint64_t>& var);
+
+	nacp::AlbumFileExport getAlbumFileExport() const;
+	void setAlbumFileExport(nacp::AlbumFileExport var);
+
+	const sPlatformSpecificRegion& getPlatformSpecificRegion() const;
+	void setPlatformSpecificRegion(const sPlatformSpecificRegion& data);
 
 private:
 	const std::string kModuleName = "APPLICATION_CONTROL_PROPERTY";
@@ -406,6 +460,7 @@ private:
 	nacp::LogoHandling mLogoHandling;
 	nacp::RuntimeAddOnContentInstall mRuntimeAddOnContentInstall;
 	nacp::RuntimeParameterDelivery mRuntimeParameterDelivery;
+	nacp::AppropriateAgeForChina mAppropriateAgeForChina;
 	nacp::CrashReport mCrashReport;
 	nacp::Hdcp mHdcp;
 	uint64_t mSeedForPsuedoDeviceId;
@@ -417,17 +472,25 @@ private:
 	sStorageSize mCacheStorageSize;
 	int64_t mCacheStorageDataAndJournalSizeMax;
 	uint16_t mCacheStorageIndexMax;
+	nacp::RuntimeUpgrade mRuntimeUpgrade;
+	std::vector<nacp::SupportingLimitedApplicationLicensesFlag> mSupportingLimitedApplicationLicenses;
 	std::vector<uint64_t> mPlayLogQueryableApplicationId;
 	nacp::PlayLogQueryCapability mPlayLogQueryCapability;
 	std::vector<nacp::RepairFlag> mRepair;
 	byte_t mProgramIndex;
 	std::vector<nacp::RequiredNetworkServiceLicenseOnLaunchFlag> mRequiredNetworkServiceLicenseOnLaunch;
+	byte_t mApplicationErrorCodePrefix;
+	byte_t mAcdIndex;
+	byte_t mApparentPlatform;
 	sNeighborDetectionClientConfiguration mNeighborDetectionClientConfiguration;
 	sJitConfiguration mJitConfiguration;
 	nacp::PlayReportPermission mPlayReportPermission;
 	nacp::CrashScreenshotForProd mCrashScreenshotForProd;
 	nacp::CrashScreenshotForDev mCrashScreenshotForDev;
+	nacp::ContentsAvailabilityTransitionPolicy mContentsAvailabilityTransitionPolicy;
 	std::vector<uint64_t> mAccessibleLaunchRequiredVersionApplicationId;
+	nacp::AlbumFileExport mAlbumFileExport;
+	sPlatformSpecificRegion mPlatformSpecificRegion;
 
 	void serialiseGroupConfig(const sNeighborDetectionClientConfiguration::sGroupConfiguration& logical, sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised);
 	void parseGroupConfig(const sApplicationControlProperty::sNeighborDetectionClientConfiguration::sGroupConfiguration& serialised, sNeighborDetectionClientConfiguration::sGroupConfiguration& logical);
