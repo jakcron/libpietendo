@@ -239,6 +239,7 @@
     <ClInclude Include="..\..\..\include\pietendo\hac\GameCardUtil.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeEntry.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\HandleTableSizeHandler.h" />
+    <ClInclude Include="..\..\..\include\pietendo\hac\CompressedStorage.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityHeader.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalIntegrityStream.h" />
     <ClInclude Include="..\..\..\include\pietendo\hac\HierarchicalSha256Header.h" />
@@ -323,6 +324,7 @@
     <ClCompile Include="..\..\..\src\hac\GameCardUtil.cpp" />
     <ClCompile Include="..\..\..\src\hac\HandleTableSizeEntry.cpp" />
     <ClCompile Include="..\..\..\src\hac\HandleTableSizeHandler.cpp" />
+    <ClCompile Include="..\..\..\src\hac\CompressedStorage.cpp" />
     <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityHeader.cpp" />
     <ClCompile Include="..\..\..\src\hac\HierarchicalIntegrityStream.cpp" />
     <ClCompile Include="..\..\..\src\hac\HierarchicalSha256Header.cpp" />
