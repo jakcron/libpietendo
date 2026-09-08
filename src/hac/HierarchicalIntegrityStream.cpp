@@ -366,26 +366,33 @@ bool pie::hac::HierarchicalIntegrityStream::validateLayerBlocksWithHashLayer(con
 		size_t blk_size = block_size;
 
 		const byte_t* blk_hash_ptr = hash_layer + (mHashCalc->kHashSize * i);
-		//std::cout << tc::cli::FormatUtil::formatBytesAsHxdHexString(blk_hash_ptr, block_size);
+
+		// Nintendo convention: an all-zero stored hash indicates the block it covers is
+		// entirely zero-filled (padding/sparse region beyond the real data), in which case
+		// the block is not hashed/verified at all. Without this, legitimate files that
+		// zero-fill such regions would fail verification (the stored hash is 0x00.., not
+		// the SHA-256 of a zero-filled block).
+		{
+			bool hash_is_zero = true;
+			for (size_t b = 0; b < mHashCalc->kHashSize; b++)
+			{
+				if (blk_hash_ptr[b] != 0) { hash_is_zero = false; break; }
+			}
+			if (hash_is_zero)
+			{
+				bad_block -= 1;
+				continue;
+			}
+		}
 
 		mHashCalc->initialize();
 		mHashCalc->update(blk_ptr, blk_size);
 		mHashCalc->getHash(mHash.data());
 
-		//fmt::print("test hash: {:s}\n", tc::cli::FormatUtil::formatBytesAsString(blk_hash_ptr, 32, true, ":"));
-		//fmt::print("calc hash: {:s}\n", tc::cli::FormatUtil::formatBytesAsString(mHash.data(), 32, true, ":"));
-
-		// if good hash, reduce bad block count
 		if (memcmp(mHash.data(), blk_hash_ptr, mHashCalc->kHashSize) == 0)
 		{
 			bad_block -= 1;
 		}
-		else
-		{
-			//fmt::print("BadBlock:\n");
-			//fmt::print("{:s}", tc::cli::FormatUtil::formatBytesAsHxdHexString(blk_ptr, blk_size));
-		}
-		
 	}
 
 	return bad_block == 0;
